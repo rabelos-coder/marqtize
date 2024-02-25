@@ -14,12 +14,10 @@ export type User = {
   id: number;
   email: string;
   name: string;
+  image: string;
   role: string;
   language: string;
   timezone: Timezone;
-  accessToken: string;
-  refreshToken: string;
-  accessTokenExpires: number;
 };
 
 export type Register = {

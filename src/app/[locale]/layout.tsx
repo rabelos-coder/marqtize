@@ -1,4 +1,3 @@
-import "../globals.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { locales } from "@/configs/i18n";
@@ -7,6 +6,10 @@ import { unstable_setRequestLocale } from "next-intl/server";
 import { ComponentProps } from "@/types";
 import { APP_LANGUAGE } from "@/environment";
 import { ApolloProvider } from "@/providers/ApolloProvider";
+import { NextAuthProvider } from "@/providers/NextAuthProvider";
+import { Suspense } from "react";
+import { Spinner } from "@/layouts/backend/Spinner";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,8 +36,13 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <ApolloProvider>{children}</ApolloProvider>
+          <ApolloProvider>
+            <NextAuthProvider>
+              <Suspense fallback={<Spinner />}>{children}</Suspense>
+            </NextAuthProvider>
+          </ApolloProvider>
         </NextIntlClientProvider>
+        <ToastContainer />
       </body>
     </html>
   );

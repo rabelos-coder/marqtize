@@ -3,10 +3,6 @@
 import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";
 
-export default function NextAuthProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  return <SessionProvider>{children}</SessionProvider>;
-}
+export const NextAuthProvider = ({ children }: { children: ReactNode }) => (
+  <SessionProvider>{children}</SessionProvider>
+);
