@@ -1,0 +1,53 @@
+{
+  "name": "rsc-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.9.5",
+    "@casl/ability": "^6.7.0",
+    "@casl/react": "^3.1.0",
+    "@reduxjs/toolkit": "^2.2.1",
+    "@testing-library/cypress": "^10.0.1",
+    "apollo-upload-client": "^18.0.1",
+    "axios": "^1.6.7",
+    "bootstrap": "^5.3.3",
+    "bootstrap-scss": "^5.3.2",
+    "cypress": "^13.6.6",
+    "cypress-social-logins": "^1.14.1",
+    "graphql": "^16.8.1",
+    "graphql-ws": "^5.15.0",
+    "jwt-decode": "^4.0.0",
+    "lodash": "^4.17.21",
+    "next": "14.1.0",
+    "next-auth": "^4.24.6",
+    "next-intl": "^3.9.1",
+    "next-redux-wrapper": "^8.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.50.1",
+    "react-redux": "^9.1.0",
+    "react-toastify": "^10.0.4",
+    "reactstrap": "^9.2.2",
+    "styled-components": "^6.1.8",
+    "sweetalert2": "^11.10.5"
+  },
+  "devDependencies": {
+    "@types/apollo-upload-client": "^18.0.0",
+    "@types/graphql-upload": "^16.0.7",
+    "@types/jwt-decode": "^3.1.0",
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/ws": "^8.5.10",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "typescript": "^5"
+  }
+}
