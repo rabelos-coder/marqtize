@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import { CountryClassName } from "@/types/language";
+
 import { LanguageList } from "./LanguageList";
 
 export const Language = () => {

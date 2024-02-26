@@ -1,3 +1,5 @@
+import { gql,TypedDocumentNode } from "@apollo/client";
+
 import {
   AuthLogin,
   LoginInput,
@@ -5,7 +7,6 @@ import {
   RegisterInput,
   User,
 } from "@/types/auth";
-import { TypedDocumentNode, gql } from "@apollo/client";
 
 const USER_PROPS = gql`
   fragment UserProps on User {

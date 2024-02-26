@@ -1,8 +1,9 @@
+import { useTranslations } from "next-intl";
+
 import SvgIcon from "@/components/common/Icons/SvgIcon";
 import { useCustomizer, useLayout } from "@/hooks";
-import { SidebarItemType } from "@/types/layout";
-import { useTranslations } from "next-intl";
 import { useRouter } from "@/navigation";
+import { SidebarItemType } from "@/types/layout";
 
 type MenuListType = {
   MENUITEMS: SidebarItemType[];

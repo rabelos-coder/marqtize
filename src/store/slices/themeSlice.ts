@@ -1,6 +1,7 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 import { STORAGE_THEME } from "@/configs";
 import { ThemeState } from "@/types/theme";
-import { createSlice } from "@reduxjs/toolkit";
 
 const defaultTheme = "light";
 

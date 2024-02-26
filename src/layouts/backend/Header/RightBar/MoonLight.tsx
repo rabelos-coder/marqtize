@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
+
 import SvgIcon from "@/components/common/Icons/SvgIcon";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { setTheme } from "@/store/slices/themeSlice";
-import { useEffect, useState } from "react";
 
 export const MoonLight = () => {
   const [darkMode, setDarkMode] = useState(false);

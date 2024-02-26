@@ -1,9 +1,10 @@
 "use client";
 
+import React, { useState } from "react";
+
 import { LayoutContext } from "@/contexts/LayoutContext";
 import { ChildrenProps } from "@/types/children";
 import { SearchableMenuType } from "@/types/layout";
-import React, { useState } from "react";
 
 export const LayoutProvider = ({ children }: ChildrenProps) => {
   const [searchIcon, setSearchIcon] = useState(false);

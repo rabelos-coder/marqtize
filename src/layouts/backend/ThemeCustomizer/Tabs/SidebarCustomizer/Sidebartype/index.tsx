@@ -1,7 +1,9 @@
 import React from "react";
-import Vertical from "./Vertical";
-import Horizontal from "./Horizontal";
+
 import { useCustomizer } from "@/hooks";
+
+import Horizontal from "./Horizontal";
+import Vertical from "./Vertical";
 
 const SidebarType = () => {
   const { addSidebarLayouts, layout } = useCustomizer();

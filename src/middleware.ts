@@ -1,15 +1,16 @@
+import { jwtDecode } from "jwt-decode";
+import { NextRequest, NextResponse } from "next/server";
 import createMiddleware from "next-intl/middleware";
+
+import { STORAGE_AUTH_TOKEN, STORAGE_LOCALE } from "./configs";
 import {
   defaultLocale,
   localeDetection,
   localePrefix,
   locales,
 } from "./configs/i18n";
-import { NextRequest, NextResponse } from "next/server";
-import { STORAGE_AUTH_TOKEN, STORAGE_LOCALE } from "./configs";
-import { jwtDecode } from "jwt-decode";
-import { JWT } from "./types/jwt";
 import { APP_LANGUAGE } from "./environment";
+import { JWT } from "./types/jwt";
 
 const intlMiddleware = createMiddleware({
   locales,

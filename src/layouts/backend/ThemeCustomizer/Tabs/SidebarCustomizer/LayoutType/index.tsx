@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+
+import Theme from "@/configs/theme";
+
+import BoxLayout from "./BoxLayout";
 import LTR from "./LTR";
 import RTL from "./RTL";
-import BoxLayout from "./BoxLayout";
-import Theme from "@/configs/theme";
 
 const LayoutType = () => {
   const localStorageLayout = Theme.data.settings.layout_type;

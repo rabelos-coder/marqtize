@@ -1,14 +1,16 @@
+import { ReactNode, useEffect } from "react";
+
+import { THEME_CUSTOMIZER_ENABLED } from "@/environment";
 import { useCustomizer, useLayout } from "@/hooks";
 import { ChildrenProps } from "@/types/children";
 import { SearchableMenuType, SidebarItemType } from "@/types/layout";
-import { ReactNode, useEffect } from "react";
-import { MenuList } from "./SideBar/menu";
-import { TapTop } from "./TapTop";
+
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
+import { MenuList } from "./SideBar/menu";
+import { TapTop } from "./TapTop";
 import { ThemeCustomizer } from "./ThemeCustomizer";
-import { THEME_CUSTOMIZER_ENABLED } from "@/environment";
 
 export const Layout = ({ children }: ChildrenProps) => {
   const { layout, setLayout } = useCustomizer();

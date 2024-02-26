@@ -1,4 +1,5 @@
 import React from "react";
+
 import CommonUL from "../CommonUL";
 
 type RtlDataType = {

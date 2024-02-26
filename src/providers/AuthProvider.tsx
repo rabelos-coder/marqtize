@@ -1,12 +1,13 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
+
 import { AuthContext } from "@/contexts/AuthContext";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useRouter } from "@/navigation";
+import { authReset, fetchAuth, fetchRegister } from "@/store/slices/authSlice";
 import { ComponentProps } from "@/types";
 import { AuthContextType, LoginInput, RegisterInput } from "@/types/auth";
-import { useCallback, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { authReset, fetchAuth, fetchRegister } from "@/store/slices/authSlice";
-import { useRouter } from "@/navigation";
 
 /**
  * AuthProvider component that provides authentication context to its children.

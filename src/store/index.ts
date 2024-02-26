@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+
+import { IS_DEVELOPMENT } from "@/environment";
+
 import auth from "./slices/authSlice";
 import customer from "./slices/customerSlice";
 import theme from "./slices/themeSlice";
-import { IS_DEVELOPMENT } from "@/environment";
 
 export const store = configureStore({
   reducer: {

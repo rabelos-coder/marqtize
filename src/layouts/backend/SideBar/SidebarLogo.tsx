@@ -1,7 +1,8 @@
-import { useLayout } from "@/hooks";
 import Image from "next/image";
-import { Link } from "@/navigation";
+
 import FeatherIconCom from "@/components/common/Icons/FeatherIconCom";
+import { useLayout } from "@/hooks";
+import { Link } from "@/navigation";
 
 export const SideBarLogo = () => {
   const { setSideBarToggle, sideBarToggle } = useLayout();

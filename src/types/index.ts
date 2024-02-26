@@ -1,5 +1,6 @@
-import { AclAbility } from "@/configs/ability";
 import { ReactNode } from "react";
+
+import { AclAbility } from "@/configs/ability";
 
 type ComponentParams = {
   id?: string;

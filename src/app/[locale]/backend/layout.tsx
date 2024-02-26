@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { ComponentProps } from "@/types";
-import { AuthProvider } from "@/providers/AuthProvider";
+
 import { AuthGuard } from "@/components/backend/Guards/AuthGuard";
+import { AuthProvider } from "@/providers/AuthProvider";
 import { CustomizerProvider } from "@/providers/CustomizerProvider";
 import { LayoutProvider } from "@/providers/LayoutProvider";
+import { ComponentProps } from "@/types";
 
 export const metadata: Metadata = {
   title: "Create Next App",

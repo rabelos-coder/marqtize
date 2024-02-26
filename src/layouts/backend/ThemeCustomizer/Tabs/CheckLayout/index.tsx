@@ -1,6 +1,7 @@
 import React from "react";
-import { useCustomizer } from "@/hooks";
+
 import { CheckLayoutData } from "@/configs/customizer";
+import { useCustomizer } from "@/hooks";
 
 const CheckLayout = () => {
   const { setLayoutName } = useCustomizer();

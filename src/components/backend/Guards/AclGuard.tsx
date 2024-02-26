@@ -1,17 +1,19 @@
 "use client";
 
+import { ReactNode } from "react";
+
 import {
   AclAbility,
   AppAbility,
   buildAbilityFor,
   defaultAcl,
 } from "@/configs/ability";
-import { ReactNode } from "react";
-import { AbilityProvider } from "@/providers/AbilityProvider";
-import { NotAuthorized } from "../NotAuthorized";
-import { Spinner } from "@/layouts/backend/Spinner";
-import { Layout } from "@/layouts/backend/Layout";
 import { useAuth } from "@/hooks";
+import { Layout } from "@/layouts/backend/Layout";
+import { Spinner } from "@/layouts/backend/Spinner";
+import { AbilityProvider } from "@/providers/AbilityProvider";
+
+import { NotAuthorized } from "../NotAuthorized";
 
 type AclGuardProps = {
   children: ReactNode;

@@ -1,7 +1,8 @@
-import { Link } from "@/navigation";
-import { CommonErrorPageProps } from "@/types/common";
 import Image from "next/image";
 import { Col, Container } from "reactstrap";
+
+import { Link } from "@/navigation";
+import { CommonErrorPageProps } from "@/types/common";
 
 export const ErrorPage = ({
   tittle,

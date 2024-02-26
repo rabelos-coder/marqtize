@@ -1,7 +1,9 @@
 import { ChangeEvent, useState } from "react";
-import SearchBarContain from "./SearchBarContain";
+
 import { useLayout } from "@/hooks";
 import { SearchableMenuType } from "@/types/layout";
+
+import SearchBarContain from "./SearchBarContain";
 
 const Search = () => {
   const [suggestion, setSuggestion] = useState<SearchableMenuType[]>([]);

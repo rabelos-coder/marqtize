@@ -1,8 +1,9 @@
 import React from "react";
 import { TabContent, TabPane } from "reactstrap";
-import TabHeader from "./TabHeader";
+
 import CheckLayout from "../Tabs/CheckLayout";
 import SidebarCustomizer from "../Tabs/SidebarCustomizer";
+import TabHeader from "./TabHeader";
 
 type TabCustomizerType = {
   callbackNav: (test: string, open: boolean) => void;

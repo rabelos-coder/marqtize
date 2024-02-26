@@ -1,5 +1,6 @@
-import { CustomizerContextType } from "@/types/customizer";
 import { createContext } from "react";
+
+import { CustomizerContextType } from "@/types/customizer";
 
 export const CustomizerContext = createContext<CustomizerContextType>({
   layout: "",

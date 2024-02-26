@@ -1,18 +1,19 @@
 import { ApolloClient, from, InMemoryCache, split } from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
-import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
-import { getMainDefinition } from "@apollo/client/utilities";
-import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
-import { createClient } from "graphql-ws";
 import { setContext } from "@apollo/client/link/context";
+import { onError } from "@apollo/client/link/error";
+import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
+import { getMainDefinition } from "@apollo/client/utilities";
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { createClient } from "graphql-ws";
+import Cookies from "js-cookie";
+
+import { STORAGE_AUTH_TOKEN } from "@/configs";
 import {
   APP_META_TITLE,
   APP_VERSION,
   IS_DEVELOPMENT,
   SERVER_URL,
 } from "@/environment";
-import { STORAGE_AUTH_TOKEN } from "@/configs";
-import Cookies from "js-cookie";
 
 export const createApolloClient = () => {
   const authMiddleware = setContext(async (operation, { headers }) => {

@@ -1,8 +1,10 @@
 import React from "react";
-import StrokeIcon from "./StrokeIcon";
-import FillIcon from "./FillIcon";
-import { useCustomizer } from "@/hooks";
+
 import Theme from "@/configs/theme";
+import { useCustomizer } from "@/hooks";
+
+import FillIcon from "./FillIcon";
+import StrokeIcon from "./StrokeIcon";
 
 const SidebarIconType = () => {
   const { addSidebarIconType } = useCustomizer();

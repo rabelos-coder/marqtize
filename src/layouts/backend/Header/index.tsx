@@ -1,8 +1,10 @@
-import { useLayout } from "@/hooks";
 import { Row } from "reactstrap";
-import Search from "./Search";
+
+import { useLayout } from "@/hooks";
+
 import { LeftBar } from "./LeftBar";
 import { RightBar } from "./RightBar";
+import Search from "./Search";
 
 export const Header = () => {
   const { sideBarToggle } = useLayout();

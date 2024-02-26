@@ -1,9 +1,10 @@
+import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
+import secureLocalStorage from "react-secure-storage";
+
 import { STORAGE_CUSTOMER } from "@/configs";
 import { GET_CUSTOMER_BY_SLUG } from "@/graphql/customer";
 import { CustomerState } from "@/types/customer";
 import { createApolloClient } from "@/utils/apollo";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import secureLocalStorage from "react-secure-storage";
 
 let customer: any =
   typeof window !== "undefined"

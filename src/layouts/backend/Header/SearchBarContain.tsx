@@ -1,9 +1,10 @@
-import SvgIcon from "@/components/common/Icons/SvgIcon";
-import { useLayout } from "@/hooks";
-import { SearchBarContainPropsType } from "@/types/layout";
 import Link from "next/link";
 import { X } from "react-feather";
 import { Form, Input } from "reactstrap";
+
+import SvgIcon from "@/components/common/Icons/SvgIcon";
+import { useLayout } from "@/hooks";
+import { SearchBarContainPropsType } from "@/types/layout";
 
 const SearchBarContain = ({
   handleSearch,

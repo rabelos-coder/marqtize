@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { Col } from "reactstrap";
 import { AlignCenter } from "react-feather";
+import { Col } from "reactstrap";
+
 import { useLayout } from "@/hooks";
-import { NotificationSlider } from "./NotificationSlider";
 import { Link } from "@/navigation";
+
+import { NotificationSlider } from "./NotificationSlider";
 
 export const LeftBar = () => {
   const { sideBarToggle, setSideBarToggle } = useLayout();

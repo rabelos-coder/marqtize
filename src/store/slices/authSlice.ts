@@ -1,3 +1,8 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+import secureLocalStorage from "react-secure-storage";
+
 import {
   STORAGE_AUTH_TOKEN,
   STORAGE_LANGUAGE,
@@ -9,10 +14,6 @@ import { AUTH_LOGIN, REGISTER } from "@/graphql/auth";
 import { AuthState, LoginInput, RegisterInput } from "@/types/auth";
 import { JWT } from "@/types/jwt";
 import { createApolloClient } from "@/utils/apollo";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { jwtDecode } from "jwt-decode";
-import secureLocalStorage from "react-secure-storage";
-import Cookies from "js-cookie";
 
 let language =
   typeof window !== "undefined"

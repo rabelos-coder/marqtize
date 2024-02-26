@@ -1,10 +1,12 @@
 import React from "react";
 import { Col } from "reactstrap";
+
+import { THEME_LOCALE_SWITCHER_ENABLED } from "@/environment";
+
 import { Language } from "./Languages/index";
-import { SearchBar } from "./SearchBar";
 import { MoonLight } from "./MoonLight";
 import Profile from "./Profile";
-import { THEME_LOCALE_SWITCHER_ENABLED } from "@/environment";
+import { SearchBar } from "./SearchBar";
 
 export const RightBar = () => {
   return (

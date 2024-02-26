@@ -1,7 +1,8 @@
-import Theme from "@/configs/theme";
-import { useCustomizer } from "@/hooks";
 import React, { useEffect, useState } from "react";
 import { Button, Input } from "reactstrap";
+
+import Theme from "@/configs/theme";
+import { useCustomizer } from "@/hooks";
 
 const ColorComponent = () => {
   const { addColor } = useCustomizer();

@@ -1,7 +1,9 @@
+import Image from "next/image";
+
 import Theme from "@/configs/theme";
 import { useCustomizer, useLayout } from "@/hooks";
 import { Link } from "@/navigation";
-import Image from "next/image";
+
 import { SideBarLogo } from "./SidebarLogo";
 import { SideBarMenu } from "./SidebarMenu";
 

@@ -1,7 +1,8 @@
 "use client";
 
-import { APP_LANGUAGE } from "@/environment";
 import { redirect, usePathname } from "next/navigation";
+
+import { APP_LANGUAGE } from "@/environment";
 
 export default function NotFound() {
   const pathname = usePathname();

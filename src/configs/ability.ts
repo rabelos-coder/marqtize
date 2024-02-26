@@ -1,5 +1,6 @@
-import { User } from "@/types/auth";
 import { AbilityBuilder, PureAbility } from "@casl/ability";
+
+import { User } from "@/types/auth";
 
 type Actions = "manage" | "create" | "read" | "update" | "delete";
 

@@ -1,8 +1,9 @@
+import React, { Dispatch, SetStateAction } from "react";
+
 import { useAppDispatch } from "@/hooks";
 import { usePathname, useRouter } from "@/navigation";
 import { setLanguage } from "@/store/slices/authSlice";
 import { Languages } from "@/types/language";
-import React, { Dispatch, SetStateAction } from "react";
 
 type ListStateType = {
   selected: string;

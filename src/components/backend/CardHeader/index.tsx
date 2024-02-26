@@ -1,5 +1,6 @@
-import { CommonCardHeadingPropsType } from "@/types/common";
 import { CardHeader as BootstrapCardHeader } from "reactstrap";
+
+import { CommonCardHeadingPropsType } from "@/types/common";
 
 export const CardHeader = ({
   headingClassName,

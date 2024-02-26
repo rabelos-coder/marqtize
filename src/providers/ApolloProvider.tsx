@@ -1,8 +1,9 @@
 "use client";
 
-import { createApolloClient } from "@/utils/apollo";
-import { ComponentProps } from "@/types";
 import { ApolloProvider as ApolloClientProvider } from "@apollo/client";
+
+import { ComponentProps } from "@/types";
+import { createApolloClient } from "@/utils/apollo";
 
 /**
  * ApolloProvider component to provide Apollo client to its children.

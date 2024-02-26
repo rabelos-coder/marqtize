@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Theme from "@/configs/theme";
+
 import { classes } from "@/configs/layout";
+import Theme from "@/configs/theme";
 import { CustomizerContext } from "@/contexts/CustomizerContext";
 import { ChildrenProps } from "@/types/children";
 

@@ -1,7 +1,8 @@
-import { Link } from "@/navigation";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import React from "react";
+
+import { Link } from "@/navigation";
 
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 

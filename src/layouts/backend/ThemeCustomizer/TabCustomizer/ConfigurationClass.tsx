@@ -1,15 +1,16 @@
 import { Fragment } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast } from "react-toastify";
 import {
+  Button,
   Container,
   Modal,
   ModalBody,
-  ModalHeader,
   ModalFooter,
+  ModalHeader,
   Row,
-  Button,
 } from "reactstrap";
-import { toast } from "react-toastify";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import Theme from "@/configs/theme";
 
 interface PropsTypeProp {

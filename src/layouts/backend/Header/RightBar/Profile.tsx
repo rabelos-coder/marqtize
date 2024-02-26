@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
 import FeatherIconCom from "@/components/common/Icons/FeatherIconCom";
-import { ProfileListData } from "@/types/language";
 import { useAuth } from "@/hooks";
+import { ProfileListData } from "@/types/language";
 
 const Profile = () => {
   const { logout } = useAuth();

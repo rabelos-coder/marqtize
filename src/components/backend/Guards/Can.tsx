@@ -1,6 +1,7 @@
-import { AbilityContext } from "@/contexts/AbilityContext";
 import { AnyAbility } from "@casl/ability";
 import { BoundCanProps, createContextualCan } from "@casl/react";
+
+import { AbilityContext } from "@/contexts/AbilityContext";
 
 /**
  * Can component to provide ability context to its children.

@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
-import { locales } from "@/configs/i18n";
 import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
-import { ComponentProps } from "@/types";
-import { APP_LANGUAGE } from "@/environment";
-import { ApolloProvider } from "@/providers/ApolloProvider";
 import { Suspense } from "react";
-import { Spinner } from "@/layouts/backend/Spinner";
 import { ToastContainer } from "react-toastify";
+
+import { locales } from "@/configs/i18n";
+import { APP_LANGUAGE } from "@/environment";
+import { Spinner } from "@/layouts/backend/Spinner";
+import { ApolloProvider } from "@/providers/ApolloProvider";
 import { ReduxProvider } from "@/providers/ReduxProvider";
+import { ComponentProps } from "@/types";
 
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -1,12 +1,14 @@
-import { Fragment, useState } from "react";
-import { MenuList as Menulist } from "./MenuList";
-import { MenuList } from "../menu";
-import { ArrowLeft, ArrowRight } from "react-feather";
-import { usePathname } from "@/navigation";
-import { useCustomizer, useLayout } from "@/hooks";
-import Theme from "@/configs/theme";
-import { SidebarMenuType } from "@/types/layout";
 import { useTranslations } from "next-intl";
+import { Fragment, useState } from "react";
+import { ArrowLeft, ArrowRight } from "react-feather";
+
+import Theme from "@/configs/theme";
+import { useCustomizer, useLayout } from "@/hooks";
+import { usePathname } from "@/navigation";
+import { SidebarMenuType } from "@/types/layout";
+
+import { MenuList } from "../menu";
+import { MenuList as Menulist } from "./MenuList";
 
 export const SideBarMenu = () => {
   const { pinedMenu } = useLayout();

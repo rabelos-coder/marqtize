@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
-import BgDark from "./BgDark";
-import DarkSidebar from "./DarkSidebar";
-import BgLight from "./BgLight";
-import { useCustomizer } from "@/hooks";
+
 import Theme from "@/configs/theme";
+import { useCustomizer } from "@/hooks";
+
+import BgDark from "./BgDark";
+import BgLight from "./BgLight";
+import DarkSidebar from "./DarkSidebar";
 
 const MixLayoutComponent = () => {
   const { addMixBackgroundLayout, setMixLayout } = useCustomizer();
