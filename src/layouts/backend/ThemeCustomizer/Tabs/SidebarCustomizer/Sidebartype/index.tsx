@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Vertical from "./Vertical";
 import Horizontal from "./Horizontal";
 import { useCustomizer } from "@/hooks";
@@ -9,6 +9,7 @@ const SidebarType = () => {
   const handleSidebarType = (type: string) => {
     addSidebarLayouts(type);
   };
+
   return (
     <div>
       <h6>Sidebar Icon</h6>

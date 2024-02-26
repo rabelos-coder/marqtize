@@ -18,6 +18,7 @@ interface PropsTypeProp {
 }
 const ConfigurationClass = ({ toggle, modal }: PropsTypeProp) => {
   const configDB = Theme.data;
+
   return (
     <Fragment>
       <Modal

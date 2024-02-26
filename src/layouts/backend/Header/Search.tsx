@@ -27,6 +27,7 @@ const Search = () => {
       setSuggestion([]);
     }
   };
+
   return (
     <SearchBarContain
       handleSearch={handleSearch}

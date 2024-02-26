@@ -11,6 +11,7 @@ type FetherType = {
 
 const FeatherIconCom = ({ iconName, className }: FetherType) => {
   const IconComp = Icon[iconName];
+
   return <IconComp className={className} />;
 };
 

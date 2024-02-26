@@ -40,6 +40,7 @@ export const fetchCustomer = createAsyncThunk(
 
       if (data) {
         const { findBySlugCustomer } = data;
+
         return findBySlugCustomer;
       } else {
         return null;
@@ -71,7 +72,7 @@ export const customerSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchCustomer.pending, (state, action) => {
+    builder.addCase(fetchCustomer.pending, (state) => {
       state.loading = true;
       state.error = null;
     });

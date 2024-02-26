@@ -8,6 +8,7 @@ const CheckLayout = () => {
   const handlePageLayputs = (type: string) => {
     setLayoutName(type.toLowerCase().replace(" ", ""));
   };
+
   return (
     <ul className="sidebar-type layout-grid layout-types">
       {CheckLayoutData &&

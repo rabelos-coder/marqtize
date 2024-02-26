@@ -95,6 +95,7 @@ export const fetchAuth = createAsyncThunk(
 
       if (data) {
         const { authLogin } = data;
+
         return authLogin;
       } else {
         return null;
@@ -122,6 +123,7 @@ export const fetchRegister = createAsyncThunk(
 
       if (data) {
         const { register } = data;
+
         return register;
       } else {
         return null;
@@ -226,7 +228,7 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAuth.pending, (state, action) => {
+    builder.addCase(fetchAuth.pending, (state) => {
       state.loading = true;
       state.error = null;
     });

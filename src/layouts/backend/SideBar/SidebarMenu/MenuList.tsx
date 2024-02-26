@@ -29,7 +29,7 @@ export const MenuList = ({
     if (!pinedMenu.includes(value || "")) {
       setPinedMenu((data) => [...data, value || ""]);
     } else {
-      let filterMenu = pinedMenu.filter((item) => item !== value);
+      const filterMenu = pinedMenu.filter((item) => item !== value);
       setPinedMenu(filterMenu);
     }
   };

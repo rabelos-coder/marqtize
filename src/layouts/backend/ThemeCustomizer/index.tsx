@@ -10,6 +10,7 @@ export const ThemeCustomizer = () => {
     setSelected(select);
     setOpenCus(open);
   };
+
   return (
     <>
       <div className={`customizer-links ${openCus ? "open" : ""}`}>

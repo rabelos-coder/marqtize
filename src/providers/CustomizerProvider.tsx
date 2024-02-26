@@ -1,14 +1,12 @@
 "use client";
 
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Theme from "@/configs/theme";
 import { classes } from "@/configs/layout";
-import { useRouter } from "next/navigation";
 import { CustomizerContext } from "@/contexts/CustomizerContext";
 import { ChildrenProps } from "@/types/children";
 
 export const CustomizerProvider = ({ children }: ChildrenProps) => {
-  const router = useRouter();
   const [layout, setLayout] = useState("compact-wrapper");
   const [layoutName, setLayoutName] = useState("");
   const [sidebarIconType, setSidebarIconType] = useState("");
@@ -19,7 +17,7 @@ export const CustomizerProvider = ({ children }: ChildrenProps) => {
   const [IsOpen, setIsClose] = useState(false);
 
   useEffect(() => {
-    classes.map((item, i) => {
+    classes.map((item) => {
       if (item.name === layoutName) {
         Theme.data.settings.layout_class = item.class;
         setLayout(item.class);
@@ -71,6 +69,7 @@ export const CustomizerProvider = ({ children }: ChildrenProps) => {
   const toggleSidebarResponsive = (toggle: boolean) => {
     setSidebarResponsive(toggle);
   };
+
   return (
     <CustomizerContext.Provider
       value={{

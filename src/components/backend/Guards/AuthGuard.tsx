@@ -1,10 +1,7 @@
 "use client";
 
 import { useAuth } from "@/hooks";
-import { useRouter } from "@/navigation";
 import { ComponentProps } from "@/types";
-import { useEffect } from "react";
-import { NotAuthorized } from "../NotAuthorized";
 
 /**
  * Asynchronous function to guard access to authenticated routes by checking for a server session.

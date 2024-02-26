@@ -37,6 +37,7 @@ const MixLayoutComponent = () => {
       }
     }
   };
+
   return (
     <>
       <h6>Mix Layout</h6>

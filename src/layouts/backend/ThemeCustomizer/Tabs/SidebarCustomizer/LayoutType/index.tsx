@@ -30,6 +30,7 @@ const LayoutType = () => {
       }
     }
   };
+
   return (
     <div>
       <h6 className="mt-0 pt-0">Layout Type</h6>

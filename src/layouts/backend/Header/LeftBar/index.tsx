@@ -7,6 +7,7 @@ import { Link } from "@/navigation";
 
 export const LeftBar = () => {
   const { sideBarToggle, setSideBarToggle } = useLayout();
+
   return (
     <>
       <Col className="header-logo-wrapper col-auto p-0">

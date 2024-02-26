@@ -13,6 +13,7 @@ export const Language = () => {
       setDropdownShow(!dropdownShow);
     }
   };
+
   return (
     <li className="language-nav">
       <div className={`translate_wrapper ${dropdownShow ? "active" : ""}`}>

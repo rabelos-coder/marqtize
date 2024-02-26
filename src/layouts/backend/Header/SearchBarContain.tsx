@@ -19,6 +19,7 @@ const SearchBarContain = ({
       document.body.classList.remove("offcanvas");
     setSearchValue("");
   };
+
   return (
     <Form className={`form-inline search-full col ${searchIcon ? "open" : ""}`}>
       <div className="form-group w-100">

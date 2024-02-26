@@ -21,6 +21,7 @@ export const TapTop = () => {
     if (typeof window !== "undefined")
       window.addEventListener("scroll", handleScroll);
     handleScroll();
+
     return () => {
       if (typeof window !== "undefined")
         window.removeEventListener("scroll", handleScroll);

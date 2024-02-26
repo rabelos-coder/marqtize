@@ -1,11 +1,8 @@
 "use client";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import { APP_LANGUAGE, APP_TIMEZONE } from "@/environment";
-import { AUTH_LOGIN } from "@/graphql/auth";
-import { createApolloClient } from "@/utils/apollo";
 import { ComponentProps } from "@/types";
-import { AuthContextType, LoginInput, RegisterInput, User } from "@/types/auth";
+import { AuthContextType, LoginInput, RegisterInput } from "@/types/auth";
 import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { authReset, fetchAuth, fetchRegister } from "@/store/slices/authSlice";
