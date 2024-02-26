@@ -5747,9 +5747,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rsc-site@workspace:.":
+"rsc-web@workspace:.":
   version: 0.0.0-use.local
-  resolution: "rsc-site@workspace:."
+  resolution: "rsc-web@workspace:."
   dependencies:
     "@apollo/client": "npm:^3.9.5"
     "@casl/ability": "npm:^6.7.0"

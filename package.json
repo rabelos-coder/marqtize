@@ -1,7 +1,22 @@
 {
-  "name": "rsc-site",
-  "version": "0.1.0",
+  "name": "rsc-web",
+  "version": "1.0.0",
+  "description": "This is the Rabelo's Coder Core Application.",
+  "author": "Fabricio Pereira Rabelo",
+  "homepage": "https://github.com/rabelos-coder/rsc-web",
+  "contributors": [
+    {
+      "name": "Fabricio Pereira Rabelo",
+      "email": "fabricio@rabeloscoder.com.br",
+      "url": "https://rabeloscoder.com.br"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rabelos-coder/rsc-web.git"
+  },
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
