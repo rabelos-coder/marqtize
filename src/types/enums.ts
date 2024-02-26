@@ -1,0 +1,5 @@
+export enum UserTypeEnum {
+  CREDENTIAL = "CREDENTIAL",
+  SOCIAL = "SOCIAL",
+  APPLICATION = "APPLICATION",
+}

@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react";
 import SearchBarContain from "./SearchBarContain";
-import { useContext } from "react";
 import { useLayout } from "@/hooks";
 import { SearchableMenuType } from "@/types/layout";
 
@@ -15,14 +14,16 @@ const Search = () => {
     setFieldTouch(true);
     setSearchValue(event.target.value);
     if (searchKey !== "") {
-      document.body.classList.add("offcanvas");
+      if (typeof document !== "undefined")
+        document.body.classList.add("offcanvas");
       const search = searchableMenu.filter((item) => {
         return item.title.toLowerCase().includes(searchKey);
       });
       setSuggestion(search);
     }
     if (searchKey === "") {
-      document.body.classList.remove("offcanvas");
+      if (typeof document !== "undefined")
+        document.body.classList.remove("offcanvas");
       setSuggestion([]);
     }
   };

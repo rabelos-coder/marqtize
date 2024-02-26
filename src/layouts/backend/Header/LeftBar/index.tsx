@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import { Col } from "reactstrap";
 import { AlignCenter } from "react-feather";
 import { useLayout } from "@/hooks";
 import { NotificationSlider } from "./NotificationSlider";
+import { Link } from "@/navigation";
 
 export const LeftBar = () => {
   const { sideBarToggle, setSideBarToggle } = useLayout();
@@ -11,7 +11,7 @@ export const LeftBar = () => {
     <>
       <Col className="header-logo-wrapper col-auto p-0">
         <div className="logo-wrapper">
-          <Link href={"/dashboard/default"}>
+          <Link href={"/backend"}>
             <Image
               className="img-fluid for-light"
               src={`/assets/images/logo/logo.png`}

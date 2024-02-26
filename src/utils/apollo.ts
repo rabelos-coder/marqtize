@@ -5,28 +5,27 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { createClient } from "graphql-ws";
 import { setContext } from "@apollo/client/link/context";
-import axios from "axios";
 import {
   APP_META_TITLE,
   APP_VERSION,
   IS_DEVELOPMENT,
   SERVER_URL,
 } from "@/environment";
+import { STORAGE_AUTH_TOKEN } from "@/configs";
+import Cookies from "js-cookie";
 
 export const createApolloClient = () => {
   const authMiddleware = setContext(async (operation, { headers }) => {
-    const { token } = await axios
-      .get("/api/auth/session")
-      .then((res) => res.data);
+    const token = Cookies.get(STORAGE_AUTH_TOKEN);
 
     return {
       headers: {
         ...headers,
         "Apollo-Require-Preflight": "true",
-        Authorization: `Bearer ${token}`,
+        Authorization: token ? `Bearer ${token}` : "",
       },
       connectionParams: {
-        authToken: token,
+        authToken: token ?? "",
       },
     };
   });

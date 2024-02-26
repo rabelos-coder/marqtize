@@ -6,12 +6,12 @@ import {
   buildAbilityFor,
   defaultAcl,
 } from "@/configs/ability";
-import { useSession } from "next-auth/react";
 import { ReactNode } from "react";
 import { AbilityProvider } from "@/providers/AbilityProvider";
 import { NotAuthorized } from "../NotAuthorized";
 import { Spinner } from "@/layouts/backend/Spinner";
 import { Layout } from "@/layouts/backend/Layout";
+import { useAuth } from "@/hooks";
 
 type AclGuardProps = {
   children: ReactNode;
@@ -31,20 +31,24 @@ export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
   const guard = acl ?? defaultAcl;
 
   // Get the user's session
-  const { data: session } = useSession();
+  const { user, isLoggedIn } = useAuth();
 
   // User is logged in, build ability for the user based on his role
-  if (session && session?.user && !ability)
-    ability = buildAbilityFor(session.user as any);
+  if (isLoggedIn && user && !ability) ability = buildAbilityFor(user);
 
   // Check the access of current user and render pages
-  if (ability && session?.user && ability.can(guard.action, guard.subject)) {
+  if (
+    ability &&
+    isLoggedIn &&
+    user &&
+    ability.can(guard.action, guard.subject)
+  ) {
     return (
       <AbilityProvider ability={ability}>
         <Layout>{children}</Layout>
       </AbilityProvider>
     );
-  } else if (!ability || !session?.user) {
+  } else if (!ability || !isLoggedIn) {
     return <Spinner />;
   }
 

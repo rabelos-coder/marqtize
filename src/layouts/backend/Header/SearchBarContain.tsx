@@ -15,7 +15,8 @@ const SearchBarContain = ({
   const { searchIcon, setSearchIcon } = useLayout();
 
   const handleOnClick = () => {
-    document.body.classList.remove("offcanvas");
+    if (typeof document !== "undefined")
+      document.body.classList.remove("offcanvas");
     setSearchValue("");
   };
   return (

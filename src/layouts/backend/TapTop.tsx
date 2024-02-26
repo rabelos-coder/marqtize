@@ -5,11 +5,12 @@ export const TapTop = () => {
   const [tapTopStyle, setTapTopStyle] = useState("none");
 
   const executeScroll = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    if (typeof window !== "undefined")
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const handleScroll = () => {
-    if (window.scrollY > 100) {
+    if (typeof window !== "undefined" && window.scrollY > 100) {
       setTapTopStyle("block");
     } else {
       setTapTopStyle("none");
@@ -17,10 +18,12 @@ export const TapTop = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    if (typeof window !== "undefined")
+      window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (typeof window !== "undefined")
+        window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 

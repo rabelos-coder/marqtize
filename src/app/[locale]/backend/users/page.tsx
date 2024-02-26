@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { AclGuard } from "@/components/backend/Guards/AclGuard";
 import { Breadcrumbs } from "@/components/backend/Breadcrumbs";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";

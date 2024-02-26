@@ -1,15 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { useRouter } from "@/navigation";
 import FeatherIconCom from "@/components/common/Icons/FeatherIconCom";
 import { ProfileListData } from "@/types/language";
-import { signOut } from "next-auth/react";
+import { useAuth } from "@/hooks";
 
 const Profile = () => {
-  const handleLogOut = async () => {
-    await signOut({ callbackUrl: "/auth/login" });
-  };
+  const { logout } = useAuth();
 
   return (
     <li className="profile-nav onhover-dropdown pe-0 py-0">
@@ -38,7 +35,7 @@ const Profile = () => {
               </Link>
             </li>
           ))}
-        <li onClick={handleLogOut}>
+        <li onClick={logout}>
           <a href="#123">
             <FeatherIconCom iconName={"LogIn"} />
             <span>Logout</span>

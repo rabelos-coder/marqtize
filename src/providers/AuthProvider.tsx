@@ -6,7 +6,10 @@ import { AUTH_LOGIN } from "@/graphql/auth";
 import { createApolloClient } from "@/utils/apollo";
 import { ComponentProps } from "@/types";
 import { AuthContextType, LoginInput, RegisterInput, User } from "@/types/auth";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { authReset, fetchAuth, fetchRegister } from "@/store/slices/authSlice";
+import { useRouter } from "@/navigation";
 
 /**
  * AuthProvider component that provides authentication context to its children.
@@ -26,51 +29,48 @@ export function AuthProvider({ children }: ComponentProps): JSX.Element {
  * @return {AuthContextType} authentication context object
  */
 function useProvideAuth(): AuthContextType {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [language, setLanguage] = useState<string | null>(APP_LANGUAGE);
-  const [timezone, setTimezone] = useState<string | null>(APP_TIMEZONE);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { user, token, language, timezone, loading, error } = useAppSelector(
+    (state) => state.auth
+  );
 
   /**
    * Function to perform a login using the provided input.
    *
    * @param {LoginInput} input - the input containing login data
-   * @return {void}
+   * @return {Promise<void>}
    */
-  const login = async (input: LoginInput): Promise<void> => {
-    const client = createApolloClient();
+  const login = useCallback(
+    async (input: LoginInput): Promise<void> => {
+      dispatch(fetchAuth(input));
+    },
+    [dispatch]
+  );
 
-    const { data } = await client.mutate({
-      mutation: AUTH_LOGIN,
-      variables: { data: input.data },
-    });
-
-    if (data?.authLogin?.token) setToken(data.authLogin.token);
-    if (data?.authLogin?.user) setUser(data.authLogin.user);
-  };
-
-  const register = async (input: RegisterInput): Promise<void> => {
-    const client = createApolloClient();
-
-    const { data } = await client.mutate({
-      mutation: AUTH_LOGIN,
-      variables: { data: input.data },
-    });
-
-    if (data?.authLogin?.token) setToken(data.authLogin.token);
-    if (data?.authLogin?.user) setUser(data.authLogin.user);
-    if (data?.authLogin?.user?.language)
-      setLanguage(data.authLogin.user.language);
-    if (data?.authLogin?.user?.timezone?.code)
-      setTimezone(data.authLogin.user.timezone.code);
-  };
+  /**
+   * Function to perform a registration using the provided input.
+   *
+   * @param {RegisterInput} input - the input containing registration data
+   * @return {Promise<void>}
+   */
+  const register = useCallback(
+    async (input: RegisterInput): Promise<void> => {
+      dispatch(fetchRegister(input));
+    },
+    [dispatch]
+  );
 
   const logout = () => {
-    setUser(null);
-    setToken(null);
-    setLanguage(APP_LANGUAGE);
-    setTimezone(APP_TIMEZONE);
+    dispatch(authReset());
+    router.push("/auth/login");
   };
+
+  useEffect(() => {
+    if (token) setIsLoggedIn(true);
+  }, [token]);
 
   return {
     user,
@@ -80,5 +80,8 @@ function useProvideAuth(): AuthContextType {
     login,
     logout,
     register,
+    loading,
+    error,
+    isLoggedIn,
   };
 }

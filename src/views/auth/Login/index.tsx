@@ -1,45 +1,58 @@
 "use client";
 
 import { Col, Container, Row } from "reactstrap";
-import Link from "next/link";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Facebook, Linkedin, Twitter } from "react-feather";
 import { Button, FormGroup, Input, Label } from "reactstrap";
 import { toast } from "react-toastify";
-import { useRouter } from "@/navigation";
 import { CommonLogo } from "@/components/common/CommonLogo";
-import { signIn } from "next-auth/react";
+import { useAuth } from "@/hooks";
+import { IS_DEVELOPMENT } from "@/environment";
+import { Link, useRouter } from "@/navigation";
 
 export const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassWord, setShowPassWord] = useState(false);
-  const [formValues, setFormValues] = useState({
-    email: "Test@gmail.com",
-    password: "Test@123",
-  });
+  const [formValues, setFormValues] = useState(
+    IS_DEVELOPMENT
+      ? {
+          email: "amandasmith@me.com",
+          password: "abClK1@X",
+        }
+      : { email: "", password: "" }
+  );
   const { email, password } = formValues;
   const router = useRouter();
+  const { login, loading, error, language, isLoggedIn } = useAuth();
+
   const handleUserValue = (event: ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [event.target.name]: event.target.value });
   };
-  const formSubmitHandle = (event: FormEvent) => {
+  const formSubmitHandle = async (event: FormEvent) => {
     event.preventDefault();
-    signIn("credentials", {
+
+    const data = {
       email,
       password,
       rememberMe,
-      redirect: false,
-    }).then((res) => {
-      if (res && res.ok) {
-        router.replace("/backend");
-      } else {
-        toast.error("Email or password is invalid");
-      }
-    });
+    };
+
+    await login({ data });
   };
+
+  useEffect(() => {
+    if (isLoggedIn && language && !loading) {
+      router.replace("/backend", { locale: language });
+      router.refresh();
+    }
+    if (error) {
+      toast.error(error);
+    }
+  }, [error, isLoggedIn, language, loading, router]);
 
   return (
     <Container fluid className="p-0">
+      <Link href="/backend" lang={language} id="backend" />
       <Row className="m-0">
         <Col xs={12} className="p-0">
           <div className="login-card login-dark">
@@ -102,6 +115,7 @@ export const Login = () => {
                         color="primary"
                         className="btn-block w-100"
                         type="submit"
+                        disabled={loading}
                       >
                         Sign in
                       </Button>

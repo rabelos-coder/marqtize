@@ -1,4 +1,6 @@
+import { useAppDispatch } from "@/hooks";
 import { usePathname, useRouter } from "@/navigation";
+import { setLanguage } from "@/store/slices/authSlice";
 import { Languages } from "@/types/language";
 import React, { Dispatch, SetStateAction } from "react";
 
@@ -11,8 +13,11 @@ export const LanguageList = ({ selected, setSelected }: ListStateType) => {
   const pathname = usePathname();
   const router = useRouter();
 
+  const dispatch = useAppDispatch();
+
   const changeLanguage = (locale: string) => {
     setSelected(locale);
+    dispatch(setLanguage(locale));
     router.push(pathname, { locale });
   };
 

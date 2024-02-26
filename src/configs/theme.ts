@@ -2,7 +2,7 @@ export class Theme {
   static data = {
     settings: {
       layout_type: "ltr",
-      layout_class: "compact-wrapper",
+      layout_class: "compact-wrapper color-sidebar",
       sidebar: {
         type: "compact-wrapper",
         iconType: "stroke-svg",

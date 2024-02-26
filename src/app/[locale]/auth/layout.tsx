@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ComponentProps } from "@/types";
+import { AuthProvider } from "@/providers/AuthProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,5 +20,5 @@ export const metadata: Metadata = {
 };
 
 export default function AuthLayout({ children }: ComponentProps) {
-  return <>{children}</>;
+  return <AuthProvider>{children}</AuthProvider>;
 }

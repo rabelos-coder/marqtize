@@ -7,6 +7,8 @@ import { TapTop } from "./TapTop";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
+import { ThemeCustomizer } from "./ThemeCustomizer";
+import { THEME_CUSTOMIZER_ENABLED } from "@/environment";
 
 export const Layout = ({ children }: ChildrenProps) => {
   const { layout, setLayout } = useCustomizer();
@@ -19,13 +21,13 @@ export const Layout = ({ children }: ChildrenProps) => {
 
   const compactSidebar = () => {
     if (layout === "compact-wrapper") {
-      if (window.innerWidth <= 1006) {
+      if (typeof window !== "undefined" && window.innerWidth <= 1006) {
         setSideBarToggle(true);
       } else {
         setSideBarToggle(false);
       }
     } else if (layout === "horizontal-wrapper") {
-      if (window.innerWidth <= 1006) {
+      if (typeof window !== "undefined" && window.innerWidth <= 1006) {
         setSideBarToggle(true);
         setLayout("compact-wrapper");
       } else {
@@ -37,9 +39,10 @@ export const Layout = ({ children }: ChildrenProps) => {
 
   useEffect(() => {
     compactSidebar();
-    window.addEventListener("resize", () => {
-      compactSidebar();
-    });
+    if (typeof window !== "undefined")
+      window.addEventListener("resize", () => {
+        compactSidebar();
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [layout]);
 
@@ -96,6 +99,7 @@ export const Layout = ({ children }: ChildrenProps) => {
           <Footer />
         </div>
       </div>
+      {THEME_CUSTOMIZER_ENABLED && <ThemeCustomizer />}
       <TapTop />
     </>
   );

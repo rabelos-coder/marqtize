@@ -93,3 +93,10 @@ export type SearchBarContainPropsType = {
   fieldTouch: boolean;
   setFieldTouch: Function;
 };
+
+export type CheckLayoutDataType = {
+  class?: string;
+  image: string;
+  title: string;
+  attr: string;
+};

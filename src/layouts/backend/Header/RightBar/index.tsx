@@ -4,6 +4,7 @@ import { Language } from "./Languages/index";
 import { SearchBar } from "./SearchBar";
 import { MoonLight } from "./MoonLight";
 import Profile from "./Profile";
+import { THEME_LOCALE_SWITCHER_ENABLED } from "@/environment";
 
 export const RightBar = () => {
   return (
@@ -15,7 +16,7 @@ export const RightBar = () => {
       className="nav-right pull-right right-header p-0 ms-auto"
     >
       <ul className="nav-menus flex-row">
-        <Language />
+        {THEME_LOCALE_SWITCHER_ENABLED && <Language />}
         <SearchBar />
         <MoonLight />
         <Profile />

@@ -6,10 +6,10 @@ import { unstable_setRequestLocale } from "next-intl/server";
 import { ComponentProps } from "@/types";
 import { APP_LANGUAGE } from "@/environment";
 import { ApolloProvider } from "@/providers/ApolloProvider";
-import { NextAuthProvider } from "@/providers/NextAuthProvider";
 import { Suspense } from "react";
 import { Spinner } from "@/layouts/backend/Spinner";
 import { ToastContainer } from "react-toastify";
+import { ReduxProvider } from "@/providers/ReduxProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,6 +27,7 @@ export default async function LocaleLayout({
   try {
     messages = (await import(`../../locales/${locale}.json`)).default;
   } catch (error) {
+    console.error(error);
     return notFound();
   }
 
@@ -37,9 +38,9 @@ export default async function LocaleLayout({
       <body suppressHydrationWarning={true}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ApolloProvider>
-            <NextAuthProvider>
+            <ReduxProvider>
               <Suspense fallback={<Spinner />}>{children}</Suspense>
-            </NextAuthProvider>
+            </ReduxProvider>
           </ApolloProvider>
         </NextIntlClientProvider>
         <ToastContainer />
