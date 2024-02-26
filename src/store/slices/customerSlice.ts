@@ -1,4 +1,4 @@
-import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import secureLocalStorage from "react-secure-storage";
 
 import { STORAGE_CUSTOMER } from "@/configs";

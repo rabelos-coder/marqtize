@@ -11,7 +11,7 @@ import { AuthContextType } from "@/types/auth";
 import { CustomizerContextType } from "@/types/customizer";
 import { LayoutContextType } from "@/types/layout";
 
-import type { AppDispatch,RootState } from "../store";
+import type { AppDispatch, RootState } from "../store";
 
 /**
  * Returns the authentication context.
