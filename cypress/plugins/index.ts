@@ -16,7 +16,7 @@
  * @type {Cypress.PluginConfig}
  */
 
-const loadConfig = (_on, _config) => {
+const loadConfig = (_on: any, _config: any) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 };

@@ -17,12 +17,6 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
-    "cypress/no-assigning-return-values": "error",
-    "cypress/no-unnecessary-waiting": "error",
-    "cypress/assertion-before-screenshot": "warn",
-    "cypress/no-force": "warn",
-    "cypress/no-async-tests": "error",
-    "cypress/no-pause": "error",
     // no unused variables
     "unused-imports/no-unused-vars": [
       "warn",
@@ -56,7 +50,7 @@
     ],
     "@typescript-eslint/ban-types": "off"
   },
-  "plugins": ["cypress", "import", "unused-imports", "simple-import-sort"],
+  "plugins": ["import", "unused-imports", "simple-import-sort"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]

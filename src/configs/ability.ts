@@ -13,18 +13,19 @@ export type AclAbility = {
   subject: string;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-vars
 function defineRulesFor(user: User) {
   const { can, rules } = new AbilityBuilder(AppAbility);
 
   can("manage", "all");
   can("create", "profile");
 
-  if (user.role === "admin") {
-    can("manage", "all");
-  }
-  if (user.role === "manager") {
-    can("manage", "article");
-  }
+  // if (user.role === "admin") {
+  //   can("manage", "all");
+  // }
+  // if (user.role === "manager") {
+  //   can("manage", "article");
+  // }
 
   return rules;
 }
