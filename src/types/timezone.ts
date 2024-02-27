@@ -3,3 +3,7 @@ export type Timezone = {
   code: string;
   name: string;
 };
+
+export type FindManyTimezone = {
+  findManyTimezone: Timezone[];
+};

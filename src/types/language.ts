@@ -26,19 +26,4 @@ export const ProfileListData: ProfileType[] = [
     text: "Account",
     path: "/app/users/profile",
   },
-  {
-    icon: "Mail",
-    text: "Inbox",
-    path: "/dashboard/default",
-  },
-  {
-    icon: "FileText",
-    text: "Taskboard",
-    path: "/app/task",
-  },
-  {
-    icon: "Settings",
-    text: "Settings",
-    path: "/app/users/edit",
-  },
 ];

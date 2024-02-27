@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import secureLocalStorage from "react-secure-storage";
 
 import { STORAGE_CUSTOMER } from "@/configs";
-import { GET_CUSTOMER_BY_SLUG } from "@/graphql/customer";
+import { FIND_CUSTOMER_BY_SLUG } from "@/graphql/customer";
 import { CustomerState } from "@/types/customer";
 import { createApolloClient } from "@/utils/apollo";
 
@@ -28,7 +28,7 @@ export const fetchCustomer = createAsyncThunk(
 
     try {
       const { data, errors } = await client.mutate({
-        mutation: GET_CUSTOMER_BY_SLUG,
+        mutation: FIND_CUSTOMER_BY_SLUG,
         variables: {
           slug: host.replace(
             "." + (process.env.NEXT_PUBLIC_ROOT_DOMAIN ?? "localhost:3000"),

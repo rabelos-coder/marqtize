@@ -1,8 +1,7 @@
-import { Customer } from "./customer";
+import { Upload } from "./common";
 import { UserTypeEnum } from "./enums";
 import { JWT } from "./jwt";
-import { Role } from "./role";
-import { Timezone } from "./timezone";
+import { User } from "./user";
 
 export type AuthState = {
   user: User | null;
@@ -27,40 +26,15 @@ export type AuthContextType = {
   isLoggedIn: boolean;
 };
 
-export type User = {
-  id: string;
-  customerId: string;
-  name: string;
-  systemName: string;
-  email: string;
-  emailVerified: string;
-  password: string;
-  isActive: boolean;
-  isSuperAdmin: boolean;
-  image: string;
-  language: string;
-  type: UserTypeEnum;
-  resetToken: string;
-  resetTokenExpires: string;
-  twoFactorSecret: string;
-  twoFactorRecoveryCodes: string;
-  twoFactorConfirmedAt: string;
-  timezoneId: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-
-  roles: Role[];
-  timezone: Timezone;
-  customer: Customer;
-};
-
 export type Register = {
   register: User;
 };
 
-export type RegisterInput = {
-  data: any;
+export type ForgotPassword = {
+  authLogin: {
+    token: string;
+    user: User;
+  };
 };
 
 export type AuthLogin = {
@@ -70,10 +44,43 @@ export type AuthLogin = {
   };
 };
 
+export type ResetPassword = {
+  resetPassword: boolean;
+};
+
 export type LoginInput = {
   data: {
     email: string;
     password: string;
     rememberMe: boolean;
+  };
+};
+
+export type RegisterInput = {
+  data: {
+    customerId?: string;
+    name: string;
+    systemName: string;
+    email: string;
+    password: string;
+    imageFile?: Upload;
+    language: string;
+    type: UserTypeEnum;
+    timezoneId: string;
+  };
+};
+
+export type ForgotPasswordInput = {
+  data: {
+    email: string;
+    callbackUrl: string;
+  };
+};
+
+export type ResetPasswordInput = {
+  data: {
+    email: string;
+    password: string;
+    resetToken: string;
   };
 };

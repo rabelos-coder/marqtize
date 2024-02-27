@@ -1,6 +1,6 @@
 import { AbilityBuilder, PureAbility } from "@casl/ability";
 
-import { User } from "@/types/auth";
+import { User } from "@/types/user";
 
 type Actions = "manage" | "create" | "read" | "update" | "delete";
 

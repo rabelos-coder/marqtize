@@ -81,15 +81,13 @@ const initialState: AuthState = {
 
 export const fetchAuth = createAsyncThunk(
   "auth/fetchAuth",
-  async (input: LoginInput) => {
+  async (variables: LoginInput) => {
     const client = createApolloClient();
 
     try {
       const { data, errors } = await client.mutate({
         mutation: AUTH_LOGIN,
-        variables: {
-          data: input.data,
-        },
+        variables,
       });
 
       if (!data && errors?.length) throw new Error(errors[0].message);
