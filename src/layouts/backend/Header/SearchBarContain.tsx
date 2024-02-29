@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { X } from "react-feather";
 import { Form, Input } from "reactstrap";
 
@@ -14,6 +15,7 @@ const SearchBarContain = ({
   fieldTouch,
 }: SearchBarContainPropsType) => {
   const { searchIcon, setSearchIcon } = useLayout();
+  const t = useTranslations("translations");
 
   const handleOnClick = () => {
     if (typeof document !== "undefined")
@@ -30,10 +32,10 @@ const SearchBarContain = ({
               onChange={handleSearch}
               value={searchValue}
               className="Typeahead-input form-control-plaintext w-100"
-              placeholder="Search Cuba .."
+              placeholder={`${t("search")}...`}
             />
             <div className="spinner-border Typeahead-spinner">
-              <span className="sr-only">Loading...</span>
+              <span className="sr-only">{t("loading")}...</span>
             </div>
             <X
               onClick={() => setSearchIcon(!searchIcon)}
@@ -55,7 +57,7 @@ const SearchBarContain = ({
                           className="stroke-icon"
                           iconId={`stroke-${item.icon}`}
                         />
-                        {item.title}
+                        {t(item.title)}
                       </Link>
                     </div>
                   </div>
@@ -69,9 +71,7 @@ const SearchBarContain = ({
             } `}
           >
             <div className="tt-dataset tt-dataset-0">
-              <div className="EmptyMessage">
-                Opps!! There are no result found.
-              </div>
+              <div className="EmptyMessage">{t("noSearchResult")}</div>
             </div>
           </div>
         </div>

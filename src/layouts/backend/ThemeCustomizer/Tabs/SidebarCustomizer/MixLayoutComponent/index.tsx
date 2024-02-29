@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React, { useEffect } from "react";
 
 import Theme from "@/configs/theme";
@@ -10,6 +11,8 @@ import DarkSidebar from "./DarkSidebar";
 const MixLayoutComponent = () => {
   const { addMixBackgroundLayout, setMixLayout } = useCustomizer();
   const mixLayout = Theme.data.color.mix_background_layout;
+
+  const t = useTranslations("translations");
 
   useEffect(() => {
     if (mixLayout !== "light-only") {
@@ -42,7 +45,7 @@ const MixLayoutComponent = () => {
 
   return (
     <>
-      <h6>Mix Layout</h6>
+      <h6>{t("mixLayout")}</h6>
       <ul className="layout-grid customizer-mix flex-row">
         <BgLight
           mixLayout={mixLayout}

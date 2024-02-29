@@ -1,29 +1,21 @@
-import { LanguageDataType, ProfileType } from "./layout";
+import { LanguageDataType } from "./layout";
 
 export const CountryClassName: Record<string, string> = {
   en: "us",
   pt: "pt",
 };
 
-export const Languages: LanguageDataType[] = [
+export const LanguagesData: LanguageDataType[] = [
   {
-    name: "English",
+    name: "english",
     shortName: "en",
     iconClass: "flag-icon flag-icon-us",
     tag: "(US)",
   },
   {
-    name: "Português",
+    name: "portuguese",
     shortName: "pt",
-    iconClass: "flag-icon flag-icon-pt",
+    iconClass: "flag-icon flag-icon-br",
     tag: "(BR)",
-  },
-];
-
-export const ProfileListData: ProfileType[] = [
-  {
-    icon: "User",
-    text: "Account",
-    path: "/app/users/profile",
   },
 ];

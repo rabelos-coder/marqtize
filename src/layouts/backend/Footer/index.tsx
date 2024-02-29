@@ -1,15 +1,20 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 import { Col, Container, Row } from "reactstrap";
 
 export const Footer = () => {
+  const t = useTranslations("translations");
+
   return (
     <footer className="footer">
       <Container fluid={true}>
         <Row>
           <Col md={12} className="footer-copyright text-center">
             <p className="mb-0">
-              Copyright {new Date().getFullYear()} &copy; Cuba theme by
-              pixelstrap
+              {t("copyright", {
+                year: new Date().getFullYear(),
+                company: "Rabelo's Coder",
+              })}
             </p>
           </Col>
         </Row>

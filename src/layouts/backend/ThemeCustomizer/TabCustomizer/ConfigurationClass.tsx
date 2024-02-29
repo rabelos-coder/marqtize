@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Fragment } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
@@ -13,12 +14,13 @@ import {
 
 import Theme from "@/configs/theme";
 
-interface PropsTypeProp {
+type PropsTypeProp = {
   toggle: () => void;
   modal: boolean;
-}
+};
 const ConfigurationClass = ({ toggle, modal }: PropsTypeProp) => {
-  const configDB = Theme.data;
+  const theme = Theme.data;
+  const t = useTranslations("translations");
 
   return (
     <Fragment>
@@ -28,79 +30,83 @@ const ConfigurationClass = ({ toggle, modal }: PropsTypeProp) => {
         className="modal-body"
         centered={true}
       >
-        <ModalHeader toggle={toggle}>Configuration</ModalHeader>
+        <ModalHeader toggle={toggle}>{t("configuration")}</ModalHeader>
         <ModalBody>
           <Container fluid={true} className="bd-example-row">
             <Row>
+              <p>{t("configurationClassInfo")}</p>
               <p>
-                {
-                  "To replace our design with your desired theme. Please do configuration as mention"
-                }{" "}
-              </p>
-              <p>
-                {" "}
-                <b> {"Path : src > config > ThemeConfig "}</b>{" "}
+                <strong>
+                  {t("pathDoubleDotName", { name: "src > configs > theme.ts" })}
+                </strong>
               </p>
             </Row>
-            <pre>
-              <code>
-                <div> {"export class Theme "}&#123;</div>
-                <div> {"static data"} = &#123;</div>
-                <div> {"settings"}&#58; &#123;</div>
-                <div>
-                  {" "}
-                  {"layout_type"}&#58; '{configDB.settings.layout_type}',
-                </div>
-
-                <div> {"sidebar"}&#58; &#123;</div>
-                <div>
-                  {" "}
-                  {"type"}&#58; '{configDB.settings.sidebar.type}',
-                </div>
-                <div> &#125;,</div>
-                <div>
-                  {" "}
-                  {"sidebar_setting"}&#58; '{configDB.settings.sidebar_setting}
-                  ',{" "}
-                </div>
-                <div> &#125;,</div>
-                <div> {"color"}&#58; &#123;</div>
-                <div>
-                  {" "}
-                  {"primary_color"}&#58; '{configDB.color.primary_color}',{" "}
-                </div>
-                <div>
-                  {" "}
-                  {"secondary_color"}&#58; '{configDB.color.secondary_color}',{" "}
-                </div>
-                <div>
-                  {" "}
-                  {"mix_background_layout"}&#58; '
-                  {configDB.color.mix_background_layout}',{" "}
-                </div>
-                <div> &#125;,</div>
-                <div> &#125;</div>
-                <div> &#125;</div>
-              </code>
-            </pre>
+            <div
+              style={{
+                background: "#e6e6e6",
+                borderRadius: "5px",
+                padding: "15px",
+              }}
+            >
+              <div>{"export class Theme "}&#123;</div>
+              <div>&nbsp;&nbsp;{"static data"} = &#123;</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;{"settings"}&#58; &#123;</div>
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"layout_type"}&#58; '
+                {theme.settings.layout_type}',
+              </div>
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"sidebar"}&#58; &#123;
+              </div>
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"type"}
+                &#58; '{theme.settings.sidebar.type}',
+              </div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;,</div>
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"sidebar_setting"}
+                &#58; '{theme.settings.sidebar_setting}
+                ',
+              </div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;,</div>
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"color"}&#58; &#123;
+              </div>
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {"primary_color"}&#58; '{theme.color.primary_color}',
+              </div>
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {"secondary_color"}&#58; '{theme.color.secondary_color}',
+              </div>
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {"mix_background_layout"}
+                &#58; '{theme.color.mix_background_layout}',
+              </div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;,</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;&#125;</div>
+              <div>&#125;</div>
+            </div>
           </Container>
         </ModalBody>
         <ModalFooter>
-          <CopyToClipboard text={JSON.stringify(configDB)}>
+          <CopyToClipboard text={JSON.stringify(theme)}>
             <Button
               color="primary"
               className="notification"
               onClick={() =>
-                toast.success("Code Copied to clipboard !", {
+                toast.success(t("codeCopied"), {
                   position: "bottom-right",
                 })
               }
             >
-              CopyText
+              {t("copyText")}
             </Button>
           </CopyToClipboard>
           <Button color="secondary" onClick={toggle}>
-            Cancel
+            {t("close")}
           </Button>
         </ModalFooter>
       </Modal>

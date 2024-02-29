@@ -1,12 +1,15 @@
-import { ErrorPage } from "@/views/common/ErrorPage";
+import { useTranslations } from "next-intl";
+
+import { ErrorPage } from "@/components/common/ErrorPage";
 
 export const NotAuthorized = () => {
+  const t = useTranslations("translations");
+
   return (
     <ErrorPage
-      tittle={401}
-      description="The page you are attempting to reach is currently not
-      available for your account."
-      tittleClassName="font-warning"
+      title={403}
+      description={t("forbiddenInfo")}
+      titleClassName="font-warning"
       BtnClassName="btn-warning-gradien"
     />
   );

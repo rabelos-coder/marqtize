@@ -1,14 +1,14 @@
 import { ReactNode, useEffect } from "react";
 
 import { THEME_CUSTOMIZER_ENABLED } from "@/environment";
-import { useCustomizer, useLayout } from "@/hooks";
+import { useAuth, useCustomizer, useLayout } from "@/hooks";
 import { ChildrenProps } from "@/types/children";
 import { SearchableMenuType, SidebarItemType } from "@/types/layout";
 
+import { MenuList } from "../../configs/menu";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
-import { MenuList } from "./SideBar/menu";
 import { TapTop } from "./TapTop";
 import { ThemeCustomizer } from "./ThemeCustomizer";
 
@@ -20,6 +20,7 @@ export const Layout = ({ children }: ChildrenProps) => {
     setSearchableMenu,
     setBookmarkList,
   } = useLayout();
+  const { user } = useAuth();
 
   const compactSidebar = () => {
     if (layout === "compact-wrapper") {
@@ -80,7 +81,7 @@ export const Layout = ({ children }: ChildrenProps) => {
     };
 
     MenuList.forEach((item) => {
-      item.Items?.map((child) => {
+      item.items?.map((child) => {
         getAllLink(child, child.icon);
       });
     });
@@ -101,7 +102,7 @@ export const Layout = ({ children }: ChildrenProps) => {
           <Footer />
         </div>
       </div>
-      {THEME_CUSTOMIZER_ENABLED && <ThemeCustomizer />}
+      {THEME_CUSTOMIZER_ENABLED && user?.isSuperAdmin && <ThemeCustomizer />}
       <TapTop />
     </>
   );

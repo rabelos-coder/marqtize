@@ -62,7 +62,7 @@ export type SidebarItemTypes = {
 export type SidebarMenuType = {
   title?: string;
   menuContent?: string;
-  Items: SidebarItemType[];
+  items: SidebarItemType[];
 };
 
 export type LanguageDataType = {
@@ -98,5 +98,6 @@ export type CheckLayoutDataType = {
   class?: string;
   image: string;
   title: string;
+  slug: string;
   attr: string;
 };

@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 
 import CommonUL from "../CommonUL";
@@ -8,6 +9,8 @@ type LtrDataType = {
 };
 
 const LTR = ({ handleLayout, layout_type }: LtrDataType) => {
+  const t = useTranslations("translations");
+
   return (
     <li
       className={`${layout_type === "ltr" ? "active" : ""} border-0`}
@@ -23,7 +26,7 @@ const LTR = ({ handleLayout, layout_type }: LtrDataType) => {
         <ul>
           <li className="bg-light sidebar"></li>
           <li className="bg-light body">
-            <span className="badge badge-primary">LTR</span>
+            <span className="badge badge-primary">{t("ltr")}</span>
           </li>
         </ul>
       </div>

@@ -137,7 +137,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    authReset: (state) => {
+    resetAuth: (state) => {
       state.loading = false;
       state.error = null;
       state.user = initialState.user;
@@ -154,6 +154,10 @@ export const authSlice = createSlice({
         localStorage.setItem(STORAGE_LANGUAGE, APP_LANGUAGE);
         localStorage.setItem(STORAGE_TIMEZONE, APP_TIMEZONE);
       }
+    },
+    resetError: (state) => {
+      state.loading = false;
+      state.error = null;
     },
     setUser: (state, action) => {
       state.user = action.payload;
@@ -276,7 +280,8 @@ export const authSlice = createSlice({
 });
 
 export const {
-  authReset,
+  resetAuth,
+  resetError,
   setAuth,
   setUser,
   setToken,

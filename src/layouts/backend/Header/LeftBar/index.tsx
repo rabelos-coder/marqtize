@@ -18,14 +18,14 @@ export const LeftBar = () => {
             <Image
               className="img-fluid for-light"
               src={`/assets/images/logo/logo.png`}
-              alt="logo"
+              alt=""
               width={100}
               height={100}
             />
             <Image
               className="img-fluid for-dark"
               src={`/assets/images/logo/logo_dark.png`}
-              alt="logo"
+              alt=""
               width={100}
               height={100}
             />

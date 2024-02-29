@@ -5,24 +5,24 @@ import { useCallback, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useRouter } from "@/navigation";
-import { authReset, fetchAuth, fetchRegister } from "@/store/slices/authSlice";
-import { ComponentProps } from "@/types";
-import { AuthContextType, LoginInput, RegisterInput } from "@/types/auth";
+import { fetchAuth, resetAuth } from "@/store/slices/authSlice";
+import { AuthContextType, LoginInput } from "@/types/auth";
+import { ChildrenProps } from "@/types/common";
 
 /**
  * AuthProvider component that provides authentication context to its children.
  *
- * @param {ComponentProps} children - The child components to provide authentication context to.
+ * @param {ChildrenProps} children - The child components to provide authentication context to.
  * @return {JSX.Element} The authentication context provided to the children.
  */
-export function AuthProvider({ children }: ComponentProps): JSX.Element {
+export function AuthProvider({ children }: ChildrenProps): JSX.Element {
   const auth = useProvideAuth();
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
 /**
- * Returns an authentication context with user, token, language, timezone, login, logout, and register functions.
+ * Returns an authentication context with user, token, language, timezone, signIn, signOut, and register functions.
  *
  * @return {AuthContextType} authentication context object
  */
@@ -41,28 +41,15 @@ function useProvideAuth(): AuthContextType {
    * @param {LoginInput} input - the input containing login data
    * @return {Promise<void>}
    */
-  const login = useCallback(
+  const signIn = useCallback(
     async (input: LoginInput): Promise<void> => {
       dispatch(fetchAuth(input));
     },
     [dispatch]
   );
 
-  /**
-   * Function to perform a registration using the provided input.
-   *
-   * @param {RegisterInput} input - the input containing registration data
-   * @return {Promise<void>}
-   */
-  const register = useCallback(
-    async (input: RegisterInput): Promise<void> => {
-      dispatch(fetchRegister(input));
-    },
-    [dispatch]
-  );
-
-  const logout = () => {
-    dispatch(authReset());
+  const signOut = () => {
+    dispatch(resetAuth());
     router.push("/auth/login");
   };
 
@@ -75,9 +62,8 @@ function useProvideAuth(): AuthContextType {
     token,
     language,
     timezone,
-    login,
-    logout,
-    register,
+    signIn,
+    signOut,
     loading,
     error,
     isLoggedIn,

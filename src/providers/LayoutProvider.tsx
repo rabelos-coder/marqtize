@@ -9,7 +9,7 @@ import { SearchableMenuType } from "@/types/layout";
 export const LayoutProvider = ({ children }: ChildrenProps) => {
   const [searchIcon, setSearchIcon] = useState(false);
   const [bookMarkClass, setBookMarkClass] = useState(false);
-  const [pinedMenu, setPinedMenu] = useState<string[]>([""]);
+  const [pinedMenu, setPinedMenu] = useState<string[]>([]);
   const [sideBarToggle, setSideBarToggle] = useState(false);
   const [searchableMenu, setSearchableMenu] = useState([]);
   const [bookmarkList, setBookmarkList] = useState<SearchableMenuType[]>([]);

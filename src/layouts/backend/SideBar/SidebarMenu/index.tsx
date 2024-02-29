@@ -7,7 +7,7 @@ import { useCustomizer, useLayout } from "@/hooks";
 import { usePathname } from "@/navigation";
 import { SidebarMenuType } from "@/types/layout";
 
-import { MenuList } from "../menu";
+import { MenuList } from "../../../../configs/menu";
 import { MenuList as Menulist } from "./MenuList";
 
 export const SideBarMenu = () => {
@@ -23,6 +23,7 @@ export const SideBarMenu = () => {
   const [activeLink, setActiveLink] = useState<string | undefined>(
     active.split("/")[active.split("/").length - 1]
   );
+  const t = useTranslations("translations");
 
   const handleActive = (title: string, level: number) => {
     if (active.includes(title)) {
@@ -75,12 +76,10 @@ export const SideBarMenu = () => {
     }
   };
   const shouldHideMenu = (mainMenu: SidebarMenuType) => {
-    return mainMenu.Items.map((data) => data.title).every((tittles) =>
-      pinedMenu.includes(tittles || "")
-    );
+    return mainMenu.items
+      .map((data) => data.title)
+      .every((tittles) => pinedMenu.includes(tittles || ""));
   };
-
-  const t = useTranslations();
 
   return (
     <nav className="sidebar-main">
@@ -129,7 +128,7 @@ export const SideBarMenu = () => {
                       } `}
                     >
                       <div>
-                        <h6>Pinned</h6>
+                        <h6>{t("pinned")}</h6>
                       </div>
                     </li>
                     {MenuList &&
@@ -152,7 +151,7 @@ export const SideBarMenu = () => {
                             activeLink={activeLink}
                             handleActive={handleActive}
                             active={active}
-                            MENUITEMS={mainMenu.Items}
+                            menuItems={mainMenu.items}
                             level={0}
                           />
                         </Fragment>

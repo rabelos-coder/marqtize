@@ -1,7 +1,9 @@
+import { ReactNode } from "react";
+
 export type CommonErrorPageProps = {
-  tittle: number;
+  title: number;
   description: string;
-  tittleClassName: string;
+  titleClassName: string;
   BtnClassName: string;
 };
 
@@ -70,4 +72,23 @@ export type FindByIdInput = {
 
 export type FindByIdsInput = {
   ids: string[];
+};
+
+type ParamsType = {
+  id?: string;
+  slug?: string;
+  locale: string;
+};
+
+export type ComponentWithLocaleProps = Readonly<{
+  children: ReactNode;
+  params: ParamsType;
+}>;
+
+export type ChildrenProps = {
+  children: ReactNode;
+};
+
+export type AuthFormProps = {
+  alignLogo?: string;
 };

@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 
 import CommonUL from "../CommonUL";
@@ -8,6 +9,8 @@ type varType = {
 };
 
 const StrokeIcon = ({ handleSideBarIconType, sideBarIconType }: varType) => {
+  const t = useTranslations("translations");
+
   return (
     <li
       data-attr="stroke-svg"
@@ -19,7 +22,7 @@ const StrokeIcon = ({ handleSideBarIconType, sideBarIconType }: varType) => {
       </div>
       <div className="body">
         <div className="body bg-light">
-          <span className="badge badge-primary">Stroke</span>
+          <span className="badge badge-primary">{t("stroke")}</span>
         </div>
       </div>
     </li>

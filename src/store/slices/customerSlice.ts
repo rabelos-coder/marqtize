@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import secureLocalStorage from "react-secure-storage";
 
 import { STORAGE_CUSTOMER } from "@/configs";
+import { APP_MAIN_DOMAIN } from "@/environment";
 import { FIND_CUSTOMER_BY_SLUG } from "@/graphql/customer";
 import { CustomerState } from "@/types/customer";
 import { createApolloClient } from "@/utils/apollo";
@@ -25,15 +26,15 @@ export const fetchCustomer = createAsyncThunk(
   "customer/fetchCustomer",
   async (host: string) => {
     const client = createApolloClient();
+    const slug = host?.replace(`.${APP_MAIN_DOMAIN}`, "")?.trim() ?? null;
+
+    if (!slug && !host) return null;
 
     try {
       const { data, errors } = await client.mutate({
         mutation: FIND_CUSTOMER_BY_SLUG,
         variables: {
-          slug: host.replace(
-            "." + (process.env.NEXT_PUBLIC_ROOT_DOMAIN ?? "localhost:3000"),
-            ""
-          ),
+          slug,
         },
       });
 
@@ -43,12 +44,12 @@ export const fetchCustomer = createAsyncThunk(
         const { findBySlugCustomer } = data;
 
         return findBySlugCustomer;
-      } else {
-        return null;
       }
     } catch (error) {
       throw error;
     }
+
+    return null;
   }
 );
 
@@ -57,12 +58,20 @@ export const customerSlice = createSlice({
   initialState,
   reducers: {
     resetCustomer: (state) => {
+      state.loading = false;
+      state.error = null;
       state.customer = initialState.customer;
       if (typeof window !== "undefined") {
         secureLocalStorage.removeItem(STORAGE_CUSTOMER);
       }
     },
+    resetError: (state) => {
+      state.loading = false;
+      state.error = null;
+    },
     setCustomer: (state, action) => {
+      state.loading = false;
+      state.error = null;
       state.customer = action.payload;
       if (typeof window !== "undefined") {
         secureLocalStorage.setItem(

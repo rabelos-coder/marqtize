@@ -1,18 +1,25 @@
+import { getTranslations } from "next-intl/server";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
 
 import { Breadcrumbs } from "@/components/backend/Breadcrumbs";
 import { CardHeader } from "@/components/backend/CardHeader";
 import { AclGuard } from "@/components/backend/Guards/AclGuard";
+import { concatTitle } from "@/utils/helpers";
 
-export default async function Page() {
+export async function generateMetadata({ params: { locale } }: any) {
+  const t = await getTranslations({ locale, namespace: "translations" });
+  const title = concatTitle(t("dashboard"));
+
+  return {
+    title,
+  };
+}
+
+export default async function BackendPage() {
   return (
     <AclGuard acl={{ action: "read", subject: "user" }}>
       <div className="page-body">
-        <Breadcrumbs
-          title="sample page"
-          mainTitle="Sample Page"
-          parent="Pages"
-        />
+        <Breadcrumbs pageTitle="dashboard" />
         <Container fluid>
           <Row>
             <Col sm="12">

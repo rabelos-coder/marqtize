@@ -9,18 +9,18 @@ export const SideBarLogo = () => {
 
   return (
     <div className="logo-wrapper">
-      <Link href={"/dashboard/default"}>
+      <Link href={"/backend"}>
         <Image
           className="img-fluid for-light"
           src={"/assets/images/logo/logo.png"}
-          alt="icon"
+          alt=""
           width={121}
           height={100}
         />
         <Image
           className="img-fluid for-dark"
           src={"/assets/images/logo/logo_dark.png"}
-          alt="icon"
+          alt=""
           width={121}
           height={100}
         />

@@ -1,9 +1,10 @@
+import { useTranslations } from "next-intl";
 import React, { Dispatch, SetStateAction } from "react";
 
 import { useAppDispatch } from "@/hooks";
 import { usePathname, useRouter } from "@/navigation";
 import { setLanguage } from "@/store/slices/authSlice";
-import { Languages } from "@/types/language";
+import { LanguagesData } from "@/types/language";
 
 type ListStateType = {
   selected: string;
@@ -14,6 +15,7 @@ export const LanguageList = ({ selected, setSelected }: ListStateType) => {
   const pathname = usePathname();
   const router = useRouter();
 
+  const t = useTranslations("translations");
   const dispatch = useAppDispatch();
 
   const changeLanguage = (locale: string) => {
@@ -24,8 +26,8 @@ export const LanguageList = ({ selected, setSelected }: ListStateType) => {
 
   return (
     <div className={`more_lang ${selected ? "active" : ""}`}>
-      {Languages &&
-        Languages.map((item, index) => (
+      {LanguagesData &&
+        LanguagesData.map((item, index) => (
           <div
             key={index}
             className="lang"
@@ -33,7 +35,7 @@ export const LanguageList = ({ selected, setSelected }: ListStateType) => {
           >
             <i className={item.iconClass}></i>
             <span className="lang-txt">
-              {item.name}
+              {t(item.name)}
               {item.tag && <span> {item.tag}</span>}
             </span>
           </div>

@@ -1,12 +1,14 @@
 import React from "react";
+import { useTranslations } from "use-intl";
 
 import { CheckLayoutData } from "@/configs/customizer";
 import { useCustomizer } from "@/hooks";
 
 const CheckLayout = () => {
   const { setLayoutName } = useCustomizer();
+  const t = useTranslations("translations");
 
-  const handlePageLayputs = (type: string) => {
+  const handlePageLayouts = (type: string) => {
     setLayoutName(type.toLowerCase().replace(" ", ""));
   };
 
@@ -19,7 +21,7 @@ const CheckLayout = () => {
             data-attr={item.attr}
             className={`${item.class ? item.class : ""}`}
             onClick={() => {
-              handlePageLayputs(item.title);
+              handlePageLayouts(item.slug);
             }}
           >
             <div className="layout-img">
@@ -29,7 +31,7 @@ const CheckLayout = () => {
                 className="img-fluid"
                 alt="layout Type"
               />
-              <h6>{item.title}</h6>
+              <h6>{t(item.title)}</h6>
             </div>
           </li>
         ))}

@@ -21,7 +21,7 @@ export const SideBar = () => {
       <div>
         <SideBarLogo />
         <div className="logo-icon-wrapper">
-          <Link href={"/dashboard/default"}>
+          <Link href={"/backend"}>
             <Image
               width={35}
               height={35}

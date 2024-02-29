@@ -1,16 +1,16 @@
-import { ErrorPage } from "@/views/common/ErrorPage";
+import { useTranslations } from "next-intl";
 
-const NotFound = () => {
+import { ErrorPage } from "@/components/common/ErrorPage";
+
+export default function NotFound() {
+  const t = useTranslations("translations");
+
   return (
     <ErrorPage
-      tittle={404}
-      description="The page you are attempting to reach is currently not
-      available.This may be because the page does not exist or has been
-      moved."
-      tittleClassName="font-danger"
+      title={404}
+      description={t("notFoundInfo")}
+      titleClassName="font-danger"
       BtnClassName="btn-danger-gradien"
     />
   );
-};
-
-export default NotFound;
+}

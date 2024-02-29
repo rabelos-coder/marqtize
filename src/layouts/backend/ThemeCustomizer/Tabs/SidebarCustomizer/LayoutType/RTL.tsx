@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 
 import CommonUL from "../CommonUL";
@@ -8,6 +9,8 @@ type RtlDataType = {
 };
 
 const RTL = ({ handleLayout, layout_type }: RtlDataType) => {
+  const t = useTranslations("translations");
+
   return (
     <li
       className={`${layout_type === "rtl" ? "active" : ""}`}
@@ -19,7 +22,7 @@ const RTL = ({ handleLayout, layout_type }: RtlDataType) => {
       <div className="body">
         <ul>
           <li className="bg-light body">
-            <span className="badge badge-primary">RTL</span>
+            <span className="badge badge-primary">{t("rtl")}</span>
           </li>
           <li className="bg-light sidebar"></li>
         </ul>

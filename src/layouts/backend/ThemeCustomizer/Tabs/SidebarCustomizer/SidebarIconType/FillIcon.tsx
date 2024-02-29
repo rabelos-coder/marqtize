@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 
 import CommonUL from "../CommonUL";
@@ -8,6 +9,8 @@ type varTypes = {
 };
 
 const FillIcon = ({ handleSideBarIconType, sideBarIconType }: varTypes) => {
+  const t = useTranslations("translations");
+
   return (
     <li
       data-attr="fill-svg"
@@ -19,7 +22,7 @@ const FillIcon = ({ handleSideBarIconType, sideBarIconType }: varTypes) => {
       </div>
       <div className="body">
         <div className="body bg-light">
-          <span className="badge badge-primary">Fill</span>
+          <span className="badge badge-primary">{t("fill")}</span>
         </div>
       </div>
     </li>

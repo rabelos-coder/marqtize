@@ -37,7 +37,7 @@ export const classes = [
   },
   {
     name: "singapore",
-    class: "horizontal-wrapper enterprice-type",
+    class: "horizontal-wrapper enterprize-type",
   },
   {
     name: "rome",
@@ -45,6 +45,6 @@ export const classes = [
   },
   {
     name: "barcelona",
-    class: "horizontal-wrapper enterprice-type advance-layout",
+    class: "horizontal-wrapper enterprize-type advance-layout",
   },
 ];

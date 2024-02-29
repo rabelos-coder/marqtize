@@ -20,9 +20,8 @@ export type AuthContextType = {
   timezone: string;
   loading: boolean;
   error: string | null;
-  login: (input: LoginInput) => Promise<void>;
-  logout: () => void;
-  register: (input: RegisterInput) => Promise<void>;
+  signIn: (input: LoginInput) => Promise<void>;
+  signOut: () => void;
   isLoggedIn: boolean;
 };
 
@@ -30,18 +29,15 @@ export type Register = {
   register: User;
 };
 
-export type ForgotPassword = {
+export type AuthLogin = {
   authLogin: {
     token: string;
     user: User;
   };
 };
 
-export type AuthLogin = {
-  authLogin: {
-    token: string;
-    user: User;
-  };
+export type ForgotPassword = {
+  forgotPassword: boolean;
 };
 
 export type ResetPassword = {
@@ -58,15 +54,15 @@ export type LoginInput = {
 
 export type RegisterInput = {
   data: {
-    customerId?: string;
+    customerId?: string | null;
     name: string;
     systemName: string;
     email: string;
     password: string;
     imageFile?: Upload;
-    language: string;
-    type: UserTypeEnum;
-    timezoneId: string;
+    language?: string;
+    type?: UserTypeEnum;
+    timezoneId?: string;
   };
 };
 

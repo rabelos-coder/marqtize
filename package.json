@@ -36,6 +36,7 @@
     "@apollo/client": "^3.9.5",
     "@casl/ability": "^6.7.0",
     "@casl/react": "^3.1.0",
+    "@hookform/resolvers": "^3.3.4",
     "@popperjs/core": "^2.11.8",
     "@reduxjs/toolkit": "^2.2.1",
     "@testing-library/cypress": "^10.0.1",

@@ -1,15 +1,15 @@
 "use client";
 
 import { useAuth } from "@/hooks";
-import { ComponentProps } from "@/types";
+import { ChildrenProps } from "@/types/common";
 
 /**
  * Asynchronous function to guard access to authenticated routes by checking for a server session.
  *
- * @param {ComponentProps} children - The child components to be rendered within the guarded route.
+ * @param {ChildrenProps} children - The child components to be rendered within the guarded route.
  * @return {JSX.Element} The original child components to be rendered if the user is authenticated.
  */
-export const AuthGuard = ({ children }: ComponentProps): JSX.Element => {
+export const AuthGuard = ({ children }: ChildrenProps): JSX.Element => {
   const { isLoggedIn } = useAuth();
 
   if (isLoggedIn) {

@@ -1,6 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
+
+import { Link } from "@/navigation";
 
 type propsType = {
   alignLogo?: string;
@@ -8,10 +9,7 @@ type propsType = {
 
 export const CommonLogo = ({ alignLogo }: propsType) => {
   return (
-    <Link
-      className={`logo ${alignLogo ? alignLogo : ""} `}
-      href="dashboard/default"
-    >
+    <Link className={`logo ${alignLogo ? alignLogo : ""} `} href="/">
       <Image
         width={121}
         height={35}

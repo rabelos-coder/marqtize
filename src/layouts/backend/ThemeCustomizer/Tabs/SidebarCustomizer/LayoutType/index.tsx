@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 import Theme from "@/configs/theme";
@@ -9,6 +10,8 @@ import RTL from "./RTL";
 const LayoutType = () => {
   const localStorageLayout = Theme.data.settings.layout_type;
   const [layout_type, setLayout_type] = useState(localStorageLayout);
+
+  const t = useTranslations("translations");
 
   const handleLayout = (layout: string) => {
     setLayout_type(layout);
@@ -35,7 +38,7 @@ const LayoutType = () => {
 
   return (
     <div>
-      <h6 className="mt-0 pt-0">Layout Type</h6>
+      <h6 className="mt-0 pt-0">{t("layoutType")}</h6>
       <ul className="main-layout layout-grid flex-row">
         <LTR handleLayout={handleLayout} layout_type={layout_type} />
         <RTL handleLayout={handleLayout} layout_type={layout_type} />

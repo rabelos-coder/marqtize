@@ -1,23 +1,25 @@
 // * ENVIRONMENT SETTINGS
-export const ENVIRONMENT = process.env.NODE_ENV || "development";
+export const ENVIRONMENT = process.env.NODE_ENV ?? "development";
 export const IS_PRODUCTION = ENVIRONMENT === "production";
 export const IS_DEVELOPMENT = ENVIRONMENT === "development";
 
 // * APPLICATION SETTINGS
-export const APP_VERSION = process.env.npm_package_version || "1.0.0";
-export const APP_LANGUAGE = process.env.NEXT_PUBLIC_APP_LANGUAGE || "pt";
+export const APP_MAIN_DOMAIN =
+  process.env.NEXT_PUBLIC_APP_MAIN_DOMAIN ?? "localhost";
+export const APP_VERSION = process.env.npm_package_version ?? "1.0.0";
+export const APP_LANGUAGE = process.env.NEXT_PUBLIC_APP_LANGUAGE ?? "pt";
 export const APP_TIMEZONE =
-  process.env.NEXT_PUBLIC_APP_TIMEZONE || "America/Sao_Paulo";
+  process.env.NEXT_PUBLIC_APP_TIMEZONE ?? "America/Sao_Paulo";
 export const APP_DATETIME_FORMAT =
-  process.env.NEXT_PUBLIC_APP_DATETIME_FORMAT || "lll";
+  process.env.NEXT_PUBLIC_APP_DATETIME_FORMAT ?? "lll";
 export const APP_META_TITLE =
-  process.env.NEXT_PUBLIC_APP_META_TITLE || "NextJS";
+  process.env.NEXT_PUBLIC_APP_META_TITLE ?? "Marqtize";
 export const APP_META_TITLE_SEPARATOR =
-  process.env.NEXT_PUBLIC_APP_META_TITLE_SEPARATOR || "|";
+  process.env.NEXT_PUBLIC_APP_META_TITLE_SEPARATOR ?? "|";
 export const APP_META_KEYWORDS =
-  process.env.NEXT_PUBLIC_APP_META_KEYWORDS || "";
+  process.env.NEXT_PUBLIC_APP_META_KEYWORDS ?? "";
 export const APP_META_DESCRIPTION =
-  process.env.NEXT_PUBLIC_APP_META_DESCRIPTION || "";
+  process.env.NEXT_PUBLIC_APP_META_DESCRIPTION ?? "";
 
 // * SERVER SETTINGS
 export const SERVER_URL =

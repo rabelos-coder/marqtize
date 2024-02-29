@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 import { Button, Input } from "reactstrap";
 
@@ -10,6 +11,8 @@ const ColorComponent = () => {
   const secondary_color = Theme.data.color.secondary_color;
   const [colorBackground1, setColorBackground1] = useState(default_color);
   const [colorBackground2, setColorBackground2] = useState(secondary_color);
+
+  const t = useTranslations("translations");
 
   useEffect(() => {
     if (typeof document !== "undefined") {
@@ -63,7 +66,7 @@ const ColorComponent = () => {
 
   return (
     <>
-      <h6>Unlimited Color</h6>
+      <h6>{t("unlimitedColor")}</h6>
       <ul className="simple-list flex-row layout-grid unlimited-color-layout">
         <Input
           className="p-0"
@@ -84,7 +87,7 @@ const ColorComponent = () => {
           className="color-apply-btn color-apply-btn"
           onClick={OnUnlimatedColorClick}
         >
-          Apply
+          {t("apply")}
         </Button>
       </ul>
     </>

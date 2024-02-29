@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 import { Nav, NavItem, NavLink } from "reactstrap";
 
@@ -5,7 +6,10 @@ type NavCustomizerType = {
   callbackNav: (test: string, open: boolean) => void;
   selected: string;
 };
+
 const NavCustomizer = ({ callbackNav, selected }: NavCustomizerType) => {
+  const t = useTranslations("translations");
+
   return (
     <Nav className="flex-column nac-pills">
       <NavItem>
@@ -16,7 +20,7 @@ const NavCustomizer = ({ callbackNav, selected }: NavCustomizerType) => {
           <div className="settings">
             <i className="icon-paint-bucket"></i>
           </div>
-          <span>Check layouts</span>
+          <span>{t("checkLayouts")}</span>
         </NavLink>
       </NavItem>
       <NavItem>
@@ -27,7 +31,7 @@ const NavCustomizer = ({ callbackNav, selected }: NavCustomizerType) => {
           <div className="settings">
             <i className="icon-settings"></i>
           </div>
-          <span>Quick option</span>
+          <span>{t("quickOptions")}</span>
         </NavLink>
       </NavItem>
     </Nav>

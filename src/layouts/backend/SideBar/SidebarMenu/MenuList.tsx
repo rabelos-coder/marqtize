@@ -6,7 +6,7 @@ import { useRouter } from "@/navigation";
 import { SidebarItemType } from "@/types/layout";
 
 type MenuListType = {
-  MENUITEMS: SidebarItemType[];
+  menuItems: SidebarItemType[];
   handleActive: (title: string, level: number) => void;
   active: string;
   setActiveLink: Function;
@@ -20,7 +20,7 @@ export const MenuList = ({
   setActive,
   handleActive,
   active,
-  MENUITEMS,
+  menuItems,
   level,
   activeLink,
   setActiveLink,
@@ -36,11 +36,11 @@ export const MenuList = ({
   };
   const router = useRouter();
   const { layoutName } = useCustomizer();
-  const t = useTranslations();
+  const t = useTranslations("translations");
 
   return (
     <>
-      {MENUITEMS.map((item, i) => (
+      {menuItems.map((item, i) => (
         <li
           key={i}
           className={`${pinedMenu.includes(item.title || "") ? "pined" : ""} ${
@@ -130,7 +130,7 @@ export const MenuList = ({
             >
               <MenuList
                 setActive={setActive}
-                MENUITEMS={item.children}
+                menuItems={item.children}
                 handleActive={handleActive}
                 active={active}
                 level={level + 1}

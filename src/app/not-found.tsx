@@ -4,7 +4,7 @@ import { redirect, usePathname } from "next/navigation";
 
 import { APP_LANGUAGE } from "@/environment";
 
-export default function NotFound() {
+export default function AppNotFound() {
   const pathname = usePathname();
 
   if (!pathname.split("/").includes(APP_LANGUAGE))
