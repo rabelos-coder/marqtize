@@ -2,7 +2,7 @@
 
 import { Provider } from "react-redux";
 
-import { ChildrenProps } from "@/types/children";
+import { ChildrenProps } from "@/types/common";
 
 import { store } from "../store";
 

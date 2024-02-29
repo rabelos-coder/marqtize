@@ -87,7 +87,7 @@ export const createApolloClient = () => {
   const client = new ApolloClient({
     name: APP_META_TITLE,
     version: APP_VERSION,
-    connectToDevTools: IS_DEVELOPMENT,
+    connectToDevTools: false,
     link: from([errorLink, authMiddleware, splitLink]),
     cache: new InMemoryCache(),
   });

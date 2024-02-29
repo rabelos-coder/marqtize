@@ -4,14 +4,18 @@ import React, { useEffect, useState } from "react";
 
 import { classes } from "@/configs/layout";
 import Theme from "@/configs/theme";
-import { CustomizerContext } from "@/contexts/CustomizerContext";
-import { ChildrenProps } from "@/types/children";
+import { CustomizerContext } from "@/context/CustomizerContext";
+import { ChildrenProps } from "@/types/common";
 
 export const CustomizerProvider = ({ children }: ChildrenProps) => {
   const [layout, setLayout] = useState("compact-wrapper");
   const [layoutName, setLayoutName] = useState("");
-  const [sidebarIconType, setSidebarIconType] = useState("");
-  const [mix_background_layout, setMixBackgroundLayout] = useState("");
+  const [sidebarIconType, setSidebarIconType] = useState(
+    Theme.data.settings.sidebar.iconType
+  );
+  const [mix_background_layout, setMixBackgroundLayout] = useState(
+    Theme.data.color.mix_background_layout
+  );
   const [toggleIcon, setToggleIcon] = useState(false);
   const [mixLayout, setMixLayout] = useState(false);
   const [sidebarResponsive, setSidebarResponsive] = useState(false);

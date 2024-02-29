@@ -1,10 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import secureLocalStorage from "react-secure-storage";
 
 import { STORAGE_CUSTOMER } from "@/configs";
 import { APP_MAIN_DOMAIN } from "@/environment";
 import { FIND_CUSTOMER_BY_SLUG } from "@/graphql/customer";
-import { CustomerState } from "@/types/customer";
+import { FindBySlugInput } from "@/types/common";
+import { Customer, CustomerState } from "@/types/customer";
 import { createApolloClient } from "@/utils/apollo";
 
 let customer: any =
@@ -27,15 +28,13 @@ export const fetchCustomer = createAsyncThunk(
   async (host: string) => {
     const client = createApolloClient();
     const slug = host?.replace(`.${APP_MAIN_DOMAIN}`, "")?.trim() ?? null;
-
+    const variables: FindBySlugInput = { slug };
     if (!slug && !host) return null;
 
     try {
       const { data, errors } = await client.mutate({
         mutation: FIND_CUSTOMER_BY_SLUG,
-        variables: {
-          slug,
-        },
+        variables,
       });
 
       if (!data && errors?.length) throw new Error(errors[0].message);
@@ -69,7 +68,7 @@ export const customerSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    setCustomer: (state, action) => {
+    setCustomer: (state, action: PayloadAction<Customer>) => {
       state.loading = false;
       state.error = null;
       state.customer = action.payload;

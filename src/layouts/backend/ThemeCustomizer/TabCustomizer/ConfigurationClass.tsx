@@ -56,11 +56,19 @@ const ConfigurationClass = ({ toggle, modal }: PropsTypeProp) => {
                 {theme.settings.layout_type}',
               </div>
               <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"layout_class"}&#58; '
+                {theme.settings.layout_class}',
+              </div>
+              <div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"sidebar"}&#58; &#123;
               </div>
               <div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"type"}
                 &#58; '{theme.settings.sidebar.type}',
+              </div>
+              <div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"iconType"}
+                &#58; '{theme.settings.sidebar.iconType}',
               </div>
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;,</div>
               <div>

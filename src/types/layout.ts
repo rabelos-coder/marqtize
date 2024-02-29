@@ -6,8 +6,7 @@ export type LayoutContextType = {
   bookMarkClass: boolean;
   setBookMarkClass: Dispatch<SetStateAction<boolean>>;
   setSearchIcon: Dispatch<SetStateAction<boolean>>;
-  setPinedMenu: Dispatch<SetStateAction<string[]>>;
-  pinedMenu: string[];
+  pinnedMenu: string[];
   sideBarToggle: boolean;
   setSideBarToggle: Dispatch<SetStateAction<boolean>>;
   searchableMenu: SearchableMenuType[];
@@ -19,6 +18,7 @@ export type LayoutContextType = {
 export type SidebarChildrenType = {
   path?: string;
   title: string;
+  nameArgument?: string;
   type: string;
   children?: SubChildrenType[];
   bookmark?: boolean;
@@ -43,7 +43,10 @@ export type SubChildrenType = {
 export type SidebarItemType = {
   id?: number;
   title?: string | undefined;
-  icon?: string;
+  icon?: string | ReactNode | undefined;
+  iconFill?: string | ReactNode;
+  iconStroke?: string | ReactNode;
+  nameArgument?: string;
   type: string;
   badge?: string;
   badge2?: boolean;

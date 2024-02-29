@@ -1,8 +1,9 @@
 import { useTranslations } from "next-intl";
 
 import SvgIcon from "@/components/common/Icons/SvgIcon";
-import { useCustomizer, useLayout } from "@/hooks";
+import { useAppDispatch, useCustomizer, useLayout } from "@/hooks";
 import { useRouter } from "@/navigation";
+import { setPinnedMenu } from "@/store/slices/themeSlice";
 import { SidebarItemType } from "@/types/layout";
 
 type MenuListType = {
@@ -25,17 +26,18 @@ export const MenuList = ({
   activeLink,
   setActiveLink,
 }: MenuListType) => {
-  const { pinedMenu, setPinedMenu } = useLayout();
+  const { pinnedMenu } = useLayout();
+  const dispatch = useAppDispatch();
   const handlePined = (value: string | undefined) => {
-    if (!pinedMenu.includes(value || "")) {
-      setPinedMenu((data) => [...data, value || ""]);
+    if (!pinnedMenu?.includes(value || "")) {
+      dispatch(setPinnedMenu([...pinnedMenu, value ?? ""]));
     } else {
-      const filterMenu = pinedMenu.filter((item) => item !== value);
-      setPinedMenu(filterMenu);
+      const filterMenu = pinnedMenu?.filter((item) => item !== value);
+      dispatch(setPinnedMenu(filterMenu));
     }
   };
   const router = useRouter();
-  const { layoutName } = useCustomizer();
+  const { layoutName, sidebarIconType } = useCustomizer();
   const t = useTranslations("translations");
 
   return (
@@ -43,7 +45,7 @@ export const MenuList = ({
       {menuItems.map((item, i) => (
         <li
           key={i}
-          className={`${pinedMenu.includes(item.title || "") ? "pined" : ""} ${
+          className={`${pinnedMenu.includes(item.title || "") ? "pined" : ""} ${
             level == 0 ? "sidebar-list" : ""
           }  `}
         >
@@ -89,13 +91,32 @@ export const MenuList = ({
               }
             }}
           >
-            {item.icon && (
-              <SvgIcon className="stroke-icon" iconId={`stroke-${item.icon}`} />
+            {typeof item.icon === "string" ? (
+              <>
+                {item.icon && (
+                  <SvgIcon
+                    className="stroke-icon"
+                    iconId={`stroke-${item.icon}`}
+                  />
+                )}
+                {item.icon && (
+                  <SvgIcon className="fill-icon" iconId={`fill-${item.icon}`} />
+                )}
+              </>
+            ) : (
+              <>
+                {item.icon
+                  ? item.icon
+                  : sidebarIconType === "stroke-svg"
+                    ? item.iconStroke
+                    : item.iconFill}
+              </>
             )}
-            {item.icon && (
-              <SvgIcon className="fill-icon" iconId={`fill-${item.icon}`} />
-            )}
-            <span>{t(`${item.title}`)}</span>
+            <span>
+              {item.title?.endsWith("Name")
+                ? t(`${item.title}`, { name: t(`${item.nameArgument}`) })
+                : t(`${item.title}`)}
+            </span>
             {item.badge ? (
               <label className={item.badge}>{item.badgeTxt}</label>
             ) : (

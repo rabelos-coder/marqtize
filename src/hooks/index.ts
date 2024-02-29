@@ -3,10 +3,10 @@ import { useContext } from "react";
 import type { TypedUseSelectorHook } from "react-redux";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AbilityContext } from "@/contexts/AbilityContext";
-import { AuthContext } from "@/contexts/AuthContext";
-import { CustomizerContext } from "@/contexts/CustomizerContext";
-import { LayoutContext } from "@/contexts/LayoutContext";
+import { AbilityContext } from "@/context/AbilityContext";
+import { AuthContext } from "@/context/AuthContext";
+import { CustomizerContext } from "@/context/CustomizerContext";
+import { LayoutContext } from "@/context/LayoutContext";
 import { AuthContextType } from "@/types/auth";
 import { CustomizerContextType } from "@/types/customizer";
 import { LayoutContextType } from "@/types/layout";

@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { STORAGE_THEME } from "@/configs";
+import { STORAGE_PINNED_MENU, STORAGE_THEME } from "@/configs";
 import { ThemeState } from "@/types/theme";
 
 const defaultTheme = "light";
@@ -15,8 +15,24 @@ if (!theme) {
   if (typeof window !== "undefined") localStorage.setItem(STORAGE_THEME, theme);
 }
 
+let pinnedMenu: any =
+  typeof window !== "undefined"
+    ? (localStorage.getItem(STORAGE_PINNED_MENU) as string) ?? null
+    : null;
+
+if (!pinnedMenu) {
+  pinnedMenu = [];
+  if (typeof window !== "undefined")
+    localStorage.setItem(STORAGE_PINNED_MENU, JSON.stringify(pinnedMenu));
+} else {
+  try {
+    pinnedMenu = JSON.parse(pinnedMenu);
+  } catch {}
+}
+
 const initialState: ThemeState = {
   theme,
+  pinnedMenu,
 };
 
 export const themeSlice = createSlice({
@@ -25,16 +41,27 @@ export const themeSlice = createSlice({
   reducers: {
     resetTheme: (state) => {
       state.theme = defaultTheme;
-      if (typeof window !== "undefined")
+      state.pinnedMenu = [];
+      if (typeof window !== "undefined") {
         localStorage.setItem(STORAGE_THEME, defaultTheme);
+        localStorage.setItem(STORAGE_PINNED_MENU, JSON.stringify([]));
+      }
     },
-    setTheme: (state, action) => {
+    setTheme: (state, action: PayloadAction<string>) => {
       state.theme = action.payload;
       if (typeof window !== "undefined")
         localStorage.setItem(STORAGE_THEME, state.theme);
     },
+    setPinnedMenu: (state, action: PayloadAction<string[]>) => {
+      state.pinnedMenu = action.payload;
+      if (typeof window !== "undefined")
+        localStorage.setItem(
+          STORAGE_PINNED_MENU,
+          JSON.stringify(state.pinnedMenu)
+        );
+    },
   },
 });
 
-export const { resetTheme, setTheme } = themeSlice.actions;
+export const { resetTheme, setTheme, setPinnedMenu } = themeSlice.actions;
 export default themeSlice.reducer;

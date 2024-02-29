@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import secureLocalStorage from "react-secure-storage";
@@ -11,8 +11,9 @@ import {
 } from "@/configs";
 import { APP_LANGUAGE, APP_TIMEZONE } from "@/environment";
 import { AUTH_LOGIN, REGISTER } from "@/graphql/auth";
-import { AuthState, LoginInput, RegisterInput } from "@/types/auth";
+import { Auth, AuthState, LoginInput, RegisterInput } from "@/types/auth";
 import { JWT } from "@/types/jwt";
+import { User } from "@/types/user";
 import { createApolloClient } from "@/utils/apollo";
 
 let language =
@@ -96,12 +97,12 @@ export const fetchAuth = createAsyncThunk(
         const { authLogin } = data;
 
         return authLogin;
-      } else {
-        return null;
       }
     } catch (error) {
       throw error;
     }
+
+    return null;
   }
 );
 
@@ -124,12 +125,12 @@ export const fetchRegister = createAsyncThunk(
         const { register } = data;
 
         return register;
-      } else {
-        return null;
       }
     } catch (error) {
       throw error;
     }
+
+    return null;
   }
 );
 
@@ -159,7 +160,7 @@ export const authSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    setUser: (state, action) => {
+    setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       if (typeof window !== "undefined")
         secureLocalStorage.setItem(
@@ -167,7 +168,7 @@ export const authSlice = createSlice({
           JSON.stringify(action.payload)
         );
     },
-    setToken: (state, action) => {
+    setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
 
       Cookies.set(STORAGE_AUTH_TOKEN, `${state.token}`);
@@ -176,30 +177,30 @@ export const authSlice = createSlice({
         secureLocalStorage.setItem(STORAGE_AUTH_TOKEN, action.payload);
 
       try {
-        const jwt: JWT = jwtDecode(action.payload.token.toString() || "");
+        const jwt: JWT = jwtDecode(state.token as string);
         state.jwt = jwt;
       } catch {
         state.jwt = null;
         Cookies.remove(STORAGE_AUTH_TOKEN);
       }
     },
-    setLanguage: (state, action) => {
+    setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
       if (typeof window !== "undefined")
         localStorage.setItem(STORAGE_LANGUAGE, state.language);
     },
-    setTimezone: (state, action) => {
+    setTimezone: (state, action: PayloadAction<string>) => {
       state.timezone = action.payload;
       if (typeof window !== "undefined")
         localStorage.setItem(STORAGE_TIMEZONE, state.timezone);
     },
-    setAuth(state, action) {
+    setAuth(state, action: PayloadAction<Auth>) {
       state.loading = false;
       state.error = null;
       state.user = action.payload?.user;
       state.token = action.payload?.token;
       state.language = action.payload?.user?.language;
-      state.timezone = action.payload?.user?.timezone;
+      state.timezone = action.payload?.user?.timezone?.code;
 
       Cookies.set(STORAGE_AUTH_TOKEN, `${state.token}`);
 
@@ -273,7 +274,7 @@ export const authSlice = createSlice({
         state.user = null;
         state.token = null;
         state.jwt = null;
-        state.timezone = initialState.timezone;
+        state.timezone = APP_TIMEZONE;
       }
     });
   },

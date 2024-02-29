@@ -29,11 +29,13 @@ export type Register = {
   register: User;
 };
 
+export type Auth = {
+  token: string;
+  user: User;
+};
+
 export type AuthLogin = {
-  authLogin: {
-    token: string;
-    user: User;
-  };
+  authLogin: Auth;
 };
 
 export type ForgotPassword = {

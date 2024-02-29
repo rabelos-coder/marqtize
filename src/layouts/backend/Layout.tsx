@@ -1,11 +1,11 @@
 import { ReactNode, useEffect } from "react";
 
+import { MenuListData } from "@/configs/menu";
 import { THEME_CUSTOMIZER_ENABLED } from "@/environment";
 import { useAuth, useCustomizer, useLayout } from "@/hooks";
-import { ChildrenProps } from "@/types/children";
+import { ChildrenProps } from "@/types/common";
 import { SearchableMenuType, SidebarItemType } from "@/types/layout";
 
-import { MenuList } from "../../configs/menu";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
@@ -80,7 +80,7 @@ export const Layout = ({ children }: ChildrenProps) => {
       }
     };
 
-    MenuList.forEach((item) => {
+    MenuListData.forEach((item) => {
       item.items?.map((child) => {
         getAllLink(child, child.icon);
       });

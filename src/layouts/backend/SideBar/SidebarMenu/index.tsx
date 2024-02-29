@@ -2,16 +2,16 @@ import { useTranslations } from "next-intl";
 import { Fragment, useState } from "react";
 import { ArrowLeft, ArrowRight } from "react-feather";
 
+import { MenuListData } from "@/configs/menu";
 import Theme from "@/configs/theme";
 import { useCustomizer, useLayout } from "@/hooks";
 import { usePathname } from "@/navigation";
 import { SidebarMenuType } from "@/types/layout";
 
-import { MenuList } from "../../../../configs/menu";
-import { MenuList as Menulist } from "./MenuList";
+import { MenuList } from "./MenuList";
 
 export const SideBarMenu = () => {
-  const { pinedMenu } = useLayout();
+  const { pinnedMenu } = useLayout();
   const { layoutName } = useCustomizer();
   const wrapper = Theme.data.settings.layout_class;
   const [margin, setMargin] = useState(0);
@@ -78,7 +78,7 @@ export const SideBarMenu = () => {
   const shouldHideMenu = (mainMenu: SidebarMenuType) => {
     return mainMenu.items
       .map((data) => data.title)
-      .every((tittles) => pinedMenu.includes(tittles || ""));
+      .every((titles) => pinnedMenu?.includes(titles || ""));
   };
 
   return (
@@ -124,15 +124,15 @@ export const SideBarMenu = () => {
                     </li>
                     <li
                       className={`pin-title sidebar-main-title ${
-                        pinedMenu.length > 1 ? "show" : ""
+                        pinnedMenu?.length > 1 ? "show" : ""
                       } `}
                     >
                       <div>
                         <h6>{t("pinned")}</h6>
                       </div>
                     </li>
-                    {MenuList &&
-                      MenuList.map((mainMenu, i) => (
+                    {MenuListData &&
+                      MenuListData.map((mainMenu, i) => (
                         <Fragment key={i}>
                           <li
                             className={`sidebar-main-title ${
@@ -145,7 +145,7 @@ export const SideBarMenu = () => {
                               </h6>
                             </div>
                           </li>
-                          <Menulist
+                          <MenuList
                             setActive={setActive}
                             setActiveLink={setActiveLink}
                             activeLink={activeLink}

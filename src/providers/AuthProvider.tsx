@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { AuthContext } from "@/contexts/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useRouter } from "@/navigation";
 import { fetchAuth, resetAuth } from "@/store/slices/authSlice";

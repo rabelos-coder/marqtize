@@ -5,6 +5,7 @@ export const STORAGE_TIMEZONE = "timezone";
 export const STORAGE_LANGUAGE = "language";
 export const STORAGE_LOCALE = "NEXT_LOCALE";
 export const STORAGE_THEME = "theme";
+export const STORAGE_PINNED_MENU = "pinnedMenu";
 export const EMAIL_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 export const PASSWORD_STRENGTH_REGEX =

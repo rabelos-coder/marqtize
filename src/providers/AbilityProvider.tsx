@@ -1,6 +1,6 @@
 "use client";
 
-import { AbilityContext } from "@/contexts/AbilityContext";
+import { AbilityContext } from "@/context/AbilityContext";
 import { AbilityProviderProps } from "@/types/ability";
 
 /**
