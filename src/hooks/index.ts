@@ -1,7 +1,7 @@
 import { AnyAbility } from "@casl/ability";
 import { useContext } from "react";
 import type { TypedUseSelectorHook } from "react-redux";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 
 import { AbilityContext } from "@/context/AbilityContext";
 import { AuthContext } from "@/context/AuthContext";
@@ -11,7 +11,7 @@ import { AuthContextType } from "@/types/auth";
 import { CustomizerContextType } from "@/types/customizer";
 import { LayoutContextType } from "@/types/layout";
 
-import type { AppDispatch, RootState } from "../store";
+import type { AppDispatch, AppStore, RootState } from "../store";
 
 /**
  * Returns the authentication context.
@@ -55,3 +55,10 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
  * @return {TypedUseSelectorHook<RootState>} The Redux root state function
  */
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+/**
+ * Returns the Redux store.
+ *
+ * @return {AppStore} The Redux store
+ */
+export const useAppStore: () => AppStore = useStore;

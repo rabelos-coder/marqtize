@@ -1,3 +1,6 @@
+// fonts
+@import './fonts.scss';
+
 @import '~bootstrap-scss/bootstrap.scss';
 
 // react toastify css
@@ -26,9 +29,10 @@
 // Typeahead
 @import "~react-bootstrap-typeahead/css/Typeahead.css";
 
-//LeafLet
+// LeafLet
 @import "~leaflet/dist/leaflet.css";
 
+// Vendors
 @import 'vendors/themify.scss';
 @import 'vendors/whether-icon.scss';
 @import 'vendors/icofont.scss';

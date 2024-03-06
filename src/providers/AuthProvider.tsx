@@ -1,12 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { AuthContext } from "@/context/AuthContext";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useRouter } from "@/navigation";
-import { fetchAuth, resetAuth } from "@/store/slices/authSlice";
-import { AuthContextType, LoginInput } from "@/types/auth";
+import { resetAuth } from "@/store/slices/authSlice";
+import { AuthContextType } from "@/types/auth";
 import { ChildrenProps } from "@/types/common";
 
 /**
@@ -17,12 +17,23 @@ import { ChildrenProps } from "@/types/common";
  */
 export function AuthProvider({ children }: ChildrenProps): JSX.Element {
   const auth = useProvideAuth();
+  const { theme } = useAppSelector((state) => state.theme);
+
+  useEffect(() => {
+    if (theme === "light") {
+      document.body.classList.remove("dark-only");
+      document.body.classList.add("light-only");
+    } else {
+      document.body.classList.remove("light-only");
+      document.body.classList.add("dark-only");
+    }
+  }, [theme]);
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }
 
 /**
- * Returns an authentication context with user, token, language, timezone, signIn, signOut, and register functions.
+ * Returns an authentication context with user, token, language, timezone, logout, and register functions.
  *
  * @return {AuthContextType} authentication context object
  */
@@ -31,24 +42,11 @@ function useProvideAuth(): AuthContextType {
 
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { user, token, language, timezone, loading, error } = useAppSelector(
+  const { user, token, language, timezone } = useAppSelector(
     (state) => state.auth
   );
 
-  /**
-   * Function to perform a login using the provided input.
-   *
-   * @param {LoginInput} input - the input containing login data
-   * @return {Promise<void>}
-   */
-  const signIn = useCallback(
-    async (input: LoginInput): Promise<void> => {
-      dispatch(fetchAuth(input));
-    },
-    [dispatch]
-  );
-
-  const signOut = () => {
+  const logout = () => {
     dispatch(resetAuth());
     router.push("/auth/login");
   };
@@ -62,10 +60,7 @@ function useProvideAuth(): AuthContextType {
     token,
     language,
     timezone,
-    signIn,
-    signOut,
-    loading,
-    error,
+    logout,
     isLoggedIn,
   };
 }

@@ -1,9 +1,11 @@
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 
+import { Spinner } from "@/components/common/Spinner";
 import { locales } from "@/configs/i18n";
 import {
   APP_LANGUAGE,
@@ -11,7 +13,6 @@ import {
   APP_META_KEYWORDS,
   APP_META_TITLE,
 } from "@/environment";
-import { Spinner } from "@/layouts/backend/Spinner";
 import { ApolloProvider } from "@/providers/ApolloProvider";
 import { ReduxProvider } from "@/providers/ReduxProvider";
 import { ComponentWithLocaleProps } from "@/types/common";
@@ -28,6 +29,9 @@ export default async function LocaleLayout({
   children,
   params,
 }: ComponentWithLocaleProps) {
+  const header = headers();
+  const host = header.get("host") ?? "";
+
   const locale = params?.locale ?? APP_LANGUAGE;
   unstable_setRequestLocale(locale);
 
@@ -47,7 +51,7 @@ export default async function LocaleLayout({
       <body suppressHydrationWarning={true}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ApolloProvider>
-            <ReduxProvider>
+            <ReduxProvider host={host}>
               <Suspense fallback={<Spinner />}>{children}</Suspense>
             </ReduxProvider>
           </ApolloProvider>

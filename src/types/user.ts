@@ -1,6 +1,7 @@
 import { Upload } from "./common";
 import { Customer } from "./customer";
-import { UserTypeEnum } from "./enums";
+import { UserType, UserTypeEnum } from "./enums";
+import { Language } from "./language";
 import { Role } from "./role";
 import { Timezone } from "./timezone";
 
@@ -15,8 +16,8 @@ export type User = {
   isActive: boolean;
   isSuperAdmin: boolean;
   image: string;
-  language: string;
-  type: UserTypeEnum;
+  type: UserType;
+  language: Language;
   resetToken: string;
   resetTokenExpires: string;
   twoFactorSecret: string;
@@ -27,6 +28,7 @@ export type User = {
   updatedAt: string;
   deletedAt: string;
 
+  claims: string[];
   roles: Role[];
   timezone: Timezone;
   customer: Customer;

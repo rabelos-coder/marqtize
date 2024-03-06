@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 
+import { Spinner } from "@/components/common/Spinner";
 import {
   AclAbility,
   AppAbility,
@@ -9,8 +10,7 @@ import {
   defaultAcl,
 } from "@/configs/ability";
 import { useAuth } from "@/hooks";
-import { Layout } from "@/layouts/backend/Layout";
-import { Spinner } from "@/layouts/backend/Spinner";
+import { Layout } from "@/layout/backend/Layout";
 import { AbilityProvider } from "@/providers/AbilityProvider";
 
 import { NotAuthorized } from "../NotAuthorized";

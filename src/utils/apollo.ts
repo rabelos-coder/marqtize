@@ -7,7 +7,7 @@ import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 import { createClient } from "graphql-ws";
 import Cookies from "js-cookie";
 
-import { STORAGE_AUTH_TOKEN } from "@/configs";
+import { STORAGE_AUTH_TOKEN, STORAGE_LOCALE } from "@/configs";
 import {
   APP_META_TITLE,
   APP_VERSION,
@@ -15,13 +15,24 @@ import {
   SERVER_URL,
 } from "@/environment";
 
-export const createApolloClient = () => {
+type ApolloClientParams = {
+  token?: string;
+  locale?: string;
+};
+
+export const createApolloClient = (params?: ApolloClientParams) => {
   const authMiddleware = setContext(async (operation, { headers }) => {
-    const token = Cookies.get(STORAGE_AUTH_TOKEN);
+    let token = null;
+    let lang = null;
+    if (!params?.token) token = Cookies.get(STORAGE_AUTH_TOKEN);
+    else token = params.token;
+    if (!params?.locale) lang = Cookies.get(STORAGE_LOCALE);
+    else lang = params.locale;
 
     return {
       headers: {
         ...headers,
+        "X-Lang": lang,
         "Apollo-Require-Preflight": "true",
         Authorization: token ? `Bearer ${token}` : "",
       },
@@ -32,13 +43,13 @@ export const createApolloClient = () => {
   });
 
   // GraphQL server URL
-  const graphqlLink = `${SERVER_URL}/graphql`;
+  const graphqlUrl = `${SERVER_URL}/graphql`;
 
   // Websocket link for subscriptions
-  const graphqlWsLink = `ws${graphqlLink.startsWith("https") ? "s" : ""}://${
-    graphqlLink.startsWith("https")
-      ? graphqlLink.substring(8)
-      : graphqlLink.substring(7)
+  const graphqlWsLink = `ws${graphqlUrl.startsWith("https") ? "s" : ""}://${
+    graphqlUrl.startsWith("https")
+      ? graphqlUrl.substring(8)
+      : graphqlUrl.substring(7)
   }`;
 
   // Websocket link for subscriptions
@@ -64,7 +75,7 @@ export const createApolloClient = () => {
 
   // HTTP link for queries and mutations
   const httpLink = createUploadLink({
-    uri: graphqlLink,
+    uri: graphqlUrl,
   });
 
   // Split link for routing subscriptions through Websocket and other operations through HTTP

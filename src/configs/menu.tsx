@@ -29,6 +29,7 @@ export const MenuListData: SidebarMenuType[] = [
   {
     title: "authentication",
     menuContent: "Users,Roles,Claims",
+    claims: ["User:Read", "Role:Read", "Claim:Read"],
     items: [
       {
         title: "users",
@@ -38,18 +39,21 @@ export const MenuListData: SidebarMenuType[] = [
         pathSlice: "users",
         type: "sub",
         active: false,
+        claims: ["User:Read", "User:Create"],
         children: [
           {
             path: "backend/users/create",
             title: "createName",
             nameArgument: "user",
             type: "link",
+            claims: ["User:Create"],
           },
           {
             path: "backend/users",
             title: "listName",
             nameArgument: "users",
             type: "link",
+            claims: ["User:Read"],
           },
         ],
       },
@@ -61,6 +65,7 @@ export const MenuListData: SidebarMenuType[] = [
         pathSlice: "groups",
         type: "sub",
         active: false,
+        claims: ["Role:Read", "Role:Create"],
         children: [
           {
             path: "backend/groups/create",
@@ -80,6 +85,7 @@ export const MenuListData: SidebarMenuType[] = [
         title: "permissions",
         path: "backend/permissions",
         id: 3,
+        claims: ["Claim:Read"],
         iconStroke: <HiOutlineLockClosed className="stroke-icon" />,
         iconFill: <HiLockClosed className="fill-icon" />,
         pathSlice: "permissions",

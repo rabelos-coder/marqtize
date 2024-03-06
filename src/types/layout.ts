@@ -23,6 +23,7 @@ export type SidebarChildrenType = {
   children?: SubChildrenType[];
   bookmark?: boolean;
   pathSlice?: string;
+  claims?: string[];
 };
 
 export type SearchableMenuType = {
@@ -38,6 +39,7 @@ export type SubChildrenType = {
   type: string;
   path: string;
   bookmark?: boolean;
+  claims?: string[];
 };
 
 export type SidebarItemType = {
@@ -55,6 +57,7 @@ export type SidebarItemType = {
   active?: boolean;
   path?: string;
   bookmark?: boolean;
+  claims?: string[];
   children?: SidebarChildrenType[];
 };
 
@@ -65,6 +68,7 @@ export type SidebarItemTypes = {
 export type SidebarMenuType = {
   title?: string;
   menuContent?: string;
+  claims?: string[];
   items: SidebarItemType[];
 };
 

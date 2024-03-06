@@ -19,3 +19,10 @@ export const LanguagesData: LanguageDataType[] = [
     tag: "(BR)",
   },
 ];
+
+export enum LanguageEnum {
+  en = "en",
+  pt = "pt",
+}
+
+export type Language = keyof typeof LanguageEnum;

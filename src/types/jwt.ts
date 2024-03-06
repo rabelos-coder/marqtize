@@ -1,3 +1,6 @@
+import { UserType } from "./enums";
+import { Language } from "./language";
+
 export type JWT = {
   id: string;
   tokenId: string | null;
@@ -7,11 +10,9 @@ export type JWT = {
   email: string;
   roles: string[];
   claims: string[];
-  type: "APPLICATION" | "VIRTUAL" | "SOCIAL";
-  lang: "en" | "pt";
+  type: UserType;
+  lang: Language;
   image: string | null;
-  hdGroups: string[];
-  hdDepartments: string[];
   iat: number;
   exp: number;
 };

@@ -1,48 +1,77 @@
+import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
-import { Card, CardBody, Col, Container, Row } from "reactstrap";
+import { Container, Row } from "reactstrap";
 
 import { Breadcrumbs } from "@/components/backend/Breadcrumbs";
-import { CardHeader } from "@/components/backend/CardHeader";
 import { AclGuard } from "@/components/backend/Guards/AclGuard";
+import EditMyProfile from "@/components/backend/Pages/profile/EditMyProfile";
+import EditProfileForm from "@/components/backend/Pages/profile/EditProfileForm";
+import { STORAGE_AUTH_TOKEN } from "@/configs";
+import { WHO_AM_I } from "@/graphql/auth";
+import { FIND_TIMEZONES } from "@/graphql/localization";
+import { createApolloClient } from "@/utils/apollo";
 import { concatTitle } from "@/utils/helpers";
 
 export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale, namespace: "translations" });
-  const title = concatTitle(t("profile"));
+  const title = concatTitle(t("myProfile"));
 
   return {
     title,
   };
 }
 
-export default function ProfilePage() {
+export const dynamic = "force-dynamic";
+
+export default async function ProfilePage({ params: { locale } }: any) {
+  const t = await getTranslations({ locale, namespace: "translations" });
+
+  const cookieStore = cookies();
+  const token = cookieStore.get(STORAGE_AUTH_TOKEN);
+
+  const client = createApolloClient({ token: token?.value, locale });
+
+  const { data } = await client.query({
+    query: WHO_AM_I,
+    fetchPolicy: "no-cache",
+  });
+
+  const { data: timezonesData } = await client.query({
+    query: FIND_TIMEZONES,
+  });
+
+  const languages: Array<{ label: string; value: string }> = [
+    {
+      label: t("english"),
+      value: "en",
+    },
+    {
+      label: t("portuguese"),
+      value: "pt",
+    },
+  ];
+
+  const timezones: Array<{ label: string; value: string }> =
+    (timezonesData?.findManyTimezone?.map((timezone) => ({
+      label: timezone.name,
+      value: timezone.id,
+    })) as any[]) || [];
+
   return (
     <AclGuard>
       <div className="page-body">
-        <Breadcrumbs title="profile" pageTitle="profile" />
+        <Breadcrumbs title={t("profile")} pageTitle={t("profile")} />
         <Container fluid>
-          <Row>
-            <Col sm="12">
-              <Card>
-                <CardHeader
-                  smallHeading="Sample Card"
-                  span="lorem ipsum dolor sit amet, consectetur adipisicing elit"
-                />
-                <CardBody>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </p>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
+          <div className="edit-profile">
+            <Row>
+              <EditMyProfile />
+              <EditProfileForm
+                user={data.whoAmI}
+                timezones={timezones}
+                languages={languages}
+              />
+            </Row>
+          </div>
         </Container>
       </div>
     </AclGuard>

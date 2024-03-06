@@ -1,23 +1,36 @@
 import { gql, TypedDocumentNode } from "@apollo/client";
 
 import {
-  AuthLogin,
   ForgotPassword,
   ForgotPasswordInput,
+  Login,
   LoginInput,
   Register,
   RegisterInput,
   ResetPassword,
   ResetPasswordInput,
+  UpdateProfile,
+  UpdateProfileInput,
+  WhoAmI,
 } from "@/types/auth";
 
 import { FRAGMENT_USER_PROPS } from "./users";
 
-export const AUTH_LOGIN: TypedDocumentNode<AuthLogin, LoginInput> = gql`
+export const WHO_AM_I: TypedDocumentNode<WhoAmI> = gql`
   ${FRAGMENT_USER_PROPS}
-  mutation AuthLogin($data: LoginInput!) {
-    authLogin(data: $data) {
+  query WhoAmI {
+    whoAmI {
+      ...UserProps
+    }
+  }
+`;
+
+export const LOGIN: TypedDocumentNode<Login, LoginInput> = gql`
+  ${FRAGMENT_USER_PROPS}
+  mutation Login($data: LoginInput!) {
+    login(data: $data) {
       token
+      expiresAt
       user {
         ...UserProps
       }
@@ -49,5 +62,17 @@ export const RESET_PASSWORD: TypedDocumentNode<
 > = gql`
   mutation ResetPassword($data: ResetPasswordInput!) {
     resetPassword(data: $data)
+  }
+`;
+
+export const UPDATE_PROFILE: TypedDocumentNode<
+  UpdateProfile,
+  UpdateProfileInput
+> = gql`
+  ${FRAGMENT_USER_PROPS}
+  mutation UpdateProfile($data: UpdateProfileInput!) {
+    updateProfile(data: $data) {
+      ...UserProps
+    }
   }
 `;

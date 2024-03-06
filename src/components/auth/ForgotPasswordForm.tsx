@@ -3,7 +3,6 @@
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
@@ -29,8 +28,7 @@ const defaultValues = IS_DEVELOPMENT
     };
 
 export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
-  const [forgotPassword, { data, loading, error }] =
-    useMutation(FORGOT_PASSWORD);
+  const [forgotPassword, { loading }] = useMutation(FORGOT_PASSWORD);
 
   const t = useTranslations("translations");
 
@@ -60,18 +58,19 @@ export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
       variables: {
         data: { email: form.email, callbackUrl },
       },
-    });
-    if (data?.forgotPassword) {
-      toast.success(t("forgotPasswordSuccess"));
-      router.push("/auth/login");
-    } else {
-      toast.error(t("forgotPasswordError"));
-    }
+    })
+      .then(({ data }) => {
+        if (data?.forgotPassword) {
+          toast.success(t("forgotPasswordSuccess"));
+          router.push("/auth/login");
+        } else {
+          toast.error(t("forgotPasswordError"));
+        }
+      })
+      .catch((error) =>
+        toast.error(error?.message ?? t("forgotPasswordError"))
+      );
   };
-
-  useEffect(() => {
-    if (error) toast.error(error.message);
-  }, [error]);
 
   return (
     <div className="login-card login-dark">
@@ -95,19 +94,15 @@ export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
               <Controller
                 name="email"
                 control={control}
+                disabled={loading}
                 rules={{ required: true }}
-                render={({
-                  field: { name, value, onChange, onBlur, ...rest },
-                }) => (
+                render={({ field: { name, ...rest } }) => (
                   <Input
                     id={name}
                     type="email"
                     autoFocus
+                    autoComplete="on"
                     placeholder={t("emailPlaceholder")}
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    valid={!Boolean(errors.email)}
                     invalid={Boolean(errors.email)}
                     {...rest}
                   />

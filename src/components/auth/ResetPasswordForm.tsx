@@ -2,8 +2,9 @@
 
 import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
@@ -23,27 +24,30 @@ type FormData = {
   passwordConfirmation: string;
 };
 
-const defaultValues = IS_DEVELOPMENT
-  ? {
-      email: "amandasmith@me.com",
-      resetToken: "123456",
-      password: "abClK1@Xa",
-      passwordConfirmation: "abClK1@X",
-    }
-  : {
-      email: "",
-      resetToken: "",
-      password: "",
-      passwordConfirmation: "",
-    };
-
 export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
-  const [resetPassword, { data, loading, error }] = useMutation(RESET_PASSWORD);
+  const [resetPassword, { loading }] = useMutation(RESET_PASSWORD);
 
   const t = useTranslations("translations");
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email") ?? "";
+  const resetToken = searchParams.get("token") ?? "";
+
+  const defaultValues = IS_DEVELOPMENT
+    ? {
+        email,
+        resetToken,
+        password: "abClK1@Xa",
+        passwordConfirmation: "abClK1@X",
+      }
+    : {
+        email,
+        resetToken,
+        password: "",
+        passwordConfirmation: "",
+      };
 
   const schema = yup.object().shape({
     email: yup
@@ -64,14 +68,7 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
       .string()
       .trim()
       .required(t("invalidPasswordConfirmationRequired"))
-      .matches(
-        new RegExp(PASSWORD_STRENGTH_REGEX),
-        t("invalidPasswordStrength")
-      )
-      .oneOf(
-        [yup.ref("password"), ""],
-        t("invalidPasswordConfirmationMustMatch")
-      ),
+      .oneOf([yup.ref("password")], t("invalidPasswordConfirmationMustMatch")),
   });
 
   const {
@@ -95,18 +92,17 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
           password: form.password,
         },
       },
-    });
-    if (data?.resetPassword) {
-      toast.success(t("resetPasswordSuccess"));
-      router.push("/auth/login");
-    } else {
-      toast.error(t("resetPasswordError"));
-    }
+    })
+      .then(({ data }) => {
+        if (data?.resetPassword) {
+          toast.success(t("resetPasswordSuccess"));
+          router.push("/auth/login");
+        } else {
+          toast.error(t("resetPasswordError"));
+        }
+      })
+      .catch((error) => toast.error(error?.message ?? t("resetPasswordError")));
   };
-
-  useEffect(() => {
-    if (error) toast.error(error.message);
-  }, [error]);
 
   return (
     <div className="login-card login-dark">
@@ -130,19 +126,14 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
               <Controller
                 name="email"
                 control={control}
+                disabled={loading}
                 rules={{ required: true }}
-                render={({
-                  field: { name, value, onChange, onBlur, ...rest },
-                }) => (
+                render={({ field: { name, ...rest } }) => (
                   <Input
                     id={name}
                     type="email"
-                    autoFocus
                     placeholder={t("emailPlaceholder")}
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    valid={!Boolean(errors.email)}
+                    autoComplete="on"
                     invalid={Boolean(errors.email)}
                     {...rest}
                   />
@@ -159,17 +150,12 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
               <Controller
                 name="resetToken"
                 control={control}
+                disabled={loading}
                 rules={{ required: true }}
-                render={({
-                  field: { name, value, onChange, onBlur, ...rest },
-                }) => (
+                render={({ field: { name, ...rest } }) => (
                   <Input
                     id={name}
-                    autoFocus
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    valid={!Boolean(errors.resetToken)}
+                    autoComplete="on"
                     invalid={Boolean(errors.resetToken)}
                     {...rest}
                   />
@@ -187,18 +173,14 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
                 <Controller
                   name="password"
                   control={control}
+                  disabled={loading}
                   rules={{ required: true }}
-                  render={({
-                    field: { name, value, onChange, onBlur, ...rest },
-                  }) => (
+                  render={({ field: { name, ...rest } }) => (
                     <Input
                       id={name}
                       type={showPassword ? "text" : "password"}
-                      placeholder="*********"
-                      value={value}
-                      onBlur={onBlur}
-                      onChange={onChange}
-                      valid={!Boolean(errors.password)}
+                      autoFocus
+                      autoComplete="off"
                       invalid={Boolean(errors.password)}
                       {...rest}
                     />
@@ -225,18 +207,13 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
                 <Controller
                   name="passwordConfirmation"
                   control={control}
+                  disabled={loading}
                   rules={{ required: true }}
-                  render={({
-                    field: { name, value, onChange, onBlur, ...rest },
-                  }) => (
+                  render={({ field: { name, ...rest } }) => (
                     <Input
                       id={name}
                       type={showPasswordConfirmation ? "text" : "password"}
-                      placeholder="*********"
-                      value={value}
-                      onBlur={onBlur}
-                      onChange={onChange}
-                      valid={!Boolean(errors.passwordConfirmation)}
+                      autoComplete="off"
                       invalid={Boolean(errors.passwordConfirmation)}
                       {...rest}
                     />

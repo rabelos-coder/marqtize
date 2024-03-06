@@ -2,8 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { Card, CardBody, Col, Container, Row } from "reactstrap";
 
 import { Breadcrumbs } from "@/components/backend/Breadcrumbs";
-import { CardHeader } from "@/components/backend/CardHeader";
 import { AclGuard } from "@/components/backend/Guards/AclGuard";
+import CommonCardHeading from "@/components/common/CommonCardHeading";
 import { concatTitle } from "@/utils/helpers";
 
 export async function generateMetadata({ params: { locale } }: any) {
@@ -15,18 +15,25 @@ export async function generateMetadata({ params: { locale } }: any) {
   };
 }
 
-export default function UsersPage() {
+export default async function UsersPage({ params: { locale } }: any) {
+  const t = await getTranslations({ locale, namespace: "translations" });
+  const title = t("users");
+  const pageTitle = t("listName", { name: t("users") });
+  const pageDescription = t("seeInformationAboutName", {
+    name: t("users").toLowerCase(),
+  });
+
   return (
-    <AclGuard>
+    <AclGuard acl={{ action: "Read", subject: "User" }}>
       <div className="page-body">
-        <Breadcrumbs title="users" pageTitle="users" />
+        <Breadcrumbs title={title} pageTitle={title} />
         <Container fluid>
           <Row>
             <Col sm="12">
               <Card>
-                <CardHeader
-                  smallHeading="Sample Card"
-                  span="lorem ipsum dolor sit amet, consectetur adipisicing elit"
+                <CommonCardHeading
+                  smallHeading={pageTitle}
+                  span={pageDescription}
                 />
                 <CardBody>
                   <p>

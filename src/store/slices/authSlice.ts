@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import secureLocalStorage from "react-secure-storage";
@@ -10,18 +10,16 @@ import {
   STORAGE_USER,
 } from "@/configs";
 import { APP_LANGUAGE, APP_TIMEZONE } from "@/environment";
-import { AUTH_LOGIN, REGISTER } from "@/graphql/auth";
-import { Auth, AuthState, LoginInput, RegisterInput } from "@/types/auth";
+import { Auth, AuthState } from "@/types/auth";
 import { JWT } from "@/types/jwt";
 import { User } from "@/types/user";
-import { createApolloClient } from "@/utils/apollo";
 
-let language =
+let language: any =
   typeof window !== "undefined"
     ? (localStorage.getItem(STORAGE_LANGUAGE) as string) ?? null
     : null;
 
-let timezone =
+let timezone: any =
   typeof window !== "undefined"
     ? (localStorage.getItem(STORAGE_TIMEZONE) as string) ?? null
     : null;
@@ -31,7 +29,7 @@ let user: any =
     ? (secureLocalStorage.getItem(STORAGE_USER) as string) ?? null
     : null;
 
-const token =
+let token: any =
   typeof window !== "undefined"
     ? (secureLocalStorage.getItem(STORAGE_AUTH_TOKEN) as string) ?? null
     : null;
@@ -48,7 +46,14 @@ if (!timezone) {
     localStorage.setItem(STORAGE_TIMEZONE, timezone);
 }
 
-if (user) user = JSON.parse(user);
+if (user) {
+  user = JSON.parse(user);
+} else if (!!Cookies.get(STORAGE_USER)) {
+  const userCookie = Cookies.get(STORAGE_USER) as string;
+  user = JSON.parse(userCookie);
+  if (typeof window !== "undefined")
+    secureLocalStorage.setItem(STORAGE_USER, `${JSON.stringify(user)}`);
+}
 
 let jwt: any = null;
 
@@ -60,13 +65,43 @@ if (token) {
       jwt = data;
     } else {
       jwt = null;
+      token = null;
+      user = null;
       Cookies.remove(STORAGE_AUTH_TOKEN);
     }
   } catch {
     jwt = null;
+    token = null;
+    user = null;
+    Cookies.remove(STORAGE_AUTH_TOKEN);
+  }
+} else if (!!Cookies.get(STORAGE_AUTH_TOKEN)) {
+  token = Cookies.get(STORAGE_AUTH_TOKEN) as string;
+  try {
+    const data: JWT = jwtDecode(token);
+    if (data.exp >= Date.now() / 1000) {
+      if (typeof window !== "undefined")
+        secureLocalStorage.setItem(STORAGE_AUTH_TOKEN, `${token}`);
+      jwt = data;
+    } else {
+      jwt = null;
+      token = null;
+      user = null;
+      if (typeof window !== "undefined")
+        secureLocalStorage.removeItem(STORAGE_AUTH_TOKEN);
+      Cookies.remove(STORAGE_AUTH_TOKEN);
+    }
+  } catch {
+    jwt = null;
+    token = null;
+    user = null;
+    if (typeof window !== "undefined")
+      secureLocalStorage.removeItem(STORAGE_AUTH_TOKEN);
     Cookies.remove(STORAGE_AUTH_TOKEN);
   }
 } else {
+  if (typeof window !== "undefined")
+    secureLocalStorage.removeItem(STORAGE_AUTH_TOKEN);
   Cookies.remove(STORAGE_AUTH_TOKEN);
 }
 
@@ -76,77 +111,20 @@ const initialState: AuthState = {
   jwt,
   timezone,
   language,
-  loading: false,
-  error: null,
 };
-
-export const fetchAuth = createAsyncThunk(
-  "auth/fetchAuth",
-  async (variables: LoginInput) => {
-    const client = createApolloClient();
-
-    try {
-      const { data, errors } = await client.mutate({
-        mutation: AUTH_LOGIN,
-        variables,
-      });
-
-      if (!data && errors?.length) throw new Error(errors[0].message);
-
-      if (data) {
-        const { authLogin } = data;
-
-        return authLogin;
-      }
-    } catch (error) {
-      throw error;
-    }
-
-    return null;
-  }
-);
-
-export const fetchRegister = createAsyncThunk(
-  "auth/fetchRegister",
-  async (input: RegisterInput) => {
-    const client = createApolloClient();
-
-    try {
-      const { data, errors } = await client.mutate({
-        mutation: REGISTER,
-        variables: {
-          data: input.data,
-        },
-      });
-
-      if (!data && errors?.length) throw new Error(errors[0].message);
-
-      if (data) {
-        const { register } = data;
-
-        return register;
-      }
-    } catch (error) {
-      throw error;
-    }
-
-    return null;
-  }
-);
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     resetAuth: (state) => {
-      state.loading = false;
-      state.error = null;
       state.user = initialState.user;
       state.token = initialState.token;
       state.jwt = initialState.jwt;
       state.language = APP_LANGUAGE;
       state.timezone = APP_TIMEZONE;
 
+      Cookies.remove(STORAGE_USER);
       Cookies.remove(STORAGE_AUTH_TOKEN);
 
       if (typeof window !== "undefined") {
@@ -156,10 +134,7 @@ export const authSlice = createSlice({
         localStorage.setItem(STORAGE_TIMEZONE, APP_TIMEZONE);
       }
     },
-    resetError: (state) => {
-      state.loading = false;
-      state.error = null;
-    },
+
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       if (typeof window !== "undefined")
@@ -167,6 +142,7 @@ export const authSlice = createSlice({
           STORAGE_USER,
           JSON.stringify(action.payload)
         );
+      Cookies.remove(STORAGE_USER);
     },
     setToken: (state, action: PayloadAction<string>) => {
       state.token = action.payload;
@@ -181,6 +157,7 @@ export const authSlice = createSlice({
         state.jwt = jwt;
       } catch {
         state.jwt = null;
+        Cookies.remove(STORAGE_USER);
         Cookies.remove(STORAGE_AUTH_TOKEN);
       }
     },
@@ -195,8 +172,6 @@ export const authSlice = createSlice({
         localStorage.setItem(STORAGE_TIMEZONE, state.timezone);
     },
     setAuth(state, action: PayloadAction<Auth>) {
-      state.loading = false;
-      state.error = null;
       state.user = action.payload?.user;
       state.token = action.payload?.token;
       state.language = action.payload?.user?.language;
@@ -222,6 +197,7 @@ export const authSlice = createSlice({
           localStorage.setItem(STORAGE_TIMEZONE, APP_TIMEZONE);
         }
 
+        Cookies.remove(STORAGE_USER);
         Cookies.remove(STORAGE_AUTH_TOKEN);
 
         state.user = null;
@@ -231,58 +207,10 @@ export const authSlice = createSlice({
       }
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(fetchAuth.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-    builder.addCase(fetchAuth.rejected, (state, action) => {
-      state.loading = false;
-      state.error = `${action.error.message}`;
-    });
-    builder.addCase(fetchAuth.fulfilled, (state, action) => {
-      state.loading = false;
-      state.error = null;
-      state.user = action.payload?.user ?? null;
-      state.token = action.payload?.token ?? null;
-      state.language = action.payload?.user?.language ?? APP_LANGUAGE;
-      state.timezone = action.payload?.user?.timezone?.code ?? APP_TIMEZONE;
-
-      Cookies.set(STORAGE_AUTH_TOKEN, `${state.token}`);
-
-      if (typeof window !== "undefined") {
-        if (state.user)
-          secureLocalStorage.setItem(STORAGE_USER, JSON.stringify(state.user));
-        if (state.token)
-          secureLocalStorage.setItem(STORAGE_AUTH_TOKEN, `${state.token}`);
-        localStorage.setItem(STORAGE_LANGUAGE, state.language);
-        localStorage.setItem(STORAGE_TIMEZONE, state.timezone);
-      }
-
-      try {
-        const jwt: JWT = jwtDecode(state.token as string);
-        state.jwt = jwt;
-      } catch {
-        if (typeof window !== "undefined") {
-          Cookies.remove(STORAGE_AUTH_TOKEN);
-          secureLocalStorage.removeItem(STORAGE_USER);
-          secureLocalStorage.removeItem(STORAGE_AUTH_TOKEN);
-          localStorage.setItem(STORAGE_LANGUAGE, APP_LANGUAGE);
-          localStorage.setItem(STORAGE_TIMEZONE, APP_TIMEZONE);
-        }
-
-        state.user = null;
-        state.token = null;
-        state.jwt = null;
-        state.timezone = APP_TIMEZONE;
-      }
-    });
-  },
 });
 
 export const {
   resetAuth,
-  resetError,
   setAuth,
   setUser,
   setToken,

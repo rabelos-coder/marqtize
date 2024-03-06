@@ -23,15 +23,10 @@ import { IS_DEVELOPMENT } from "@/environment";
 import { REGISTER } from "@/graphql/auth";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { Link, useRouter } from "@/navigation";
-import { resetError } from "@/store/slices/authSlice";
-import { fetchCustomer } from "@/store/slices/customerSlice";
+import { setLoading } from "@/store/slices/themeSlice";
+import { AuthFormProps } from "@/types/common";
 
 import { SpinnerBoxed } from "../common/SpinnerBoxed";
-
-type RegisterProps = {
-  host: string;
-  alignLogo?: string;
-};
 
 type FormData = {
   name: string;
@@ -57,17 +52,17 @@ const defaultValues = IS_DEVELOPMENT
       passwordConfirmation: "",
     };
 
-export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
+export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
+  const [disabled, setDisabled] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false);
-  const [register, { data, loading, error }] = useMutation(REGISTER);
+  const [register] = useMutation(REGISTER);
 
   const t = useTranslations("translations");
   const dispatch = useAppDispatch();
-  const { customer, loading: customerLoading } = useAppSelector(
-    (state) => state.customer
-  );
+
+  const { customer, loading } = useAppSelector((state) => state.customer);
 
   const schema = yup.object().shape({
     name: yup.string().required(t("invalidNameRequired")),
@@ -89,14 +84,7 @@ export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
       .string()
       .trim()
       .required(t("invalidPasswordConfirmationRequired"))
-      .matches(
-        new RegExp(PASSWORD_STRENGTH_REGEX),
-        t("invalidPasswordStrength")
-      )
-      .oneOf(
-        [yup.ref("password"), ""],
-        t("invalidPasswordConfirmationMustMatch")
-      ),
+      .oneOf([yup.ref("password")], t("invalidPasswordConfirmationMustMatch")),
   });
 
   const {
@@ -112,6 +100,7 @@ export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
   const router = useRouter();
 
   const onSubmit = async (form: FormData) => {
+    setDisabled(true);
     await register({
       variables: {
         data: {
@@ -122,22 +111,25 @@ export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
           password: form.password,
         },
       },
-    });
-    if (data?.register) {
-      toast.success(t("resetPasswordSuccess"));
-      router.push("/auth/login");
-    } else {
-      toast.error(t("resetPasswordError"));
-    }
+    })
+      .then(({ data }) => {
+        if (data?.register) {
+          toast.success(t("registerSuccess"));
+          router.push("/auth/login");
+        } else {
+          toast.error(t("registerError"));
+        }
+      })
+      .catch((error) => toast.error(error?.message ?? t("registerError")));
+
+    setDisabled(false);
   };
 
   useEffect(() => {
-    dispatch(resetError());
-    dispatch(fetchCustomer(host));
-    if (error) toast.error(error.message);
-  }, [error, dispatch, host]);
+    dispatch(setLoading(false));
+  }, [dispatch]);
 
-  return customerLoading ? (
+  return loading ? (
     <SpinnerBoxed type="grow" />
   ) : (
     <div className="login-card login-dark">
@@ -167,18 +159,14 @@ export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
                   <Controller
                     name="name"
                     control={control}
+                    disabled={disabled}
                     rules={{ required: true }}
-                    render={({
-                      field: { name, value, onChange, onBlur, ...rest },
-                    }) => (
+                    render={({ field: { name, ...rest } }) => (
                       <Input
                         id={name}
                         autoFocus
                         placeholder={t("namePlaceholder")}
-                        value={value}
-                        onBlur={onBlur}
-                        onChange={onChange}
-                        valid={!Boolean(errors.name)}
+                        autoComplete="on"
                         invalid={Boolean(errors.name)}
                         {...rest}
                       />
@@ -195,18 +183,13 @@ export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
                   <Controller
                     name="systemName"
                     control={control}
+                    disabled={disabled}
                     rules={{ required: true }}
-                    render={({
-                      field: { name, value, onChange, onBlur, ...rest },
-                    }) => (
+                    render={({ field: { name, ...rest } }) => (
                       <Input
                         id={name}
-                        autoFocus
                         placeholder={t("systemNamePlaceholder")}
-                        value={value}
-                        onBlur={onBlur}
-                        onChange={onChange}
-                        valid={!Boolean(errors.systemName)}
+                        autoComplete="on"
                         invalid={Boolean(errors.systemName)}
                         {...rest}
                       />
@@ -225,19 +208,14 @@ export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
               <Controller
                 name="email"
                 control={control}
+                disabled={disabled}
                 rules={{ required: true }}
-                render={({
-                  field: { name, value, onChange, onBlur, ...rest },
-                }) => (
+                render={({ field: { name, ...rest } }) => (
                   <Input
                     id={name}
                     type="email"
-                    autoFocus
                     placeholder={t("emailPlaceholder")}
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    valid={!Boolean(errors.email)}
+                    autoComplete="on"
                     invalid={Boolean(errors.email)}
                     {...rest}
                   />
@@ -257,18 +235,13 @@ export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
                     <Controller
                       name="password"
                       control={control}
+                      disabled={disabled}
                       rules={{ required: true }}
-                      render={({
-                        field: { name, value, onChange, onBlur, ...rest },
-                      }) => (
+                      render={({ field: { name, ...rest } }) => (
                         <Input
                           id={name}
                           type={showPassword ? "text" : "password"}
-                          placeholder="*********"
-                          value={value}
-                          onBlur={onBlur}
-                          onChange={onChange}
-                          valid={!Boolean(errors.password)}
+                          autoComplete="off"
                           invalid={Boolean(errors.password)}
                           {...rest}
                         />
@@ -298,18 +271,13 @@ export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
                     <Controller
                       name="passwordConfirmation"
                       control={control}
+                      disabled={disabled}
                       rules={{ required: true }}
-                      render={({
-                        field: { name, value, onChange, onBlur, ...rest },
-                      }) => (
+                      render={({ field: { name, ...rest } }) => (
                         <Input
                           id={name}
                           type={showPasswordConfirmation ? "text" : "password"}
-                          placeholder="*********"
-                          value={value}
-                          onBlur={onBlur}
-                          onChange={onChange}
-                          valid={!Boolean(errors.passwordConfirmation)}
+                          autoComplete="off"
                           invalid={Boolean(errors.passwordConfirmation)}
                           {...rest}
                         />
@@ -339,7 +307,7 @@ export const RegisterForm = ({ host, alignLogo }: RegisterProps) => {
                   color="primary"
                   className="btn-block w-100"
                   type="submit"
-                  disabled={loading}
+                  disabled={disabled}
                 >
                   {t("register")}
                 </Button>

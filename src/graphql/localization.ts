@@ -13,7 +13,7 @@ const FRAGMENT_TIMEZONE_PROPS = gql`
   }
 `;
 
-export const FIND_MANY_TIMEZONES: TypedDocumentNode<
+export const FIND_TIMEZONES: TypedDocumentNode<
   FindManyTimezone,
   WhereAndOrderInput
 > = gql`

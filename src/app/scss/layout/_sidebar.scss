@@ -1911,7 +1911,7 @@
                           .sidebar-link:not(.active) {
                             &:hover {
                               svg {
-                                fill: rgba($primary-color, 0.10%);
+                                color: var(--theme-deafult);
                                 stroke: var(--theme-deafult);
                                 transition: all 0.3s ease;
 

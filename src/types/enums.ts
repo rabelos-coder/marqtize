@@ -1,5 +1,6 @@
 export enum UserTypeEnum {
-  CREDENTIAL = "CREDENTIAL",
-  SOCIAL = "SOCIAL",
-  APPLICATION = "APPLICATION",
+  credentials = "credentials",
+  application = "application",
 }
+
+export type UserType = keyof typeof UserTypeEnum;

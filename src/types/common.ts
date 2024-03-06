@@ -89,6 +89,11 @@ export type ChildrenProps = {
   children: ReactNode;
 };
 
+export type ReduxProviderProps = {
+  host: string;
+  children: ReactNode;
+};
+
 export type AuthFormProps = {
   alignLogo?: string;
 };

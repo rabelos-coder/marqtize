@@ -1,26 +1,29 @@
 "use client";
 
+import { useMutation } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { FaFacebook, FaGoogle, FaMicrosoft } from "react-icons/fa";
+import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
 import * as yup from "yup";
 
 import { CommonLogo } from "@/components/common/CommonLogo";
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from "@/configs";
-import { IS_DEVELOPMENT } from "@/environment";
-import { useAppDispatch, useAppSelector, useAuth } from "@/hooks";
+import { IS_DEVELOPMENT, SERVER_URL } from "@/environment";
+import { LOGIN } from "@/graphql/auth";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { Link, useRouter } from "@/navigation";
-import { resetError } from "@/store/slices/authSlice";
-import { fetchCustomer } from "@/store/slices/customerSlice";
+import { setAuth } from "@/store/slices/authSlice";
+import { setLoading } from "@/store/slices/themeSlice";
+import { LoginInput } from "@/types/auth";
 
 import { SpinnerBoxed } from "../common/SpinnerBoxed";
 
 type AuthProps = {
-  host: string;
+  host?: string;
   alignLogo?: string;
 };
 
@@ -39,16 +42,15 @@ const defaultValues = IS_DEVELOPMENT
       password: "",
     };
 
-export const LoginForm = ({ host, alignLogo }: AuthProps) => {
+export const LoginForm = ({ alignLogo }: AuthProps) => {
+  const [disabled, setDisabled] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [login] = useMutation(LOGIN, { fetchPolicy: "no-cache" });
 
   const t = useTranslations("translations");
   const dispatch = useAppDispatch();
-  const { signIn, loading, error, language, isLoggedIn } = useAuth();
-  const { customer, loading: customerLoading } = useAppSelector(
-    (state) => state.customer
-  );
+  const { customer, loading } = useAppSelector((state) => state.customer);
 
   const schema = yup.object().shape({
     email: yup
@@ -78,23 +80,38 @@ export const LoginForm = ({ host, alignLogo }: AuthProps) => {
 
   const router = useRouter();
 
-  const onSubmit = async (data: FormData) => {
-    await signIn({ data: { ...data, rememberMe } });
+  const onSubmit = async (form: FormData) => {
+    setDisabled(true);
+
+    const variables: LoginInput = {
+      data: { email: form.email, password: form.password, rememberMe },
+    };
+
+    await login({ variables })
+      .then(({ data }) => {
+        if (data?.login) {
+          const {
+            user: { language },
+          } = data.login;
+          toast.success(t("loginSuccess"));
+          dispatch(setAuth(data.login));
+
+          router.replace("/backend", { locale: language });
+          router.refresh();
+        } else {
+          toast.error(t("loginError"));
+        }
+      })
+      .catch((error) => toast.error(error?.message ?? t("loginError")));
+
+    setDisabled(false);
   };
 
   useEffect(() => {
-    dispatch(resetError());
-    dispatch(fetchCustomer(host));
-    if (isLoggedIn && language && !loading) {
-      router.replace("/backend", { locale: language });
-      router.refresh();
-    }
-    if (error) {
-      toast.error(error);
-    }
-  }, [dispatch, error, host, isLoggedIn, language, loading, router]);
+    dispatch(setLoading(false));
+  }, [dispatch]);
 
-  return customerLoading ? (
+  return loading ? (
     <SpinnerBoxed type="grow" />
   ) : (
     <div className="login-card login-dark">
@@ -124,19 +141,15 @@ export const LoginForm = ({ host, alignLogo }: AuthProps) => {
               <Controller
                 name="email"
                 control={control}
+                disabled={disabled}
                 rules={{ required: true }}
-                render={({
-                  field: { name, value, onChange, onBlur, ...rest },
-                }) => (
+                render={({ field: { name, ...rest } }) => (
                   <Input
                     id={name}
                     type="email"
                     autoFocus
+                    autoComplete="on"
                     placeholder={t("emailPlaceholder")}
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    valid={!Boolean(errors.email)}
                     invalid={Boolean(errors.email)}
                     {...rest}
                   />
@@ -154,18 +167,13 @@ export const LoginForm = ({ host, alignLogo }: AuthProps) => {
                 <Controller
                   name="password"
                   control={control}
+                  disabled={disabled}
                   rules={{ required: true }}
-                  render={({
-                    field: { name, value, onChange, onBlur, ...rest },
-                  }) => (
+                  render={({ field: { name, ...rest } }) => (
                     <Input
                       id={name}
                       type={showPassword ? "text" : "password"}
-                      placeholder="*********"
-                      value={value}
-                      onBlur={onBlur}
-                      onChange={onChange}
-                      valid={!Boolean(errors.password)}
+                      autoComplete="off"
                       invalid={Boolean(errors.password)}
                       {...rest}
                     />
@@ -203,7 +211,7 @@ export const LoginForm = ({ host, alignLogo }: AuthProps) => {
                   color="primary"
                   className="btn-block w-100"
                   type="submit"
-                  disabled={loading}
+                  disabled={disabled}
                 >
                   {t("signIn")}
                 </Button>
@@ -214,30 +222,21 @@ export const LoginForm = ({ host, alignLogo }: AuthProps) => {
               <div className="btn-showcase">
                 <Link
                   className="btn btn-light"
-                  href="https://www.google.com/"
-                  target="_blank"
+                  href={`${SERVER_URL}/auth/facebook`}
                   rel="noreferrer"
-                >
-                  <FaGoogle className="social-icon txt-google" />
-                  {t("google")}
-                </Link>
-                <Link
-                  className="btn btn-light"
-                  href="https://www.microsoft.com/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <FaMicrosoft className="social-icon txt-microsoft" />
-                  {t("microsoft")}
-                </Link>
-                <Link
-                  className="btn btn-light"
-                  href="https://www.facebook.com/"
-                  target="_blank"
-                  rel="noreferrer"
+                  title={t("facebook")}
                 >
                   <FaFacebook className="social-icon txt-facebook" />
                   {t("facebook")}
+                </Link>
+                <Link
+                  className="btn btn-light"
+                  href={`${SERVER_URL}/auth/google`}
+                  rel="noreferrer"
+                  title={t("google")}
+                >
+                  <FaGoogle className="social-icon txt-google" />
+                  {t("google")}
                 </Link>
               </div>
             </div>
