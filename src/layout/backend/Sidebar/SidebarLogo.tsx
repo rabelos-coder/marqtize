@@ -12,17 +12,17 @@ export const SidebarLogo = () => {
       <Link href={"/backend"}>
         <Image
           className="img-fluid for-light"
-          src={"/assets/images/logo/logo.png"}
+          src={"/assets/images/logo/marqtize_logo.png"}
           alt=""
-          width={121}
-          height={100}
+          width={75}
+          height={37}
         />
         <Image
           className="img-fluid for-dark"
-          src={"/assets/images/logo/logo_dark.png"}
+          src={"/assets/images/logo/marqtize_logo_dark.png"}
           alt=""
-          width={121}
-          height={100}
+          width={75}
+          height={37}
         />
       </Link>
       <div

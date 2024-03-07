@@ -15,14 +15,14 @@ export const Leftbar = () => {
           <Link href={"/backend"}>
             <Image
               className="img-fluid for-light"
-              src={`/assets/images/logo/logo.png`}
+              src={`/assets/images/logo/marqtize_logo.png`}
               alt=""
               width={100}
               height={100}
             />
             <Image
               className="img-fluid for-dark"
-              src={`/assets/images/logo/logo_dark.png`}
+              src={`/assets/images/logo/marqtize_logo_dark.png`}
               alt=""
               width={100}
               height={100}

@@ -300,7 +300,7 @@ body {
 			}
 		}
 
-		//dropzon 
+		//dropzon
 		.dzu-previewContainer {
 			.dzu-previewStatusContainer {
 				span {
@@ -309,7 +309,7 @@ body {
 			}
 		}
 
-		//Faq 
+		//Faq
 		.faq-form {
 			input {
 				background-color: $dark-body-background;
@@ -343,7 +343,7 @@ body {
 			}
 		}
 
-		//basic card 
+		//basic card
 
 		.bg-info {
 			&.text-white {
@@ -383,7 +383,7 @@ body {
 			}
 		}
 
-		// datatable 
+		// datatable
 		.main-zero-config {
 			.card-body {
 				header {
@@ -630,7 +630,7 @@ body {
 			}
 		}
 
-		// Toasts 
+		// Toasts
 		.toast {
 			border: 1px solid $dark-card-border;
 
@@ -804,8 +804,10 @@ body {
 			.page-header {
 				.header-wrapper {
 					.nav-right {
-						.profile-dropdown li span {
-							color: $white;
+						.profile-dropdown {
+							&>li span {
+								color: $white;
+							}
 						}
 
 						.flip-card .flip-card-inner {
@@ -1194,7 +1196,8 @@ body {
 												a {
 													svg {
 														&.stroke-icon {
-															stroke: $white;
+															stroke: $dark-all-font-color;
+															color: $dark-all-font-color;
 														}
 
 														&.fill-icon {
@@ -1207,6 +1210,7 @@ body {
 														svg {
 															&.stroke-icon {
 																stroke: var(--theme-deafult);
+																color: var(--theme-deafult);
 															}
 
 															&.fill-icon {
@@ -1913,7 +1917,7 @@ body {
 			background-color: $dark-card-background !important;
 		}
 
-		// Bookmark 
+		// Bookmark
 
 		.email-wrap {
 			.media-body {
@@ -1945,7 +1949,7 @@ body {
 			}
 		}
 
-		// index page css end	
+		// index page css end
 		.blockquote {
 			border-left: 4px solid $dark-card-border;
 		}
@@ -2026,7 +2030,7 @@ body {
 			}
 		}
 
-		// index page css start		
+		// index page css start
 		.appointment-table {
 			table {
 				tr {
@@ -2794,7 +2798,7 @@ body {
 									}
 
 									&:hover {
-										color: var(--theme-deafult);
+										color: var(--theme-secondary) !important;
 
 										svg {
 
@@ -3075,13 +3079,13 @@ body {
 
 					.breadcrumb {
 						li {
-							color: $dark-all-font-color;
+							color: $dark-all-font-color !important;
 						}
 
 						.breadcrumb-item {
 							a {
 								svg {
-									stroke: $dark-all-font-color;
+									stroke: $dark-all-font-color !important;
 								}
 							}
 						}
@@ -7118,7 +7122,7 @@ body {
 			color: $dark-all-font-color !important;
 		}
 
-		// tree view 
+		// tree view
 		.tree {
 			.tree-branch-wrapper {
 				.tree-node {
@@ -7133,14 +7137,14 @@ body {
 
 
 
-		// range-slider 
+		// range-slider
 		.irs-min,
 		.irs-max {
 			color: $dark-small-font-color;
 			background-color: $dark-card-inbox;
 		}
 
-		// Ribbons 
+		// Ribbons
 		.ribbon-wrapper,
 		.ribbon-wrapper-bottom,
 		.ribbon-vertical-left-wrapper,
@@ -7316,7 +7320,7 @@ body {
 			box-shadow: 0px 3px 17px rgb(113 113 137 / 18%);
 		}
 
-		// grid 
+		// grid
 		.grid-showcase {
 			span {
 				background-color: $dark-body-background;
@@ -7367,7 +7371,7 @@ body {
 			background-color: $dark-datatable-odd !important;
 		}
 
-		// Base-input 
+		// Base-input
 		.card-wrapper,
 		.dark-field {
 			.form-control {
@@ -7837,7 +7841,7 @@ body {
 											}
 
 											svg {
-												stroke: $dark-all-font-color;
+												// stroke: $dark-all-font-color;
 											}
 										}
 

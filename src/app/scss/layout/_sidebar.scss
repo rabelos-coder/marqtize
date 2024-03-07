@@ -863,7 +863,7 @@
                     a {
                       svg {
                         &.stroke-icon {
-                          stroke: $dark-color;
+                          stroke: rgba($theme-body-sub-title-color, 0.8);
                         }
 
                         &.fill-icon {
@@ -991,7 +991,7 @@
         position: absolute;
         top: 19px;
         right: 0px;
-        color: $primary-color;
+        color: var(--theme-deafult);
 
         [dir="rtl"] & {
           left: 0;
@@ -1483,7 +1483,7 @@
         position: absolute;
         top: 11px;
         right: -9px;
-        color: $primary-color;
+        color: var(--theme-deafult);
         z-index: 9999;
 
         [dir="rtl"] & {
@@ -1750,7 +1750,7 @@
                 position: absolute;
                 top: 16px;
                 right: 35px;
-                color: $primary-color;
+                color: var(--theme-deafult);
 
                 [dir="rtl"] & {
                   left: 35px;
@@ -2203,7 +2203,7 @@
                             right: 0;
                             top: 50%;
                             transform: translateY(-50%);
-                            background-color: $primary-color;
+                            background-color: var(--theme-deafult);
                             border-radius: 5px 0px 0px 5px;
                             opacity: 0;
                             visibility: hidden;
@@ -2326,7 +2326,16 @@
 
       .toggle-sidebar {
         svg {
-          stroke: var(--theme-deafult);
+          stroke: var(--theme-secondary) !important;
+          color: var(--theme-secondary) !important;
+        }
+      }
+
+      .toggle-sidebar:hover {
+        svg {
+          opacity: 0.6;
+          stroke: var(--theme-secondary) !important;
+          color: var(--theme-secondary) !important;
         }
       }
 
@@ -2339,25 +2348,53 @@
                   .simplebar-content-wrapper {
                     .simplebar-content {
                       >li {
+                        i.fa-thumb-tack {
+                          color: var(--theme-secondary) !important;
+                        }
                         a {
+                          &:hover {
+                            .according-menu i {
+                              color: var(--theme-secondary) !important;
+                            }
+                            span {
+                              color: var(--theme-secondary) !important;
+                            }
+                            svg {
+                              &.stroke-icon {
+                                stroke: var(--theme-secondary) !important;
+                              }
+
+                              &.fill-icon {
+                                fill: var(--theme-secondary) !important;
+                              }
+                            }
+                          }
                           svg {
                             &.stroke-icon {
                               stroke: $dark-all-font-color;
+                              color: $dark-all-font-color;
                             }
 
                             &.fill-icon {
                               fill: $dark-all-font-color;
+                              color: $dark-all-font-color;
                             }
                           }
 
                           &.active {
+                            &::after {
+                              background-color: var(--theme-secondary);
+                            }
+                            span {
+                              color: var(--theme-secondary) !important;
+                            }
                             svg {
                               &.stroke-icon {
-                                stroke: var(--theme-deafult);
+                                stroke: var(--theme-secondary);
                               }
 
                               &.fill-icon {
-                                fill: var(--theme-deafult);
+                                fill: var(--theme-secondary);
                               }
                             }
                           }
@@ -2523,7 +2560,7 @@
         position: absolute;
         top: 8px;
         right: 54px;
-        color: $primary-color;
+        color: var(--theme-deafult);
         width: 20px;
         height: 20px;
         background-color: $light-primary;
@@ -2920,7 +2957,7 @@
         position: absolute;
         top: 8px;
         right: 22px;
-        color: $primary-color;
+        color: var(--theme-deafult);
         width: 20px;
         height: 20px;
         background-color: $light-primary;

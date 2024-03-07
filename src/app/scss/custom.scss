@@ -46,36 +46,6 @@
   color: var(--theme-deafult);
 }
 
-.page-wrapper.compact-wrapper
-  .page-body-wrapper
-  div.sidebar-wrapper
-  .sidebar-main
-  .sidebar-links
-  .simplebar-wrapper
-  .simplebar-mask
-  .simplebar-content-wrapper
-  .simplebar-content
-  > li:hover
-  .sidebar-link:not(.active):hover
-  svg {
-  color: var(--theme-deafult);
-}
-
-.page-wrapper
-  .page-body-wrapper
-  div.sidebar-wrapper
-  .sidebar-main
-  .sidebar-links
-  .simplebar-wrapper
-  .simplebar-mask
-  .simplebar-content-wrapper
-  .simplebar-content
-  > li
-  a.active
-  svg.stroke-icon {
-  color: var(--theme-deafult);
-}
-
 .select2-input.has-error div div {
   border-color: var(--bs-form-invalid-border-color) !important;
 }

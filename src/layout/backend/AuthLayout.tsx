@@ -1,6 +1,9 @@
-import { ReactNode, useEffect } from "react";
+"use client";
+
+import { ReactNode, useEffect, useState } from "react";
 
 import { MenuListData } from "@/configs/menu";
+import Theme from "@/configs/theme";
 import { THEME_CUSTOMIZER_ENABLED } from "@/environment";
 import { useAppSelector, useAuth, useCustomizer, useLayout } from "@/hooks";
 import { ChildrenProps } from "@/types/common";
@@ -13,14 +16,40 @@ import { Header } from "./Header";
 import { SideBar } from "./Sidebar";
 import { ThemeCustomizer } from "./ThemeCustomizer";
 
-export const Layout = ({ children }: ChildrenProps) => {
+export const AuthLayout = ({ children }: ChildrenProps) => {
   const { layout, setLayout } = useCustomizer();
+  const default_color = Theme.data.color.primary_color;
+  const secondary_color = Theme.data.color.secondary_color;
+  const [colorBackground1, setColorBackground1] = useState(default_color);
+  const [colorBackground2, setColorBackground2] = useState(secondary_color);
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.style.setProperty(
+        "--theme-deafult",
+        colorBackground1
+      );
+      document.documentElement.style.setProperty(
+        "--theme-secondary",
+        colorBackground2
+      );
+    }
+    Theme.data.color.primary_color = colorBackground1;
+    Theme.data.color.secondary_color = colorBackground2;
+  }, [
+    setColorBackground1,
+    setColorBackground2,
+    colorBackground1,
+    colorBackground2,
+  ]);
+
   const {
     sideBarToggle,
     setSideBarToggle,
     setSearchableMenu,
     setBookmarkList,
   } = useLayout();
+
   const { user } = useAuth();
   const { loading, theme } = useAppSelector((state) => state.theme);
 

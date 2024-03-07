@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import React from "react";
+import {
+  HiOutlineArrowRightOnRectangle,
+} from "react-icons/hi2";
 import { toast } from "react-toastify";
 import Sawl from "sweetalert2";
 
-import FeatherIconCom from "@/components/common/Icons/FeatherIconCom";
 import { ProfileListData } from "@/configs/profile";
 import { useAppDispatch, useAuth } from "@/hooks";
 import { setLoading } from "@/store/slices/themeSlice";
@@ -54,14 +56,14 @@ const Profile = () => {
           ProfileListData.map((item, index) => (
             <li key={index}>
               <Link href={item.path}>
-                <FeatherIconCom iconName={item.icon} />
+                {item.icon}
                 <span>{t(item.text)} </span>
               </Link>
             </li>
           ))}
         <li onClick={logoutConfirm}>
           <a href="#123">
-            <FeatherIconCom iconName={"LogIn"} />
+            <HiOutlineArrowRightOnRectangle />
             <span>{t("logout")}</span>
           </a>
         </li>

@@ -590,8 +590,7 @@ $btn-color in (primary, $primary-color),
 
     &.disabled,
     &:disabled {
-      background-color: $btn-color !important;
-      border-color: $btn-color !important;
+      opacity: 0.65;
     }
 
     &:focus {

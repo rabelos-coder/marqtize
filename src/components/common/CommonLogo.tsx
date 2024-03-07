@@ -11,18 +11,18 @@ export const CommonLogo = ({ alignLogo }: propsType) => {
   return (
     <Link className={`logo ${alignLogo ? alignLogo : ""} `} href="/">
       <Image
-        width={121}
-        height={35}
+        width={100}
+        height={37}
         className="img-fluid for-light"
-        src={`/assets/images/logo/logo.png`}
-        alt="looginpage"
+        src={`/assets/images/logo/marqtize_logo.png`}
+        alt="logo"
       />
       <Image
-        width={121}
-        height={35}
+        width={100}
+        height={37}
         className="img-fluid for-dark"
-        src={`/assets/images/logo/logo_dark.png`}
-        alt="looginpage"
+        src={`/assets/images/logo/marqtize_logo_dark.png`}
+        alt="logo"
       />
     </Link>
   );

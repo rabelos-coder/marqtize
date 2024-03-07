@@ -23,7 +23,7 @@ export const SideBar = () => {
               width={35}
               height={35}
               className="img-fluid"
-              src={`/assets/images/logo/logo-icon.png`}
+              src={`/assets/images/logo/marqtize_logo_solo_312x312.png`}
               alt=""
             />
           </Link>

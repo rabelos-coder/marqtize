@@ -8,7 +8,7 @@ import { CustomizerContext } from "@/context/CustomizerContext";
 import { ChildrenProps } from "@/types/common";
 
 export const CustomizerProvider = ({ children }: ChildrenProps) => {
-  const [layout, setLayout] = useState("compact-wrapper");
+  const [layout, setLayout] = useState(Theme.data.settings.layout_class);
   const [layoutName, setLayoutName] = useState("");
   const [sidebarIconType, setSidebarIconType] = useState(
     Theme.data.settings.sidebar.iconType

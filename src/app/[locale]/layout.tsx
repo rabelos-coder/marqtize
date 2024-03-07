@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import { Metadata } from "next/types";
 import { NextIntlClientProvider } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
@@ -11,17 +12,19 @@ import {
   APP_LANGUAGE,
   APP_META_DESCRIPTION,
   APP_META_KEYWORDS,
-  APP_META_TITLE,
+  APP_META_SLOGAN,
 } from "@/environment";
 import { ApolloProvider } from "@/providers/ApolloProvider";
 import { ReduxProvider } from "@/providers/ReduxProvider";
 import { ComponentWithLocaleProps } from "@/types/common";
+import { concatTitle, icons } from "@/utils/helpers";
 
-export async function generateMetadata() {
+export function generateMetadata(): Metadata {
   return {
-    title: APP_META_TITLE,
+    title: concatTitle(APP_META_SLOGAN),
     description: APP_META_DESCRIPTION,
     keywords: APP_META_KEYWORDS,
+    icons,
   };
 }
 

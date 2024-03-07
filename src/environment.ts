@@ -14,6 +14,7 @@ export const APP_DATETIME_FORMAT =
   process.env.NEXT_PUBLIC_APP_DATETIME_FORMAT ?? "lll";
 export const APP_META_TITLE =
   process.env.NEXT_PUBLIC_APP_META_TITLE ?? "Marqtize";
+export const APP_META_SLOGAN = process.env.NEXT_PUBLIC_APP_META_SLOGAN ?? "";
 export const APP_META_TITLE_SEPARATOR =
   process.env.NEXT_PUBLIC_APP_META_TITLE_SEPARATOR ?? "|";
 export const APP_META_KEYWORDS =

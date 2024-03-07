@@ -1,5 +1,4 @@
 import { ChangeEvent, Dispatch, ReactNode, SetStateAction } from "react";
-import * as Icon from "react-feather";
 
 export type LayoutContextType = {
   searchIcon: boolean;
@@ -80,7 +79,7 @@ export type LanguageDataType = {
 };
 
 export type ProfileType = {
-  icon: keyof typeof Icon;
+  icon: ReactNode;
   path: string;
   text: string;
 };

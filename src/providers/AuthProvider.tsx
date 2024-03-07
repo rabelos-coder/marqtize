@@ -17,17 +17,6 @@ import { ChildrenProps } from "@/types/common";
  */
 export function AuthProvider({ children }: ChildrenProps): JSX.Element {
   const auth = useProvideAuth();
-  const { theme } = useAppSelector((state) => state.theme);
-
-  useEffect(() => {
-    if (theme === "light") {
-      document.body.classList.remove("dark-only");
-      document.body.classList.add("light-only");
-    } else {
-      document.body.classList.remove("light-only");
-      document.body.classList.add("dark-only");
-    }
-  }, [theme]);
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 }

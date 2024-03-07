@@ -1,6 +1,7 @@
-import { AiFillDashboard, AiOutlineDashboard } from "react-icons/ai";
 import {
+  HiHome,
   HiLockClosed,
+  HiOutlineHome,
   HiOutlineLockClosed,
   HiOutlineUser,
   HiOutlineUsers,
@@ -17,10 +18,10 @@ export const MenuListData: SidebarMenuType[] = [
     items: [
       {
         id: 1,
-        title: "dashboard",
+        title: "home",
         path: "backend",
-        iconStroke: <AiOutlineDashboard className="stroke-icon" />,
-        iconFill: <AiFillDashboard className="fill-icon" />,
+        iconStroke: <HiOutlineHome className="stroke-icon" />,
+        iconFill: <HiHome className="fill-icon" />,
         active: false,
         type: "link",
       },

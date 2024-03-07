@@ -10,7 +10,7 @@ import {
   defaultAcl,
 } from "@/configs/ability";
 import { useAuth } from "@/hooks";
-import { Layout } from "@/layout/backend/Layout";
+import { AuthLayout } from "@/layout/backend/AuthLayout";
 import { AbilityProvider } from "@/providers/AbilityProvider";
 
 import { NotAuthorized } from "../NotAuthorized";
@@ -47,7 +47,7 @@ export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
   ) {
     return (
       <AbilityProvider ability={ability}>
-        <Layout>{children}</Layout>
+        <AuthLayout>{children}</AuthLayout>
       </AbilityProvider>
     );
   } else if (!ability || !isLoggedIn) {

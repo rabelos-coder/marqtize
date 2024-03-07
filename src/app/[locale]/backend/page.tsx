@@ -4,11 +4,11 @@ import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import { Breadcrumbs } from "@/components/backend/Breadcrumbs";
 import { AclGuard } from "@/components/backend/Guards/AclGuard";
 import CommonCardHeading from "@/components/common/CommonCardHeading";
+import { APP_META_SLOGAN } from "@/environment";
 import { concatTitle } from "@/utils/helpers";
 
-export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
-  const title = concatTitle(t("dashboard"));
+export async function generateMetadata() {
+  const title = concatTitle(APP_META_SLOGAN);
 
   return {
     title,
@@ -17,7 +17,7 @@ export async function generateMetadata({ params: { locale } }: any) {
 
 export default async function BackendPage({ params: { locale } }: any) {
   const t = await getTranslations({ locale, namespace: "translations" });
-  const title = t("dashboard");
+  const title = t("home");
 
   return (
     <AclGuard>
