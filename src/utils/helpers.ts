@@ -30,3 +30,43 @@ export const icons: Metadata["icons"] = [
     type: "image/png",
   },
 ];
+
+/**
+ * Retrieves the valid subdomain from the given host.
+ *
+ * @param {string | null} host - The host from which to retrieve the subdomain.
+ * @return {string | null} The valid subdomain, if found; otherwise, null.
+ */
+export const getValidSubdomain = (host?: string | null) => {
+  let subdomain: string | null = null;
+  if (!host && typeof window !== "undefined") {
+    // On client side, get the host from window
+    host = window.location.host;
+  }
+  if (host && host.includes(".")) {
+    const candidate = host.split(".")[0];
+    if (candidate && !candidate.includes("localhost")) {
+      // Valid candidate
+      subdomain = candidate;
+    }
+  }
+
+  return subdomain;
+};
+
+/**
+ * Handles click event on an anchor element, prevents default behavior, and scrolls to the referenced element.
+ *
+ * @param {React.MouseEvent<HTMLAnchorElement>} e - The click event object
+ * @return {void}
+ */
+export const anchorClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
+  if (typeof e === "object") {
+    e?.preventDefault();
+    document
+      ?.querySelector(`${e?.currentTarget?.getAttribute("href")}`)
+      ?.scrollIntoView({
+        behavior: "smooth",
+      });
+  }
+};

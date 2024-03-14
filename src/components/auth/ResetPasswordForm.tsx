@@ -52,23 +52,34 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
   const schema = yup.object().shape({
     email: yup
       .string()
-      .email(t("invalidEmailFormat"))
-      .required(t("invalidEmailRequired"))
-      .matches(new RegExp(EMAIL_REGEX), t("invalidEmailFormat")),
-    resetToken: yup.string().required(t("invalidResetTokenRequired")),
+      .email(t("propertyEmail", { property: t("email") }))
+      .required(t("propertyRequired", { property: t("email") }))
+      .matches(
+        new RegExp(EMAIL_REGEX),
+        t("propertyEmail", { property: t("email") })
+      ),
+    resetToken: yup
+      .string()
+      .required(t("propertyRequired", { property: t("resetToken") })),
     password: yup
       .string()
       .trim()
-      .required(t("invalidPasswordRequired"))
+      .required(t("propertyRequired", { property: t("password") }))
       .matches(
         new RegExp(PASSWORD_STRENGTH_REGEX),
-        t("invalidPasswordStrength")
+        t("propertyStrength", { property: t("password") })
       ),
     passwordConfirmation: yup
       .string()
       .trim()
-      .required(t("invalidPasswordConfirmationRequired"))
-      .oneOf([yup.ref("password")], t("invalidPasswordConfirmationMustMatch")),
+      .required(t("propertyRequired", { property: t("passwordConfirmation") }))
+      .oneOf(
+        [yup.ref("password")],
+        t("propertyMatch", {
+          property: t("passwordConfirmation"),
+          match: t("password"),
+        })
+      ),
   });
 
   const {

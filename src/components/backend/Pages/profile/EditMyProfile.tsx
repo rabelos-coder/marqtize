@@ -51,9 +51,12 @@ const EditMyProfile = () => {
       email: yup
         .string()
         .trim()
-        .email(t("invalidEmailFormat"))
-        .required(t("invalidEmailRequired"))
-        .matches(new RegExp(EMAIL_REGEX), t("invalidEmailFormat")),
+        .email(t("propertyEmail", { property: t("email") }))
+        .required(t("propertyRequired", { property: t("email") }))
+        .matches(
+          new RegExp(EMAIL_REGEX),
+          t("propertyEmail", { property: t("email") })
+        ),
     }),
     [t]
   );
@@ -62,17 +65,22 @@ const EditMyProfile = () => {
       password: yup
         .string()
         .trim()
-        .required(t("invalidPasswordRequired"))
+        .required(t("propertyRequired", { property: t("password") }))
         .matches(
           new RegExp(PASSWORD_STRENGTH_REGEX),
-          t("invalidPasswordStrength")
+          t("propertyStrength", { property: t("password") })
         ),
       passwordConfirmation: yup
         .string()
-        .required(t("invalidPasswordConfirmationRequired"))
+        .required(
+          t("propertyRequired", { property: t("passwordConfirmation") })
+        )
         .oneOf(
           [yup.ref("password")],
-          t("invalidPasswordConfirmationMustMatch")
+          t("propertyMatch", {
+            property: t("passwordConfirmation"),
+            match: t("password"),
+          })
         ),
     }),
     [t]

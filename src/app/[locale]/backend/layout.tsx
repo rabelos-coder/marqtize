@@ -1,4 +1,7 @@
+import "../../scss/app.scss";
+
 import { Metadata } from "next/types";
+import { ToastContainer } from "react-toastify";
 
 import { AuthGuard } from "@/components/backend/Guards/AuthGuard";
 import {
@@ -32,6 +35,7 @@ export default async function BackendLayout({ children }: ChildrenProps) {
             <AuthGuard>{children}</AuthGuard>
           </LayoutProvider>
         </CustomizerProvider>
+        <ToastContainer />
       </AuthProvider>
     </>
   );

@@ -1,11 +1,13 @@
+import "../scss/globals.scss";
+
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
 import { NextIntlClientProvider } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
-import { ToastContainer } from "react-toastify";
 
+import { CookieConsent } from "@/components/common/CookieConsent";
 import { Spinner } from "@/components/common/Spinner";
 import { locales } from "@/configs/i18n";
 import {
@@ -19,7 +21,7 @@ import { ReduxProvider } from "@/providers/ReduxProvider";
 import { ComponentWithLocaleProps } from "@/types/common";
 import { concatTitle, icons } from "@/utils/helpers";
 
-export function generateMetadata(): Metadata {
+export async function generateMetadata(): Promise<Metadata> {
   return {
     title: concatTitle(APP_META_SLOGAN),
     description: APP_META_DESCRIPTION,
@@ -55,11 +57,13 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ApolloProvider>
             <ReduxProvider host={host}>
-              <Suspense fallback={<Spinner />}>{children}</Suspense>
+              <Suspense fallback={<Spinner />}>
+                {children}
+                <CookieConsent />
+              </Suspense>
             </ReduxProvider>
           </ApolloProvider>
         </NextIntlClientProvider>
-        <ToastContainer />
       </body>
     </html>
   );

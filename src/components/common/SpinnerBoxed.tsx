@@ -1,7 +1,5 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-
 type SpinnerBoxedProps = {
   type?: "border" | "grow";
   color?:
@@ -17,8 +15,6 @@ type SpinnerBoxedProps = {
 };
 
 export const SpinnerBoxed = ({ type, color }: SpinnerBoxedProps) => {
-  const t = useTranslations("translations");
-
   return (
     <div
       className="d-flex justify-content-center align-items-center"
@@ -27,9 +23,7 @@ export const SpinnerBoxed = ({ type, color }: SpinnerBoxedProps) => {
       <div
         className={`spinner-${type ?? "border"} text-${color ?? "default"}`}
         role="status"
-      >
-        <span className="sr-only">{t("loading")}...</span>
-      </div>
+      ></div>
     </div>
   );
 };

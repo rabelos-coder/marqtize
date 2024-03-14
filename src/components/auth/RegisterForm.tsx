@@ -65,26 +65,37 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
   const { customer, loading } = useAppSelector((state) => state.customer);
 
   const schema = yup.object().shape({
-    name: yup.string().required(t("invalidNameRequired")),
-    systemName: yup.string().required(t("invalidSystemNameRequired")),
+    name: yup.string().required(t("propertyRequired", { property: t("name") })),
+    systemName: yup
+      .string()
+      .required(t("propertyRequired", { property: t("systemName") })),
     email: yup
       .string()
-      .email(t("invalidEmailFormat"))
-      .required(t("invalidEmailRequired"))
-      .matches(new RegExp(EMAIL_REGEX), t("invalidEmailFormat")),
+      .email(t("propertyEmail", { property: t("email") }))
+      .required(t("propertyRequired", { property: t("email") }))
+      .matches(
+        new RegExp(EMAIL_REGEX),
+        t("propertyEmail", { property: t("email") })
+      ),
     password: yup
       .string()
       .trim()
-      .required(t("invalidPasswordRequired"))
+      .required(t("propertyRequired", { property: t("password") }))
       .matches(
         new RegExp(PASSWORD_STRENGTH_REGEX),
-        t("invalidPasswordStrength")
+        t("propertyStrength", { property: t("password") })
       ),
     passwordConfirmation: yup
       .string()
       .trim()
-      .required(t("invalidPasswordConfirmationRequired"))
-      .oneOf([yup.ref("password")], t("invalidPasswordConfirmationMustMatch")),
+      .required(t("propertyRequired", { property: t("passwordConfirmation") }))
+      .oneOf(
+        [yup.ref("password")],
+        t("propertyMatch", {
+          property: t("passwordConfirmation"),
+          match: t("password"),
+        })
+      ),
   });
 
   const {

@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "~bootstrap-scss/bootstrap.scss";
+@import "./layout/_tap_top.scss";
+@import "react-toastify/dist/ReactToastify.css";
+
+.txt-facebook {
+    color: #3b5998;
+}
+
+.txt-google {
+    color: #dd4b39;
+}
+
+.social-icon {
+    margin: 0 5px;
+}
+
+.login-modal {
+    a {
+        color: $color-default !important;
+
+        &:hover,
+        &:active {
+            color: $color-variant-3 !important;
+        }
+    }
+
+    label {
+        font-weight: 600;
+    }
+
+    .checkbox {
+        label {
+            margin-left: 5px;
+        }
+    }
+
+    .text-muted {
+        color: #363d47 !important;
+    }
+
+    .or {
+        font-weight: 600;
+        color: #363d47 !important;
+        position: relative;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 65%;
+            height: 2px;
+            background-color: #f3f3ff;
+            top: 9px;
+            z-index: 0;
+            right: 0;
+        }
+    }
+
+    .btn + .btn {
+        margin-left: 5px;
+    }
+
+    .show-hide {
+        top: 50%;
+        cursor: pointer;
+        color: $color-default !important;
+        right: 1.9rem !important;
+        text-transform: lowercase;
+        position: absolute;
+        transform: translateY(-50%);
+    }
+}

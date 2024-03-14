@@ -14,6 +14,8 @@ import { Auth, AuthState } from "@/types/auth";
 import { JWT } from "@/types/jwt";
 import { User } from "@/types/user";
 
+let isLoggedIn = false;
+
 let language: any =
   typeof window !== "undefined"
     ? (localStorage.getItem(STORAGE_LANGUAGE) as string) ?? null
@@ -63,16 +65,19 @@ if (token) {
     if (data.exp >= Date.now() / 1000) {
       Cookies.set(STORAGE_AUTH_TOKEN, `${token}`);
       jwt = data;
+      isLoggedIn = true;
     } else {
       jwt = null;
       token = null;
       user = null;
+      isLoggedIn = false;
       Cookies.remove(STORAGE_AUTH_TOKEN);
     }
   } catch {
     jwt = null;
     token = null;
     user = null;
+    isLoggedIn = false;
     Cookies.remove(STORAGE_AUTH_TOKEN);
   }
 } else if (!!Cookies.get(STORAGE_AUTH_TOKEN)) {
@@ -83,10 +88,12 @@ if (token) {
       if (typeof window !== "undefined")
         secureLocalStorage.setItem(STORAGE_AUTH_TOKEN, `${token}`);
       jwt = data;
+      isLoggedIn = true;
     } else {
       jwt = null;
       token = null;
       user = null;
+      isLoggedIn = false;
       if (typeof window !== "undefined")
         secureLocalStorage.removeItem(STORAGE_AUTH_TOKEN);
       Cookies.remove(STORAGE_AUTH_TOKEN);
@@ -95,6 +102,7 @@ if (token) {
     jwt = null;
     token = null;
     user = null;
+    isLoggedIn = false;
     if (typeof window !== "undefined")
       secureLocalStorage.removeItem(STORAGE_AUTH_TOKEN);
     Cookies.remove(STORAGE_AUTH_TOKEN);
@@ -111,6 +119,7 @@ const initialState: AuthState = {
   jwt,
   timezone,
   language,
+  isLoggedIn,
 };
 
 export const authSlice = createSlice({
@@ -171,6 +180,9 @@ export const authSlice = createSlice({
       if (typeof window !== "undefined")
         localStorage.setItem(STORAGE_TIMEZONE, state.timezone);
     },
+    setIsLoggedIn: (state, action: PayloadAction<boolean>) => {
+      state.isLoggedIn = action.payload;
+    },
     setAuth(state, action: PayloadAction<Auth>) {
       state.user = action.payload?.user;
       state.token = action.payload?.token;
@@ -189,6 +201,7 @@ export const authSlice = createSlice({
       try {
         const jwt: JWT = jwtDecode(state.token as string);
         state.jwt = jwt;
+        state.isLoggedIn = true;
       } catch {
         if (typeof window !== "undefined") {
           secureLocalStorage.removeItem(STORAGE_USER);
@@ -203,6 +216,7 @@ export const authSlice = createSlice({
         state.user = null;
         state.token = null;
         state.jwt = null;
+        state.isLoggedIn = false;
         state.timezone = initialState.timezone;
       }
     },
@@ -216,5 +230,6 @@ export const {
   setToken,
   setLanguage,
   setTimezone,
+  setIsLoggedIn,
 } = authSlice.actions;
 export default authSlice.reducer;

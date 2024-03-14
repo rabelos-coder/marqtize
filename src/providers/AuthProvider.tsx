@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import { AuthContext } from "@/context/AuthContext";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useRouter } from "@/navigation";
@@ -27,11 +25,9 @@ export function AuthProvider({ children }: ChildrenProps): JSX.Element {
  * @return {AuthContextType} authentication context object
  */
 function useProvideAuth(): AuthContextType {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { user, token, language, timezone } = useAppSelector(
+  const { user, token, language, timezone, isLoggedIn } = useAppSelector(
     (state) => state.auth
   );
 
@@ -39,10 +35,6 @@ function useProvideAuth(): AuthContextType {
     dispatch(resetAuth());
     router.push("/auth/login");
   };
-
-  useEffect(() => {
-    if (token) setIsLoggedIn(true);
-  }, [token]);
 
   return {
     user,

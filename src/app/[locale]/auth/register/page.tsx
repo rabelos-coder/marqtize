@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import { Col, Container, Row } from "reactstrap";
 
@@ -16,9 +15,6 @@ export async function generateMetadata({ params: { locale } }: any) {
 }
 
 export default async function RegisterPage() {
-  const header = headers();
-  const host = header.get("host") ?? "";
-
   return (
     <Container fluid>
       <Row>
@@ -30,7 +26,7 @@ export default async function RegisterPage() {
           />
         </Col>
         <Col xl={5} className="p-0">
-          <RegisterForm host={host} alignLogo="text-start" />
+          <RegisterForm alignLogo="text-start" />
         </Col>
       </Row>
     </Container>

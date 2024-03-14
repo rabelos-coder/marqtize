@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 
-import SvgIcon from "@/components/common/Icons/SvgIcon";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { setTheme } from "@/store/slices/themeSlice";
 
@@ -44,7 +44,11 @@ export const MoonLight = () => {
         className={`mode ${darkMode ? "active" : ""}`}
         onClick={() => DarkModeHandler(darkMode)}
       >
-        <SvgIcon iconId="moon" />
+        {darkMode ? (
+          <HiOutlineSun className="stroke-icon" />
+        ) : (
+          <HiOutlineMoon className="stroke-icon" />
+        )}
       </div>
     </li>
   );

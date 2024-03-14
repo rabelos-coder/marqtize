@@ -35,9 +35,12 @@ export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
   const schema = yup.object().shape({
     email: yup
       .string()
-      .email(t("invalidEmailFormat"))
-      .required(t("invalidEmailRequired"))
-      .matches(new RegExp(EMAIL_REGEX), t("invalidEmailFormat")),
+      .email(t("propertyEmail", { property: t("email") }))
+      .required(t("propertyRequired", { property: t("email") }))
+      .matches(
+        new RegExp(EMAIL_REGEX),
+        t("propertyEmail", { property: t("email") })
+      ),
   });
 
   const {

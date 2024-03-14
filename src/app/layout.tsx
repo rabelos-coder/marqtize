@@ -1,7 +1,5 @@
-import "./scss/app.scss";
-
 import { ChildrenProps } from "@/types/common";
 
-export default function AppLayout({ children }: ChildrenProps) {
+export default function RootLayout({ children }: ChildrenProps) {
   return children;
 }

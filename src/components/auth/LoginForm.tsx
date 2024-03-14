@@ -55,16 +55,19 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
   const schema = yup.object().shape({
     email: yup
       .string()
-      .email(t("invalidEmailFormat"))
-      .required(t("invalidEmailRequired"))
-      .matches(new RegExp(EMAIL_REGEX), t("invalidEmailFormat")),
+      .email(t("propertyEmail", { property: t("email") }))
+      .required(t("propertyRequired", { property: t("email") }))
+      .matches(
+        new RegExp(EMAIL_REGEX),
+        t("propertyEmail", { property: t("email") })
+      ),
     password: yup
       .string()
       .trim()
-      .required(t("invalidPasswordRequired"))
+      .required(t("propertyRequired", { property: t("password") }))
       .matches(
         new RegExp(PASSWORD_STRENGTH_REGEX),
-        t("invalidPasswordStrength")
+        t("propertyStrength", { property: t("password") })
       ),
   });
 

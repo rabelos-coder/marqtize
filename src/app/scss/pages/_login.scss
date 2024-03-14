@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  background: url('/assets/images/login/login_bg.jpg');
+  background: url("/assets/images/login/login_bg.jpg");
   background-position: center;
   padding: 30px 12px;
 
@@ -24,7 +24,7 @@
       padding: 10px 15px;
       margin: 0;
 
-      &+.btn {
+      & + .btn {
         margin-left: 5px;
       }
 
@@ -119,16 +119,6 @@
     cursor: pointer;
     font-size: 13px;
     color: var(--theme-deafult);
-
-    &.show {
-      &:before {
-        content: "show";
-      }
-    }
-
-    &:before {
-      content: "hide";
-    }
   }
 }
 

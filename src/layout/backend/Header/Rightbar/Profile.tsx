@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import React from "react";
 import {
   HiOutlineArrowRightOnRectangle,
+  HiOutlineGlobeAlt,
 } from "react-icons/hi2";
 import { toast } from "react-toastify";
 import Sawl from "sweetalert2";
@@ -52,6 +53,12 @@ const Profile = () => {
         </div>
       </div>
       <ul className="profile-dropdown onhover-show-div">
+        <li>
+          <a href="/home">
+            <HiOutlineGlobeAlt />
+            <span>{t("website")}</span>
+          </a>
+        </li>
         {ProfileListData &&
           ProfileListData.map((item, index) => (
             <li key={index}>

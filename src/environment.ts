@@ -22,6 +22,12 @@ export const APP_META_KEYWORDS =
 export const APP_META_DESCRIPTION =
   process.env.NEXT_PUBLIC_APP_META_DESCRIPTION ?? "";
 
+// * SOCIAL LINKS
+export const EMAIL = process.env.NEXT_PUBLIC_EMAIL ?? "";
+export const WEBSITE = process.env.NEXT_PUBLIC_WEBSITE ?? "";
+export const INSTAGRAM_URL = process.env.NEXT_PUBLIC_INSTAGRAM_URL ?? "";
+export const FACEBOOK_URL = process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "";
+
 // * SERVER SETTINGS
 export const SERVER_URL =
   process.env.NEXT_PUBLIC_SERVER_URL ?? "http://localhost:4000";

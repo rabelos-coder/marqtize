@@ -1,15 +1,13 @@
 import Image from "next/image";
 import React from "react";
 
-import { Link } from "@/navigation";
-
 type propsType = {
   alignLogo?: string;
 };
 
 export const CommonLogo = ({ alignLogo }: propsType) => {
   return (
-    <Link className={`logo ${alignLogo ? alignLogo : ""} `} href="/">
+    <a className={`logo ${alignLogo ? alignLogo : ""} `} href="/home">
       <Image
         width={100}
         height={37}
@@ -24,6 +22,6 @@ export const CommonLogo = ({ alignLogo }: propsType) => {
         src={`/assets/images/logo/marqtize_logo_dark.png`}
         alt="logo"
       />
-    </Link>
+    </a>
   );
 };

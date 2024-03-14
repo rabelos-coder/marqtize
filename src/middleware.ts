@@ -11,6 +11,9 @@ import {
 } from "./configs/i18n";
 import { APP_LANGUAGE } from "./environment";
 import { JWT } from "./types/jwt";
+import { getValidSubdomain } from "./utils/helpers";
+
+const PUBLIC_FILE = /\.(.*)$/;
 
 const intlMiddleware = createMiddleware({
   locales,
@@ -20,11 +23,15 @@ const intlMiddleware = createMiddleware({
 });
 
 export default function middleware(request: NextRequest) {
+  const url = request.nextUrl.clone();
+
+  if (PUBLIC_FILE.test(url.pathname) || url.pathname.includes("_next")) return;
+
   const token = request.cookies.get(STORAGE_AUTH_TOKEN)?.value;
   const locale = request.cookies.get(STORAGE_LOCALE)?.value ?? APP_LANGUAGE;
 
-  const isAuth = request.nextUrl.pathname.split("/").includes("auth");
-  const isBackend = request.nextUrl.pathname.split("/").includes("backend");
+  const isAuth = url.pathname.split("/").includes("auth");
+  const isBackend = url.pathname.split("/").includes("backend");
 
   if (isBackend && !token && !isAuth) {
     return NextResponse.redirect(new URL(`/${locale}/auth/login`, request.url));
@@ -44,9 +51,21 @@ export default function middleware(request: NextRequest) {
     }
   }
 
+  const host = request.headers.get("host");
+  const subdomain = getValidSubdomain(host);
+  if (subdomain) {
+    url.pathname = `/subdomains/${subdomain}${url.pathname}`;
+
+    return NextResponse.rewrite(url);
+  }
+
   return intlMiddleware(request);
 }
 
 export const config = {
-  matcher: ["/", "/((?!api|_next|_vercel|.*\\..*).*)", "/(pt|en)/:path*"],
+  matcher: [
+    "/",
+    "/((?!api|_next|_vercel|subdomains|.*\\..*).*)",
+    "/(pt|en)/:path*",
+  ],
 };

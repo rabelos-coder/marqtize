@@ -9,6 +9,7 @@ export type AuthState = {
   jwt: JWT | null;
   language: string;
   timezone: string;
+  isLoggedIn: boolean;
 };
 
 export type AuthContextType = {
