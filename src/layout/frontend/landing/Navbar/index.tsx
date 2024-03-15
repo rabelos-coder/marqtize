@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronCircleRight, FaChevronDown } from "react-icons/fa";
 import { FiBookOpen, FiCode, FiFileText, FiMenu } from "react-icons/fi";
 import { toast } from "react-toastify";
 import {
@@ -34,7 +34,6 @@ export const NavBar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [isOpenLogin, setIsOpenLogin] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [color, setColor] = useState("");
 
@@ -42,7 +41,6 @@ export const NavBar = () => {
   const { isLoggedIn } = useAppSelector((state) => state.auth);
 
   const toggle = () => setIsOpen(!isOpen);
-  const toggleLogin = () => setIsOpenLogin(!isOpenLogin);
 
   const t = useTranslations("translations");
 
@@ -124,11 +122,6 @@ export const NavBar = () => {
                   {t("home")}
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/about-us" tag={Link}>
-                  {t("aboutUs")}
-                </NavLink>
-              </NavItem>
               <UncontrolledDropdown
                 nav
                 inNavbar
@@ -149,145 +142,65 @@ export const NavBar = () => {
                       }}
                     >
                       <div className="d-flex h-100 w-100 align-items-center justify-content-center">
-                        <div className="text-white text-center z-1">
-                          <div className="mb-3">
-                            Multipurpose landing pages for a variety of
-                            projects.
+                        <div className="text-white z-1">
+                          <h3 className="mb-3 text-white">
+                            {t("knowHowToWorkOurPlatform")}
+                          </h3>
+                          <div className="mb-3 text-normal">
+                            {t("exploreOurPlatform")}
                           </div>
-                          <Link
-                            className="btn btn-white btn-sm text-primary fw-500"
-                            href="index.html"
+                          <Button
+                            color="white"
+                            size="sm"
+                            className="text-primary fw-500 text-start"
+                            href="/platform-overview"
+                            tag={Link}
                           >
-                            View All
-                          </Link>
+                            {t("getAnOverview")}
+                            <FaChevronCircleRight
+                              width={24}
+                              height={24}
+                              className="ms-2"
+                            />
+                          </Button>
                         </div>
                       </div>
                     </Col>
                     <Col lg={7} className="p-lg-5">
                       <Row>
-                        <Col lg={6}>
+                        <Col lg={12}>
                           <h6 className="dropdown-header text-primary">
-                            Applications
-                          </h6>
-                          <DropdownItem
-                            href="landing-app-mobile.html"
-                            tag={Link}
-                          >
-                            Mobile App
-                          </DropdownItem>
-                          <DropdownItem
-                            tag={Link}
-                            href="landing-app-desktop.html"
-                          >
-                            Desktop App
-                          </DropdownItem>
-                          <DropdownItem
-                            divider
-                            className="border-0 d-lg-none"
-                          />
-                          <h6 className="dropdown-header text-primary">
-                            Business
+                            {t("applications")}
                           </h6>
                           <DropdownItem
                             tag={Link}
-                            href="landing-multipurpose.html"
+                            href="/products/ecommerce-platform"
                           >
-                            Multipurpose
-                          </DropdownItem>
-                          <DropdownItem tag={Link} href="landing-agency.html">
-                            Agency
-                          </DropdownItem>
-                          <DropdownItem tag={Link} href="landing-press.html">
-                            Press
+                            {t("eCommercePlatform")}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
-                            href="landing-directory.html"
+                            href="/products/order-management-system"
                           >
-                            Directory
-                          </DropdownItem>
-                          <DropdownItem tag={Link} href="landing-rental.html">
-                            Rental
+                            {t("orderManagementSystem")}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
-                            href="landing-real-estate.html"
+                            href="/products/design-management-system"
                           >
-                            Real Estate
+                            {t("designManagementSystem")}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
-                            href="landing-classifieds.html"
+                            href="/products/marketplace-management-system"
                           >
-                            Classifieds
-                          </DropdownItem>
-                          <DropdownItem
-                            divider
-                            className="border-0 d-lg-none"
-                          />
-                          <h6 className="dropdown-header text-primary">
-                            Lead Generation
-                          </h6>
-                          <DropdownItem
-                            tag={Link}
-                            href="landing-lead-capture.html"
-                          >
-                            Lead Capture
-                          </DropdownItem>
-                          <div className="dropdown-divider border-0 d-lg-none"></div>
-                        </Col>
-                        <Col lg={6}>
-                          <h6 className="dropdown-header text-primary">
-                            Personal
-                          </h6>
-                          <DropdownItem tag={Link} href="landing-resume.html">
-                            Resume
+                            {t("marketplaceManagementSystem")}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
-                            href="landing-portfolio.html"
+                            href="/products/sellers-management-system"
                           >
-                            Portfolio
-                          </DropdownItem>
-                          <DropdownItem
-                            divider
-                            className="border-0 d-lg-none"
-                          />
-                          <h6 className="dropdown-header text-primary">
-                            Header Styles
-                          </h6>
-                          <DropdownItem tag={Link} href="header-basic.html">
-                            Basic
-                          </DropdownItem>
-                          <DropdownItem
-                            tag={Link}
-                            href="header-basic-signup.html"
-                          >
-                            Basic (Signup)
-                          </DropdownItem>
-                          <DropdownItem tag={Link} href="header-graphic.html">
-                            Graphic
-                          </DropdownItem>
-                          <DropdownItem
-                            tag={Link}
-                            href="header-graphic-signup.html"
-                          >
-                            Graphic (Signup)
-                          </DropdownItem>
-                          <DropdownItem tag={Link} href="header-video.html">
-                            Video Header
-                            <span className="badge bg-primary-soft text-primary ms-1">
-                              New!
-                            </span>
-                          </DropdownItem>
-                          <DropdownItem
-                            tag={Link}
-                            href="header-inner-page.html"
-                          >
-                            Inner Page
-                          </DropdownItem>
-                          <DropdownItem tag={Link} href="header-nav-only.html">
-                            Nav Only
+                            {t("sellersManagementSystem")}
                           </DropdownItem>
                         </Col>
                       </Row>
@@ -298,193 +211,97 @@ export const NavBar = () => {
               <UncontrolledDropdown
                 nav
                 inNavbar
-                className="dropdown-xl no-caret"
+                className="dropdown-lg no-caret"
               >
                 <DropdownToggle nav className="dropdown-toggle">
-                  Pages
+                  {t("business")}
                   <FaChevronDown className="dropdown-arrow" />
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-end me-lg-n20 me-xl-n15 animated--fade-in-up">
                   <Row className="g-0">
-                    <div className="col-lg-4 p-lg-5">
-                      <h6 className="dropdown-header text-primary">Company</h6>
-                      <DropdownItem tag={Link} href="page-basic.html">
-                        Basic Page
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-company-about.html">
-                        About
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-company-pricing.html">
-                        Pricing
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-company-contact.html">
-                        Contact
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-company-team.html">
-                        Team
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-company-terms.html">
-                        Terms
-                      </DropdownItem>
-                      <DropdownItem divider className="border-0 d-lg-none" />
-                      <h6 className="dropdown-header text-primary">Support</h6>
-                      <DropdownItem tag={Link} href="page-help-center.html">
-                        Help Center
-                      </DropdownItem>
-                      <DropdownItem
-                        tag={Link}
-                        href="page-help-knowledgebase.html"
-                      >
-                        Knowledgebase
-                      </DropdownItem>
-                      <DropdownItem
-                        tag={Link}
-                        href="page-help-message-center.html"
-                      >
-                        Message Center
-                      </DropdownItem>
-                      <DropdownItem
-                        tag={Link}
-                        href="page-help-support-ticket.html"
-                      >
-                        Support Ticket
-                      </DropdownItem>
-                      <div className="dropdown-divider border-0 d-lg-none"></div>
-                    </div>
-                    <div className="col-lg-4 p-lg-5">
-                      <h6 className="dropdown-header text-primary">Careers</h6>
-                      <DropdownItem
-                        tag={Link}
-                        href="page-careers-overview.html"
-                      >
-                        Careers List
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-careers-listing.html">
-                        Position Details
-                      </DropdownItem>
-                      <DropdownItem divider className="border-0 d-lg-none" />
-                      <h6 className="dropdown-header text-primary">Blog</h6>
-                      <DropdownItem tag={Link} href="page-blog-overview.html">
-                        Overview
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-blog-post.html">
-                        Post
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-blog-archive.html">
-                        Archive
-                      </DropdownItem>
-                      <DropdownItem divider className="border-0 d-lg-none" />
+                    <Col lg={5} className="p-lg-5">
                       <h6 className="dropdown-header text-primary">
-                        Portfolio
+                        {t("about")}
                       </h6>
-                      <DropdownItem tag={Link} href="page-portfolio-grid.html">
-                        Grid
+                      <DropdownItem tag={Link} href="/about-us">
+                        {t("aboutUs")}
                       </DropdownItem>
-                      <DropdownItem
-                        tag={Link}
-                        href="page-portfolio-large-grid.html"
-                      >
-                        Large Grid
+                      <DropdownItem tag={Link} href="/contact-us">
+                        {t("contactUs")}
                       </DropdownItem>
-                      <DropdownItem
-                        tag={Link}
-                        href="page-portfolio-masonry.html"
-                      >
-                        Masonry
+                      <DropdownItem tag={Link} href="/support">
+                        {t("helpCenter")}
                       </DropdownItem>
-                      <DropdownItem
-                        tag={Link}
-                        href="page-portfolio-case-study.html"
-                      >
-                        Case Study
+                    </Col>
+                    <Col lg={7} className="p-lg-5">
+                      <h6 className="dropdown-header text-primary">
+                        {t("developers")}
+                      </h6>
+                      <DropdownItem tag={Link} href="/developers">
+                        {t("developerPortal")}
                       </DropdownItem>
-                      <DropdownItem
-                        tag={Link}
-                        href="page-portfolio-project.html"
-                      >
-                        Project
-                      </DropdownItem>
-                      <DropdownItem divider className="border-0 d-lg-none" />
-                    </div>
-                    <div className="col-lg-4 p-lg-5">
-                      <h6 className="dropdown-header text-primary">Error</h6>
-                      <DropdownItem tag={Link} href="page-error-400.html">
-                        400 Error
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-error-401.html">
-                        401 Error
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-error-404-1.html">
-                        404 Error (Option 1)
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-error-404-2.html">
-                        404 Error (Option 2)
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-error-500.html">
-                        500 Error
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-error-503.html">
-                        503 Error
-                      </DropdownItem>
-                      <DropdownItem tag={Link} href="page-error-504.html">
-                        504 Error
-                      </DropdownItem>
-                    </div>
+                    </Col>
                   </Row>
                 </DropdownMenu>
               </UncontrolledDropdown>
               <UncontrolledDropdown nav inNavbar className="no-caret">
                 <DropdownToggle nav className="dropdown-toggle">
-                  Documentation
+                  {t("documentation")}
                   <FaChevronDown className="dropdown-arrow" />
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-end animated--fade-in-up">
                   <DropdownItem
                     className="py-3"
-                    href="https://docs.startbootstrap.com/sb-ui-kit-pro/quickstart"
+                    href="/documentation"
                     tag={Link}
                   >
                     <div className="icon-stack bg-primary-soft text-primary me-4">
                       <FiBookOpen width={24} height={24} />
                     </div>
                     <div>
-                      <div className="small text-gray-500">Documentation</div>
-                      Usage instructions and reference
+                      <div className="small text-gray-500">
+                        {t("documentation")}
+                      </div>
+                      {t("usageInstructionsAndReference")}
                     </div>
                   </DropdownItem>
                   <DropdownItem divider className="m-0" />
                   <DropdownItem
                     className="py-3"
-                    href="https://docs.startbootstrap.com/sb-ui-kit-pro/components"
+                    href="/documentation/components"
                     tag={Link}
                   >
                     <div className="icon-stack bg-primary-soft text-primary me-4">
                       <FiCode width={24} height={24} />
                     </div>
                     <div>
-                      <div className="small text-gray-500">Components</div>
-                      Code snippets and reference
+                      <div className="small text-gray-500">
+                        {t("components")}
+                      </div>
+                      {t("codeSnippetsAndReference")}
                     </div>
                   </DropdownItem>
                   <DropdownItem divider className="m-0" />
                   <DropdownItem
                     className="py-3"
-                    href="https://docs.startbootstrap.com/sb-ui-kit-pro/changelog"
+                    href="/documentation/changelogs"
                     tag={Link}
                   >
                     <div className="icon-stack bg-primary-soft text-primary me-4">
                       <FiFileText width={24} height={24} />
                     </div>
                     <div>
-                      <div className="small text-gray-500">Changelog</div>
-                      Updates and changes
+                      <div className="small text-gray-500">
+                        {t("changelog")}
+                      </div>
+                      {t("updatesAndChanges")}
                     </div>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
-                <NavLink href="/contact" tag={Link}>
-                  {t("contact")}
+                <NavLink href="/blog" tag={Link}>
+                  {t("blog")}
                 </NavLink>
               </NavItem>
             </Nav>
@@ -528,7 +345,8 @@ export const NavBar = () => {
                     type="button"
                     color="primary"
                     className="text-uppercase"
-                    onClick={toggleLogin}
+                    tag={Link}
+                    href="/auth/login"
                   >
                     {t("signIn")}
                   </Button>

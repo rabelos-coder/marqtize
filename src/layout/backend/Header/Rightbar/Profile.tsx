@@ -54,7 +54,7 @@ const Profile = () => {
       </div>
       <ul className="profile-dropdown onhover-show-div">
         <li>
-          <a href="/home">
+          <a href="/">
             <HiOutlineGlobeAlt />
             <span>{t("website")}</span>
           </a>

@@ -1,12 +1,17 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { Col, Row } from "reactstrap";
+import { Col, List, Row } from "reactstrap";
 
-import { APP_META_TITLE } from "@/environment";
-import { usePathname } from "@/navigation";
+import { APP_META_TITLE, FACEBOOK_URL, INSTAGRAM_URL } from "@/environment";
+import { Link, usePathname } from "@/navigation";
 
 export const FooterMenu = () => {
+  const t = useTranslations("translations");
+
   const pathname = usePathname();
   const [imgSrc] = useState(
     pathname === "/"
@@ -21,20 +26,30 @@ export const FooterMenu = () => {
           <div className="footer-brand">
             <Image
               src={imgSrc}
-              width={120}
-              height={120}
+              width={180}
+              height={180}
               alt={APP_META_TITLE}
               className="img-fluid me-2 mb-3"
             />
           </div>
-          <div className="mb-3">Design made easy</div>
+          <div className="mb-3">
+            {t("madeWithLove", { company: APP_META_TITLE })}
+          </div>
           <div className="icon-list-social mb-5">
-            <a className="icon-list-social-link" href="#!">
+            <Link
+              className="icon-list-social-link"
+              href={INSTAGRAM_URL}
+              target="_blank"
+            >
               <FaInstagram />
-            </a>
-            <a className="icon-list-social-link" href="#!">
+            </Link>
+            <Link
+              className="icon-list-social-link"
+              href={FACEBOOK_URL}
+              target="_blank"
+            >
               <FaFacebook />
-            </a>
+            </Link>
           </div>
         </Col>
         <Col lg={9}>
@@ -43,84 +58,88 @@ export const FooterMenu = () => {
               <div className="text-uppercase-expanded text-xs mb-4">
                 Product
               </div>
-              <ul className="list-unstyled mb-0">
+              <List type="unstyled" className="mb-0">
                 <li className="mb-2">
-                  <a href="#!">Landing</a>
+                  <Link href="#!">Landing</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Pages</a>
+                  <Link href="#!">Pages</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Sections</a>
+                  <Link href="#!">Sections</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Documentation</a>
+                  <Link href="#!">Documentation</Link>
                 </li>
                 <li>
-                  <a href="#!">Changelog</a>
+                  <Link href="#!">Changelog</Link>
                 </li>
-              </ul>
+              </List>
             </Col>
             <Col lg={3} md={6} className="mb-5 mb-lg-0">
               <div className="text-uppercase-expanded text-xs mb-4">
                 Technical
               </div>
-              <ul className="list-unstyled mb-0">
+              <List type="unstyled" className="mb-0">
                 <li className="mb-2">
-                  <a href="#!">Documentation</a>
+                  <Link href="#!">Documentation</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Changelog</a>
+                  <Link href="#!">Changelog</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Theme Customizer</a>
+                  <Link href="#!">Theme Customizer</Link>
                 </li>
                 <li>
-                  <a href="#!">UI Kit</a>
+                  <Link href="#!">UI Kit</Link>
                 </li>
-              </ul>
+              </List>
             </Col>
             <Col lg={3} md={6} className="mb-5 mb-md-0">
               <div className="text-uppercase-expanded text-xs mb-4">
                 Includes
               </div>
-              <ul className="list-unstyled mb-0">
+              <List type="unstyled" className="mb-0">
                 <li className="mb-2">
-                  <a href="#!">Utilities</a>
+                  <Link href="#!">Utilities</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Components</a>
+                  <Link href="#!">Components</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Layouts</a>
+                  <Link href="#!">Layouts</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Code Samples</a>
+                  <Link href="#!">Code Samples</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Products</a>
+                  <Link href="#!">Products</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Affiliates</a>
+                  <Link href="#!">Affiliates</Link>
                 </li>
                 <li>
-                  <a href="#!">Updates</a>
+                  <Link href="#!">Updates</Link>
                 </li>
-              </ul>
+              </List>
             </Col>
             <Col lg={3} md={6}>
-              <div className="text-uppercase-expanded text-xs mb-4">Legal</div>
-              <ul className="list-unstyled mb-0">
+              <div className="text-uppercase-expanded text-xs mb-4">
+                {t("legal")}
+              </div>
+              <List type="unstyled" className="mb-0">
                 <li className="mb-2">
-                  <a href="#!">Privacy Policy</a>
+                  <Link href="/privacy-policy">{t("privacyPolicy")}</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="#!">Terms and Conditions</a>
+                  <Link href="/terms-and-conditions">
+                    {t("termsAndConditions")}
+                  </Link>
                 </li>
                 <li>
-                  <a href="#!">License</a>
+                  <Link href="/license">{t("license")}</Link>
                 </li>
-              </ul>
+              </List>
             </Col>
           </Row>
         </Col>

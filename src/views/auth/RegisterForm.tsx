@@ -26,7 +26,7 @@ import { Link, useRouter } from "@/navigation";
 import { setLoading } from "@/store/slices/themeSlice";
 import { AuthFormProps } from "@/types/common";
 
-import { SpinnerBoxed } from "../common/SpinnerBoxed";
+import { SpinnerBoxed } from "../../components/common/SpinnerBoxed";
 
 type FormData = {
   name: string;

@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 
 import { STORAGE_AUTH_TOKEN, STORAGE_LOCALE } from "@/configs";
 import {
+  APP_LANGUAGE,
   APP_META_TITLE,
   APP_VERSION,
   IS_DEVELOPMENT,
@@ -29,10 +30,12 @@ export const createApolloClient = (params?: ApolloClientParams) => {
     if (!params?.locale) lang = Cookies.get(STORAGE_LOCALE);
     else lang = params.locale;
 
+    lang = lang?.replace("_", "-")?.toLowerCase();
+
     return {
       headers: {
         ...headers,
-        "X-Lang": lang,
+        "X-Lang": lang ?? APP_LANGUAGE,
         "Apollo-Require-Preflight": "true",
         Authorization: token ? `Bearer ${token}` : "",
       },

@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Col, Container, Row } from "reactstrap";
 
-import { ResetPasswordForm } from "@/components/auth/ResetPasswordForm";
+import { ResetPasswordForm } from "@/views/auth/ResetPasswordForm";
 import RatioImage from "@/components/backend/RatioImage";
 import { concatTitle } from "@/utils/helpers";
 

@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Col, Container, Row } from "reactstrap";
 
-import { ForgotPasswordForm } from "@/components/auth/ForgotPasswordForm";
+import { ForgotPasswordForm } from "@/views/auth/ForgotPasswordForm";
 import RatioImage from "@/components/backend/RatioImage";
 import { concatTitle } from "@/utils/helpers";
 

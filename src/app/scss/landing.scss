@@ -15440,7 +15440,7 @@ body {
 }
 
 .overlay-primary:before {
-    background-color: #0061f2 !important;
+    background-color: #a030fe !important;
 }
 
 .overlay-secondary:before {
@@ -16498,6 +16498,10 @@ body {
     transform: rotateY(-30deg) rotateX(15deg) !important;
     -webkit-backface-visibility: hidden !important;
     backface-visibility: hidden !important;
+}
+
+.text-normal {
+    text-transform: none !important;
 }
 
 .text-gray-100 {
@@ -19105,4 +19109,9 @@ section {
     .divider-right {
         border-right: 0.0625rem solid #e0e5ec;
     }
+}
+
+.tap-top {
+    bottom: 20px !important;
+    right: 90px !important;
 }

@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
 import { NextIntlClientProvider } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 import { Suspense } from "react";
 
 import { CookieConsent } from "@/components/common/CookieConsent";
@@ -15,6 +16,7 @@ import {
   APP_META_DESCRIPTION,
   APP_META_KEYWORDS,
   APP_META_SLOGAN,
+  RECAPTCHA_SITE_KEY,
 } from "@/environment";
 import { ApolloProvider } from "@/providers/ApolloProvider";
 import { ReduxProvider } from "@/providers/ReduxProvider";
@@ -58,7 +60,12 @@ export default async function LocaleLayout({
           <ApolloProvider>
             <ReduxProvider host={host}>
               <Suspense fallback={<Spinner />}>
-                {children}
+                <ReCaptchaProvider
+                  reCaptchaKey={RECAPTCHA_SITE_KEY}
+                  language={locale === "pt-br" ? "pt-BR" : locale}
+                >
+                  {children}
+                </ReCaptchaProvider>
                 <CookieConsent />
               </Suspense>
             </ReduxProvider>

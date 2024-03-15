@@ -20,7 +20,7 @@ import { setAuth } from "@/store/slices/authSlice";
 import { setLoading } from "@/store/slices/themeSlice";
 import { LoginInput } from "@/types/auth";
 
-import { SpinnerBoxed } from "../common/SpinnerBoxed";
+import { SpinnerBoxed } from "../../components/common/SpinnerBoxed";
 
 type AuthProps = {
   host?: string;
@@ -97,9 +97,10 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
             user: { language },
           } = data.login;
           toast.success(t("loginSuccess"));
+          const locale = language.replace("_", "-").toLowerCase();
           dispatch(setAuth(data.login));
 
-          router.replace("/backend", { locale: language });
+          router.replace("/backend", { locale });
           router.refresh();
         } else {
           toast.error(t("loginError"));

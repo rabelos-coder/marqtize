@@ -23,7 +23,7 @@ export default async function TermsAndConditionsPage({
 
   return (
     <LandingLayout>
-      <Header title={t("title")} />
+      <Header title={t("title")} description={t("description")} />
       <section className="bg-white py-10">
         <Container className="px-5">
           <Row className="mb-5">

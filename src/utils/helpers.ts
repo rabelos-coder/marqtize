@@ -70,3 +70,18 @@ export const anchorClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
       });
   }
 };
+
+/**
+ * Generates a WhatsApp link with the given phone number and optional message.
+ *
+ * @param {string} number - The phone number to generate the link for
+ * @param {string} [message] - Optional message to include in the link
+ * @return {string} The generated WhatsApp link
+ */
+export const generateWhatsAppLink = (
+  number: string,
+  message?: string
+): string =>
+  new URL(
+    `https://api.whatsapp.com/send?phone=${number.replace(/[\D+]/g, "")}${message ? `&text=${message}` : ""}`
+  ).toString();

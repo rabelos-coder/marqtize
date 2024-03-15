@@ -4,13 +4,13 @@ import { Container, Row } from "reactstrap";
 
 import { Breadcrumbs } from "@/components/backend/Breadcrumbs";
 import { AclGuard } from "@/components/backend/Guards/AclGuard";
-import EditMyProfile from "@/components/backend/Pages/profile/EditMyProfile";
-import EditProfileForm from "@/components/backend/Pages/profile/EditProfileForm";
 import { STORAGE_AUTH_TOKEN } from "@/configs";
 import { WHO_AM_I } from "@/graphql/auth";
 import { FIND_TIMEZONES } from "@/graphql/localization";
 import { createApolloClient } from "@/utils/apollo";
 import { concatTitle } from "@/utils/helpers";
+import EditMyProfile from "@/views/backend/profile/EditMyProfile";
+import EditProfileForm from "@/views/backend/profile/EditProfileForm";
 
 export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale, namespace: "translations" });
@@ -47,7 +47,7 @@ export default async function ProfilePage({ params: { locale } }: any) {
     },
     {
       label: t("portuguese"),
-      value: "pt",
+      value: "pt-br",
     },
   ];
 

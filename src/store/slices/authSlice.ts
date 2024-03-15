@@ -6,6 +6,7 @@ import secureLocalStorage from "react-secure-storage";
 import {
   STORAGE_AUTH_TOKEN,
   STORAGE_LANGUAGE,
+  STORAGE_LOCALE,
   STORAGE_TIMEZONE,
   STORAGE_USER,
 } from "@/configs";
@@ -40,6 +41,7 @@ if (!language) {
   language = APP_LANGUAGE;
   if (typeof window !== "undefined")
     localStorage.setItem(STORAGE_LANGUAGE, language);
+  Cookies.set(STORAGE_LOCALE, language);
 }
 
 if (!timezone) {
@@ -49,12 +51,14 @@ if (!timezone) {
 }
 
 if (user) {
-  user = JSON.parse(user);
+  user = JSON.parse(user) as User;
+  Cookies.set(STORAGE_LOCALE, user.language?.replace("_", "-")?.toLowerCase());
 } else if (!!Cookies.get(STORAGE_USER)) {
   const userCookie = Cookies.get(STORAGE_USER) as string;
-  user = JSON.parse(userCookie);
+  user = JSON.parse(userCookie) as User;
   if (typeof window !== "undefined")
     secureLocalStorage.setItem(STORAGE_USER, `${JSON.stringify(user)}`);
+  Cookies.set(STORAGE_LOCALE, user.language?.replace("_", "-")?.toLowerCase());
 }
 
 let jwt: any = null;
@@ -171,7 +175,7 @@ export const authSlice = createSlice({
       }
     },
     setLanguage: (state, action: PayloadAction<string>) => {
-      state.language = action.payload;
+      state.language = action.payload.replace("_", "-").toLowerCase();
       if (typeof window !== "undefined")
         localStorage.setItem(STORAGE_LANGUAGE, state.language);
     },
@@ -186,7 +190,9 @@ export const authSlice = createSlice({
     setAuth(state, action: PayloadAction<Auth>) {
       state.user = action.payload?.user;
       state.token = action.payload?.token;
-      state.language = action.payload?.user?.language;
+      state.language = action.payload?.user?.language
+        ?.replace("_", "-")
+        ?.toLowerCase();
       state.timezone = action.payload?.user?.timezone?.code;
 
       Cookies.set(STORAGE_AUTH_TOKEN, `${state.token}`);
