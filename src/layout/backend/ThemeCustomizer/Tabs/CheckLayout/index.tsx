@@ -6,7 +6,7 @@ import { useCustomizer } from "@/hooks";
 
 const CheckLayout = () => {
   const { setLayoutName } = useCustomizer();
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const handlePageLayouts = (type: string) => {
     setLayoutName(type.toLowerCase().replace(" ", ""));

@@ -10,7 +10,7 @@ import { APP_META_TITLE, FACEBOOK_URL, INSTAGRAM_URL } from "@/environment";
 import { Link, usePathname } from "@/navigation";
 
 export const FooterMenu = () => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const pathname = usePathname();
   const [imgSrc] = useState(
@@ -129,15 +129,15 @@ export const FooterMenu = () => {
               </div>
               <List type="unstyled" className="mb-0">
                 <li className="mb-2">
-                  <Link href="/privacy-policy">{t("privacyPolicy")}</Link>
+                  <Link href="/privacy-policy">{t("privacyPolicy.title")}</Link>
                 </li>
                 <li className="mb-2">
                   <Link href="/terms-and-conditions">
-                    {t("termsAndConditions")}
+                    {t("termsAndConditions.title")}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/license">{t("license")}</Link>
+                  <Link href="/license">{t("license.title")}</Link>
                 </li>
               </List>
             </Col>

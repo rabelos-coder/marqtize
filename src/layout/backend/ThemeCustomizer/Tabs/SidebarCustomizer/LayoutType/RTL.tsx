@@ -9,7 +9,7 @@ type RtlDataType = {
 };
 
 const RTL = ({ handleLayout, layout_type }: RtlDataType) => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <li

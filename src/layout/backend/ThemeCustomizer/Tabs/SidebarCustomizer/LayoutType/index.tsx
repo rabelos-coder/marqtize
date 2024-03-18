@@ -11,7 +11,7 @@ const LayoutType = () => {
   const localStorageLayout = Theme.data.settings.layout_type;
   const [layout_type, setLayout_type] = useState(localStorageLayout);
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const handleLayout = (layout: string) => {
     setLayout_type(layout);

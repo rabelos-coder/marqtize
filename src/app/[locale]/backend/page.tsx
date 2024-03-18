@@ -16,7 +16,7 @@ export async function generateMetadata() {
 }
 
 export default async function BackendPage({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
   const title = t("home");
 
   return (

@@ -12,7 +12,7 @@ const MixLayoutComponent = () => {
   const { addMixBackgroundLayout, setMixLayout } = useCustomizer();
   const mixLayout = Theme.data.color.mix_background_layout;
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   useEffect(() => {
     if (mixLayout !== "light-only") {

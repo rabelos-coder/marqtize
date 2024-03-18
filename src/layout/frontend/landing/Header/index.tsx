@@ -5,8 +5,8 @@ import { Col, Container, Row } from "reactstrap";
 import { SvgBorder } from "@/components/frontend/common/SvgBorder";
 
 type HeaderProps = {
-  title?: string;
-  description?: string;
+  title?: string | React.ReactNode;
+  description?: string | React.ReactNode;
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;

@@ -37,7 +37,7 @@ type FormData = {
 const defaultImageUrl = "/assets/images/user/user.jpg";
 
 const EditMyProfile = () => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const basePasswordSchema = useMemo(
     () => ({

@@ -28,6 +28,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "scontent.faqa2-1.fna.fbcdn.net",
+      },
     ],
   },
   webpack: (config, options) => {

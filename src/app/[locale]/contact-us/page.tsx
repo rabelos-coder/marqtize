@@ -7,10 +7,10 @@ import { Header } from "@/layout/frontend/landing/Header";
 import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 import { Link } from "@/navigation";
 import { concatTitle, generateWhatsAppLink } from "@/utils/helpers";
-import { ContactForm } from "@/views/frontend/landing/ContactForm";
+import { ContactUs } from "@/views/frontend/landing/ContactUs";
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
   const title = concatTitle(t("contact"));
 
   return {
@@ -19,7 +19,7 @@ export async function generateMetadata({ params: { locale } }: any) {
 }
 
 export default async function ContactPage({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
 
   return (
     <LandingLayout>
@@ -54,7 +54,7 @@ export default async function ContactPage({ params: { locale } }: any) {
               <Link href={`mailto:${EMAIL}`}>{EMAIL}</Link>
             </Col>
           </Row>
-          <ContactForm />
+          <ContactUs />
         </Container>
         <SvgBorder className="text-dark" />
       </section>

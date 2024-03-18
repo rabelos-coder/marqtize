@@ -39,7 +39,7 @@ export const MenuList = ({
   };
   const router = useRouter();
   const { layoutName, sidebarIconType } = useCustomizer();
-  const t = useTranslations("translations");
+  const t = useTranslations();
   const ability = useAbility();
 
   const can = (level: number, claims: string[]) => {

@@ -13,7 +13,7 @@ const TabHeader = ({
   const toggle = useCallback(() => {
     setModal(!modal);
   }, [modal]);
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <div className="customizer-header">

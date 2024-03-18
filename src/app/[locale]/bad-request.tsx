@@ -8,7 +8,7 @@ import { Header } from "@/layout/frontend/landing/Header";
 import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 
 export default function BadRequest() {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <LandingLayout>

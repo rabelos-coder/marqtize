@@ -8,7 +8,7 @@ type NavCustomizerType = {
 };
 
 const NavCustomizer = ({ callbackNav, selected }: NavCustomizerType) => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <Nav className="flex-column nac-pills">

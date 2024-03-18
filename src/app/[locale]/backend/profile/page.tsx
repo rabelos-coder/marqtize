@@ -13,7 +13,7 @@ import EditMyProfile from "@/views/backend/profile/EditMyProfile";
 import EditProfileForm from "@/views/backend/profile/EditProfileForm";
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
   const title = concatTitle(t("myProfile"));
 
   return {
@@ -24,7 +24,7 @@ export async function generateMetadata({ params: { locale } }: any) {
 export const dynamic = "force-dynamic";
 
 export default async function ProfilePage({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
 
   const cookieStore = cookies();
   const token = cookieStore.get(STORAGE_AUTH_TOKEN);

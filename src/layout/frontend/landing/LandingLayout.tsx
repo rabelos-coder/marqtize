@@ -1,6 +1,6 @@
 "use client";
 
-import "../../../app/scss/landing.scss";
+import "../../../app/assets/scss/landing.scss";
 
 // import AOS from "aos";
 import { useEffect } from "react";
@@ -12,12 +12,16 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { GuestLayout } from "@/layout/common/GuestLayout";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { setLoading } from "@/store/slices/themeSlice";
-import { ChildrenProps } from "@/types/common";
 
 import { Footer } from "./Footer";
 import { NavBar } from "./Navbar/index";
 
-export const LandingLayout = ({ children }: ChildrenProps) => {
+type LandingProps = {
+  children: React.ReactNode;
+  navbarExpanded?: boolean;
+};
+
+export const LandingLayout = ({ navbarExpanded, children }: LandingProps) => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.theme);
 
@@ -36,7 +40,7 @@ export const LandingLayout = ({ children }: ChildrenProps) => {
           <AuthProvider>
             <div id="layoutDefault">
               <div id="layoutDefault_content">
-                <NavBar />
+                <NavBar navbarExpanded={navbarExpanded} />
                 {children}
               </div>
               <Footer />

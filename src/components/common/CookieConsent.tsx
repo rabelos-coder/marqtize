@@ -14,7 +14,7 @@ const localConsent: string | null =
 export const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState(true);
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const acceptCookie = () => {
     setShowConsent(true);

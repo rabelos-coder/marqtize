@@ -33,8 +33,8 @@ const defaultValues = IS_DEVELOPMENT
       message: "",
     };
 
-export const ContactForm = () => {
-  const t = useTranslations("translations");
+export const ContactUs = () => {
+  const t = useTranslations();
 
   const { executeRecaptcha } = useReCaptcha();
 

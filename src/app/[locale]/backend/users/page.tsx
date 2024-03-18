@@ -7,7 +7,7 @@ import CommonCardHeading from "@/components/common/CommonCardHeading";
 import { concatTitle } from "@/utils/helpers";
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
   const title = concatTitle(t("users"));
 
   return {
@@ -16,7 +16,7 @@ export async function generateMetadata({ params: { locale } }: any) {
 }
 
 export default async function UsersPage({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
   const title = t("users");
   const pageTitle = t("listName", { name: t("users") });
   const pageDescription = t("seeInformationAboutName", {

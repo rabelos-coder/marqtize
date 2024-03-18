@@ -9,7 +9,7 @@ type varTypes = {
 };
 
 const FillIcon = ({ handleSideBarIconType, sideBarIconType }: varTypes) => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <li

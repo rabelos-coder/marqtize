@@ -1,4 +1,4 @@
-import "../scss/globals.scss";
+import "../assets/scss/globals.scss";
 
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
@@ -54,7 +54,10 @@ export default async function LocaleLayout({
   if (!locales.includes(locale)) notFound();
 
   return (
-    <html lang={locale} suppressHydrationWarning={true}>
+    <html
+      lang={locale === "pt-br" ? "pt-BR" : locale}
+      suppressHydrationWarning={true}
+    >
       <body suppressHydrationWarning={true}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ApolloProvider>

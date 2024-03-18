@@ -29,20 +29,24 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { Link, usePathname } from "@/navigation";
 import { resetAuth } from "@/store/slices/authSlice";
 
-export const NavBar = () => {
+type NavbarProps = {
+  navbarExpanded?: boolean;
+};
+
+export const NavBar = ({ navbarExpanded }: NavbarProps) => {
   const pathname = usePathname();
 
   const [isOpen, setIsOpen] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState(navbarExpanded ? "navbar-scrolled" : "");
 
   const dispatch = useAppDispatch();
   const { isLoggedIn } = useAppSelector((state) => state.auth);
 
   const toggle = () => setIsOpen(!isOpen);
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const logoutConfirm = () => {
     setDisabled(true);
@@ -79,17 +83,16 @@ export const NavBar = () => {
   };
 
   useEffect(() => {
-    setColor("");
-    window.addEventListener("scroll", changeColor);
+    if (!navbarExpanded) window.addEventListener("scroll", changeColor);
     setLoggedIn(isLoggedIn);
 
     return function () {
       window.removeEventListener("scroll", changeColor);
     };
-  }, [isLoggedIn, pathname]);
+  }, [isLoggedIn, pathname, navbarExpanded]);
 
   return (
-    <>
+    <div className={`${navbarExpanded ? "navbar-fixed-top" : ""}`}>
       <Navbar
         className={`navbar-marketing bg-transparent navbar-dark ${color}`}
         fixed="top"
@@ -143,7 +146,7 @@ export const NavBar = () => {
                     >
                       <div className="d-flex h-100 w-100 align-items-center justify-content-center">
                         <div className="text-white z-1">
-                          <h3 className="mb-3 text-white">
+                          <h3 className="mb-3 text-white text-normal">
                             {t("knowHowToWorkOurPlatform")}
                           </h3>
                           <div className="mb-3 text-normal">
@@ -176,31 +179,31 @@ export const NavBar = () => {
                             tag={Link}
                             href="/products/ecommerce-platform"
                           >
-                            {t("eCommercePlatform")}
+                            {t("eCommercePlatform.title")}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
                             href="/products/order-management-system"
                           >
-                            {t("orderManagementSystem")}
+                            {t("orderManagementSystem.title")}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
                             href="/products/design-management-system"
                           >
-                            {t("designManagementSystem")}
+                            {t("designManagementSystem.title")}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
                             href="/products/marketplace-management-system"
                           >
-                            {t("marketplaceManagementSystem")}
+                            {t("marketplaceManagementSystem.title")}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
                             href="/products/sellers-management-system"
                           >
-                            {t("sellersManagementSystem")}
+                            {t("sellersManagementSystem.title")}
                           </DropdownItem>
                         </Col>
                       </Row>
@@ -246,7 +249,7 @@ export const NavBar = () => {
               </UncontrolledDropdown>
               <UncontrolledDropdown nav inNavbar className="no-caret">
                 <DropdownToggle nav className="dropdown-toggle">
-                  {t("documentation")}
+                  {t("documentation.title")}
                   <FaChevronDown className="dropdown-arrow" />
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-end animated--fade-in-up">
@@ -260,39 +263,31 @@ export const NavBar = () => {
                     </div>
                     <div>
                       <div className="small text-gray-500">
-                        {t("documentation")}
+                        {t("documentation.title")}
                       </div>
-                      {t("usageInstructionsAndReference")}
+                      {t("usageInstructions")}
                     </div>
                   </DropdownItem>
                   <DropdownItem divider className="m-0" />
-                  <DropdownItem
-                    className="py-3"
-                    href="/documentation/components"
-                    tag={Link}
-                  >
+                  <DropdownItem className="py-3" href="/components" tag={Link}>
                     <div className="icon-stack bg-primary-soft text-primary me-4">
                       <FiCode width={24} height={24} />
                     </div>
                     <div>
                       <div className="small text-gray-500">
-                        {t("components")}
+                        {t("components.title")}
                       </div>
                       {t("codeSnippetsAndReference")}
                     </div>
                   </DropdownItem>
                   <DropdownItem divider className="m-0" />
-                  <DropdownItem
-                    className="py-3"
-                    href="/documentation/changelogs"
-                    tag={Link}
-                  >
+                  <DropdownItem className="py-3" href="/changelog" tag={Link}>
                     <div className="icon-stack bg-primary-soft text-primary me-4">
                       <FiFileText width={24} height={24} />
                     </div>
                     <div>
                       <div className="small text-gray-500">
-                        {t("changelog")}
+                        {t("changelog.title")}
                       </div>
                       {t("updatesAndChanges")}
                     </div>
@@ -300,8 +295,8 @@ export const NavBar = () => {
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
-                <NavLink href="/blog" tag={Link}>
-                  {t("blog")}
+                <NavLink href="/blog/1" tag={Link}>
+                  {t("blog.title2")}
                 </NavLink>
               </NavItem>
             </Nav>
@@ -356,6 +351,6 @@ export const NavBar = () => {
           </Collapse>
         </Container>
       </Navbar>
-    </>
+    </div>
   );
 };

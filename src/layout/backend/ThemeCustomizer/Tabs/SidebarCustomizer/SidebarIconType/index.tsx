@@ -11,7 +11,7 @@ const SidebarIconType = () => {
   const { addSidebarIconType } = useCustomizer();
   const sideBarIconType = Theme.data.settings.sidebar.iconType;
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const handleSideBarIconType = (type: string) => {
     addSidebarIconType(type);

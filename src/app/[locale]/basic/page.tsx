@@ -8,7 +8,7 @@ import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 import { concatTitle } from "@/utils/helpers";
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
   const title = concatTitle(APP_META_SLOGAN);
 
   return {
@@ -16,7 +16,9 @@ export async function generateMetadata({ params: { locale } }: any) {
   };
 }
 
-export default function BasicPage() {
+export default async function BasicPage({ params: { locale } }: any) {
+  const t = await getTranslations({ locale });
+
   return (
     <LandingLayout>
       <Header
@@ -25,7 +27,7 @@ export default function BasicPage() {
       />
       <section className="bg-white py-10">
         <Container className="px-5">
-          <h1>This is a basic content page.</h1>
+          <h1 className="pb-3">This is a basic content page.</h1>
           <p className="lead">
             You can use this page as a starting point to create your own custom
             pages, or choose an already built example page to start development!

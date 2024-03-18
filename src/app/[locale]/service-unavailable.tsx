@@ -8,7 +8,7 @@ import { Header } from "@/layout/frontend/landing/Header";
 import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 
 export default function ServiceUnavailable() {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <LandingLayout>

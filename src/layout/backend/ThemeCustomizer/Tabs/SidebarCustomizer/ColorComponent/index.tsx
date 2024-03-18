@@ -12,7 +12,7 @@ const ColorComponent = () => {
   const [colorBackground1, setColorBackground1] = useState(default_color);
   const [colorBackground2, setColorBackground2] = useState(secondary_color);
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   useEffect(() => {
     if (typeof document !== "undefined") {

@@ -48,7 +48,7 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [login] = useMutation(LOGIN, { fetchPolicy: "no-cache" });
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
   const dispatch = useAppDispatch();
   const { customer, loading } = useAppSelector((state) => state.customer);
 

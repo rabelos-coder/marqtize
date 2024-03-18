@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { ErrorPage } from "@/components/common/ErrorPage";
 
 export const NotAuthorized = () => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <ErrorPage

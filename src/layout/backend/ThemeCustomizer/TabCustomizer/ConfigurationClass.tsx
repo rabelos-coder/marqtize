@@ -20,7 +20,7 @@ type PropsTypeProp = {
 };
 const ConfigurationClass = ({ toggle, modal }: PropsTypeProp) => {
   const theme = Theme.data;
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <Fragment>

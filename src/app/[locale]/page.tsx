@@ -13,7 +13,7 @@ import GoogleIcon from "../assets/svg/google.svg";
 import InstagramIcon from "../assets/svg/instagram.svg";
 
 export default async function HomePage({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
 
   return (
     <LandingLayout>

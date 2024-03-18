@@ -13,7 +13,7 @@ export const ErrorPage = ({
   titleClassName,
   BtnClassName,
 }: CommonErrorPageProps) => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
   const router = useRouter();
 
   return (

@@ -9,7 +9,7 @@ type varType = {
 };
 
 const StrokeIcon = ({ handleSideBarIconType, sideBarIconType }: varType) => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <li

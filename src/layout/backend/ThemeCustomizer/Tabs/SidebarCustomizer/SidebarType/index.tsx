@@ -9,7 +9,7 @@ import Vertical from "./Vertical";
 const SidebarType = () => {
   const { addSidebarLayouts, layout } = useCustomizer();
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const handleSidebarType = (type: string) => {
     addSidebarLayouts(type);

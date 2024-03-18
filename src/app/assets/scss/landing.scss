@@ -19115,3 +19115,21 @@ section {
     bottom: 20px !important;
     right: 90px !important;
 }
+
+.blog-posts {
+    .card-title {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .card-text {
+        height: 11rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.navbar-fixed-top {
+    margin-bottom: 5rem;
+}

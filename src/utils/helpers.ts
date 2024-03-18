@@ -85,3 +85,25 @@ export const generateWhatsAppLink = (
   new URL(
     `https://api.whatsapp.com/send?phone=${number.replace(/[\D+]/g, "")}${message ? `&text=${message}` : ""}`
   ).toString();
+
+/**
+ * Creates a resume from the given text by truncating it to a certain length and adding ellipsis if needed.
+ *
+ * @param {string} text - The input text to create a resume from.
+ * @param {number} maxLength - The maximum length the resume should be truncated to.
+ * @return {string} The truncated resume text.
+ */
+export function createResume(text: string, maxLength: number = 150): string {
+  if (text.length > maxLength) {
+    let resume = text.substring(0, maxLength);
+    resume = resume.substring(
+      0,
+      Math.min(resume.length, resume.lastIndexOf(" "))
+    );
+    resume += "...";
+
+    return resume;
+  } else {
+    return text;
+  }
+}

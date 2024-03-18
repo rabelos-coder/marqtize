@@ -12,7 +12,7 @@ import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 import { Link, useRouter } from "@/navigation";
 
 export default function NotFoundPage() {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const router = useRouter();
 
@@ -46,7 +46,7 @@ export default function NotFoundPage() {
                   onClick={handleBack}
                 >
                   <FiArrowLeft width={24} height={24} className="ms-0 me-1" />
-                  {t("backToHomePage")}
+                  {t("back")}
                 </Link>
               </div>
             </Col>

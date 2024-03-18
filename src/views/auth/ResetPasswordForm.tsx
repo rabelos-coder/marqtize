@@ -30,7 +30,7 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
     useState(false);
   const [resetPassword, { loading }] = useMutation(RESET_PASSWORD);
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") ?? "";
   const resetToken = searchParams.get("token") ?? "";

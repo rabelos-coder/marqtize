@@ -57,7 +57,7 @@ export const LoginModal = ({ isOpen, toggle, setLoggedIn }: LoginProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [login] = useMutation(LOGIN, { fetchPolicy: "no-cache" });
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
   const dispatch = useAppDispatch();
 
   const schema = yup.object().shape({

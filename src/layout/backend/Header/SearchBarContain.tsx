@@ -15,7 +15,7 @@ const SearchBarContain = ({
   fieldTouch,
 }: SearchBarContainPropsType) => {
   const { searchIcon, setSearchIcon } = useLayout();
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const handleOnClick = () => {
     if (typeof document !== "undefined")

@@ -22,16 +22,18 @@ export type Upload = {
   encoding: string;
 };
 
+export type PaginationMeta = {
+  total: number;
+  lastPage: number;
+  currentPage: number;
+  perPage: number;
+  prev: number | null;
+  next: number | null;
+};
+
 export type PaginatedObject<T> = {
   data: T[];
-  meta: {
-    total: number;
-    lastPage: number;
-    currentPage: number;
-    perPage: number;
-    prev: number | null;
-    next: number | null;
-  };
+  meta: PaginationMeta;
 };
 
 export type WhereAndOrderInput = {

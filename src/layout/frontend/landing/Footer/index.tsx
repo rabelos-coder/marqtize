@@ -15,7 +15,7 @@ export const Footer = () => {
     pathname === "/" ? "bg-light footer-light" : "bg-dark footer-dark"
   );
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <div id="layoutDefault_footer">
@@ -30,10 +30,10 @@ export const Footer = () => {
               })}
             </Col>
             <Col md={6} className="text-md-end">
-              <Link href={"/privacy-policy"}>{t("privacyPolicy")}</Link>
+              <Link href={"/privacy-policy"}>{t("privacyPolicy.title")}</Link>
               {" · "}
               <Link href={"/terms-and-conditions"}>
-                {t("termsAndConditions")}
+                {t("termsAndConditions.title")}
               </Link>
             </Col>
           </Row>

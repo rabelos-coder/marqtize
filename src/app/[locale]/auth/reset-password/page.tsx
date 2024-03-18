@@ -6,7 +6,7 @@ import RatioImage from "@/components/backend/RatioImage";
 import { concatTitle } from "@/utils/helpers";
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
   const title = concatTitle(t("resetPassword"));
 
   return {

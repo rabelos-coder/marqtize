@@ -59,7 +59,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
     useState(false);
   const [register] = useMutation(REGISTER);
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
   const dispatch = useAppDispatch();
 
   const { customer, loading } = useAppSelector((state) => state.customer);

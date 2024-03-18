@@ -15,7 +15,7 @@ import { setLoading } from "@/store/slices/themeSlice";
 const Profile = () => {
   const dispatch = useAppDispatch();
   const { logout, user } = useAuth();
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const logoutConfirm = () => {
     Sawl.fire({

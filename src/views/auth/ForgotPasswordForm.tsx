@@ -30,7 +30,7 @@ const defaultValues = IS_DEVELOPMENT
 export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
   const [forgotPassword, { loading }] = useMutation(FORGOT_PASSWORD);
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   const schema = yup.object().shape({
     email: yup

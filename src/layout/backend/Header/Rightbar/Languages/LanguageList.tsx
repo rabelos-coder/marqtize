@@ -15,7 +15,7 @@ export const LanguageList = ({ selected, setSelected }: ListStateType) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const t = useTranslations("translations");
+  const t = useTranslations();
   const dispatch = useAppDispatch();
 
   const changeLanguage = (locale: string) => {

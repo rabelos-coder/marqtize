@@ -7,7 +7,7 @@ import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 import { concatTitle } from "@/utils/helpers";
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
   const title = concatTitle(t("paymentMethods"));
 
   return {
@@ -16,7 +16,7 @@ export async function generateMetadata({ params: { locale } }: any) {
 }
 
 export default async function PaymentsPage({ params: { locale } }: any) {
-  const t = await getTranslations({ locale, namespace: "translations" });
+  const t = await getTranslations({ locale });
 
   return (
     <LandingLayout>

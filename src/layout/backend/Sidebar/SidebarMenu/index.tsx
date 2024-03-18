@@ -23,7 +23,7 @@ export const SidebarMenu = () => {
   const [activeLink, setActiveLink] = useState<string | undefined>(
     active.split("/")[active.split("/").length - 1]
   );
-  const t = useTranslations("translations");
+  const t = useTranslations();
   const ability = useAbility();
 
   const handleActive = (title: string, level: number) => {

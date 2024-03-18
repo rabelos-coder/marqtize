@@ -3,7 +3,7 @@ import React from "react";
 import { Col, Container, Row } from "reactstrap";
 
 export const Footer = () => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <footer className="footer">

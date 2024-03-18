@@ -9,7 +9,7 @@ type LtrDataType = {
 };
 
 const BoxLayout = ({ handleLayout, layout_type }: LtrDataType) => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
 
   return (
     <li

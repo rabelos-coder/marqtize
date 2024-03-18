@@ -38,7 +38,7 @@ type FormData = {
 };
 
 const EditProfileForm = ({ user, timezones, languages }: EditProfileProps) => {
-  const t = useTranslations("translations");
+  const t = useTranslations();
   const [updateProfile, { loading }] = useMutation(UPDATE_PROFILE, {
     fetchPolicy: "no-cache",
   });
