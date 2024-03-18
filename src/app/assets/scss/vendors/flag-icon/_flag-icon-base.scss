@@ -12,7 +12,7 @@
   line-height: 1em;
 
   &:before {
-    content: '\00a0';
+    content: "\00a0";
   }
 
   &.flag-icon-squared {
@@ -22,10 +22,10 @@
 
 @mixin flag-icon($country) {
   .flag-icon-#{$country} {
-    background-image: url(../../../../../public/assets/fonts/flag-icon/#{$country}.svg);
+    background-image: url(../../../fonts/flag-icon/#{$country}.svg);
 
     &.flag-icon-squared {
-      background-image: url(../../../../../public/assets/fonts/flag-icon/#{$country}.svg);
+      background-image: url(../../../fonts/flag-icon/#{$country}.svg);
     }
   }
 }

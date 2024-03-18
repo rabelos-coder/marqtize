@@ -12,6 +12,7 @@ const nextConfig = {
     includePaths: [join(process.cwd(), "src/app/scss")],
     sourceMap: true,
   },
+  swcMinify: true,
   images: {
     remotePatterns: [
       {
