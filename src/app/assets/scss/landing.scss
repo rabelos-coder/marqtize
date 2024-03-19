@@ -19133,3 +19133,65 @@ section {
 .navbar-fixed-top {
     margin-bottom: 5rem;
 }
+
+.single-post-meta-links {
+    button {
+        padding-left: 0.3rem !important;
+        padding-right: 0.3rem !important;
+        color: #c5ccd6 !important;
+        margin-left: 0.5rem !important;
+        cursor: pointer !important;
+
+        svg {
+            color: #c5ccd6 !important;
+
+            &:hover {
+                color: #69707a !important;
+            }
+        }
+    }
+}
+
+.post-preview {
+    a {
+        color: var(--bs-card-title-color);
+
+        &:hover {
+            color: var(--bs-gray-500) !important;
+            text-decoration: none;
+        }
+    }
+}
+
+.post-preview-meta-details {
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+    overflow-wrap: normal;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+.post-preview-meta-data {
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+    height: 4.4rem;
+    overflow-wrap: normal;
+    text-wrap: nowrap;
+    overflow: hidden;
+
+    h6 {
+        font-size: 0.9rem;
+    }
+}
+
+.post-meta-data {
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+    overflow-wrap: normal;
+    text-wrap: nowrap;
+    overflow: hidden;
+
+    h6 {
+        font-size: 0.9rem;
+    }
+}

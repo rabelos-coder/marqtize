@@ -2,10 +2,9 @@
   2.29 Tab CSS Start
 ==========================**/
 .nav-pills {
-
   .nav-link.active,
-  .show>.nav-link {
-    background-color: var(--theme-deafult);
+  .show > .nav-link {
+    background-color: var(--theme-default);
   }
 }
 
@@ -24,24 +23,9 @@
   justify-content: flex-end;
 }
 
-$nav-name: theme,
-  primary,
-  secondary,
-  success,
-  danger,
-  info,
-  light,
-  dark,
-  warning;
-$nav-color: var(--theme-deafult),
-  var(--theme-deafult),
-  $secondary-color,
-  $success-color,
-  $danger-color,
-  $info-color,
-  $light-color,
-  $dark-color,
-  $warning-color;
+$nav-name: theme, primary, secondary, success, danger, info, light, dark, warning;
+$nav-color: var(--theme-default), var(--theme-default), $secondary-color, $success-color, $danger-color, $info-color,
+  $light-color, $dark-color, $warning-color;
 
 @each $var in $nav-name {
   $i: index($label-name, $var);
@@ -53,7 +37,7 @@ $nav-color: var(--theme-deafult),
     }
 
     .nav-link.active,
-    .show>.nav-link {
+    .show > .nav-link {
       background-color: nth($nav-color, $i);
       color: $white;
     }
@@ -62,7 +46,6 @@ $nav-color: var(--theme-deafult),
 
 .nav-tabs.nav-bottom {
   .nav-item {
-
     .nav-link.active,
     .nav-link.focus,
     .nav-link.hover {
@@ -72,7 +55,7 @@ $nav-color: var(--theme-deafult),
 }
 
 .tab-content {
-  ~.nav-tabs {
+  ~ .nav-tabs {
     &.border-tab {
       margin-bottom: 0;
       margin-top: 30px;
@@ -104,7 +87,7 @@ $nav-color: var(--theme-deafult),
       &.show,
       &:focus,
       &:hover {
-        color: var(--theme-deafult);
+        color: var(--theme-default);
       }
 
       &.active,
@@ -123,10 +106,10 @@ $nav-color: var(--theme-deafult),
   }
 
   .nav-link.active,
-  .show>.nav-link {
+  .show > .nav-link {
     background-color: transparent;
-    border-left-color: var(--theme-deafult);
-    color: var(--theme-deafult);
+    border-left-color: var(--theme-default);
+    color: var(--theme-default);
     border-radius: 0;
     transition: all 0.3s ease;
   }
@@ -141,39 +124,23 @@ $nav-color: var(--theme-deafult),
   }
 
   .nav-link.active,
-  .show>.nav-link {
+  .show > .nav-link {
     background-color: transparent;
-    border-right-color: var(--theme-deafult);
-    color: var(--theme-deafult);
+    border-right-color: var(--theme-default);
+    color: var(--theme-default);
     border-radius: 0;
     transition: all 0.3s ease;
   }
 }
 
-$m-nav-name: theme,
-  primary,
-  secondary,
-  success,
-  danger,
-  info,
-  light,
-  dark,
-  warning;
-$nav-color: var(--theme-deafult),
-  var(--theme-deafult),
-  $secondary-color,
-  $success-color,
-  $danger-color,
-  $info-color,
-  $light-color,
-  $dark-color,
-  $warning-color;
+$m-nav-name: theme, primary, secondary, success, danger, info, light, dark, warning;
+$nav-color: var(--theme-default), var(--theme-default), $secondary-color, $success-color, $danger-color, $info-color,
+  $light-color, $dark-color, $warning-color;
 
 @each $var in $m-nav-name {
   $i: index($label-name, $var);
 
   .border-tab.nav-#{$var} {
-
     .nav-link.active,
     .nav-item.show,
     .nav-link:focus,
@@ -203,18 +170,16 @@ $nav-color: var(--theme-deafult),
   }
 
   .border-tab.nav-left.nav-#{$var} {
-
     .nav-link.active,
-    .show>.nav-link {
+    .show > .nav-link {
       border-left-color: nth($nav-color, $i);
       color: nth($nav-color, $i);
     }
   }
 
   .border-tab.nav-right.nav-#{$var} {
-
     .nav-link.active,
-    .show>.nav-link {
+    .show > .nav-link {
       border-right-color: nth($nav-color, $i);
       color: nth($nav-color, $i);
     }
@@ -248,10 +213,9 @@ $nav-color: var(--theme-deafult),
   display: flex;
   gap: 16px;
 
-  @media (max-width:576px) {
+  @media (max-width: 576px) {
     justify-content: center;
   }
-
 }
 
 .tab-img {
@@ -266,14 +230,12 @@ $nav-color: var(--theme-deafult),
     border-top-right-radius: 4px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-
   }
 }
 
 .simple-wrapper {
   .dropdown-collection {
     .dropdown-item {
-
       &:hover,
       &:active {
         background-color: $gray-60 !important;
@@ -295,7 +257,7 @@ $nav-color: var(--theme-deafult),
   flex-wrap: wrap;
   gap: 20px;
 
-  @media (max-width:1400px) {
+  @media (max-width: 1400px) {
     gap: calc(14px + (35 - 14) * ((100vw - 320px) / (1400 - 320)));
   }
 
@@ -306,7 +268,6 @@ $nav-color: var(--theme-deafult),
       display: flex;
       align-items: center;
       gap: 12px;
-
 
       .designer-img {
         height: 50px;
@@ -378,7 +339,7 @@ $nav-color: var(--theme-deafult),
       border-bottom: 1px solid var(--light-border);
       align-items: center;
 
-      @media (max-width:630px) {
+      @media (max-width: 630px) {
         align-items: unset;
       }
     }
@@ -389,23 +350,10 @@ $nav-color: var(--theme-deafult),
   font-size: 14px;
 }
 
-$tabs-name: primary,
-  secondary,
-  success,
-  danger,
-  warning,
-  info,
-  light,
-  dark;
+$tabs-name: primary, secondary, success, danger, warning, info, light, dark;
 
-$tab-color : $primary-color,
-$secondary-color,
-$success-color,
-$danger-color,
-$warning-color,
-$info-color,
-$light-color,
-$dark-color;
+$tab-color: $primary-color, $secondary-color, $success-color, $danger-color, $warning-color, $info-color, $light-color,
+  $dark-color;
 
 @each $var in $tabs-name {
   $i: index($tabs-name, $var);
@@ -434,7 +382,7 @@ $dark-color;
     position: relative;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       display: inline-block;
@@ -443,8 +391,12 @@ $dark-color;
       border-bottom: 1px solid;
       margin-top: 10px;
       opacity: 0;
-      -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-      transition: opacity 0.35s, transform 0.35s;
+      -webkit-transition:
+        opacity 0.35s,
+        -webkit-transform 0.35s;
+      transition:
+        opacity 0.35s,
+        transform 0.35s;
       -webkit-transform: scale(0, 1);
       transform: scale(0, 1);
     }
@@ -464,7 +416,6 @@ $dark-color;
     &.nav-secondary {
       &.nav-left {
         .nav-link {
-
           &:hover,
           &.active {
             background-color: unset;
@@ -493,7 +444,7 @@ $dark-color;
   display: flex;
   gap: 12px;
 
-  @media (max-width:576px) {
+  @media (max-width: 576px) {
     flex-direction: column;
     align-items: center;
   }

@@ -31,7 +31,7 @@ body {
 			background-color: $dark-body-background;
 		}
 
-		input[type=file] {
+		input[type="file"] {
 			&::file-selector-button {
 				color: $dark-all-font-color;
 				background-color: $dark-card-background !important;
@@ -45,7 +45,6 @@ body {
 
 		.table-light {
 			tr {
-
 				td,
 				th {
 					color: $dark-all-font-color !important;
@@ -69,7 +68,6 @@ body {
 
 		.greeting-user,
 		.deposit-wrap {
-
 			h4,
 			h5,
 			p {
@@ -91,7 +89,7 @@ body {
 		.apexcharts-tooltip {
 			.apexcharts-tooltip-series-group {
 				.apexcharts-tooltip-text {
-					>div {
+					> div {
 						span {
 							color: $black;
 						}
@@ -189,7 +187,10 @@ body {
 
 		.social-widget {
 			.social-icons {
-				box-shadow: 0px 42.1092px 27.8569px $dark-body-background, 0px 8.90772px 7.12618px $dark-body-background, 0px 2.02448px 3.44162px $dark-body-background;
+				box-shadow:
+					0px 42.1092px 27.8569px $dark-body-background,
+					0px 8.90772px 7.12618px $dark-body-background,
+					0px 2.02448px 3.44162px $dark-body-background;
 			}
 		}
 
@@ -204,7 +205,6 @@ body {
 
 			.calendar-default {
 				.fc {
-
 					.fc-daygrid-day-number,
 					.fc-col-header-cell-cushion {
 						color: $dark-all-font-color !important;
@@ -227,14 +227,13 @@ body {
 			background-color: $dark-body-background;
 		}
 
-
 		.clockpicker-popover {
 			.popover-title {
 				background-color: $dark-card-background;
 			}
 
 			&.bottom {
-				>.arrow {
+				> .arrow {
 					border-bottom-color: $dark-body-background;
 
 					&:after {
@@ -244,7 +243,7 @@ body {
 			}
 
 			&.top {
-				>.arrow {
+				> .arrow {
 					border-top-color: $dark-body-background;
 
 					&::after {
@@ -254,7 +253,7 @@ body {
 			}
 
 			&.left {
-				>.arrow {
+				> .arrow {
 					border-left-color: $dark-body-background;
 
 					&::after {
@@ -269,7 +268,6 @@ body {
 		}
 
 		.fc-theme-standard {
-
 			.fc-scrollgrid,
 			.fc-list {
 				border-color: $dark-card-border !important;
@@ -313,7 +311,6 @@ body {
 		.faq-form {
 			input {
 				background-color: $dark-body-background;
-
 			}
 		}
 
@@ -347,7 +344,6 @@ body {
 
 		.bg-info {
 			&.text-white {
-
 				p,
 				h6,
 				h5 {
@@ -442,7 +438,7 @@ body {
 									background-color: $dark-body-background;
 								}
 
-								&:nth-child(n+2) {
+								&:nth-child(n + 2) {
 									background-color: $dark-card-background;
 								}
 							}
@@ -456,7 +452,7 @@ body {
 									background-color: $dark-card-background;
 								}
 
-								&:nth-child(n+2) {
+								&:nth-child(n + 2) {
 									background-color: $dark-body-background;
 								}
 							}
@@ -489,7 +485,7 @@ body {
 
 		// crypto dashboard
 		.currency-widget {
-			div[class*=bg-light-] {
+			div[class*="bg-light-"] {
 				color: $dark-all-font-color;
 			}
 		}
@@ -525,7 +521,7 @@ body {
 		}
 
 		.schedule-list {
-			>li {
+			> li {
 				box-shadow: 4px 7px 17px 5px rgba($dark-body-background, 0.2);
 			}
 		}
@@ -605,7 +601,6 @@ body {
 		}
 
 		.faq-widgets {
-
 			h5,
 			p {
 				color: $white;
@@ -637,7 +632,6 @@ body {
 			.toast-header {
 				background-color: $dark-card-background;
 				color: $dark-all-font-color;
-
 			}
 
 			.toast-dark {
@@ -773,7 +767,7 @@ body {
 			&.only-body {
 				.page-body-wrapper {
 					.page-title {
-						>.row {
+						> .row {
 							.col-6 {
 								&:first-child {
 									h6 {
@@ -795,7 +789,6 @@ body {
 									}
 								}
 							}
-
 						}
 					}
 				}
@@ -805,7 +798,7 @@ body {
 				.header-wrapper {
 					.nav-right {
 						.profile-dropdown {
-							&>li span {
+							& > li span {
 								color: $white;
 							}
 						}
@@ -853,7 +846,6 @@ body {
 								}
 							}
 						}
-
 					}
 				}
 			}
@@ -866,7 +858,6 @@ body {
 		}
 
 		.customizer-contain {
-
 			p,
 			h5,
 			h6 {
@@ -884,7 +875,6 @@ body {
 					}
 				}
 			}
-
 		}
 
 		// calender
@@ -951,7 +941,7 @@ body {
 			}
 		}
 
-		.react-datepicker-popper[data-placement^=bottom] {
+		.react-datepicker-popper[data-placement^="bottom"] {
 			.react-datepicker__triangle::before {
 				border-bottom-color: $dark-card-inbox;
 			}
@@ -961,7 +951,7 @@ body {
 			}
 		}
 
-		.react-datepicker-popper[data-placement^=top] {
+		.react-datepicker-popper[data-placement^="top"] {
 			.react-datepicker__triangle::before {
 				border-top-color: $dark-card-inbox;
 			}
@@ -984,7 +974,6 @@ body {
 					}
 				}
 
-
 				button {
 					color: rgba($dark-all-font-color, 0.5);
 				}
@@ -1006,7 +995,6 @@ body {
 						.react-calendar__tile {
 							&:hover {
 								background-color: rgba(230, 230, 230, 0.5);
-
 							}
 						}
 					}
@@ -1066,9 +1054,7 @@ body {
 
 					.or {
 						&:before {
-
 							background-color: $dark-card-background;
-
 						}
 					}
 
@@ -1077,12 +1063,11 @@ body {
 						border-color: $dark-card-background !important;
 					}
 				}
-
 			}
 		}
 
 		.H_ui {
-			~div {
+			~ div {
 				background-color: $dark-body-background !important;
 			}
 		}
@@ -1171,7 +1156,7 @@ body {
 
 		.toggle-sidebar {
 			svg {
-				stroke: var(--theme-deafult);
+				stroke: var(--theme-default);
 			}
 		}
 
@@ -1192,7 +1177,7 @@ body {
 								.simplebar-mask {
 									.simplebar-content-wrapper {
 										.simplebar-content {
-											>li {
+											> li {
 												a {
 													svg {
 														&.stroke-icon {
@@ -1209,12 +1194,12 @@ body {
 													&.active {
 														svg {
 															&.stroke-icon {
-																stroke: var(--theme-deafult);
-																color: var(--theme-deafult);
+																stroke: var(--theme-default);
+																color: var(--theme-default);
 															}
 
 															&.fill-icon {
-																fill: var(--theme-deafult);
+																fill: var(--theme-default);
 																stroke: transparent;
 															}
 														}
@@ -1234,7 +1219,7 @@ body {
 						.sidebar-link.active {
 							svg {
 								&.stroke-icon {
-									stroke: var(--theme-deafult);
+									stroke: var(--theme-default);
 								}
 							}
 						}
@@ -1251,7 +1236,7 @@ body {
 							.simplebar-mask {
 								.simplebar-content-wrapper {
 									.simplebar-content {
-										>li {
+										> li {
 											.sidebar-link {
 												&.active {
 													background-color: rgba($primary-color, 0.2);
@@ -1291,7 +1276,7 @@ body {
 														color: $dark-all-font-color;
 
 														&.active {
-															color: var(--theme-deafult);
+															color: var(--theme-default);
 														}
 													}
 												}
@@ -1311,7 +1296,7 @@ body {
 										}
 
 										&.active {
-											color: var(--theme-deafult);
+											color: var(--theme-default);
 										}
 									}
 								}
@@ -1320,7 +1305,6 @@ body {
 					}
 				}
 			}
-
 
 			&.modern-type {
 				.page-body-wrapper {
@@ -1346,7 +1330,7 @@ body {
 							.sidebar-links {
 								.sidebar-link.active {
 									svg {
-										stroke: var(--theme-deafult);
+										stroke: var(--theme-default);
 									}
 								}
 
@@ -1362,7 +1346,7 @@ body {
 									.simplebar-mask {
 										.simplebar-content-wrapper {
 											.simplebar-content {
-												>li {
+												> li {
 													.sidebar-link {
 														&.active {
 															background-color: rgba($primary-color, 0.2);
@@ -1402,7 +1386,7 @@ body {
 																color: $dark-all-font-color;
 
 																&.active {
-																	color: var(--theme-deafult);
+																	color: var(--theme-default);
 																}
 															}
 														}
@@ -1422,7 +1406,7 @@ body {
 												}
 
 												&.active {
-													color: var(--theme-deafult);
+													color: var(--theme-default);
 												}
 											}
 										}
@@ -1452,8 +1436,8 @@ body {
 									.simplebar-mask {
 										.simplebar-content-wrapper {
 											.simplebar-content {
-												>li {
-													>a {
+												> li {
+													> a {
 														color: $dark-all-font-color;
 													}
 
@@ -1466,10 +1450,10 @@ body {
 
 																&.active,
 																&:hover {
-																	color: var(--theme-deafult);
+																	color: var(--theme-default);
 
 																	span {
-																		color: var(--theme-deafult);
+																		color: var(--theme-default);
 																	}
 																}
 															}
@@ -1516,7 +1500,7 @@ body {
 				.page-body-wrapper {
 					div {
 						&.sidebar-wrapper {
-							>div {
+							> div {
 								background: $dark-card-background;
 							}
 
@@ -1553,18 +1537,18 @@ body {
 										.simplebar-mask {
 											.simplebar-content-wrapper {
 												.simplebar-content {
-													>li {
+													> li {
 														.sidebar-link {
 															&.active {
 																background-color: rgba($primary-color, 0.2);
 
 																span {
-																	color: var(--theme-deafult);
+																	color: var(--theme-default);
 																}
 
 																svg {
-																	color: var(--theme-deafult);
-																	stroke: var(--theme-deafult);
+																	color: var(--theme-default);
+																	stroke: var(--theme-default);
 																}
 															}
 														}
@@ -1618,7 +1602,7 @@ body {
 													}
 
 													&.active {
-														color: var(--theme-deafult);
+														color: var(--theme-default);
 													}
 												}
 											}
@@ -1652,7 +1636,6 @@ body {
 						background-color: $transparent-color;
 
 						.nav-right {
-
 							.language-nav {
 								.more_lang {
 									color: $white;
@@ -1676,9 +1659,7 @@ body {
 									}
 								}
 							}
-
 						}
-
 					}
 
 					.header-logo-wrapper {
@@ -1690,7 +1671,6 @@ body {
 					.page-body {
 						background-color: $transparent-color;
 					}
-
 				}
 			}
 
@@ -1812,7 +1792,6 @@ body {
 
 		.create-project-detail {
 			.create-group {
-
 				.form-control,
 				select {
 					background-color: $dark-body-background;
@@ -1861,7 +1840,7 @@ body {
 		}
 
 		.lnb-new-schedule,
-		.lnb-calendars>div {
+		.lnb-calendars > div {
 			border-bottom: 1px solid $dark-card-border;
 		}
 
@@ -1930,7 +1909,7 @@ body {
 				ul {
 					li {
 						a {
-							>.title {
+							> .title {
 								color: $dark-all-font-color;
 							}
 						}
@@ -1938,7 +1917,7 @@ body {
 				}
 
 				.main-menu {
-					>li {
+					> li {
 						a {
 							&:hover {
 								background-color: $dark-body-background;
@@ -1967,7 +1946,7 @@ body {
 				border-right: 1px solid $dark-card-border;
 
 				.nav-link {
-					+.nav-link {
+					+ .nav-link {
 						border-top: 1px solid $dark-card-border;
 					}
 				}
@@ -1980,7 +1959,7 @@ body {
 					.media-body {
 						ul {
 							li {
-								+li {
+								+ li {
 									border-left: 2px solid $dark-card-border;
 								}
 							}
@@ -2019,8 +1998,7 @@ body {
 		.small-donut,
 		.donut-peity2,
 		.pie-peity {
-
-			~svg,
+			~ svg,
 			svg {
 				path {
 					&:nth-child(even) {
@@ -2106,10 +2084,8 @@ body {
 
 					.datepicker--content {
 						.datepicker--days {
-
 							.datepicker--days-names,
 							.datepicker--cells {
-
 								.datepicker--day-name,
 								.datepicker--cell-day {
 									color: $dark-all-font-color;
@@ -2127,7 +2103,7 @@ body {
 
 		// index page css end
 		// ecommerce dashboard css start
-		[class*='activity-dot-'] {
+		[class*="activity-dot-"] {
 			background-color: $dark-card-background;
 		}
 
@@ -2135,7 +2111,6 @@ body {
 		.page-header {
 			.header-wrapper {
 				.nav-right {
-
 					.profile-dropdown {
 						li {
 							&:last-child {
@@ -2147,22 +2122,9 @@ body {
 			}
 		}
 
-		$alert-name: primary,
-			secondary,
-			success,
-			danger,
-			warning,
-			info,
-			light,
-			dark;
-		$alert-color : $primary-color,
-		$secondary-color,
-		$success-color,
-		$danger-color,
-		$warning-color,
-		$info-color,
-		$light-color,
-		$dark-color;
+		$alert-name: primary, secondary, success, danger, warning, info, light, dark;
+		$alert-color: $primary-color, $secondary-color, $success-color, $danger-color, $warning-color, $info-color,
+			$light-color, $dark-color;
 
 		@each $var in $alert-name {
 			$i: index($alert-name, $var);
@@ -2226,7 +2188,7 @@ body {
 		}
 
 		.options {
-			>div {
+			> div {
 				border: 1px solid $dark-card-border;
 			}
 		}
@@ -2234,7 +2196,7 @@ body {
 		.was-validated {
 			.custom-control-input {
 				&:invalid {
-					~.custom-control-label {
+					~ .custom-control-label {
 						&::before {
 							background-color: $dark-body-background;
 						}
@@ -2255,7 +2217,7 @@ body {
 			ul {
 				&.search-info {
 					li {
-						+li {
+						+ li {
 							border-left: 1px solid $dark-body-background;
 						}
 					}
@@ -2289,7 +2251,6 @@ body {
 
 		.calendar-wrap {
 			.fc-unthemed {
-
 				td,
 				th {
 					border-color: $dark-body-background;
@@ -2677,7 +2638,6 @@ body {
 		}
 
 		.page-wrapper {
-
 			.sidebar-main-title {
 				h6 {
 					color: $dark-all-font-color;
@@ -2712,8 +2672,8 @@ body {
 					}
 
 					.nav-right {
-						>ul {
-							>li {
+						> ul {
+							> li {
 								svg {
 									stroke: $white;
 								}
@@ -2721,8 +2681,8 @@ body {
 						}
 
 						&.right-header {
-							>ul {
-								>li {
+							> ul {
+								> li {
 									.profile-media {
 										.media-body {
 											p {
@@ -2780,7 +2740,6 @@ body {
 									}
 								}
 							}
-
 						}
 
 						.profile-dropdown {
@@ -2789,7 +2748,6 @@ body {
 									color: $dark-all-font-color;
 
 									svg {
-
 										path,
 										line,
 										circle {
@@ -2801,11 +2759,10 @@ body {
 										color: var(--theme-secondary) !important;
 
 										svg {
-
 											line,
 											path,
 											circle {
-												color: var(--theme-deafult) !important;
+												color: var(--theme-default) !important;
 											}
 										}
 									}
@@ -2813,8 +2770,8 @@ body {
 							}
 						}
 
-						>ul {
-							>li {
+						> ul {
+							> li {
 								.media {
 									.media-body {
 										.txt-dark {
@@ -2857,7 +2814,6 @@ body {
 								}
 							}
 						}
-
 					}
 				}
 
@@ -2880,7 +2836,6 @@ body {
 
 			/* Main Header ends */
 			.page-body-wrapper {
-
 				/* body start*/
 				.page-body {
 					.topper-lists {
@@ -2909,7 +2864,6 @@ body {
 
 					.feather-main,
 					.professor-table {
-
 						.media-body,
 						.professor-block {
 							p {
@@ -2920,8 +2874,8 @@ body {
 
 					.logs-element {
 						span {
-							+span {
-								color: $dark-small-font-color
+							+ span {
+								color: $dark-small-font-color;
 							}
 						}
 					}
@@ -2929,7 +2883,7 @@ body {
 					.progress-block {
 						.progress-title {
 							span {
-								+span {
+								+ span {
 									color: $dark-small-font-color;
 								}
 							}
@@ -3035,7 +2989,6 @@ body {
 					.activity {
 						.media {
 							.gradient-round {
-
 								&.gradient-line-1,
 								&.small-line,
 								&.medium-line {
@@ -3076,7 +3029,6 @@ body {
 						}
 					}
 
-
 					.breadcrumb {
 						li {
 							color: $dark-all-font-color !important;
@@ -3093,7 +3045,7 @@ body {
 
 					.breadcrumb {
 						.breadcrumb-item {
-							&+.breadcrumb-item {
+							& + .breadcrumb-item {
 								&:before {
 									color: $font-gray-color;
 								}
@@ -3152,7 +3104,6 @@ body {
 						.table {
 							&.table-light {
 								tr {
-
 									th,
 									td {
 										color: $theme-body-font-color;
@@ -3162,11 +3113,9 @@ body {
 						}
 
 						table {
-
 							thead,
 							tbody {
 								.border-bottom-light {
-
 									th,
 									td {
 										border-bottom: 1px solid $dark-card-border !important;
@@ -3195,11 +3144,11 @@ body {
 						.chart-block {
 							#bar-chart2 {
 								svg {
-									>rect {
+									> rect {
 										fill: $dark-card-background;
 									}
 
-									>g {
+									> g {
 										text {
 											fill: $dark-all-font-color;
 										}
@@ -3209,12 +3158,12 @@ body {
 
 							.word-tree {
 								svg {
-									>g {
-										>rect {
+									> g {
+										> rect {
 											fill: $dark-card-background;
 										}
 
-										>text {
+										> text {
 											fill: $dark-all-font-color;
 										}
 									}
@@ -3226,7 +3175,7 @@ body {
 							background-color: $transparent-color;
 							border-bottom: 1px solid $dark-card-border;
 
-							>span {
+							> span {
 								color: $dark-all-font-color;
 							}
 
@@ -3246,7 +3195,7 @@ body {
 									color: $dark-all-font-color;
 
 									&.fa-cog {
-										color: var(--theme-deafult);
+										color: var(--theme-default);
 									}
 								}
 							}
@@ -3311,7 +3260,6 @@ body {
 						}
 
 						.table {
-
 							th,
 							td {
 								color: $dark-all-font-color;
@@ -3324,7 +3272,7 @@ body {
 
 								.border-bottom-primary {
 									th {
-										border-bottom: 1px solid var(--theme-deafult);
+										border-bottom: 1px solid var(--theme-default);
 									}
 								}
 							}
@@ -3336,7 +3284,6 @@ body {
 							.table-warning,
 							.table-light,
 							.table-danger {
-
 								th,
 								td {
 									color: $dark-card-background;
@@ -3364,17 +3311,15 @@ body {
 
 							tbody {
 								.border-bottom-primary {
-
 									th,
 									td {
-										border-bottom: 1px solid var(--theme-deafult);
+										border-bottom: 1px solid var(--theme-default);
 									}
 								}
 							}
 						}
 
-						.table[class*='bg-'] {
-
+						.table[class*="bg-"] {
 							th,
 							td {
 								color: $white;
@@ -3388,7 +3333,6 @@ body {
 										--bs-table-accent-bg: rgba(0, 0, 0, 0.05);
 
 										&:hover {
-
 											th,
 											td {
 												color: $white;
@@ -3430,7 +3374,6 @@ body {
 						}
 
 						.table-border-vertical {
-
 							tr,
 							th,
 							td {
@@ -3439,10 +3382,8 @@ body {
 						}
 
 						.table-styling {
-
 							thead,
 							tbody {
-
 								th,
 								td {
 									color: $white;
@@ -3462,8 +3403,8 @@ body {
 
 							input {
 								&:checked {
-									+.switch-state {
-										background-color: var(--theme-deafult);
+									+ .switch-state {
+										background-color: var(--theme-default);
 									}
 								}
 							}
@@ -3567,20 +3508,20 @@ body {
 							}
 
 							svg {
-								>rect {
+								> rect {
 									fill: $dark-card-background;
 								}
 
-								>g {
-									>g {
-										>g {
+								> g {
+									> g {
+										> g {
 											text {
 												fill: rgb(177, 177, 178);
 											}
 										}
 									}
 
-									>text {
+									> text {
 										fill: $dark-all-font-color;
 									}
 								}
@@ -3611,7 +3552,6 @@ body {
 						}
 
 						.chart-container {
-
 							.live-products,
 							.turnover,
 							.monthly,
@@ -3716,7 +3656,7 @@ body {
 										background-color: $dark-card-background;
 
 										&:hover {
-											>.sorting_1 {
+											> .sorting_1 {
 												background-color: $dark-datatable-sorting;
 											}
 										}
@@ -3725,13 +3665,13 @@ body {
 									tr.odd {
 										background-color: $dark-datatable-odd;
 
-										>.sorting_1 {
+										> .sorting_1 {
 											background-color: $dark-datatable-sorting;
 										}
 									}
 
 									tr.even {
-										>.sorting_1 {
+										> .sorting_1 {
 											background-color: $dark-datatable-sorting-even;
 										}
 									}
@@ -3742,7 +3682,6 @@ body {
 								border: 1px solid $dark-border-color;
 
 								thead {
-
 									th,
 									td {
 										border-bottom: 2px solid $dark-border-color;
@@ -3786,7 +3725,7 @@ body {
 
 									&.current,
 									&:active {
-										border-color: var(--theme-deafult);
+										border-color: var(--theme-default);
 									}
 								}
 
@@ -3803,13 +3742,11 @@ body {
 							table.dataTable.row-border,
 							table.dataTable.display {
 								tbody {
-
 									th,
 									td {
 										border-top: 1px solid $dark-border-color;
 									}
 								}
-
 							}
 
 							table.dataTable.display,
@@ -3817,7 +3754,7 @@ body {
 								tbody {
 									tr.even {
 										&:hover {
-											>.sorting_1 {
+											> .sorting_1 {
 												background-color: $dark-even-hover-sorting;
 											}
 										}
@@ -3837,7 +3774,6 @@ body {
 							}
 
 							table.dataTable.cell-border {
-
 								th,
 								td {
 									border-top: 1px solid $dark-border-color;
@@ -3853,10 +3789,9 @@ body {
 							table.dataTable.display {
 								tbody {
 									tr {
-
-										>.sorting_1,
-										>.sorting_2,
-										>.sorting_3 {
+										> .sorting_1,
+										> .sorting_2,
+										> .sorting_3 {
 											background-color: $dark-body-background;
 										}
 									}
@@ -3930,7 +3865,6 @@ body {
 								#API-2 {
 									tbody {
 										td {
-
 											span,
 											p {
 												color: $dark-small-font-color;
@@ -3955,11 +3889,10 @@ body {
 							}
 
 							.nav-link {
-
 								&.active,
 								&:focus,
 								&:hover {
-									color: var(--theme-deafult);
+									color: var(--theme-default);
 								}
 							}
 						}
@@ -3975,7 +3908,7 @@ body {
 
 									&.br-active,
 									&.br-selected {
-										background-color: var(--theme-deafult);
+										background-color: var(--theme-default);
 									}
 								}
 							}
@@ -3988,8 +3921,8 @@ body {
 								color: $dark-all-font-color;
 
 								&.active {
-									border: 2px solid var(--theme-deafult);
-									color: var(--theme-deafult);
+									border: 2px solid var(--theme-default);
+									color: var(--theme-default);
 								}
 							}
 
@@ -4001,7 +3934,7 @@ body {
 							&.pill-rating-list {
 								.pill-rating {
 									background-color: $dark-body-background;
-									color: var(--theme-deafult);
+									color: var(--theme-default);
 								}
 							}
 						}
@@ -4010,11 +3943,10 @@ body {
 						.br-theme-fontawesome-stars-o {
 							.br-widget {
 								a {
-
 									&.br-selected,
 									&.br-active {
 										&:after {
-											color: var(--theme-deafult);
+											color: var(--theme-default);
 										}
 									}
 								}
@@ -4113,7 +4045,7 @@ body {
 						}
 
 						a {
-							>div {
+							> div {
 								border: 1px solid $dark-border-color;
 							}
 						}
@@ -4138,9 +4070,8 @@ body {
 
 					.jsgrid-header-row,
 					.jsgrid-filter-row {
-
-						>.jsgrid-header-cell,
-						>.jsgrid-cell {
+						> .jsgrid-header-cell,
+						> .jsgrid-cell {
 							background: $dark-card-background;
 							border: 1px solid $dark-border-color;
 
@@ -4163,13 +4094,13 @@ body {
 					}
 
 					.jsgrid-row {
-						>.jsgrid-cell {
+						> .jsgrid-cell {
 							background-color: $dark-card-background;
 						}
 					}
 
 					.jsgrid-alt-row {
-						>.jsgrid-cell {
+						> .jsgrid-cell {
 							background-color: $dark-body-background;
 						}
 					}
@@ -4180,7 +4111,7 @@ body {
 					}
 
 					.jsgrid-selected-row {
-						>.jsgrid-cell {
+						> .jsgrid-cell {
 							background-color: $dark-datatable-sorting;
 						}
 					}
@@ -4220,7 +4151,7 @@ body {
 								color: $dark-all-font-color;
 
 								&:hover {
-									color: var(--theme-deafult);
+									color: var(--theme-default);
 								}
 							}
 						}
@@ -4242,7 +4173,7 @@ body {
 						li {
 							button {
 								&:hover {
-									color: var(--theme-deafult) !important;
+									color: var(--theme-default) !important;
 								}
 							}
 						}
@@ -4256,10 +4187,10 @@ body {
 								}
 
 								&:hover {
-									color: var(--theme-deafult);
+									color: var(--theme-default);
 
 									a {
-										color: var(--theme-deafult);
+										color: var(--theme-default);
 									}
 								}
 							}
@@ -4279,7 +4210,6 @@ body {
 
 									a {
 										svg {
-
 											path,
 											line,
 											polyline,
@@ -4291,13 +4221,12 @@ body {
 
 										&:hover {
 											svg {
-
 												path,
 												line,
 												polyline,
 												polygon,
 												rect {
-													color: var(--theme-deafult) !important;
+													color: var(--theme-default) !important;
 												}
 											}
 										}
@@ -4405,23 +4334,10 @@ body {
 						border: 10px solid $dark-body-background !important;
 					}
 
-					$border-gradient: primary,
-						secondary,
-						success,
-						danger,
-						warning,
-						info,
-						light,
-						dark;
+					$border-gradient: primary, secondary, success, danger, warning, info, light, dark;
 
-					$helper-border-color : $primary-color,
-					$secondary-color,
-					$success-color,
-					$danger-color,
-					$warning-color,
-					$info-color,
-					$light-color,
-					$dark-color;
+					$helper-border-color: $primary-color, $secondary-color, $success-color, $danger-color,
+						$warning-color, $info-color, $light-color, $dark-color;
 
 					@each $var in $border-gradient {
 						$i: index($border-gradient, $var);
@@ -4603,7 +4519,7 @@ body {
 
 						.chat-msg-box {
 							.my-message {
-								border: 1px solid $dark-border-color
+								border: 1px solid $dark-border-color;
 							}
 
 							.message {
@@ -4667,7 +4583,6 @@ body {
 			}
 
 			.input-group-solid {
-
 				.input-group-text,
 				.form-control {
 					background: $dark-body-background;
@@ -4686,13 +4601,13 @@ body {
 				border: 1px solid rgba(255, 255, 255, 0.3);
 				color: $dark-all-font-color;
 
-				+.list-group-item {
+				+ .list-group-item {
 					border-top-width: 0;
 				}
 
 				&.active {
-					background-color: var(--theme-deafult) !important;
-					border-color: var(--theme-deafult);
+					background-color: var(--theme-default) !important;
+					border-color: var(--theme-default);
 					color: $white;
 				}
 
@@ -4704,7 +4619,6 @@ body {
 			}
 
 			.list-group-item-action {
-
 				&:hover:not(.active),
 				&:focus {
 					background-color: $dark-body-background;
@@ -4722,7 +4636,7 @@ body {
 			.dark-list {
 				.list-group {
 					.border-left-primary {
-						border-left: 4px solid var(--theme-deafult);
+						border-left: 4px solid var(--theme-default);
 					}
 
 					.border-left-secondary {
@@ -4830,7 +4744,6 @@ body {
 				background-color: rgba(54, 64, 74, 0.7);
 
 				.authentication-box {
-
 					h4,
 					h3 {
 						color: $white;
@@ -4845,9 +4758,8 @@ body {
 
 						.theme-form {
 							.form-group {
-
-								input[type=text],
-								input[type=password] {
+								input[type="text"],
+								input[type="password"] {
 									background-color: $dark-body-background;
 									border: 1px solid $dark-border-color;
 									color: $dark-all-font-color;
@@ -4971,7 +4883,6 @@ body {
 								background-color: $dark-border-color;
 							}
 						}
-
 					}
 
 					.authentication-box {
@@ -4992,9 +4903,8 @@ body {
 
 							.theme-form {
 								.form-group {
-
-									input[type=text],
-									input[type=password] {
+									input[type="text"],
+									input[type="password"] {
 										background-color: $dark-body-background;
 										border: 1px solid $dark-border-color;
 										color: $dark-all-font-color;
@@ -5029,13 +4939,12 @@ body {
 					div {
 						a {
 							&:hover {
-								color: var(--theme-deafult);
+								color: var(--theme-default);
 							}
 						}
 					}
 				}
 			}
-
 
 			.default-according {
 				.card {
@@ -5055,8 +4964,8 @@ body {
 
 				.bg-primary {
 					.btn-link {
-						background-color: var(--theme-deafult);
-						border: 1px solid var(--theme-deafult);
+						background-color: var(--theme-default);
+						border: 1px solid var(--theme-default);
 					}
 				}
 
@@ -5107,7 +5016,7 @@ body {
 				.chat-box {
 					.chat-history {
 						.call-content {
-							>div {
+							> div {
 								background-color: rgba(0, 0, 0, 0.75);
 								background-blend-mode: overlay;
 							}
@@ -5152,7 +5061,6 @@ body {
 				}
 
 				.page-wrapper {
-
 					&.compact-wrapper,
 					&.compact-sidebar {
 						.page-header {
@@ -5227,7 +5135,6 @@ body {
 		}
 
 		.select2-container--default {
-
 			.select2-selection--multiple,
 			.select2-selection--single {
 				background-color: $dark-body-background;
@@ -5267,8 +5174,8 @@ body {
 
 		.select2-drpdwn {
 			.form-control-primary {
-				border-color: var(--theme-deafult) !important;
-				color: var(--theme-deafult) !important;
+				border-color: var(--theme-default) !important;
+				color: var(--theme-default) !important;
 			}
 
 			.form-control-secondary {
@@ -5302,7 +5209,7 @@ body {
 			}
 
 			.form-control-primary-fill {
-				background-color: var(--theme-deafult) !important;
+				background-color: var(--theme-default) !important;
 				color: $white !important;
 			}
 
@@ -5351,20 +5258,20 @@ body {
 					border-color: $dark-border-color;
 				}
 
-				input[type=text],
-				input[type=email],
-				input[type=search],
-				input[type=password],
-				input[type=number],
-				input[type=tel],
-				input[type=date],
-				input[type=datetime-local],
-				input[type=time],
-				input[type=datetime-local],
-				input[type=month],
-				input[type=week],
-				input[type=url],
-				input[type=file],
+				input[type="text"],
+				input[type="email"],
+				input[type="search"],
+				input[type="password"],
+				input[type="number"],
+				input[type="tel"],
+				input[type="date"],
+				input[type="datetime-local"],
+				input[type="time"],
+				input[type="datetime-local"],
+				input[type="month"],
+				input[type="week"],
+				input[type="url"],
+				input[type="file"],
 				select {
 					border-color: $dark-border-color;
 					background-color: $dark-body-background;
@@ -5396,7 +5303,7 @@ body {
 
 			input {
 				background-color: $dark-body-background;
-				border-color: $dark-border-color
+				border-color: $dark-border-color;
 			}
 		}
 
@@ -5465,7 +5372,7 @@ body {
 
 			&.active,
 			&.current {
-				background: var(--theme-deafult);
+				background: var(--theme-default);
 				color: $white;
 			}
 		}
@@ -5492,7 +5399,6 @@ body {
 		}
 
 		.u-pearl.disabled {
-
 			.u-pearl-icon,
 			.u-pearl-number {
 				background: $dark-border-color;
@@ -5566,17 +5472,15 @@ body {
 		}
 
 		.nav-primary {
-
 			.nav-link {
 				&.active {
-					background-color: var(--theme-deafult);
+					background-color: var(--theme-default);
 				}
-
 			}
 
 			.nav-item.show {
 				.nav-link {
-					background-color: var(--theme-deafult);
+					background-color: var(--theme-default);
 				}
 			}
 		}
@@ -5590,7 +5494,6 @@ body {
 		.nav-tabs.nav-bottom {
 			.nav-item {
 				.nav-link {
-
 					&.active,
 					&.focus,
 					&.hover {
@@ -5602,14 +5505,13 @@ body {
 
 		.border-tab {
 			.nav-link {
-
 				&.active {
 					background-color: transparent;
 				}
 			}
 
 			.show {
-				>.nav-link {
+				> .nav-link {
 					background-color: transparent;
 				}
 			}
@@ -5621,20 +5523,19 @@ body {
 				color: $dark-all-font-color;
 
 				&.active {
-					color: var(--theme-deafult);
+					color: var(--theme-default);
 				}
 			}
 
 			.show {
-				>.nav-link {
-					color: var(--theme-deafult);
+				> .nav-link {
+					color: var(--theme-default);
 				}
 			}
 		}
 
 		.border-tab.nav-left.nav-secondary {
 			.nav-link {
-
 				&.active,
 				&:focus,
 				&:hover {
@@ -5643,7 +5544,7 @@ body {
 				}
 			}
 
-			.show>.nav-link {
+			.show > .nav-link {
 				border-left-color: var(--theme-secondary);
 				color: var(--theme-secondary) !important;
 			}
@@ -5656,7 +5557,6 @@ body {
 
 		.border-tab.nav-left.nav-success {
 			.nav-link {
-
 				&.active,
 				&:focus,
 				&:hover {
@@ -5664,7 +5564,7 @@ body {
 				}
 			}
 
-			.show>.nav-link {
+			.show > .nav-link {
 				border-left-color: $success-color;
 				color: $success-color !important;
 			}
@@ -5677,7 +5577,6 @@ body {
 
 		.border-tab.nav-right.nav-info {
 			.nav-link {
-
 				&.active,
 				&:focus,
 				&:hover {
@@ -5685,7 +5584,7 @@ body {
 				}
 			}
 
-			.show>.nav-link {
+			.show > .nav-link {
 				border-left-color: $info-color;
 				color: $info-color !important;
 			}
@@ -5698,7 +5597,6 @@ body {
 
 		.border-tab.nav-secondary {
 			.nav-link {
-
 				&.active,
 				&:focus,
 				&:hover {
@@ -5715,7 +5613,6 @@ body {
 
 		.border-tab.nav-success {
 			.nav-link {
-
 				&.active,
 				&:focus,
 				&:hover {
@@ -5848,8 +5745,6 @@ body {
 					}
 				}
 			}
-
-
 		}
 
 		.todo {
@@ -5883,7 +5778,7 @@ body {
 						&.completed {
 							.task-container {
 								.task-label {
-									color: var(--theme-deafult);
+									color: var(--theme-default);
 								}
 
 								.complete-btn {
@@ -5905,7 +5800,6 @@ body {
 						}
 					}
 				}
-
 			}
 		}
 
@@ -5967,7 +5861,6 @@ body {
 			}
 
 			color: $danger-color;
-
 		}
 
 		.user-profile {
@@ -6031,7 +5924,6 @@ body {
 		}
 
 		.jstree-default {
-
 			.jstree-node,
 			.jstree-icon {
 				color: #455869 !important;
@@ -6095,8 +5987,8 @@ body {
 				color: $white;
 			}
 
-			code[class*=language-],
-			pre[class*=language-] {
+			code[class*="language-"],
+			pre[class*="language-"] {
 				text-shadow: 0px 1px $black;
 
 				::selection {
@@ -6160,7 +6052,6 @@ body {
 		}
 
 		#example-style-8_wrapper {
-
 			table.dataTable.stripe,
 			table.dataTable.display {
 				tbody {
@@ -6225,7 +6116,6 @@ body {
 		}
 
 		.token {
-
 			&.boolean,
 			&.constant,
 			&.deleted,
@@ -6262,9 +6152,9 @@ body {
 
 		.alert-theme {
 			span {
-				+span {
-					+span {
-						border-left: 5px solid var(--theme-deafult);
+				+ span {
+					+ span {
+						border-left: 5px solid var(--theme-default);
 						background-color: $dark-body-background;
 						border-radius: 4px;
 					}
@@ -6286,7 +6176,7 @@ body {
 			}
 
 			.card-footer {
-				>div {
+				> div {
 					&:first-child {
 						border-right: 1px solid $dark-border-color;
 					}
@@ -6298,7 +6188,6 @@ body {
 					}
 
 					svg {
-
 						path,
 						rect {
 							color: $dark-small-font-color;
@@ -6330,7 +6219,6 @@ body {
 				}
 
 				tr {
-
 					td,
 					th {
 						border-top: none !important;
@@ -6363,7 +6251,7 @@ body {
 					color: $dark-all-font-color;
 				}
 
-				>a {
+				> a {
 					color: $dark-all-font-color;
 				}
 
@@ -6404,18 +6292,13 @@ body {
 			}
 		}
 
-		@each $btn-name,
-		$btn-color in (primary, var(--theme-deafult)),
-		(secondary, $secondary-color),
-		(success, $success-color),
-		(danger, $danger-color),
-		(info, $info-color),
-		(light, $light-color),
-		(dark, $dark-color),
-		(warning, $warning-color) {
+		@each $btn-name, $btn-color in (primary, var(--theme-default)), (secondary, $secondary-color),
+			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
+			(dark, $dark-color), (warning, $warning-color)
+		{
 			.radio-#{$btn-name} {
 				input[type="radio"] {
-					&+label {
+					& + label {
 						&::before {
 							border-color: $btn-color !important;
 						}
@@ -6426,7 +6309,7 @@ body {
 					}
 
 					&:checked {
-						&+label {
+						& + label {
 							&::before {
 								border-color: $btn-color !important;
 							}
@@ -6440,15 +6323,10 @@ body {
 			}
 		}
 
-		@each $btn-name,
-		$btn-color in (primary, var(--theme-deafult)),
-		(secondary, $secondary-color),
-		(success, $success-color),
-		(danger, $danger-color),
-		(info, $info-color),
-		(light, $light-color),
-		(dark, $dark-color),
-		(warning, $warning-color) {
+		@each $btn-name, $btn-color in (primary, var(--theme-default)), (secondary, $secondary-color),
+			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
+			(dark, $dark-color), (warning, $warning-color)
+		{
 			.checkbox-#{$btn-name} {
 				label {
 					&::before {
@@ -6458,15 +6336,10 @@ body {
 			}
 		}
 
-		@each $btn-name,
-		$btn-color in (primary, var(--theme-deafult)),
-		(secondary, $secondary-color),
-		(success, $success-color),
-		(danger, $danger-color),
-		(info, $info-color),
-		(light, $light-color),
-		(dark, $dark-color),
-		(warning, $warning-color) {
+		@each $btn-name, $btn-color in (primary, var(--theme-default)), (secondary, $secondary-color),
+			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
+			(dark, $dark-color), (warning, $warning-color)
+		{
 			.checkbox-solid-#{$btn-name} {
 				label {
 					&:before {
@@ -6478,7 +6351,7 @@ body {
 
 				input[type="checkbox"] {
 					&:checked {
-						&+label {
+						& + label {
 							&::before {
 								background-color: $btn-color !important;
 								border-color: $btn-color !important;
@@ -6503,7 +6376,6 @@ body {
 			}
 
 			tr {
-
 				th,
 				td {
 					&:hover {
@@ -6546,7 +6418,6 @@ body {
 
 		#cal-basic {
 			.fc-toolbar {
-
 				.fc-left,
 				.fc-right {
 					.fc-next-button {
@@ -6577,7 +6448,6 @@ body {
 		}
 
 		.fc-button-group {
-
 			.fc-basicWeek-button,
 			.fc-basicDay-button,
 			.fc-agendaWeek-button,
@@ -6605,7 +6475,6 @@ body {
 			.fc-toolbar {
 				.fc-right {
 					.fc-button-group {
-
 						.fc-month-button,
 						.btn-light {
 							color: $black !important;
@@ -6629,7 +6498,6 @@ body {
 			.fc-toolbar {
 				.fc-right {
 					.fc-button-group {
-
 						.fc-basicWeek-button,
 						.btn-light {
 							color: $black !important;
@@ -6679,7 +6547,7 @@ body {
 			.media {
 				.media-body {
 					span {
-						+span {
+						+ span {
 							color: $dark-small-font-color;
 						}
 					}
@@ -6767,7 +6635,6 @@ body {
 			}
 		}
 
-
 		@media only screen and (max-width: 767.98px) {
 			.page-wrapper {
 				&.material-icon {
@@ -6835,9 +6702,9 @@ body {
 
 		.heading-dropdown {
 			.dropdown-menu {
-				>li {
+				> li {
 					&:first-child {
-						>a {
+						> a {
 							background-color: $card-body-color;
 						}
 					}
@@ -6860,7 +6727,7 @@ body {
 			.accordion-item {
 				.accordion-collapse {
 					p {
-						color: $dark-body-background
+						color: $dark-body-background;
 					}
 
 					.accordion-body {
@@ -6953,12 +6820,11 @@ body {
 			}
 		}
 
-
 		// List dark mode
 		.dark-list {
 			.list-group {
 				.list-group-item {
-					+.list-group-item {
+					+ .list-group-item {
 						border-top-width: 1px;
 					}
 
@@ -6979,7 +6845,6 @@ body {
 				&.active {
 					.list-wrapper {
 						.list-content {
-
 							h6,
 							p {
 								color: $white;
@@ -7021,7 +6886,6 @@ body {
 				}
 			}
 		}
-
 
 		// Modal dark mode
 		.dark-sign-up {
@@ -7135,8 +6999,6 @@ body {
 			}
 		}
 
-
-
 		// range-slider
 		.irs-min,
 		.irs-max {
@@ -7202,10 +7064,10 @@ body {
 		.income-wrapper {
 			ul {
 				li {
-					+li {
+					+ li {
 						border-left: 1px dashed $dark-card-border;
 
-						@media (max-width:1735px) {
+						@media (max-width: 1735px) {
 							border-left: unset;
 						}
 					}
@@ -7246,7 +7108,7 @@ body {
 				color: $light-all-font-color;
 
 				&:focus {
-					~label {
+					~ label {
 						color: $dark-all-font-color;
 					}
 				}
@@ -7255,13 +7117,13 @@ body {
 			.form-label,
 			label {
 				&::before {
-					content: '';
+					content: "";
 					background-color: $dark-card-background;
 					color: $dark-all-font-color;
 				}
 
 				&::after {
-					content: '';
+					content: "";
 					background-color: $dark-card-background;
 				}
 			}
@@ -7285,7 +7147,6 @@ body {
 					}
 				}
 			}
-
 		}
 
 		// dashboard-8
@@ -7293,7 +7154,9 @@ body {
 			.product-body {
 				.product-search {
 					&.input-group {
-						>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+						> :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(
+								.invalid-tooltip
+							):not(.invalid-feedback) {
 							color: $dark-small-font-color;
 						}
 
@@ -7333,7 +7196,6 @@ body {
 			}
 		}
 
-
 		// forms
 		.custom-input #validationCustom03.form-control,
 		.custom-input #validationCustom03 .form-select,
@@ -7342,10 +7204,9 @@ body {
 		.custom-input #validationCustomUsername.form-control,
 		.custom-input #validationCustomUsername .form-select {
 			border-color: $dark-body-background;
-
 		}
 
-		.form-control[type=file]:not(:disabled):not([readonly]) {
+		.form-control[type="file"]:not(:disabled):not([readonly]) {
 			color: $light-all-font-color;
 			background-color: $dark-body-background;
 			border-color: $dark-body-background;
@@ -7358,7 +7219,6 @@ body {
 		}
 
 		.custom-input {
-
 			.form-control,
 			.form-select {
 				background-color: $dark-body-background;
@@ -7438,13 +7298,13 @@ body {
 		.variation-box {
 			.selection-box {
 				input {
-					&[type=checkbox]:checked~div {
+					&[type="checkbox"]:checked ~ div {
 						ul {
 							li {
 								color: $bg-dark-color !important;
 
 								&.txt-primary {
-									color: var(--theme-deafult) !important;
+									color: var(--theme-default) !important;
 								}
 							}
 						}
@@ -7494,7 +7354,6 @@ body {
 		// datepicker
 		.flatpickr-calendar {
 			&.animate {
-
 				background-color: $dark-body-background;
 			}
 		}
@@ -7503,12 +7362,11 @@ body {
 	&.dark-sidebar {
 		.toggle-sidebar {
 			svg {
-				stroke: var(--theme-deafult);
+				stroke: var(--theme-default);
 			}
 		}
 
 		.page-wrapper {
-
 			&.horizontal-wrapper {
 				.page-header {
 					background-color: $dark-card-background;
@@ -7533,7 +7391,6 @@ body {
 								&.onhover-dropdown {
 									.bookmark-flip {
 										.flip-card {
-
 											.front,
 											.back {
 												background-color: $dark-card-inbox;
@@ -7619,8 +7476,8 @@ body {
 								.simplebar-mask {
 									.simplebar-content-wrapper {
 										.simplebar-content {
-											>li {
-												>a {
+											> li {
+												> a {
 													svg {
 														&.stroke-icon {
 															stroke: $dark-small-font-color;
@@ -7670,14 +7527,14 @@ body {
 									.simplebar-mask {
 										.simplebar-content-wrapper {
 											.simplebar-content {
-												>li {
+												> li {
 													.sidebar-link {
 														&.active {
 															background-color: rgba($primary-color, 0.2);
 
 															svg {
-																color: var(--theme-deafult);
-																stroke: var(--theme-deafult);
+																color: var(--theme-default);
+																stroke: var(--theme-default);
 															}
 														}
 													}
@@ -7731,7 +7588,7 @@ body {
 												}
 
 												&.active {
-													color: var(--theme-deafult);
+													color: var(--theme-default);
 												}
 											}
 										}
@@ -7762,8 +7619,8 @@ body {
 									.simplebar-mask {
 										.simplebar-content-wrapper {
 											.simplebar-content {
-												>li {
-													>a {
+												> li {
+													> a {
 														color: $dark-all-font-color;
 													}
 
@@ -7776,7 +7633,7 @@ body {
 
 																&.active,
 																&:hover {
-																	color: var(--theme-deafult);
+																	color: var(--theme-default);
 																}
 															}
 
@@ -7806,7 +7663,6 @@ body {
 										}
 									}
 								}
-
 							}
 
 							.left-arrow,
@@ -7823,14 +7679,13 @@ body {
 				.page-body-wrapper {
 					div {
 						&.sidebar-wrapper {
-							>div {
+							> div {
 								background: $dark-card-background;
 							}
 
 							.sidebar-main {
 								.sidebar-links {
 									li {
-
 										.sidebar-title {
 											border-bottom: 1px solid $dark-card-border;
 										}
@@ -7861,19 +7716,18 @@ body {
 										.simplebar-mask {
 											.simplebar-content-wrapper {
 												.simplebar-content {
-													>li {
-
+													> li {
 														.sidebar-link {
 															&.active {
 																background-color: rgba($primary-color, 0.2);
 
 																span {
-																	color: var(--theme-deafult);
+																	color: var(--theme-default);
 																}
 
 																svg {
-																	color: var(--theme-deafult);
-																	stroke: var(--theme-deafult);
+																	color: var(--theme-default);
+																	stroke: var(--theme-default);
 																}
 															}
 														}
@@ -7927,7 +7781,7 @@ body {
 													}
 
 													&.active {
-														color: var(--theme-deafult);
+														color: var(--theme-default);
 													}
 												}
 											}
@@ -7952,7 +7806,7 @@ body {
 		display: none;
 	}
 
-	&[class*='dark-'] {
+	&[class*="dark-"] {
 		.for-dark {
 			display: block;
 		}
@@ -7964,7 +7818,6 @@ body {
 }
 
 // =======================  Dark Body only  ======================= //
-
 
 /**=====================
 	4.1. Dark CSS ends

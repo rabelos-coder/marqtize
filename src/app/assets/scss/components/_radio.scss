@@ -27,7 +27,7 @@
         z-index: 1;
         width: 0.75rem;
         height: 0.375rem;
-        border: 2px solid var(--theme-deafult);
+        border: 2px solid var(--theme-default);
         border-top-style: none;
         border-right-style: none;
     }
@@ -68,7 +68,7 @@
         z-index: 1;
         width: 0.75rem;
         height: 0.75rem;
-        background: var(--theme-deafult);
+        background: var(--theme-default);
         border-radius: 50%;
     }
 
@@ -109,9 +109,15 @@
             border: 1px solid $light-semi-gray;
             border-radius: 3px;
             background-color: $white;
-            -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-            -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-            transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+            -webkit-transition:
+                border 0.15s ease-in-out,
+                color 0.15s ease-in-out;
+            -o-transition:
+                border 0.15s ease-in-out,
+                color 0.15s ease-in-out;
+            transition:
+                border 0.15s ease-in-out,
+                color 0.15s ease-in-out;
         }
 
         &::after {
@@ -135,7 +141,7 @@
         &:focus {
             outline-offset: -2px;
 
-            &+label {
+            & + label {
                 &::before {
                     outline-offset: -2px;
                 }
@@ -145,7 +151,7 @@
 
     input[type="checkbox"] {
         &:checked {
-            &+label {
+            & + label {
                 &::before {
                     font-family: $font-themify;
                     content: "\e64c";
@@ -156,7 +162,7 @@
         }
 
         &:disabled {
-            &+label {
+            & + label {
                 opacity: 0.65;
 
                 &::before {
@@ -181,7 +187,6 @@
 }
 
 .radio-first-col-width {
-
     .radio {
         label {
             padding-left: 15px;
@@ -198,7 +203,6 @@
 }
 
 .checkbox-td-width {
-
     .checkbox,
     .w-50 {
         label {
@@ -229,15 +233,9 @@
     }
 }
 
-@each $btn-name,
-$btn-color in (primary, var(--theme-deafult)),
-(secondary, $secondary-color),
-(success, $success-color),
-(danger, $danger-color),
-(info, $info-color),
-(light, $light-color),
-(dark, $dark-color),
-(warning, $warning-color) {
+@each $btn-name, $btn-color in (primary, var(--theme-default)), (secondary, $secondary-color), (success, $success-color),
+    (danger, $danger-color), (info, $info-color), (light, $light-color), (dark, $dark-color), (warning, $warning-color)
+{
     .checkbox-#{$btn-name} {
         label {
             &::before {
@@ -247,7 +245,7 @@ $btn-color in (primary, var(--theme-deafult)),
 
         input[type="checkbox"] {
             &:checked {
-                &+label {
+                & + label {
                     &::before {
                         border-color: $btn-color;
                         color: $btn-color;
@@ -272,7 +270,7 @@ $btn-color in (primary, var(--theme-deafult)),
 
         input[type="checkbox"] {
             &:checked {
-                &+label {
+                & + label {
                     &::before {
                         background-color: $btn-color;
                         border-color: $btn-color;
@@ -289,7 +287,7 @@ $btn-color in (primary, var(--theme-deafult)),
 
     .radio-#{$btn-name} {
         input[type="radio"] {
-            &+label {
+            & + label {
                 &::before {
                     border-color: $btn-color;
                 }
@@ -300,7 +298,7 @@ $btn-color in (primary, var(--theme-deafult)),
             }
 
             &:checked {
-                &+label {
+                & + label {
                     &::before {
                         border-color: $btn-color;
                     }
@@ -377,28 +375,26 @@ $btn-color in (primary, var(--theme-deafult)),
         opacity: 0;
 
         &:focus {
-            &+label {
+            & + label {
                 &::before {
                     outline-offset: -2px;
                 }
-
             }
         }
 
         &:checked {
-            &+label {
+            & + label {
                 &::after {
                     -webkit-transform: scale(1, 1);
                     -ms-transform: scale(1, 1);
                     -o-transform: scale(1, 1);
                     transform: scale(1, 1);
                 }
-
             }
         }
 
         &:disabled {
-            &+label {
+            & + label {
                 opacity: 0.65;
 
                 &::before {
@@ -416,10 +412,9 @@ $btn-color in (primary, var(--theme-deafult)),
 .main-radio-toggle {
     .btn-check {
         &.radio-light-secondary {
-
             &:focus,
             &:checked {
-                +.btn {
+                + .btn {
                     box-shadow: 0 0 0 4px rgba(255, 51, 100, 0.55);
                     background-color: #ffe0e8 !important;
                 }
@@ -427,7 +422,7 @@ $btn-color in (primary, var(--theme-deafult)),
 
             &:hover,
             &:focus {
-                +.btn {
+                + .btn {
                     background-color: #ffe0e8 !important;
                 }
             }

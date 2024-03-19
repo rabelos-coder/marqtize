@@ -4,7 +4,7 @@ import { Link } from "@/navigation";
 import { PaginationMeta } from "@/types/common";
 
 type PaginationProps = {
-  meta?: PaginationMeta | undefined;
+  meta?: PaginationMeta | null | undefined;
 };
 
 export const Pagination = ({ meta }: PaginationProps) => {

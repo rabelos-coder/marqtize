@@ -28,7 +28,6 @@
     }
 
     h5 {
-
       &:not(.mb-0),
       &:not(.m-0) {
         margin-bottom: 0;
@@ -36,7 +35,7 @@
       }
     }
 
-    >span {
+    > span {
       font-size: $card-header-span-size;
       color: $card-header-span-color;
       margin-top: 5px;
@@ -69,7 +68,7 @@
             i {
               transition: 1s;
               font-size: 16px;
-              color: var(--theme-deafult);
+              color: var(--theme-default);
 
               &.icofont {
                 color: unset;
@@ -131,7 +130,7 @@
 
       i {
         margin: 0 auto;
-        color: var(--theme-deafult);
+        color: var(--theme-default);
         font-size: 20px;
       }
     }
@@ -237,7 +236,7 @@
         transition: all 0.3s ease;
 
         &:hover {
-          color: var(--theme-deafult);
+          color: var(--theme-default);
           transition: all 0.3s ease;
         }
       }
@@ -256,8 +255,8 @@
   .card-footer {
     padding: 0;
 
-    >div {
-      +div {
+    > div {
+      + div {
         border-left: 1px solid $light-semi-gray;
       }
 
@@ -330,7 +329,7 @@
       li {
         position: relative;
 
-        +li {
+        + li {
           &::before {
             position: absolute;
             content: "";
@@ -360,7 +359,7 @@
   }
 
   &-img-wrap {
-    background: linear-gradient(253deg, var(--theme-deafult) 11.51%, rgba(115, 102, 255, 0) 82.07%);
+    background: linear-gradient(253deg, var(--theme-default) 11.51%, rgba(115, 102, 255, 0) 82.07%);
     display: inline-block;
     border-radius: 100%;
     padding: 2px;

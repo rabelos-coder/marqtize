@@ -1,4 +1,4 @@
-@import '../utils/variables.scss';
+@import "../utils/variables.scss";
 @import "dropzone/dropzone";
 /*
  * The MIT License
@@ -9,7 +9,7 @@
   margin-right: auto;
   margin-left: auto;
   padding: 50px;
-  border: 2px dashed var(--theme-deafult);
+  border: 2px dashed var(--theme-default);
   border-radius: 15px;
   -webkit-border-image: none;
   -o-border-image: none;
@@ -24,7 +24,7 @@
 
   i {
     font-size: 50px;
-    color: var(--theme-deafult);
+    color: var(--theme-default);
   }
 
   position: relative;
@@ -43,7 +43,7 @@
     background-color: #eeeeee;
     width: 120px;
     height: 120px;
-    box-shadow: 0px 0px 3px var(--theme-deafult);
+    box-shadow: 0px 0px 3px var(--theme-default);
 
     .dz-progress {
       display: block;
@@ -68,7 +68,7 @@
       pointer-events: none;
 
       &:after {
-        content: '';
+        content: "";
         position: absolute;
         top: -6px;
         left: 64px;
@@ -81,7 +81,6 @@
     }
 
     &.dz-error {
-
       .dz-error-message,
       .dz-error-mark {
         display: block;

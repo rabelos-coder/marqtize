@@ -33,7 +33,7 @@
         font-size: 12px;
         color: $theme-body-sub-title-color;
 
-        +li {
+        + li {
           padding-left: 20px;
           line-height: 1;
           padding-right: 0;
@@ -342,7 +342,7 @@
 
     .rbt-input-wrapper {
       .rbt-token {
-        color: var(--theme-deafult);
+        color: var(--theme-default);
         background-color: var(--light-background);
       }
 

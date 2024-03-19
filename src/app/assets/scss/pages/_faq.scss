@@ -6,7 +6,6 @@
   height: 500px;
   border-radius: 15px;
   margin-bottom: 30px;
-
 }
 
 .knowledgebase-search {
@@ -80,7 +79,6 @@
 
 .features-faq {
   &.card {
-
     .card-body,
     .card-footer {
       padding: 20px 25px;
@@ -227,7 +225,7 @@
 .updates-faq {
   width: 40px;
   height: 40px;
-  border: 2px solid var(--theme-deafult);
+  border: 2px solid var(--theme-default);
   border-radius: 100%;
   display: flex;
   align-items: center;
@@ -235,7 +233,7 @@
   margin-right: 20px;
   min-width: 40px;
 
-  @media (max-width:575px) {
+  @media (max-width: 575px) {
     width: 30px;
     height: 30px;
     min-width: 30px;
@@ -245,7 +243,7 @@
     width: 18px;
     height: 18px;
 
-    @media (max-width:575px) {
+    @media (max-width: 575px) {
       width: 14px;
       height: 14px;
     }
@@ -256,7 +254,7 @@
   p {
     margin-bottom: 2px;
 
-    +p {
+    + p {
       color: $light-text;
     }
   }

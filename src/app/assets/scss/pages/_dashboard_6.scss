@@ -23,7 +23,6 @@
                                    min-width: 120px;
                               }
                          }
-
                     }
                }
           }
@@ -113,7 +112,7 @@
      }
 
      .decore {
-          @media (max-width:1199.98px) {
+          @media (max-width: 1199.98px) {
                display: none;
           }
 
@@ -177,7 +176,6 @@
 
      .apexcharts-tooltip {
           &.apexcharts-theme-light {
-
                .apexcharts-tooltip-title,
                .apexcharts-tooltip-goals-groupm,
                .apexcharts-tooltip-z-group {
@@ -194,7 +192,7 @@
 
 .sale-status-table {
      .table {
-          > :not(:last-child)> :last-child>* {
+          > :not(:last-child) > :last-child > * {
                border-bottom: none;
           }
      }
@@ -245,7 +243,6 @@
 }
 
 .arrow-round {
-
      .swiper-button-next,
      .swiper-button-prev {
           top: 55px;
@@ -258,7 +255,7 @@
 
           &::after {
                font-size: 14px;
-               color: var(--theme-deafult);
+               color: var(--theme-default);
           }
 
           @media (max-width: 991px) {
@@ -288,7 +285,7 @@
 
 .product-card {
      .product-image {
-          >img {
+          > img {
                width: 100%;
                border-radius: 4px;
                height: 6.875rem;
@@ -319,7 +316,7 @@
                          }
                     }
 
-                    +li {
+                    + li {
                          text-align: right;
                          border-left: 1px dashed var(--recent-dashed-border);
                     }
@@ -333,13 +330,12 @@
 }
 
 .artist-chart-wrap {
-     >div {
+     > div {
           margin-left: -15px;
           margin-right: -10px;
      }
 
      .apexcharts-tooltip {
-
           .apexcharts-tooltip-z-group,
           .apexcharts-tooltip-goals-group,
           .apexcharts-tooltip-text-y-label {
@@ -358,7 +354,6 @@
      margin-bottom: -25px;
 
      .apexcharts-tooltip {
-
           .apexcharts-tooltip-z-group,
           .apexcharts-tooltip-goals-group,
           .apexcharts-tooltip-text-y-label {
@@ -370,7 +365,7 @@
 .statistics-card {
      .d-flex {
           li {
-               +li {
+               + li {
                     padding-left: 15px;
                     margin-left: 15px;
                     border-left: 1px dashed var(--recent-dashed-border);
@@ -461,7 +456,6 @@
                }
           }
      }
-
 }
 
 .nft-table {

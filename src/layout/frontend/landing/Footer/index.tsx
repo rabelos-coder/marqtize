@@ -1,25 +1,19 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 
 import { APP_META_TITLE } from "@/environment";
-import { Link, usePathname } from "@/navigation";
+import { Link } from "@/navigation";
 
 import { FooterMenu } from "./FooterMenu";
 
 export const Footer = () => {
-  const pathname = usePathname();
-  const [color] = useState(
-    pathname === "/" ? "bg-light footer-light" : "bg-dark footer-dark"
-  );
-
   const t = useTranslations();
 
   return (
     <div id="layoutDefault_footer">
-      <footer className={`footer py-5 mt-auto ${color}`}>
+      <footer className={`footer py-5 mt-auto bg-dark footer-dark`}>
         <Container className="px-5">
           <FooterMenu />
           <Row className="gx-5 align-items-center">

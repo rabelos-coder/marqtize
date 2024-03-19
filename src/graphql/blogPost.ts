@@ -19,6 +19,7 @@ const FRAGMENT_BLOG_POST_PROPS = gql`
     author {
       id
       name
+      systemName
       image
     }
     tags {

@@ -10,8 +10,8 @@
     input {
         display: none;
 
-        &:checked+.switch-state {
-            background-color: var(--theme-deafult);
+        &:checked + .switch-state {
+            background-color: var(--theme-default);
 
             &.large-switch {
                 &::before {
@@ -24,8 +24,8 @@
             }
         }
 
-        &:focus+.switch-state {
-            box-shadow: 0 0 1px var(--theme-deafult);
+        &:focus + .switch-state {
+            box-shadow: 0 0 1px var(--theme-default);
         }
     }
 }
@@ -39,7 +39,7 @@
     right: 0;
     bottom: 0;
     background-color: $light-color;
-    transition: .4s;
+    transition: 0.4s;
 
     &:before {
         position: absolute;
@@ -49,7 +49,7 @@
         left: 4px;
         bottom: 4px;
         background-color: $white;
-        transition: .4s;
+        transition: 0.4s;
         border-radius: 20px;
     }
 
@@ -69,19 +69,18 @@
             position: absolute;
             top: 10px;
             color: $dark-color;
-            transition: .4s;
+            transition: 0.4s;
             opacity: 0.3;
         }
     }
 
     input {
-        &:checked+.switch-state {
+        &:checked + .switch-state {
             &:after {
                 content: "\efad";
                 left: 36px;
                 opacity: 1;
-                transition: .4s;
-
+                transition: 0.4s;
             }
         }
     }
@@ -114,7 +113,7 @@
         }
 
         input {
-            &:checked+.switch-state {
+            &:checked + .switch-state {
                 &:after {
                     left: 47px;
                 }
@@ -139,7 +138,7 @@
             }
 
             input {
-                &:checked+.switch-state {
+                &:checked + .switch-state {
                     &:after {
                         left: 13px;
                         top: 4px;
@@ -166,7 +165,7 @@
     }
 
     input {
-        &:checked+.switch-state {
+        &:checked + .switch-state {
             &:before {
                 left: -13px;
             }
@@ -177,8 +176,8 @@
 .switch-outline {
     .switch-state {
         background-color: $white;
-        border: 1px solid var(--theme-deafult);
-        transition: .4s;
+        border: 1px solid var(--theme-default);
+        transition: 0.4s;
 
         &:before {
             background-color: $light-color;
@@ -193,12 +192,12 @@
         input {
             display: none;
 
-            &:checked+.switch-state {
+            &:checked + .switch-state {
                 background-color: $transparent-color;
-                border: 1px solid var(--theme-deafult);
+                border: 1px solid var(--theme-default);
 
                 &:before {
-                    background-color: var(--theme-deafult);
+                    background-color: var(--theme-default);
                     bottom: 3px;
                     transform: translateX(26px);
                 }
@@ -213,18 +212,18 @@
 
 .switch-outline {
     .switch-state.bg-primary {
-        border: 1px solid var(--theme-deafult);
+        border: 1px solid var(--theme-default);
         background-color: $transparent-color !important;
     }
 
     .switch {
         input {
-            &:checked+.switch-state.bg-primary {
+            &:checked + .switch-state.bg-primary {
                 background-color: $transparent-color !important;
-                border: 1px solid var(--theme-deafult);
+                border: 1px solid var(--theme-default);
 
                 &:before {
-                    background-color: var(--theme-deafult);
+                    background-color: var(--theme-default);
                 }
             }
         }
@@ -237,7 +236,7 @@
 
     .switch {
         input {
-            &:checked+.switch-state.bg-dark {
+            &:checked + .switch-state.bg-dark {
                 background-color: $transparent-color !important;
                 border: 1px solid $dark-color;
 
@@ -255,7 +254,7 @@
 
     .switch {
         input {
-            &:checked+.switch-state.bg-warning {
+            &:checked + .switch-state.bg-warning {
                 background-color: $transparent-color !important;
                 border: 1px solid $warning-color;
 
@@ -273,7 +272,7 @@
 
     .switch {
         input {
-            &:checked+.switch-state.bg-success {
+            &:checked + .switch-state.bg-success {
                 background-color: $transparent-color !important;
                 border: 1px solid $success-color;
 
@@ -291,7 +290,7 @@
 
     .switch {
         input {
-            &:checked+.switch-state.bg-info {
+            &:checked + .switch-state.bg-info {
                 background-color: $transparent-color !important;
                 border: 1px solid $info-color;
 
@@ -309,7 +308,7 @@
 
     .switch {
         input {
-            &:checked+.switch-state.bg-danger {
+            &:checked + .switch-state.bg-danger {
                 background-color: $transparent-color !important;
                 border: 1px solid $danger-color;
 
@@ -321,18 +320,18 @@
     }
 
     .switch-state.bg-primary {
-        border: 1px solid var(--theme-deafult);
+        border: 1px solid var(--theme-default);
         background-color: $transparent-color !important;
     }
 
     .switch {
         input {
-            &:checked+.switch-state.bg-primary {
+            &:checked + .switch-state.bg-primary {
                 background-color: $transparent-color !important;
-                border: 1px solid var(--theme-deafult);
+                border: 1px solid var(--theme-default);
 
                 &:before {
-                    background-color: var(--theme-deafult);
+                    background-color: var(--theme-default);
                 }
             }
         }
@@ -345,7 +344,7 @@
 
     .switch {
         input {
-            &:checked+.switch-state.bg-secondary {
+            &:checked + .switch-state.bg-secondary {
                 background-color: $transparent-color !important;
                 border: 1px solid var(--theme-secondary);
 
@@ -374,12 +373,11 @@
 .form-switch {
     .form-check-input {
         &:checked {
-            background-color: var(--theme-deafult);
-            border-color: var(--theme-deafult);
+            background-color: var(--theme-default);
+            border-color: var(--theme-default);
         }
     }
 }
-
 
 // Custom design switches
 .tg-list {
@@ -398,7 +396,7 @@
     & *,
     & *:after,
     & *:before,
-    &+.tgl-btn {
+    & + .tgl-btn {
         box-sizing: border-box;
 
         &::selection {
@@ -406,7 +404,7 @@
         }
     }
 
-    +.tgl-btn {
+    + .tgl-btn {
         outline: 0;
         display: block;
         width: 4em;
@@ -433,31 +431,31 @@
         }
     }
 
-    &:checked+.tgl-btn:after {
+    &:checked + .tgl-btn:after {
         left: 50%;
     }
 }
 
 .tgl-skewed {
-    +.tgl-btn {
+    + .tgl-btn {
         overflow: hidden;
         transform: skew(-10deg);
         backface-visibility: hidden;
-        transition: all .2s ease;
+        transition: all 0.2s ease;
         background: $secondary-color;
 
         &:after,
         &:before {
             transform: skew(10deg);
             display: inline-block;
-            transition: all .2s ease;
+            transition: all 0.2s ease;
             width: 100%;
             text-align: center;
             position: absolute;
             line-height: 2em;
             font-weight: bold;
             color: #fff;
-            text-shadow: 0 1px 0 rgba(0, 0, 0, .4);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
         }
 
         &:after {
@@ -479,7 +477,7 @@
         }
     }
 
-    &:checked+.tgl-btn {
+    &:checked + .tgl-btn {
         background: $primary-color;
 
         &:before {
@@ -496,17 +494,16 @@
     }
 }
 
-
 .tgl-flip {
-    +.tgl-btn {
+    + .tgl-btn {
         padding: 2px;
-        transition: all .2s ease;
+        transition: all 0.2s ease;
         perspective: 100px;
 
         &:after,
         &:before {
             display: inline-block;
-            transition: all .4s ease;
+            transition: all 0.4s ease;
             width: 100%;
             text-align: center;
             position: absolute;
@@ -536,7 +533,7 @@
         }
     }
 
-    &:checked+.tgl-btn {
+    &:checked + .tgl-btn {
         &:before {
             transform: rotateY(180deg);
         }
@@ -553,13 +550,11 @@
     }
 }
 
-
 .radius-none {
     .form-check-input {
         border-radius: 3px;
     }
 }
-
 
 // Square Checked
 .tg-list {
@@ -567,7 +562,7 @@
         .square-checked {
             .switch-state {
                 &::before {
-                    content: '';
+                    content: "";
                     border-radius: 0;
                 }
             }
@@ -580,7 +575,6 @@
         .col-form-label {
             padding-bottom: 0;
         }
-
     }
 
     .tg-list {

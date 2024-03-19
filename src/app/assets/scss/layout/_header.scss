@@ -45,7 +45,6 @@
 
 /*======= Page Header css ends  ======= */
 
-
 /**======Main Header css Start ======**/
 .offcanvas,
 .offcanvas-bookmark {
@@ -99,9 +98,9 @@
       transition: all 0.3s ease;
     }
 
-    >svg {
-      color: var(--theme-deafult) !important;
-      stroke: var(--theme-deafult) !important;
+    > svg {
+      color: var(--theme-default) !important;
+      stroke: var(--theme-default) !important;
     }
   }
 }
@@ -139,7 +138,6 @@
   }
 }
 
-
 /**======Main Header css Ends ======**/
 
 /*=======Mega menu css start=======*/
@@ -166,7 +164,7 @@
   }
 
   div {
-    >div {
+    > div {
       a {
         margin-bottom: 0px;
         display: inline-block;

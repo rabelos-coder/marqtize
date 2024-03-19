@@ -141,7 +141,6 @@
 
       &:first-child {
         a {
-
           &:hover,
           &:active {
             color: $danger-color;
@@ -163,7 +162,7 @@
       cursor: pointer;
 
       &:hover {
-        color: var(--theme-deafult);
+        color: var(--theme-default);
       }
     }
   }
@@ -180,7 +179,6 @@
     }
   }
 }
-
 
 //Edit profile //
 .edit-profile {

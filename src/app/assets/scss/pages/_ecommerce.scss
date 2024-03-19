@@ -24,7 +24,7 @@
   svg {
     width: 50px;
     height: 25px;
-    stroke: var(--theme-deafult);
+    stroke: var(--theme-default);
     fill: #e8e5ff;
     margin-right: 10px;
   }
@@ -43,7 +43,7 @@
   }
 
   li {
-    &+li {
+    & + li {
       margin-top: 16px;
     }
   }
@@ -55,8 +55,6 @@
       }
     }
   }
-
-
 }
 
 .qty-box {
@@ -81,7 +79,7 @@
 
   .input-group {
     background-color: rgba($dark-color, 0.1);
-    // width:100px; 
+    // width:100px;
   }
 
   input {
@@ -117,7 +115,7 @@
       }
     }
 
-    &:nth-child(n+2) {
+    &:nth-child(n + 2) {
       margin-left: 10px;
 
       [dir="rtl"] & {
@@ -434,7 +432,7 @@
         }
       }
 
-      .owl-nav [class*='owl-'] {
+      .owl-nav [class*="owl-"] {
         &:hover {
           background-color: $transparent-color;
           color: inherit;
@@ -448,7 +446,7 @@
               padding: 25px 0;
             }
 
-            +.product-box {
+            + .product-box {
               margin-top: 15px;
             }
           }
@@ -497,7 +495,7 @@
   .product-details {
     padding: 15px 25px;
 
-    >a {
+    > a {
       color: $theme-body-font-color;
     }
 
@@ -632,15 +630,13 @@
           }
 
           &:hover {
-            background-color: var(--theme-deafult);
+            background-color: var(--theme-default);
             transition: all 0.3s ease;
 
             .btn,
             i {
               color: $white;
             }
-
-
           }
         }
       }
@@ -648,7 +644,6 @@
   }
 
   &:hover {
-
     .product-hover {
       opacity: 1;
       border-radius: 0%;
@@ -670,7 +665,7 @@
 
     &.current {
       .item {
-        border: 1px solid var(--theme-deafult);
+        border: 1px solid var(--theme-default);
       }
     }
   }
@@ -694,11 +689,7 @@
   .product-color {
     margin-top: 10px;
   }
-
-
 }
-
-
 
 .product-page-details {
   h4 {
@@ -714,7 +705,6 @@
 
 .br-theme-fontawesome-stars {
   .br-widget {
-
     a,
     a.br-selected:after,
     a.br-active:after {
@@ -728,7 +718,7 @@
   font-size: 18px;
   font-weight: 700;
   margin-top: 5px;
-  color: var(--theme-deafult);
+  color: var(--theme-default);
 
   del {
     color: rgba($dark-color, 0.4);
@@ -771,10 +761,10 @@
   }
 }
 
-.recent-sliders{
+.recent-sliders {
   .nav {
     &.nav-tabs {
-      &.nav-pills{
+      &.nav-pills {
         border: none !important;
       }
     }
@@ -785,7 +775,6 @@
   3.14 Ecommerce CSS End
 ==========================**/
 @media screen and (max-width: 1660px) and (min-width: 1200px) {
-
   .owl-carousel .owl-item img {
     max-width: 420px;
     margin: 0 auto;

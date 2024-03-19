@@ -14,7 +14,7 @@
 
       &:before {
         position: absolute;
-        content: '';
+        content: "";
         width: 80px;
         height: 1px;
         margin: 0 auto;
@@ -48,7 +48,7 @@
   &:before,
   &:after {
     content: "";
-    background-color: var(--theme-deafult);
+    background-color: var(--theme-default);
     width: 300px;
     height: 300px;
     border-radius: 50%;
@@ -57,14 +57,11 @@
     z-index: -1;
     opacity: 0.1;
   }
-
 }
-
-
 
 .pricingtable {
   &:after {
-    background-color: var(--theme-deafult);
+    background-color: var(--theme-default);
     height: 300px;
     width: 300px;
     top: auto;
@@ -81,7 +78,7 @@
 
   .price-value {
     color: $white;
-    background-color: var(--theme-deafult);
+    background-color: var(--theme-default);
     width: 130px;
     height: 130px;
     padding: 45px 0 0;
@@ -121,7 +118,7 @@
 
       &:before {
         content: "\f00c";
-        color: var(--theme-deafult);
+        color: var(--theme-default);
         font-family: FontAwesome;
         text-align: center;
         width: 20px;
@@ -135,17 +132,16 @@
   }
 }
 
-@media (max-width:1470px) {
+@media (max-width: 1470px) {
   .pricing-block {
-    >div {
+    > div {
       flex: 50%;
 
-      &:nth-child(n+3) {
+      &:nth-child(n + 3) {
         margin-top: 30px;
       }
     }
   }
-
 }
 
 @media only screen and (max-width: 991px) {
@@ -162,15 +158,12 @@
   }
 
   .pricing-block {
-    >div {
-      &:nth-child(n+2) {
+    > div {
+      &:nth-child(n + 2) {
         margin-top: 20px;
       }
     }
   }
-
-
-
 }
 
 @media only screen and (max-width: 575px) {
@@ -183,7 +176,7 @@
   }
 
   .pricing-block {
-    >div {
+    > div {
       flex: 100%;
     }
   }
@@ -192,8 +185,6 @@
     padding-top: 30px;
     padding-bottom: 30px;
   }
-
-
 }
 
 /**=====================

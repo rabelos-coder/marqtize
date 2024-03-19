@@ -64,7 +64,9 @@
   "getAnOverview": "Obtenha um overview da plataforma",
   "backToHomePage": "Voltar ao início",
   "backToPreviousPage": "Voltar à página anterior",
+  "backToBlog": "Voltar ao Blog",
   "back": "Voltar",
+  "shareWithName": "Compartilhe com {name}",
   "confirmation": "Confirmação",
   "loading": "Carregando",
   "general": "Geral",
@@ -690,11 +692,13 @@
     },
     "tags": {
       "title": "Tag",
-      "shortDescription": "Descubra conteúdo rico e diversificado em nosso blog com nossas tags exclusivas. Explore tópicos como #Ecommerce, #MarketingDigital, #Tendências, #DicasdeNegócio e muito mais para encontrar insights valiosos para o sucesso de sua jornada empresarial."
+      "title2": "Postagens por #{tag}",
+      "shortDescription": "Descubra conteúdo rico e diversificado em nosso blog com nossas tags exclusivas."
     },
     "categories": {
-      "title": "Category",
-      "shortDescription": "Explore nossas categorias de blog e mergulhe em uma variedade de tópicos interessantes. Descubra conteúdo inspirador sobre #Ecommerce, #MarketingDigital, #Empreendedorismo, #Tecnologia e muito mais para impulsionar sua jornada no mundo dos negócios."
+      "title": "Categoria",
+      "title2": "Postagens por {category}",
+      "shortDescription": "Explore nossas categorias de blog e mergulhe em uma variedade de tópicos interessantes."
     }
   },
   "eCommercePlatform": {

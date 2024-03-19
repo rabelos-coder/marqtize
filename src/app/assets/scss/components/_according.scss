@@ -10,7 +10,7 @@
         margin-bottom: 0;
         box-shadow: none;
 
-        &+.card {
+        & + .card {
             margin-top: $according-card-top-margin;
         }
 
@@ -21,7 +21,6 @@
         }
 
         .btn-link {
-
             &:focus,
             &:hover {
                 text-decoration: none;
@@ -98,7 +97,7 @@
         }
 
         &::after {
-            content: '';
+            content: "";
             background-image: unset;
         }
     }
@@ -121,23 +120,10 @@
     }
 }
 
-$accordion-light-name: primary,
-    secondary,
-    success,
-    warning,
-    info,
-    light,
-    danger,
-    dark;
+$accordion-light-name: primary, secondary, success, warning, info, light, danger, dark;
 
-$accordion-light-color: $light-primary,
-    $light-secondary,
-    $light-success,
-    $light-warning,
-    $light-info,
-    $light-white,
-    $light-danger,
-    $light-dark;
+$accordion-light-color: $light-primary, $light-secondary, $light-success, $light-warning, $light-info, $light-white,
+    $light-danger, $light-dark;
 
 @each $var in $accordion-light-name {
     $i: index($accordion-light-name, $var);
@@ -221,14 +207,13 @@ $accordion-light-color: $light-primary,
     2.1 According CSS Ends
 ==========================**/
 
-
-.tab-pane{
-    .row{
-        .accordion{
-            .accordion-item{
-                .accordion-header{
-                    button{
-                        color:  var(--theme-deafult) !important;;
+.tab-pane {
+    .row {
+        .accordion {
+            .accordion-item {
+                .accordion-header {
+                    button {
+                        color: var(--theme-default) !important;
                     }
                 }
             }

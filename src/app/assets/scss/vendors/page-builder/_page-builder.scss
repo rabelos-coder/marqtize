@@ -65,7 +65,7 @@
 
         .column {
           height: 10px;
-          background: var(--theme-deafult);
+          background: var(--theme-default);
           padding: 0;
           border-left: 3px solid $white;
         }
@@ -116,13 +116,13 @@
         margin: 0 0 5px;
         display: block;
 
-        >a {
+        > a {
           display: inline-block;
           padding: 5px;
 
           &:hover {
             cursor: pointer;
-            color: var(--theme-deafult) !important;
+            color: var(--theme-default) !important;
           }
         }
 
@@ -150,11 +150,11 @@
         margin-right: 0;
         border-radius: 4px;
 
-        >.ge-tools-drawer {
+        > .ge-tools-drawer {
           text-align: right;
           width: 100%;
 
-          >a {
+          > a {
             color: $gray-60;
             font-size: 11px;
           }
@@ -167,13 +167,13 @@
         padding: 15px;
         border-radius: 4px;
 
-        >.ge-tools-drawer {
+        > .ge-tools-drawer {
           a {
             color: $gray-60;
             font-size: 11px;
           }
 
-          >a.ge-add-row {
+          > a.ge-add-row {
             color: $dark-color;
           }
         }

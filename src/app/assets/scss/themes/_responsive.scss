@@ -3,7 +3,7 @@
 ==========================**/
 
 /* ========= min and max scss for 1200 to 1366 screen ========= */
-@media (max-width:1800px) {
+@media (max-width: 1800px) {
   .todo-wrap {
     .todo-list-body {
       .task-container {
@@ -20,7 +20,6 @@
     display: none;
   }
 }
-
 
 @media screen and (max-width: 1660px) {
   .photos {
@@ -59,7 +58,7 @@
           margin: 0 auto;
         }
 
-        >div {
+        > div {
           //height: 545px;
           z-index: 2;
           background-color: rgba(255, 255, 255, 0.75);
@@ -146,7 +145,6 @@
         }
 
         .page-body-wrapper {
-
           .sidebar-wrapper,
           .page-body {
             max-width: 1320px;
@@ -155,7 +153,6 @@
       }
     }
   }
-
 
   // chat page //
   .chat-box {
@@ -181,8 +178,6 @@
       }
     }
   }
-
-
 }
 
 @media (max-width: 1470px) {
@@ -192,7 +187,7 @@
         tbody {
           tr {
             td {
-              &:nth-child(n+2) {
+              &:nth-child(n + 2) {
                 min-width: 180px;
               }
             }
@@ -275,7 +270,6 @@
 }
 
 @media (max-width: 1280px) {
-
   .img-gallery-set1,
   .img-gallery-set5 {
     display: none;
@@ -295,7 +289,6 @@
 }
 
 @media screen and (max-width: 1580px) and (min-width: 1200px) {
-
   .docs-buttons,
   .docs-toggles {
     flex: 0 0 100%;
@@ -344,7 +337,7 @@
     }
 
     .card-footer {
-      >div {
+      > div {
         h3 {
           font-size: 18px;
         }
@@ -398,7 +391,6 @@
           }
         }
       }
-
     }
 
     .user-image {
@@ -502,7 +494,6 @@
     img {
       height: 50px;
     }
-
   }
 
   // email-app
@@ -616,8 +607,8 @@
 
 @media only screen and (max-width: 1366px) {
   .map-js-height {
-    .map-block{
-      >div{
+    .map-block {
+      > div {
         height: 348px !important;
       }
     }
@@ -659,7 +650,7 @@
   // alert page
   .alert-dismissible {
     strong {
-      &~p {
+      & ~ p {
         display: inline;
       }
     }
@@ -723,11 +714,6 @@
           }
         }
       }
-
-
-
-
-
     }
 
     .chat-history {
@@ -737,7 +723,6 @@
         }
       }
     }
-
   }
 
   .call-chat-body {
@@ -806,8 +791,6 @@
     }
   }
 
-
-
   //default dashboard
   .custom-card {
     padding: 15px;
@@ -825,7 +808,6 @@
     .chart-container {
       height: 300px;
     }
-
   }
 
   .speed-chart {
@@ -935,7 +917,6 @@
           }
         }
       }
-
     }
 
     .user-image {
@@ -1100,13 +1081,11 @@
   .page-wrapper {
     &.horizontal-wrapper {
       &.material-type {
-
         .page-header {
           max-width: 1140px;
         }
 
         .page-body-wrapper {
-
           .sidebar-wrapper,
           .page-body {
             max-width: 1140px;
@@ -1115,7 +1094,6 @@
       }
     }
   }
-
 }
 
 @media only screen and (max-width: 1199.98px) {
@@ -1152,7 +1130,7 @@
         margin-bottom: 0;
 
         .row {
-          >div {
+          > div {
             &:last-child {
               .card {
                 margin-bottom: 0;
@@ -1212,9 +1190,9 @@
     }
   }
 
-  .link-section>div {
+  .link-section > div {
     &.active {
-      >h6 {
+      > h6 {
         &:before {
           content: "\f107";
           transition: content 0.3s ease;
@@ -1222,7 +1200,7 @@
       }
     }
 
-    >h6 {
+    > h6 {
       position: relative;
 
       &:before {
@@ -1257,7 +1235,7 @@
           position: unset;
           padding: 0;
 
-          >ul {
+          > ul {
             li {
               .submenu {
                 li {
@@ -1383,7 +1361,7 @@
   .typography {
     .row {
       div {
-        &+div {
+        & + div {
           margin-top: 30px;
         }
       }
@@ -1393,8 +1371,8 @@
   .listing {
     .card-body {
       .row {
-        >div {
-          &+div {
+        > div {
+          & + div {
             margin-top: 30px;
           }
         }
@@ -1412,7 +1390,7 @@
     }
 
     .docs-toggles {
-      >.dropdown {
+      > .dropdown {
         margin-bottom: 0;
       }
     }
@@ -1448,7 +1426,7 @@
     &.dataTables_wrapper {
       div {
         &.dataTables_paginate {
-          &~.dataTables_filter {
+          & ~ .dataTables_filter {
             display: block;
             width: 100%;
             margin-top: 20px;
@@ -1474,7 +1452,7 @@
   .custom-card {
     .card-profile {
       .card-footer {
-        >div {
+        > div {
           h3 {
             font-size: 18px;
           }
@@ -1582,7 +1560,7 @@
 
   // eccommerce product
   .product-table {
-    table.dataTable thead>tr>th {
+    table.dataTable thead > tr > th {
       padding-right: 50px;
     }
   }
@@ -1678,7 +1656,7 @@
 
     .chat-history {
       .call-content {
-        >div {
+        > div {
           padding-top: 70px;
         }
       }
@@ -1720,7 +1698,7 @@
 
     .row {
       .col-xl-3 {
-        &+.col-xl-3 {
+        & + .col-xl-3 {
           padding-right: 15px;
         }
       }
@@ -1817,9 +1795,6 @@
       }
     }
   }
-
-
-
 }
 
 @media only screen and (max-width: 1199px) and (min-width: 992px) {
@@ -1831,7 +1806,6 @@
         }
 
         .page-body-wrapper {
-
           .sidebar-wrapper,
           .page-body {
             max-width: 930px;
@@ -1900,7 +1874,7 @@
                 li {
                   .sidebar-link {
                     &.active {
-                      ~.sidebar-submenu {
+                      ~ .sidebar-submenu {
                         display: none !important;
                       }
                     }
@@ -2044,7 +2018,6 @@
 
   #aniimated-thumbnials {
     figure {
-
       &:nth-child(12),
       &:nth-child(11),
       &:nth-child(10),
@@ -2061,7 +2034,6 @@
   // datatable css
   table {
     &.dataTable {
-
       &.fixedHeader-locked,
       &.fixedHeader-floating {
         left: 0 !important;
@@ -2162,7 +2134,7 @@
 
           .sidebar-main {
             .sidebar-links {
-              height: calc(100vh - 95px)
+              height: calc(100vh - 95px);
             }
           }
 
@@ -2236,10 +2208,9 @@
           .notification {
             top: 10px;
           }
-
         }
 
-        >.mobile-toggle {
+        > .mobile-toggle {
           cursor: pointer;
           display: flex;
           align-items: center;
@@ -2261,7 +2232,6 @@
   }
 
   .page-body-wrapper {
-
     .page-body,
     footer {
       margin-left: 0 !important;
@@ -2300,7 +2270,7 @@
   .crm-activity {
     > {
       li {
-        +li {
+        + li {
           margin-top: 10px;
           padding-top: 10px;
         }
@@ -2310,7 +2280,6 @@
 
   // add post page
   .add-post {
-
     .dropzone {
       margin-bottom: 20px;
     }
@@ -2349,7 +2318,6 @@
   }
 
   .timeline-content {
-
     p,
     .comments-box {
       margin-top: 20px;
@@ -2376,14 +2344,14 @@
   }
 
   .details-about {
-    +.details-about {
+    + .details-about {
       margin-top: 20px;
     }
   }
 
   .activity-log {
     .my-activity {
-      +.my-activity {
+      + .my-activity {
         margin-top: 20px;
       }
     }
@@ -2578,7 +2546,7 @@
 
   .typography {
     .h1 {
-      @media (max-width:1200px) {
+      @media (max-width: 1200px) {
         font-size: calc(16px + (34 - 16) * ((100vw - 320px) / (1200 - 320)));
       }
     }
@@ -2586,7 +2554,7 @@
     .h2 {
       font-size: 30px;
 
-      @media (max-width:1200px) {
+      @media (max-width: 1200px) {
         font-size: calc(18px + (30 - 18) * ((100vw - 320px) / (1200 - 320)));
       }
     }
@@ -2594,7 +2562,7 @@
     .h3 {
       font-size: 22px;
 
-      @media (max-width:1200px) {
+      @media (max-width: 1200px) {
         font-size: calc(17px + (22 - 17) * ((100vw - 320px) / (1200 - 320)));
       }
     }
@@ -2602,7 +2570,7 @@
     .h4 {
       font-size: 20px;
 
-      @media (max-width:1200px) {
+      @media (max-width: 1200px) {
         font-size: calc(15px + (20 - 15) * ((100vw - 320px) / (1200 - 320)));
       }
     }
@@ -2610,7 +2578,7 @@
     .h5 {
       font-size: 18px;
 
-      @media (max-width:1200px) {
+      @media (max-width: 1200px) {
         font-size: calc(13px + (18 - 13) * ((100vw - 320px) / (1200 - 320)));
       }
     }
@@ -2618,7 +2586,7 @@
     .h6 {
       font-size: 15px;
 
-      @media (max-width:1200px) {
+      @media (max-width: 1200px) {
         font-size: calc(12px + (15 - 12) * ((100vw - 320px) / (1200 - 320)));
       }
     }
@@ -2628,14 +2596,12 @@
     font-size: calc(20px + (34 - 20) * ((100vw - 320px) / (1200 - 320)));
   }
 
-
   h2 {
     font-size: calc(18px + (28 - 18) * ((100vw - 320px) / (1200 - 320)));
   }
 
   h3 {
     font-size: calc(17px + (26 - 17) * ((100vw - 320px) / (1200 - 320)));
-
   }
 
   h4 {
@@ -2672,7 +2638,7 @@
     .basic-calendar {
       .external-events {
         .fc-event {
-          &+.fc-event {
+          & + .fc-event {
             margin-top: 10px;
           }
         }
@@ -2683,7 +2649,7 @@
   .owl-theme {
     .owl-nav {
       &.disabled {
-        &+.owl-dots {
+        & + .owl-dots {
           margin-bottom: -10px;
           margin-top: 15px;
         }
@@ -2721,13 +2687,10 @@
     }
   }
 
-
   // search page //
   .search-list {
     justify-content: center;
   }
-
-
 
   //blog
   .blog-single {
@@ -2848,7 +2811,7 @@
           width: 50px;
         }
 
-        +li {
+        + li {
           a {
             padding-left: 65px;
 
@@ -2888,7 +2851,7 @@
   }
 
   .tab-content {
-    ~.nav-tabs {
+    ~ .nav-tabs {
       &.border-tab {
         margin-top: 20px;
       }
@@ -2909,14 +2872,14 @@
   // search page
   .search-page {
     .info-block {
-      +.info-block {
+      + .info-block {
         padding-top: 20px;
         margin-top: 20px;
       }
     }
 
     #video-links {
-      .embed-responsive+.embed-responsive {
+      .embed-responsive + .embed-responsive {
         margin-top: 20px;
       }
     }
@@ -2930,7 +2893,7 @@
     margin-bottom: -20px;
 
     a {
-      >div {
+      > div {
         margin-bottom: 20px;
       }
     }
@@ -3029,7 +2992,7 @@
 
   // summer-note page
   .click2edit {
-    &~.note-editor {
+    & ~ .note-editor {
       &.note-frame {
         margin-bottom: 20px;
       }
@@ -3066,7 +3029,6 @@
           .animated-modal-md-mb {
             margin-bottom: 20px !important;
           }
-
         }
       }
     }
@@ -3086,16 +3048,6 @@
       display: flex;
     }
   }
-
-
-
-
-
-
-
-
-
-
 }
 
 @media only screen and (max-width: 991px) and (min-width: 768px) {
@@ -3132,8 +3084,8 @@
     .page-header {
       .header-wrapper {
         .nav-right {
-          >ul {
-            >li {
+          > ul {
+            > li {
               .profile-media {
                 .media-body {
                   display: none;
@@ -3217,8 +3169,8 @@
       .page-header {
         .header-wrapper {
           .nav-right {
-            >ul {
-              >li {
+            > ul {
+              > li {
                 margin-right: -2px;
               }
             }
@@ -3236,7 +3188,7 @@
     .owl-carousel {
       .product-box {
         &.row {
-          >div {
+          > div {
             width: auto;
           }
         }
@@ -3254,7 +3206,7 @@
     .form-group:not(.form-control-search) {
       width: 100%;
 
-      +.form-group {
+      + .form-group {
         margin-top: 10px;
       }
 
@@ -3294,7 +3246,7 @@
             padding-right: 25px;
           }
 
-          +li {
+          + li {
             padding-left: 25px;
           }
         }
@@ -3303,7 +3255,7 @@
   }
 
   .footer-copyright {
-    ~div {
+    ~ div {
       text-align: center;
 
       p {
@@ -3312,7 +3264,6 @@
       }
     }
   }
-
 
   // button page //
   // .btn-showcase {
@@ -3360,7 +3311,6 @@
   // icon-compact layout page
   .my-gallery {
     figure {
-
       &:nth-child(9),
       &:nth-child(10) {
         margin-bottom: 20px;
@@ -3417,7 +3367,7 @@
 
     .chat-history {
       .call-content {
-        >div {
+        > div {
           padding-top: 40px;
           height: auto;
         }
@@ -3471,7 +3421,7 @@
   .form-builder-2-header {
     flex-wrap: wrap;
 
-    >div {
+    > div {
       width: 100%;
       margin-top: 10px;
 
@@ -3525,7 +3475,7 @@
         .ge-tools-drawer {
           margin: 10px 0 0 10px;
 
-          >a {
+          > a {
             padding: 0 5px;
           }
         }
@@ -3683,7 +3633,6 @@
     }
 
     .fc-events-container {
-
       h6,
       .checkbox {
         text-align: right;
@@ -3734,17 +3683,17 @@
       }
 
       .fc-toolbar {
-        >div {
+        > div {
           display: block !important;
           float: none !important;
         }
 
-        >* {
+        > * {
           :first-child {
             font-size: 18px;
           }
 
-          >* {
+          > * {
             float: none !important;
           }
         }
@@ -3872,7 +3821,6 @@
     }
   }
 
-
   //blog
   .blog-single {
     .comment-box {
@@ -3932,12 +3880,6 @@
     }
   }
 
-
-
-
-
-
-
   //authentication
   .authentication-main {
     .authentication-box {
@@ -3995,7 +3937,7 @@
     .icon-popup {
       display: block;
 
-      >.icon-last {
+      > .icon-last {
         display: block;
         margin-top: 15px;
 
@@ -4233,7 +4175,6 @@
 
   // gallery page
   .lg-outer {
-
     .lg-actions .lg-next,
     .lg-actions .lg-prev {
       top: 48%;
@@ -4369,13 +4310,12 @@
       }
     }
   }
-
 }
 
 @media only screen and (max-width: 575.98px) {
   .card {
     &.height-equal {
-      height: calc(100% - 20px)
+      height: calc(100% - 20px);
     }
   }
 
@@ -4434,8 +4374,8 @@
 
   .date-picker {
     .theme-form {
-      >.row {
-        >div {
+      > .row {
+        > div {
           &:last-child {
             margin-top: 0;
           }
@@ -4452,10 +4392,10 @@
 
   .form-bookmark {
     .row {
-      >div {
+      > div {
         .row {
-          >.col-sm-6 {
-            +.col-sm-6 {
+          > .col-sm-6 {
+            + .col-sm-6 {
               margin-top: 10px;
             }
           }
@@ -4507,7 +4447,7 @@
       }
     }
 
-    >div {
+    > div {
       width: 100%;
       text-align: center;
       padding: 15px;
@@ -4537,7 +4477,6 @@
     .text-xs-center {
       text-align: center;
     }
-
   }
 
   // Login page
@@ -4568,7 +4507,7 @@
       .btn {
         width: 100%;
 
-        +.btn {
+        + .btn {
           margin-left: 0;
           margin-top: 5px;
         }
@@ -4586,21 +4525,20 @@
           }
         }
 
-        &+li {
+        & + li {
           margin-left: 5px;
         }
       }
     }
   }
 
-  .page-wrapper .page-header .header-wrapper .nav-right>ul>li {
+  .page-wrapper .page-header .header-wrapper .nav-right > ul > li {
     padding: 4px 6px;
   }
 
   .page-header {
     .header-wrapper {
       .nav-right {
-
         .cart-box,
         .notification-box {
           .badge {
@@ -4613,7 +4551,7 @@
 
   .page-wrapper {
     .page-body-wrapper {
-      .page-title>.row {
+      .page-title > .row {
         .col-6 {
           &:first-child {
             display: block;
@@ -4650,7 +4588,6 @@
 
     &.compact-wrapper,
     &.compact-sidebar {
-
       .page-header {
         .header-wrapper {
           .logo-wrapper {
@@ -4685,7 +4622,7 @@
               .simplebar-mask {
                 .simplebar-content-wrapper {
                   .simplebar-content {
-                    >li {
+                    > li {
                       margin-right: 0;
                     }
                   }
@@ -4702,14 +4639,13 @@
         padding: 12px 15px !important;
 
         .nav-right {
-          >ul {
+          > ul {
             top: 58px;
 
             .search-form {
               i {
                 display: none;
               }
-
             }
           }
 
@@ -4723,9 +4659,8 @@
             }
           }
 
-          >ul {
+          > ul {
             li {
-
               .flag-icon {
                 font-size: 14px !important;
               }
@@ -4736,13 +4671,11 @@
                   height: 25px;
                 }
               }
-
             }
           }
 
           .notification-dropdown {
             &.onhover-show-div {
-
               &:before,
               &:after {
                 left: 24px !important;
@@ -4812,15 +4745,12 @@
           margin-right: 15px;
         }
       }
-
     }
 
     .dropzone {
       margin-bottom: 15px;
     }
   }
-
-
 
   //form-wizard-four page css
   .wizard-4 {
@@ -4911,7 +4841,6 @@
 
   #aniimated-thumbnials {
     figure {
-
       &:nth-child(12),
       &:nth-child(11),
       &:nth-child(10),
@@ -5043,7 +4972,6 @@
   }
 
   .timeline-content {
-
     p,
     .comments-box {
       margin-top: 15px;
@@ -5103,7 +5031,7 @@
     }
   }
 
-  .details-about+.details-about {
+  .details-about + .details-about {
     margin-top: 15px;
   }
 
@@ -5121,14 +5049,13 @@
           width: 18px;
           height: 18px;
         }
-
       }
     }
   }
 
   .activity-log {
     .my-activity {
-      +.my-activity {
+      + .my-activity {
         margin-top: 15px;
       }
     }
@@ -5146,12 +5073,11 @@
     }
   }
 
-
   // chat page //
   .chat-box {
     .chat-history {
       .call-content {
-        >div {
+        > div {
           padding-top: 30px;
         }
       }
@@ -5306,7 +5232,6 @@
     }
   }
 
-
   // editor_container //
   .editor_container {
     .CodeMirror {
@@ -5314,9 +5239,6 @@
       height: 190px;
     }
   }
-
-
-
 
   // order history //
   .order-history {
@@ -5328,7 +5250,6 @@
       }
     }
   }
-
 
   // tab material start
   .border-tab.nav-left {
@@ -5350,7 +5271,7 @@
   }
 
   .tab-content {
-    ~.nav-tabs {
+    ~ .nav-tabs {
       &.border-tab {
         margin-top: 10px;
       }
@@ -5381,7 +5302,7 @@
         font-size: 13px;
       }
 
-      &:nth-child(n+2) {
+      &:nth-child(n + 2) {
         margin-left: 5px;
 
         [dir="rtl"] & {
@@ -5485,11 +5406,11 @@
 
   div {
     &.table-responsive {
-      >div {
+      > div {
         &.dataTables_wrapper {
-          >div {
+          > div {
             &.row {
-              >div {
+              > div {
                 &[class^="col-"] {
                   &:last-child {
                     padding-left: 0 !important;
@@ -5519,7 +5440,6 @@
 
       table {
         &.dataTable {
-
           th,
           td {
             padding: 0.5rem;
@@ -5659,7 +5579,6 @@
     }
 
     .blog-details {
-
       p,
       .single-blog-content-top {
         margin-top: 15px;
@@ -5673,10 +5592,10 @@
         margin-top: 15px;
 
         li {
-          &+li {
+          & + li {
             padding-left: 20px;
 
-            >span {
+            > span {
               display: none;
             }
           }
@@ -5719,7 +5638,7 @@
   }
 
   .gallery {
-    >a {
+    > a {
       margin-bottom: 15px;
       text-align: center;
     }
@@ -5743,7 +5662,6 @@
     .page-body-wrapper {
       .default-according {
         .card {
-
           .card-header,
           .card-body,
           .card-footer {
@@ -5788,22 +5706,9 @@
   }
 
   /* alert responsive css start here */
-  $alert-name: primary,
-    secondary,
-    success,
-    danger,
-    warning,
-    info,
-    light,
-    dark;
-  $alert-color: var(--theme-deafult),
-    $secondary-color,
-    $success-color,
-    $danger-color,
-    $warning-color,
-    $info-color,
-    $light-color,
-    $dark-color;
+  $alert-name: primary, secondary, success, danger, warning, info, light, dark;
+  $alert-color: var(--theme-default), $secondary-color, $success-color, $danger-color, $warning-color, $info-color,
+    $light-color, $dark-color;
 
   @each $var in $alert-name {
     $i: index($alert-name, $var);
@@ -5867,7 +5772,7 @@
   //user card
   .custom-card {
     .card-footer {
-      >div {
+      > div {
         h6 {
           font-size: 14px;
           font-weight: 600;
@@ -5889,9 +5794,8 @@
     }
 
     a.fc-more {
-      font-size: .70em;
+      font-size: 0.7em;
     }
-
   }
 
   // megaoption page responsive scss
@@ -6127,7 +6031,6 @@
         }
       }
     }
-
   }
 
   // tilt
@@ -6217,7 +6120,7 @@
 
   // summer-note page
   .click2edit {
-    &~.note-editor {
+    & ~ .note-editor {
       &.note-frame {
         margin-bottom: 15px;
       }
@@ -6245,7 +6148,7 @@
   // gallery-with-description page
   .gallery-with-description {
     a {
-      >div {
+      > div {
         margin-bottom: 15px;
       }
     }
@@ -6255,7 +6158,6 @@
   .gallery-img-mb-sm {
     margin-bottom: 15px;
   }
-
 
   // peity chart page
   .xm-mb-peity {
@@ -6269,7 +6171,6 @@
 
   .translate_wrapper.active {
     .more_lang {
-
       &:before,
       &:after {
         display: none;
@@ -6350,11 +6251,9 @@
       margin-right: unset;
     }
   }
-
 }
 
 @media only screen and (max-width: 480px) {
-
   .wizard-4 {
     .step-container {
       width: 100%;
@@ -6405,7 +6304,7 @@
 
   .pagination-lg {
     .page-link {
-      font-size: 1.0rem;
+      font-size: 1rem;
     }
   }
 
@@ -6452,7 +6351,7 @@
       }
     }
 
-    >div:not(.chart-clock-main) {
+    > div:not(.chart-clock-main) {
       canvas {
         width: 245px !important;
         height: 245px !important;
@@ -6465,7 +6364,7 @@
       .btn {
         width: 100%;
 
-        &+.btn {
+        & + .btn {
           margin-top: 10px;
         }
       }
@@ -6528,7 +6427,7 @@
     padding: 0;
 
     .card-footer {
-      >div {
+      > div {
         h3 {
           font-size: 20px;
         }
@@ -6567,8 +6466,8 @@
         }
       }
 
-      >span {
-        &+span {
+      > span {
+        & + span {
           display: none;
         }
       }
@@ -6602,7 +6501,6 @@
   .dropup-basic {
     text-align: center;
   }
-
 
   //blog
   .blog-box.blog-shadow {
@@ -6684,7 +6582,6 @@
     width: 90%;
   }
 
-
   // chat page //
   .chat-box {
     .chat-right-aside {
@@ -6700,11 +6597,6 @@
       }
     }
   }
-
-
-
-
-
 }
 
 @media only screen and (max-width: 420px) {
@@ -6727,8 +6619,8 @@
     }
 
     span {
-      +span {
-        +span {
+      + span {
+        + span {
           padding: 15px;
         }
       }
@@ -6759,14 +6651,13 @@
     &.compact-sidebar {
       .page-body-wrapper {
         div.sidebar-wrapper {
-          >div {
+          > div {
             width: 112px;
           }
 
           .sidebar-main {
             .sidebar-links {
               li {
-
                 .sidebar-submenu,
                 .mega-menu-container {
                   left: 112px;
@@ -6782,14 +6673,13 @@
     &.compact-small {
       .page-body-wrapper {
         div.sidebar-wrapper {
-          >div {
+          > div {
             width: 80px;
           }
 
           .sidebar-main {
             .sidebar-links {
               li {
-
                 .sidebar-submenu,
                 .mega-menu-container {
                   left: 80px;
@@ -6813,14 +6703,12 @@
       }
     }
   }
-
-
 }
 
 @media only screen and (max-width: 360px) {
   .map-js-height {
-    .map-block{
-      >div{
+    .map-block {
+      > div {
         height: 252px !important;
       }
     }
@@ -6861,8 +6749,6 @@
         margin-top: 15px;
       }
     }
-
-
   }
 
   .datepicker--nav-action {
@@ -6871,7 +6757,7 @@
     background-color: transparent;
 
     path {
-      stroke: var(--theme-deafult);
+      stroke: var(--theme-default);
     }
   }
 
@@ -7021,7 +6907,7 @@
     }
 
     .card-footer {
-      >div {
+      > div {
         h6 {
           font-size: 12px;
         }
@@ -7106,7 +6992,6 @@
     }
   }
 
-
   // serach page //
   .search-page {
     .theme-form {
@@ -7162,9 +7047,6 @@
           margin-right: 5px;
         }
       }
-
-
-
     }
 
     .email-body {
@@ -7238,7 +7120,6 @@
       .title {
         line-height: 1;
       }
-
     }
   }
 
@@ -7301,7 +7182,6 @@
     }
   }
 
-
   // error 400 page
   .error-wrapper {
     .error-heading {
@@ -7321,7 +7201,7 @@
   // calender page
   .calendar-wrap {
     a.fc-more {
-      font-size: .59em;
+      font-size: 0.59em;
     }
 
     .fc {
@@ -7381,9 +7261,6 @@
       margin-top: 15px;
     }
   }
-
-
-
 }
 
 @media only screen and (min-width: 576px) {

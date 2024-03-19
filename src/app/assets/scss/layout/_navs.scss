@@ -2,7 +2,6 @@
     5.4 Navs CSS Start
 ==========================**/
 #accordionoc {
-
 	#collapseicon,
 	#collapseicon1 {
 		padding-top: 0px;
@@ -22,7 +21,7 @@
 			position: relative;
 
 			&:hover {
-				color: var(--theme-deafult) !important;
+				color: var(--theme-default) !important;
 			}
 		}
 
@@ -50,7 +49,7 @@
 			color: $theme-body-font-color;
 
 			&:hover {
-				color: var(--theme-deafult);
+				color: var(--theme-default);
 			}
 		}
 
@@ -64,7 +63,6 @@
 	&.navs-dropdown {
 		&:hover {
 			.onhover-show-div {
-
 				&:before,
 				&:after {
 					right: 77px;

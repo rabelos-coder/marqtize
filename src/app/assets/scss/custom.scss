@@ -43,7 +43,7 @@
 }
 
 .text-default {
-  color: var(--theme-deafult);
+  color: var(--theme-default);
 }
 
 .select2-input.has-error div div {
@@ -94,7 +94,7 @@
 .swal2-container {
   .swal2-actions {
     .swal2-confirm {
-      background-color: var(--theme-deafult) !important;
+      background-color: var(--theme-default) !important;
     }
     .swal2-deny {
       background-color: var(--bs-danger) !important;

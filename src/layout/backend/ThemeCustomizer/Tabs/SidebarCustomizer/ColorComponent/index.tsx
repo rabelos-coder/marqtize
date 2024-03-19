@@ -17,7 +17,7 @@ const ColorComponent = () => {
   useEffect(() => {
     if (typeof document !== "undefined") {
       document.documentElement.style.setProperty(
-        "--theme-deafult",
+        "--theme-default",
         colorBackground1
       );
       document.documentElement.style.setProperty(
@@ -54,7 +54,7 @@ const ColorComponent = () => {
     addColor(colorBackground1, colorBackground2);
     if (typeof document !== "undefined") {
       document.documentElement.style.setProperty(
-        "--theme-deafult",
+        "--theme-default",
         colorBackground1
       );
       document.documentElement.style.setProperty(

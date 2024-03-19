@@ -12,7 +12,6 @@ $url_4: url(/assets/images/button_builder/scroll.png);
 $url_5: url(/assets/images/button_builder/hex_bg.gif);
 $url_6: url(/assets/images/button_builder/btn-ok.png);
 
-
 .button-builder {
   %extend-col1 {
     background: $url_6 no-repeat scroll 0 0 $danger-color;
@@ -77,7 +76,7 @@ $url_6: url(/assets/images/button_builder/btn-ok.png);
     position: relative;
     z-index: 1;
     top: 3px;
-    border: 1px solid var(--theme-deafult);
+    border: 1px solid var(--theme-default);
     border-radius: 100%;
 
     &:hover {
@@ -85,7 +84,7 @@ $url_6: url(/assets/images/button_builder/btn-ok.png);
     }
 
     &.selected {
-      background-color: var(--theme-deafult);
+      background-color: var(--theme-default);
     }
 
     input[type="radio"] {
@@ -201,7 +200,7 @@ $url_6: url(/assets/images/button_builder/btn-ok.png);
     position: absolute;
     top: 133px;
     width: 75px;
-    background-color: var(--theme-deafult);
+    background-color: var(--theme-default);
     border-radius: 5px;
 
     &:before {
@@ -285,7 +284,7 @@ $url_6: url(/assets/images/button_builder/btn-ok.png);
     }
 
     a {
-      background-color: var(--theme-deafult);
+      background-color: var(--theme-default);
       color: $white;
       font-weight: bold;
       display: inline-block;

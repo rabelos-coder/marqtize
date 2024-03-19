@@ -2,12 +2,14 @@
 
 import "../../../app/assets/scss/landing.scss";
 
-// import AOS from "aos";
+import { useLocale } from "next-intl";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
 import { SpinnerBoxed } from "@/components/common/SpinnerBoxed";
 import { TapTop } from "@/components/common/TapTop";
+import { RECAPTCHA_SITE_KEY } from "@/environment";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { GuestLayout } from "@/layout/common/GuestLayout";
 import { AuthProvider } from "@/providers/AuthProvider";
@@ -22,6 +24,7 @@ type LandingProps = {
 };
 
 export const LandingLayout = ({ navbarExpanded, children }: LandingProps) => {
+  const locale = useLocale();
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.theme);
 
@@ -32,7 +35,10 @@ export const LandingLayout = ({ navbarExpanded, children }: LandingProps) => {
   }, [dispatch]);
 
   return (
-    <>
+    <ReCaptchaProvider
+      reCaptchaKey={RECAPTCHA_SITE_KEY}
+      language={locale === "pt-br" ? "pt-BR" : locale}
+    >
       {loading ? (
         <SpinnerBoxed color="primary" />
       ) : (
@@ -50,6 +56,6 @@ export const LandingLayout = ({ navbarExpanded, children }: LandingProps) => {
         </GuestLayout>
       )}
       <ToastContainer position="bottom-right" />
-    </>
+    </ReCaptchaProvider>
   );
 };

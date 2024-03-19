@@ -34,7 +34,7 @@
 		}
 
 		.progress-bar {
-			background-color: var(--theme-deafult);
+			background-color: var(--theme-default);
 		}
 	}
 }
@@ -50,7 +50,7 @@
 
 	&::after {
 		position: absolute;
-		content: '';
+		content: "";
 		top: -2px;
 		right: -9px;
 		background-color: $primary-color;
@@ -101,18 +101,18 @@
 	}
 
 	25% {
-		transform: scale(.1);
+		transform: scale(0.1);
 		opacity: 1;
 	}
 
 	50% {
-		transform: scale(.5);
-		opacity: .3;
+		transform: scale(0.5);
+		opacity: 0.3;
 	}
 
 	75% {
-		transform: scale(.8);
-		opacity: .5;
+		transform: scale(0.8);
+		opacity: 0.5;
 	}
 
 	100% {

@@ -336,15 +336,12 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                 </>
               ) : (
                 <NavItem>
-                  <Button
-                    type="button"
-                    color="primary"
-                    className="text-uppercase"
-                    tag={Link}
+                  <a
+                    className="btn btn-primary text-uppercase"
                     href="/auth/login"
                   >
                     {t("signIn")}
-                  </Button>
+                  </a>
                 </NavItem>
               )}
             </Nav>

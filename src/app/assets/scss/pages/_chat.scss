@@ -1,21 +1,21 @@
-  /**=====================
+/**=====================
      14. Chat CSS Start
 ==========================**/
 .chat-box {
-  .toogle-bar{
+  .toogle-bar {
     display: none;
   }
   .chat-menu {
-    max-width:340px;
+    max-width: 340px;
   }
   .people-list {
-    .search{
+    .search {
       position: relative;
-      .form-control{
+      .form-control {
         background-color: $light-body-bg-color;
         border: 1px solid $light-color;
-        &::placeholder{
-            color: $semi-dark;
+        &::placeholder {
+          color: $semi-dark;
         }
       }
       i {
@@ -27,10 +27,10 @@
       }
     }
     ul {
-      padding:0;
+      padding: 0;
       li {
         padding-bottom: 20px;
-        &:last-child{
+        &:last-child {
           padding-bottom: 0;
         }
       }
@@ -57,32 +57,32 @@
     letter-spacing: 1px;
     font-size: 12px;
     margin-top: 5px;
-    .chat-status{
-      font-weight:600;
+    .chat-status {
+      font-weight: 600;
       color: $theme-body-font-color;
     }
-    p{
-      font-size:14px;
+    p {
+      font-size: 14px;
     }
   }
-  .chat-right-aside{
+  .chat-right-aside {
     .chat {
       .chat-header {
-        padding:15px;
-        border-bottom:1px solid $light-color;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
+        padding: 15px;
+        border-bottom: 1px solid $light-color;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         img {
           float: left;
           width: 50px;
           height: 50px;
           box-shadow: 1px 1px 4px 1px $light-gray;
         }
-        .chat-menu-icons{
-          li{
-           margin-right:24px;     
-            a i{
+        .chat-menu-icons {
+          li {
+            margin-right: 24px;
+            a i {
               color: $theme-body-sub-title-color;
               font-size: 25px;
               cursor: pointer;
@@ -90,21 +90,20 @@
           }
         }
 
-        .chat-menu-icons{
-          margin-left:auto;
+        .chat-menu-icons {
+          margin-left: auto;
           [dir="rtl"] & {
             margin-right: auto;
             margin-left: unset;
           }
         }
-
       }
       .chat-msg-box {
         padding: 20px;
         overflow-y: auto;
         height: 560px;
         margin-bottom: 80px;
-        .chat-user-img{
+        .chat-user-img {
           margin-top: -35px;
         }
         .message-data {
@@ -131,7 +130,7 @@
           border-top-left-radius: 0;
         }
         .other-message {
-          background-color: $light ;
+          background-color: $light;
           border-radius: 10px;
           border-top-right-radius: 0;
         }
@@ -143,23 +142,23 @@
         width: calc(100% - 15px);
         background-color: $white;
         bottom: 0;
-        .smiley-box{
+        .smiley-box {
           background: $light-semi-gray;
           padding: 10px;
           display: block;
           border-radius: 4px;
           margin-right: 0.5rem;
         }
-        .text-box{
+        .text-box {
           position: relative;
           .input-txt-bx {
             height: 50px;
-            border: 2px solid var(--theme-deafult);
+            border: 2px solid var(--theme-default);
             padding-left: 18px;
             font-size: 12px;
             letter-spacing: 1px;
           }
-          i{
+          i {
             position: absolute;
             right: 20px;
             top: 20px;
@@ -167,11 +166,11 @@
             color: $light-gray;
             cursor: pointer;
           }
-          .btn{
+          .btn {
             font-size: 16px;
             font-weight: 500;
             padding: 0.74rem 1.75rem;
-            border-radius: 0 5px 5px 0; 
+            border-radius: 0 5px 5px 0;
           }
         }
       }
@@ -182,11 +181,11 @@
     .tab-pane {
       padding: 0 15px;
     }
-    ul{
-      li{
-        .about{
-          .status{
-            i{
+    ul {
+      li {
+        .about {
+          .status {
+            i {
               font-size: 10px;
             }
           }
@@ -195,18 +194,20 @@
     }
     .user-profile {
       margin-top: 30px;
-      .user-content{
-        h5{
+      .user-content {
+        h5 {
           margin: 25px 0;
         }
-        hr{
+        hr {
           margin: 25px 0;
         }
-        p{
+        p {
           font-size: 16px;
         }
       }
-      .border-tab.nav-tabs .nav-item .nav-link.active, .border-tab.nav-tabs .nav-item .nav-link.show, .border-tab.nav-tabs .nav-item .nav-link:focus{
+      .border-tab.nav-tabs .nav-item .nav-link.active,
+      .border-tab.nav-tabs .nav-item .nav-link.show,
+      .border-tab.nav-tabs .nav-item .nav-link:focus {
         border-bottom: 0;
       }
       .image {
@@ -253,125 +254,126 @@
         font-size: 15px;
         padding: 0 7px;
       }
-      .chat-profile-contact{
-        p{
-          font-size:14px;
-          color:$semi-dark;
+      .chat-profile-contact {
+        p {
+          font-size: 14px;
+          color: $semi-dark;
         }
       }
     }
-    .nav{
+    .nav {
       margin-bottom: 20px;
     }
     .nav-tabs .nav-item {
-      width:33.33%;
+      width: 33.33%;
       a {
-        padding: 15px!important;
-        color: $semi-dark!important;
+        padding: 15px !important;
+        color: $semi-dark !important;
         letter-spacing: 1px;
         font-size: 14px;
         font-weight: 500;
         height: 60px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-      .material-border{
-        border-width:1px;
-        border-color:var(--theme-deafult);
+      .material-border {
+        border-width: 1px;
+        border-color: var(--theme-default);
       }
       .nav-link.active {
-        color: $black!important;
+        color: $black !important;
       }
     }
   }
-  .chat-history{
-     .call-content {
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       min-width: 300px;
-     }
-     .total-time h2 {
-       font-size: 50px;
-       color: $light-semi-gray;
-       font-weight: 600;
-       margin-bottom: 30px;
-     }
-     .receiver-img{
-       margin-top: 55px;
-       img{
-          border-radius: 5px;
-       }
-     }
-     .call-icons{
-       margin-bottom: 35px;
-       ul{
-         li {
-           width: 60px;
-           height: 60px;
-           border: 1px solid $light-color;
-           border-radius: 50%;
-           padding: 12px;
-           cursor: pointer;
-           + li{
-             margin-left: 10px;
-           }
-           a {
-             color: #999;
-             font-size: 25px;
-           }
-         }
-       }
-     }
-   }
+  .chat-history {
+    .call-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 300px;
+    }
+    .total-time h2 {
+      font-size: 50px;
+      color: $light-semi-gray;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+    .receiver-img {
+      margin-top: 55px;
+      img {
+        border-radius: 5px;
+      }
+    }
+    .call-icons {
+      margin-bottom: 35px;
+      ul {
+        li {
+          width: 60px;
+          height: 60px;
+          border: 1px solid $light-color;
+          border-radius: 50%;
+          padding: 12px;
+          cursor: pointer;
+          + li {
+            margin-left: 10px;
+          }
+          a {
+            color: #999;
+            font-size: 25px;
+          }
+        }
+      }
+    }
+  }
 }
-.chat-left-aside{
-  > .media{
+.chat-left-aside {
+  > .media {
     margin-bottom: 15px;
   }
-  .people-list{
+  .people-list {
     height: 625px;
   }
-  ul li{
+  ul li {
     position: relative;
   }
 }
-.status-circle{
+.status-circle {
   width: 12px;
   height: 12px;
   position: absolute;
-  top:4px;
-  left:44px;
+  top: 4px;
+  left: 44px;
   border-radius: 50%;
-  border:2px solid $white;
+  border: 2px solid $white;
 }
-.away{
+.away {
   background-color: $warning-color;
 }
-.online{
+.online {
   background-color: $success-color;
 }
-.offline{
+.offline {
   background-color: $danger-color;
 }
-.chat-container{
-  .aside-chat-left{
-    width:320px;
+.chat-container {
+  .aside-chat-left {
+    width: 320px;
   }
-  .chat-right-aside{
-    width:320px;
+  .chat-right-aside {
+    width: 320px;
   }
 }
-.call-chat-sidebar{
+.call-chat-sidebar {
   max-width: 320px;
 }
-.call-chat-sidebar,.chat-body{
-    .card{
-        .card-body{
-            padding: 15px;
-        }
+.call-chat-sidebar,
+.chat-body {
+  .card {
+    .card-body {
+      padding: 15px;
     }
+  }
 }
 /**=====================
     14.  Chat CSS Ends

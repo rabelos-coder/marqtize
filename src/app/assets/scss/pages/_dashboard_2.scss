@@ -124,11 +124,11 @@
 
 .appointment {
   .customer-table {
-    @media (max-width:1470px) {
+    @media (max-width: 1470px) {
       height: 268px;
     }
 
-    @media (max-width:1399px) {
+    @media (max-width: 1399px) {
       height: unset;
     }
   }
@@ -184,7 +184,7 @@
       h6 {
         a {
           transition: 0.5s;
-          color: var(--theme-deafult);
+          color: var(--theme-default);
         }
       }
     }
@@ -202,15 +202,15 @@
     margin: -10px -16px 0;
   }
 
-  @media (max-width:1500px) {
+  @media (max-width: 1500px) {
     margin: -10px -14px 0;
   }
 
-  @media (max-width:1472px) {
+  @media (max-width: 1472px) {
     margin: -10px -20px 0;
   }
 
-  @media (max-width:1424px) {
+  @media (max-width: 1424px) {
     margin: -10px -25px 0;
   }
 
@@ -314,7 +314,7 @@
     svg {
       width: 18px;
       height: 18px;
-      fill: var(--theme-deafult);
+      fill: var(--theme-default);
     }
   }
 }
@@ -352,7 +352,7 @@
     transition: 0.5s;
 
     &.active {
-      border: 1px solid var(--theme-deafult);
+      border: 1px solid var(--theme-default);
     }
 
     &:hover {
@@ -379,7 +379,6 @@
     }
 
     tr {
-
       td,
       th {
         padding: 12px 8px;
@@ -440,7 +439,7 @@
         .product-content {
           h6 {
             a {
-              color: var(--theme-deafult);
+              color: var(--theme-default);
               transition: 0.5s;
             }
           }
@@ -602,7 +601,6 @@
 .new-update {
   .media {
     .media-body {
-
       span,
       p {
         font-weight: 500;
@@ -611,15 +609,10 @@
   }
 }
 
-@each $activity-dot-name,
-$activity-dot-color in (primary, $primary-color),
-(secondary, $secondary-color),
-(success, $success-color),
-(danger, $danger-color),
-(info, $info-color),
-(light, $light-color),
-(dark, $dark-color),
-(warning, $warning-color) {
+@each $activity-dot-name, $activity-dot-color in (primary, $primary-color), (secondary, $secondary-color),
+  (success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color), (dark, $dark-color),
+  (warning, $warning-color)
+{
   .activity-dot-#{$activity-dot-name} {
     min-width: 6px;
     height: 6px;
@@ -639,7 +632,6 @@ $activity-dot-color in (primary, $primary-color),
     position: relative;
     z-index: 2;
   }
-
 }
 
 // responsive

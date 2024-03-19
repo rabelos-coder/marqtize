@@ -16,7 +16,9 @@
         align-items: center;
         justify-content: center;
         border-radius: 5px;
-        box-shadow: inset 2.66667px -2.66667px 2.66667px rgba(194, 128, 49, 0.1), inset -2.66667px 2.66667px 2.66667px rgba(255, 255, 255, 0.1);
+        box-shadow:
+            inset 2.66667px -2.66667px 2.66667px rgba(194, 128, 49, 0.1),
+            inset -2.66667px 2.66667px 2.66667px rgba(255, 255, 255, 0.1);
 
         svg {
             width: 16px;
@@ -33,11 +35,11 @@
             gap: 10px;
             justify-content: space-between;
 
-            @media (max-width:1660px) {
+            @media (max-width: 1660px) {
                 flex-wrap: wrap;
             }
 
-            @media (max-width:575px) {
+            @media (max-width: 575px) {
                 flex-wrap: unset;
             }
         }
@@ -71,7 +73,7 @@
         border-radius: 10px;
         width: 115px;
 
-        @media (max-width:1660px) and (min-width: 1200px) {
+        @media (max-width: 1660px) and (min-width: 1200px) {
             display: none;
         }
 
@@ -113,7 +115,7 @@
     }
 
     &.height-equal {
-        @media (max-width:1399px) {
+        @media (max-width: 1399px) {
             min-height: unset !important;
         }
     }
@@ -159,7 +161,7 @@
     }
 
     .deposit-wrap {
-        >div {
+        > div {
             width: 65%;
 
             @media (max-width: 1660px) {
@@ -342,7 +344,7 @@
             color: var(--chart-text-color);
 
             &.active {
-                color: var(--theme-deafult);
+                color: var(--theme-default);
             }
         }
     }
@@ -355,7 +357,7 @@
         margin: -24px -15px -24px 0;
     }
 
-    @media (max-width:575px) {
+    @media (max-width: 575px) {
         margin-bottom: 0;
     }
 }
@@ -366,7 +368,7 @@
     }
 
     .custom-tab {
-        @media (max-width:575px) {
+        @media (max-width: 575px) {
             display: none;
         }
     }
@@ -407,13 +409,13 @@
 
     &.dark-green {
         svg {
-            fill: #1BA27A;
+            fill: #1ba27a;
         }
     }
 
     &.light-blue {
         svg {
-            fill: #038DE7;
+            fill: #038de7;
         }
     }
 }
@@ -424,7 +426,7 @@
             td {
                 &:first-child {
                     h6 {
-                        color: var(--theme-deafult);
+                        color: var(--theme-default);
                     }
                 }
             }
@@ -443,7 +445,7 @@
             }
 
             .badge-light-primary {
-                background-color: var(--theme-deafult);
+                background-color: var(--theme-default);
                 color: $white;
             }
         }
@@ -504,14 +506,13 @@ select {
 
 .crypto-form {
     input {
-
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
 
-        &[type=number] {
+        &[type="number"] {
             -moz-appearance: textfield;
         }
     }
@@ -546,7 +547,7 @@ select {
             align-items: center;
             justify-content: center;
             border: 2px solid var(--white);
-            background-color: #DFDFF4;
+            background-color: #dfdff4;
             right: 0;
             bottom: 0;
             border-radius: 100%;
@@ -574,10 +575,10 @@ select {
         li {
             position: relative;
 
-            +li {
+            + li {
                 &::before {
                     position: absolute;
-                    content: '';
+                    content: "";
                     left: -25px;
                     top: 50%;
                     height: 40px;
@@ -604,11 +605,11 @@ select {
 
 .activity-card {
     .appointment-table {
-        @media (max-width:1399px) {
+        @media (max-width: 1399px) {
             height: 180px;
         }
 
-        @media (max-width:575px) {
+        @media (max-width: 575px) {
             height: unset;
         }
 
@@ -708,14 +709,12 @@ select {
     }
 
     table {
-
         tr,
         td {
             border-style: dashed;
         }
 
         tr {
-
             td,
             th {
                 &:first-child {

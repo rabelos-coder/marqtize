@@ -2,7 +2,6 @@
     3.2 Bookmark-app CSS Start
 ==========================**/
 .modal-bookmark {
-
   .modal-body,
   .modal-header {
     padding: 30px;
@@ -19,8 +18,8 @@
 .bookmark-wrap {
   .details-bookmark {
     .row {
-      >div {
-        +div {
+      > div {
+        + div {
           padding-right: 15px !important;
         }
       }
@@ -53,8 +52,8 @@
           vertical-align: middle;
         }
 
-        >.main-title {
-          color: var(--theme-deafult);
+        > .main-title {
+          color: var(--theme-default);
           font-weight: 500;
           margin-bottom: 5px;
           display: block;
@@ -75,7 +74,7 @@
         }
 
         a {
-          >.title {
+          > .title {
             text-transform: capitalize;
           }
         }
@@ -100,7 +99,7 @@
 .form-bookmark {
   a {
     text-transform: capitalize !important;
-    color: var(--theme-deafult) !important;
+    color: var(--theme-default) !important;
     line-height: 1 !important;
     font-weight: 500;
 
@@ -225,7 +224,7 @@
               li {
                 display: inline-block;
 
-                +li {
+                + li {
                   margin-left: 5px;
                 }
 
@@ -263,9 +262,9 @@
 
     &.list-bookmark {
       .row {
-        >div {
+        > div {
           flex: 0 0 100%;
-          max-width: 100%
+          max-width: 100%;
         }
       }
 
@@ -320,7 +319,7 @@
 
               &::after {
                 position: absolute;
-                content: '-';
+                content: "-";
                 right: 0;
                 color: $dark-gray;
               }
@@ -359,7 +358,7 @@
           li {
             display: inline-block;
 
-            +li {
+            + li {
               margin-left: 5px;
             }
           }
@@ -368,14 +367,14 @@
     }
 
     .tab-pane {
-      >.card {
+      > .card {
         box-shadow: none;
       }
     }
   }
 }
 
-// responsive 
+// responsive
 @media only screen and (max-width: 1660px) {
   .bookmark-tabcontent {
     .details-bookmark {
@@ -454,13 +453,11 @@
 
 @media only screen and (max-width: 991px) {
   .modal-bookmark {
-
     .modal-body,
     .modal-header {
       padding: 20px;
     }
   }
-
 }
 
 @media only screen and (max-width: 767px) {
@@ -553,13 +550,11 @@
   }
 
   .modal-bookmark {
-
     .modal-body,
     .modal-header {
       padding: 15px;
     }
   }
-
 }
 
 /**=====================

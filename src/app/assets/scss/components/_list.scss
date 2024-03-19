@@ -2,8 +2,8 @@
    2.20 List CSS Start
 ==========================**/
 .list-group-item.active {
-	background-color: var(--theme-deafult);
-	border-color: var(--theme-deafult);
+	background-color: var(--theme-default);
+	border-color: var(--theme-default);
 }
 
 .list-group {
@@ -18,23 +18,10 @@
 	}
 }
 
-$list-name: primary,
-	secondary,
-	success,
-	warning,
-	info,
-	light,
-	danger,
-	dark;
+$list-name: primary, secondary, success, warning, info, light, danger, dark;
 
-$list-light-color: $light-primary,
-	$light-secondary,
-	$light-success,
-	$light-warning,
-	$light-info,
-	$light-white,
-	$light-danger,
-	$light-dark;
+$list-light-color: $light-primary, $light-secondary, $light-success, $light-warning, $light-info, $light-white,
+	$light-danger, $light-dark;
 
 @each $var in $list-name {
 	$i: index($list-name, $var);
@@ -119,18 +106,18 @@ $list-light-color: $light-primary,
 		gap: 12px;
 	}
 
-	@media (max-width:575px) {
+	@media (max-width: 575px) {
 		&:first-child {
 			margin-bottom: 14px;
 		}
 	}
 
 	img {
-		@media (max-width:1999px) {
+		@media (max-width: 1999px) {
 			height: 86px;
 		}
 
-		@media (max-width:992px) {
+		@media (max-width: 992px) {
 			height: 70px;
 		}
 	}
@@ -138,7 +125,7 @@ $list-light-color: $light-primary,
 	.flex-grow-1 {
 		margin-left: 16px;
 
-		@media (max-width:1199px) {
+		@media (max-width: 1199px) {
 			margin-left: 0;
 
 			p {
@@ -161,13 +148,13 @@ $list-light-color: $light-primary,
 }
 
 .list-behaviors {
-	>div:nth-child(even) {
+	> div:nth-child(even) {
 		.flex-grow-1 {
 			order: -1;
 			margin-left: unset;
 			margin-right: 16px;
 
-			@media (max-width:1199px) {
+			@media (max-width: 1199px) {
 				margin-left: 0;
 				margin-right: 0;
 				order: unset;
@@ -195,9 +182,8 @@ $list-light-color: $light-primary,
 	}
 }
 
-
 .contact-profile {
-	@media (max-width:1216px) {
+	@media (max-width: 1216px) {
 		background-color: unset;
 
 		&.list-light-dark {
@@ -207,7 +193,6 @@ $list-light-color: $light-primary,
 		}
 	}
 }
-
 
 .badge-list {
 	.list-group-item {
@@ -224,9 +209,7 @@ $list-light-color: $light-primary,
 				margin-left: auto;
 				margin-right: 8px;
 			}
-
 		}
-
 	}
 }
 

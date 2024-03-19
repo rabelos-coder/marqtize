@@ -91,7 +91,7 @@
   width: 100%;
   overflow: hidden;
   background-color: $white;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .Typeahead-menu.is-open {
@@ -184,7 +184,7 @@
 
 .ProfileCard.is-active {
   color: $white;
-  background: var(--theme-deafult);
+  background: var(--theme-default);
 
   .ProfileCard-screenName {
     color: $white;

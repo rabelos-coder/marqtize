@@ -16,7 +16,7 @@ export const GuestLayout = ({ children }: ChildrenProps) => {
   useEffect(() => {
     if (typeof document !== "undefined") {
       document.documentElement.style.setProperty(
-        "--theme-deafult",
+        "--theme-default",
         colorBackground1
       );
       document.documentElement.style.setProperty(

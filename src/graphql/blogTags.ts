@@ -5,17 +5,16 @@ import { WhereAndOrderInput } from "@/types/common";
 
 const FRAGMENT_BLOG_TAG_PROPS = gql`
   fragment BlogTagProps on BlogTag {
+    id
     name
     slug
+    createdAt
+    updatedAt
+    deletedAt
     posts {
+      id
       slug
       title
-      isPublished
-      publishedAt
-      categories {
-        name
-        slug
-      }
     }
   }
 `;

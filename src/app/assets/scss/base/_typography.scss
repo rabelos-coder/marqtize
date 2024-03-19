@@ -25,7 +25,7 @@ ul {
 }
 
 * a {
-    color: var(--theme-deafult);
+    color: var(--theme-default);
     text-decoration: none;
     letter-spacing: 1px;
 }
@@ -37,12 +37,12 @@ ul {
 a {
     font-size: 0.875rem;
     text-decoration: none;
-    color: var(--theme-deafult);
+    color: var(--theme-default);
     transition: 0.5s all;
     cursor: pointer;
 
     &:hover {
-        color: var(--theme-deafult);
+        color: var(--theme-default);
         transition: all 0.5s all;
     }
 
@@ -93,7 +93,6 @@ blockquote {
         blockquote {
             border: none !important;
         }
-
     }
 
     &.text-end {
@@ -105,7 +104,7 @@ blockquote {
 }
 
 .row {
-    >div {
+    > div {
         position: relative;
     }
 }
@@ -130,7 +129,7 @@ input {
 }
 
 label {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 }
 
 .media-widgets {
@@ -143,7 +142,6 @@ label {
 
 //Typography CSS start
 .typography {
-
     h1,
     .h1,
     h2,
@@ -187,7 +185,7 @@ pre {
             &.active,
             &:hover {
                 span {
-                    background: var(--theme-deafult);
+                    background: var(--theme-default);
                 }
             }
         }
@@ -195,7 +193,7 @@ pre {
 
     .owl-nav {
         &.disabled {
-            &+.owl-dots {
+            & + .owl-dots {
                 margin-bottom: -10px;
                 margin-top: 25px;
             }
@@ -204,7 +202,7 @@ pre {
 }
 
 .click2edit {
-    &~.note-editor {
+    & ~ .note-editor {
         &.note-frame {
             margin-bottom: 30px;
         }
@@ -272,7 +270,7 @@ pre {
     button {
         top: 45px !important;
         right: 20px !important;
-        color: var(--theme-deafult);
+        color: var(--theme-default);
 
         [dir="rtl"] & {
             right: unset !important;
@@ -281,10 +279,10 @@ pre {
     }
 
     span {
-        +span {
-            +span {
+        + span {
+            + span {
                 background-color: $white;
-                color: var(--theme-deafult);
+                color: var(--theme-default);
                 border-radius: 4px;
                 box-shadow: 0 2px 14px -3px rgba($black, 0.2);
             }
@@ -292,7 +290,7 @@ pre {
     }
 
     .close {
-        color: var(--theme-deafult);
+        color: var(--theme-default);
     }
 
     i {
@@ -307,18 +305,18 @@ pre {
         width: 100%;
 
         .progress-bar {
-            background-color: var(--theme-deafult);
+            background-color: var(--theme-default);
         }
     }
 }
 
 .alert-copy {
-    border: 1px solid var(--theme-deafult);
+    border: 1px solid var(--theme-default);
     line-height: 1;
     display: inline-block;
     width: 300px;
     color: $white;
-    background-color: var(--theme-deafult);
+    background-color: var(--theme-default);
 
     .close {
         box-shadow: none;
@@ -363,10 +361,10 @@ pre {
 .irs-from,
 .irs-to,
 .irs-single {
-    background: var(--theme-deafult);
+    background: var(--theme-default);
 
     &:after {
-        border-top-color: var(--theme-deafult);
+        border-top-color: var(--theme-default);
     }
 }
 
@@ -375,12 +373,12 @@ pre {
 .irs-line-right,
 .irs-bar,
 .irs-bar-edge {
-    background-color: var(--theme-deafult);
+    background-color: var(--theme-default);
 }
 
 // sweetalert css
 .swal-button {
-    background-color: var(--theme-deafult);
+    background-color: var(--theme-default);
 
     &:active {
         background-color: darken($primary-color, 5%);
@@ -388,7 +386,7 @@ pre {
 }
 
 .swal-button--cancel {
-    background-color: #EFEFEE !important;
+    background-color: #efefee !important;
 }
 
 .clipboaard-container {
@@ -399,11 +397,10 @@ pre {
 }
 
 fieldset {
-
     .bootstrap-touchspin-postfix,
     .bootstrap-touchspin-prefix {
         border-radius: 0;
-        padding: .4rem .75rem;
+        padding: 0.4rem 0.75rem;
     }
 
     .input-group-lg {

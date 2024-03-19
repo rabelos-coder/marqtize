@@ -2,12 +2,10 @@
   4.3 Update CSS Start
 ==========================**/
 
-
 @import "../utils/variables";
 
 // jsgrid css
 .jsgrid-filter-row {
-
     select,
     input {
         padding: 6px 10px;
@@ -370,7 +368,7 @@ button[data-toggle="dropdown"] {
                 left: unset;
             }
 
-            @media (max-width:1200px) {
+            @media (max-width: 1200px) {
                 left: 14px;
 
                 [dir="rtl"] & {
@@ -388,7 +386,7 @@ button[data-toggle="dropdown"] {
                 left: 24px;
             }
 
-            @media (max-width:1200px) {
+            @media (max-width: 1200px) {
                 right: 14px;
 
                 [dir="rtl"] & {
@@ -435,7 +433,6 @@ button[data-toggle="dropdown"] {
     .carousel-control-next-icon {
         width: calc(23px + (32 - 23) * ((100vw - 320px) / (1920 - 320)));
         height: calc(23px + (32 - 23) * ((100vw - 320px) / (1920 - 320)));
-
     }
 }
 
@@ -446,23 +443,21 @@ button[data-toggle="dropdown"] {
 
     .slick-dots {
         li {
-
             button {
                 zoom: 2;
 
-                @media (max-width:1400px) {
+                @media (max-width: 1400px) {
                     zoom: 1.5;
                 }
 
                 &::before {
-                    color: var(--theme-deafult);
+                    color: var(--theme-default);
                 }
             }
         }
     }
 
     .slick-arrow {
-
         &.slick-next,
         &.slick-prev {
             display: none !important;
@@ -470,11 +465,9 @@ button[data-toggle="dropdown"] {
     }
 
     &.dark-slider {
-
         .slick-dots {
             li {
                 button {
-
                     &::before {
                         color: var(--body-font-color);
                     }
@@ -483,7 +476,6 @@ button[data-toggle="dropdown"] {
         }
 
         .slick-arrow {
-
             &.slick-next,
             &.slick-prev {
                 display: block !important;
@@ -506,7 +498,7 @@ button[data-toggle="dropdown"] {
     }
 }
 
-// Rating 
+// Rating
 .rating-header {
     h4 {
         [dir="rtl"] & {
@@ -545,7 +537,7 @@ button[data-toggle="dropdown"] {
 
 .animated-modal {
     .form-select {
-        @media (max-width:442px) {
+        @media (max-width: 442px) {
             width: 100% !important;
         }
     }
@@ -607,12 +599,12 @@ button[data-toggle="dropdown"] {
     }
 }
 
-// map-js 
+// map-js
 .map-z-index {
     z-index: 1;
 }
 
-// Notification slider 
+// Notification slider
 .notification-slider {
     .d-flex {
         [dir="rtl"] & {
@@ -628,17 +620,16 @@ button[data-toggle="dropdown"] {
             .ck-toolbar__items {
                 .ck-button {
                     &.ck-on {
-                        color: var(--theme-deafult);
+                        color: var(--theme-default);
                         background-color: var(--chart-progress-light);
                         border: var(--recent-dashed-border);
 
                         &:hover,
                         &:active,
                         &:focus {
-                            color: var(--theme-deafult);
+                            color: var(--theme-default);
                             background-color: var(--chart-progress-light);
                             border: var(--recent-dashed-border);
-
                         }
                     }
                 }
@@ -653,12 +644,12 @@ button[data-toggle="dropdown"] {
         }
     }
 
-    .ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    .ck-editor__main > .ck-editor__editable:not(.ck-focused) {
         border-color: var(--chart-dashed-border) !important;
     }
 
     .ck-toolbar {
-        .ck-toolbar_grouping>.ck-toolbar__items {
+        .ck-toolbar_grouping > .ck-toolbar__items {
             background-color: $dark-body-background;
         }
 
@@ -694,7 +685,7 @@ button[data-toggle="dropdown"] {
     }
 }
 
-// Crypto dashboard 
+// Crypto dashboard
 .radial-progress-card {
     &.main-radial-progress {
         .radial-chart-wrap {
@@ -709,7 +700,6 @@ button[data-toggle="dropdown"] {
     }
 }
 
-
 // Chart js(polar chart)
 .chart-block-container {
     &.radar-chartjs {
@@ -718,7 +708,7 @@ button[data-toggle="dropdown"] {
                 height: 300px;
                 width: 300px;
 
-                @media (max-width:420px) {
+                @media (max-width: 420px) {
                     height: 300px;
                     width: 200px;
                 }

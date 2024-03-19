@@ -1,16 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import { BsArrowRight, BsCart, BsCreditCard } from "react-icons/bs";
 import { FaCheckCircle, FaCircle, FaQuestionCircle } from "react-icons/fa";
-import { FiActivity, FiUser } from "react-icons/fi";
+import { FiUser } from "react-icons/fi";
 import { Badge, Card, CardBody, Col, Container, List, Row } from "reactstrap";
 
 import { SvgBorder } from "@/components/frontend/common/SvgBorder";
 import { Header } from "@/layout/frontend/landing/Header";
 import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 import { Link } from "@/navigation";
-
-import GoogleIcon from "../assets/svg/google.svg";
-import InstagramIcon from "../assets/svg/instagram.svg";
 
 export default async function HomePage({ params: { locale } }: any) {
   const t = await getTranslations({ locale });
@@ -482,145 +479,7 @@ export default async function HomePage({ params: { locale } }: any) {
             </Col>
           </Row>
         </Container>
-        <SvgBorder className="text-white" />
-      </section>
-      <section id="testimonials" className="bg-white pt-10">
-        <Container className="px-5">
-          <Row className="gx-5 mb-10 hidden-lg">
-            <Col
-              lg={6}
-              className="mb-5 mb-lg-0 divider-right aos-init aos-animate"
-              data-aos="fade"
-            >
-              <div className="testimonial p-lg-5">
-                <div className="testimonial-brand text-gray-400">
-                  <GoogleIcon />
-                </div>
-                <p className="testimonial-quote text-muted">
-                  "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                  error vel omnis adipisci. Ad nam officiis sapiente dicta
-                  incidunt harum."
-                </p>
-                <div className="testimonial-name">Adam Hall</div>
-                <div className="testimonial-position">Head of Engineering</div>
-              </div>
-            </Col>
-            <Col
-              lg={6}
-              className="aos-init aos-animate"
-              data-aos="fade"
-              data-aos-delay="100"
-            >
-              <div className="testimonial p-lg-5">
-                <div className="testimonial-brand text-gray-400">
-                  <InstagramIcon />
-                </div>
-                <p className="testimonial-quote text-muted">
-                  "Adipisci mollitia nemo magnam iure, temporibus molestiae
-                  odit, sit harum dolores neque maiores quo eligendi nam
-                  corrupti."
-                </p>
-                <div className="testimonial-name">Lia Peterson</div>
-                <div className="testimonial-position">
-                  Technical Project Manager
-                </div>
-              </div>
-            </Col>
-          </Row>
-          <Row className="gx-5">
-            <Col
-              lg={6}
-              className="col-lg-6 mb-lg-n10 mb-5 mb-lg-0 z-1 aos-init aos-animate"
-              data-aos="fade-right"
-            >
-              <Card
-                className="text-decoration-none h-100 lift"
-                href="#about"
-                tag={Link}
-              >
-                <CardBody className="py-5">
-                  <div className="d-flex align-items-center">
-                    <div className="icon-stack icon-stack-xl bg-primary text-white flex-shrink-0">
-                      <FiActivity className="feather feather-activity" />
-                    </div>
-                    <div className="ms-4">
-                      <h5 className="text-primary">
-                        {t("workSmarterNotHarder")}
-                      </h5>
-                      <p className="card-text text-gray-600">
-                        {t("workSmarterNotHarderDescription")}
-                      </p>
-                    </div>
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col
-              lg={6}
-              className="mb-lg-n10 z-1 aos-init aos-animate"
-              data-aos="fade-left"
-            >
-              <Card
-                className="text-decoration-none h-100 lift"
-                href="#pricing"
-                tag={Link}
-              >
-                <CardBody className="py-5">
-                  <div className="d-flex align-items-center">
-                    <div className="icon-stack icon-stack-xl bg-secondary text-white flex-shrink-0">
-                      <FiUser
-                        width="24"
-                        height="24"
-                        className="feather feather-user"
-                      />
-                    </div>
-                    <div className="ms-4">
-                      <h5 className="text-secondary">
-                        {t("builtForCustomers")}
-                      </h5>
-                      <p className="card-text text-gray-600">
-                        {t("builtForCustomersDescription")}
-                      </p>
-                    </div>
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-        <SvgBorder className="text-light" />
-      </section>
-      <section id="get-in-touch" className="bg-light py-10">
-        <Container className="px-5 mt-5">
-          <Row className="gx-5 align-items-center">
-            <Col lg={6} className="aos-init aos-animate" data-aos="fade-up">
-              <h4>{t("readyToGetStarted")}</h4>
-              <p className="lead mb-5 mb-lg-0 text-gray-500">
-                {t("readyToGetStartedDescription")}
-              </p>
-            </Col>
-            <Col
-              lg={6}
-              className="text-lg-end aos-init aos-animate"
-              data-aos="fade-up"
-            >
-              <Link
-                color="primary"
-                className="btn btn-secondary fw-500 me-3 my-2"
-                href="#!"
-              >
-                {t("contactSales")}
-              </Link>
-              <Link
-                color="white"
-                className="btn btn-primary fw-500 my-2 shadow"
-                href="/auth/register"
-              >
-                {t("createAccount")}
-              </Link>
-            </Col>
-          </Row>
-        </Container>
+        <SvgBorder className="text-dark" />
       </section>
       <hr className="m-0" />
     </LandingLayout>

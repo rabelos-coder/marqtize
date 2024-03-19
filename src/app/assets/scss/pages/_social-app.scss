@@ -42,7 +42,7 @@
   }
 
   .card-footer {
-    >div {
+    > div {
       h3 {
         font-size: 16px;
       }
@@ -144,7 +144,7 @@
 
       &:hover {
         a {
-          color: var(--theme-deafult);
+          color: var(--theme-default);
         }
       }
     }
@@ -262,7 +262,7 @@
     }
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       top: 19px;
       right: 100%;
@@ -271,7 +271,7 @@
     }
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       top: 19px;
       right: 100%;
@@ -340,7 +340,7 @@
     }
 
     .social-status {
-      content: '';
+      content: "";
       position: absolute;
       width: 12px;
       height: 12px;
@@ -369,7 +369,7 @@
       }
 
       span {
-        +span {
+        + span {
           color: $light-text;
         }
       }
@@ -398,7 +398,7 @@
 }
 
 .details-about {
-  +.details-about {
+  + .details-about {
     margin-top: 30px;
   }
 
@@ -438,7 +438,7 @@
 
 .activity-log {
   .my-activity {
-    +.my-activity {
+    + .my-activity {
       margin-top: 30px;
     }
 

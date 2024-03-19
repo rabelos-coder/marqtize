@@ -2,6 +2,7 @@ import Image from "next/image";
 import { AlignCenter } from "react-feather";
 import { Col } from "reactstrap";
 
+import { APP_META_TITLE } from "@/environment";
 import { useLayout } from "@/hooks";
 import { Link } from "@/navigation";
 
@@ -16,14 +17,14 @@ export const Leftbar = () => {
             <Image
               className="img-fluid for-light"
               src={`/assets/images/logo/marqtize_logo.png`}
-              alt=""
+              alt={APP_META_TITLE}
               width={100}
               height={100}
             />
             <Image
               className="img-fluid for-dark"
               src={`/assets/images/logo/marqtize_logo_dark.png`}
-              alt=""
+              alt={APP_META_TITLE}
               width={100}
               height={100}
             />

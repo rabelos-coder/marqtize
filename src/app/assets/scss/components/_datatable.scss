@@ -64,8 +64,8 @@ div {
   &.dataTables_wrapper {
     button {
       background-color: white;
-      border: 1px solid var(--theme-deafult);
-      color: var(--theme-deafult);
+      border: 1px solid var(--theme-default);
+      color: var(--theme-default);
     }
   }
 }
@@ -101,7 +101,7 @@ div {
     color: $white;
   }
 
-  &+.dataTables_wrapper {
+  & + .dataTables_wrapper {
     margin-top: 20px;
   }
 
@@ -116,13 +116,13 @@ div {
 
       &.current,
       &:active {
-        background: var(--theme-deafult);
+        background: var(--theme-default);
         color: $white !important;
         box-shadow: none;
       }
 
       &:hover {
-        border: 1px solid var(--theme-deafult);
+        border: 1px solid var(--theme-default);
         color: $dark-color !important;
         background: transparent !important;
       }
@@ -146,7 +146,6 @@ div {
     border: 1px solid $light-semi-gray;
 
     tbody {
-
       td,
       th {
         &.select-checkbox {
@@ -167,7 +166,6 @@ div {
     }
 
     thead {
-
       th,
       td {
         border-bottom: 2px solid $light-semi-gray;
@@ -205,9 +203,9 @@ table {
   }
 
   .box {
-    >div {
+    > div {
       padding: 5px 15px;
-      background-color: var(--theme-deafult);
+      background-color: var(--theme-default);
       display: inline-block;
       color: $white;
       border-radius: 5px;
@@ -217,7 +215,6 @@ table {
   }
 
   &.dataTable {
-
     &.fixedHeader-locked,
     &.fixedHeader-floating {
       width: calc(100vw - 250px) !important;
@@ -240,13 +237,11 @@ table {
     margin-top: 0 !important;
 
     thead {
-
       .sorting,
       .sorting_asc,
       .sorting_desc,
       .sorting_asc_disabled,
       .sorting_desc_disabled {
-
         &:before,
         &:after {
           bottom: 12px !important;
@@ -264,7 +259,6 @@ table {
 
 .user-datatable {
   tr {
-
     td,
     th {
       &:first-child {
@@ -307,7 +301,7 @@ table {
 
 .toolbar {
   padding: 5px 15px;
-  background-color: var(--theme-deafult);
+  background-color: var(--theme-default);
   display: inline-block;
   color: $white;
   border-radius: 5px;
@@ -331,8 +325,8 @@ code {
     .page-item {
       &.active {
         .page-link {
-          background-color: var(--theme-deafult) !important;
-          border-color: var(--theme-deafult) !important;
+          background-color: var(--theme-default) !important;
+          border-color: var(--theme-default) !important;
           color: $white;
         }
       }
@@ -354,7 +348,7 @@ code {
 
       .page-link {
         margin-left: 0px;
-        color: var(--theme-deafult);
+        color: var(--theme-default);
       }
     }
 
@@ -370,8 +364,8 @@ code {
     div.dt-button.active:not(.disabled),
     a.dt-button:active:not(.disabled),
     a.dt-button.active:not(.disabled) {
-      background-color: var(--theme-deafult);
-      border-color: var(--theme-deafult);
+      background-color: var(--theme-default);
+      border-color: var(--theme-default);
       border-radius: 2px;
       color: $white;
       background-image: none;
@@ -388,42 +382,41 @@ code {
     button.dt-button.btn-primary,
     div.dt-button.btn-primary,
     a.dt-button.btn-primary {
-      background-color: var(--theme-deafult);
-      border-color: var(--theme-deafult);
+      background-color: var(--theme-default);
+      border-color: var(--theme-default);
     }
 
     button.dt-button.btn-danger,
     div.dt-button.btn-danger,
     a.dt-button.btn-danger {
       background-color: $danger-color;
-      border-color: $danger-color
+      border-color: $danger-color;
     }
 
     table.dataTable th.focus,
     table.dataTable td.focus {
-      outline: 3px solid var(--theme-deafult);
+      outline: 3px solid var(--theme-default);
     }
 
-    table.dataTable.display tbody>tr.odd.selected>.sorting_1,
-    table.dataTable.order-column.stripe tbody>tr.odd.selected>.sorting_1 {
-      background-color: lighten($primary-color, 38%);
-
-    }
-
-    table.dataTable.stripe tbody>tr.odd.selected,
-    table.dataTable.stripe tbody>tr.odd>.selected,
-    table.dataTable.display tbody>tr.odd.selected,
-    table.dataTable.display tbody>tr.odd>.selected {
+    table.dataTable.display tbody > tr.odd.selected > .sorting_1,
+    table.dataTable.order-column.stripe tbody > tr.odd.selected > .sorting_1 {
       background-color: lighten($primary-color, 38%);
     }
 
-    table.dataTable.display tbody>tr.even.selected>.sorting_1,
-    table.dataTable.order-column.stripe tbody>tr.even.selected>.sorting_1 {
+    table.dataTable.stripe tbody > tr.odd.selected,
+    table.dataTable.stripe tbody > tr.odd > .selected,
+    table.dataTable.display tbody > tr.odd.selected,
+    table.dataTable.display tbody > tr.odd > .selected {
       background-color: lighten($primary-color, 38%);
     }
 
-    table.dataTable tbody>tr.selected,
-    table.dataTable tbody>tr>.selected {
+    table.dataTable.display tbody > tr.even.selected > .sorting_1,
+    table.dataTable.order-column.stripe tbody > tr.even.selected > .sorting_1 {
+      background-color: lighten($primary-color, 38%);
+    }
+
+    table.dataTable tbody > tr.selected,
+    table.dataTable tbody > tr > .selected {
       background-color: lighten($primary-color, 38%);
     }
   }
@@ -434,16 +427,16 @@ td.highlight {
 }
 
 td.details-control {
-  background: url('/assets/images/details_open.png') no-repeat center center;
+  background: url("/assets/images/details_open.png") no-repeat center center;
   cursor: pointer;
 }
 
 tr.shown td.details-control {
-  background: url('/assets/images/details_close.png') no-repeat center center;
+  background: url("/assets/images/details_close.png") no-repeat center center;
 }
 
 .dataTables_scroll {
-  &~.dataTables_paginate {
+  & ~ .dataTables_paginate {
     margin-top: 20px !important;
   }
 }
@@ -467,7 +460,7 @@ table {
       tbody {
         tr {
           &.odd {
-            >.sorting_1 {
+            > .sorting_1 {
               background-color: $light;
             }
 
@@ -549,7 +542,7 @@ table {
               background-color: #fafafa;
             }
 
-            &:nth-child(n+2) {
+            &:nth-child(n + 2) {
               background-color: #fff;
             }
           }
@@ -561,7 +554,7 @@ table {
               background-color: #fff;
             }
 
-            &:nth-child(n+2) {
+            &:nth-child(n + 2) {
               background-color: #fafafa;
             }
           }
@@ -577,9 +570,7 @@ table {
         }
       }
     }
-
   }
-
 
   .IgpLZ,
   .kvgeKk {

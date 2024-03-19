@@ -33,11 +33,11 @@
         vertical-align: -5px;
 
         .icon-trash {
-          color: var(--theme-deafult);
+          color: var(--theme-default);
         }
 
         .icon-check {
-          color: var(--theme-deafult);
+          color: var(--theme-default);
         }
       }
     }
@@ -105,7 +105,6 @@
     .todo-list-footer {
       position: relative;
 
-
       h5 {
         text-align: center;
         color: $light-semi-gray;
@@ -113,7 +112,7 @@
 
       .add-task-btn {
         &:hover {
-          background: var(--theme-deafult);
+          background: var(--theme-default);
 
           .icon {
             color: $light-color;
@@ -121,7 +120,7 @@
         }
 
         .icon {
-          color: var(--theme-deafult);
+          color: var(--theme-default);
           font-size: 20px;
         }
       }
@@ -260,7 +259,7 @@
 
         &.completed .task-container {
           .complete-btn {
-            border: 1px solid var(--theme-deafult);
+            border: 1px solid var(--theme-default);
             border-radius: 4px;
 
             .icon {
@@ -279,7 +278,7 @@
 
           .task-label {
             text-decoration: line-through;
-            color: var(--theme-deafult);
+            color: var(--theme-default);
           }
         }
 
@@ -386,8 +385,8 @@
   &.email-wrap {
     .email-app-sidebar {
       .main-menu {
-        >li {
-          +li {
+        > li {
+          + li {
             padding-top: 12px;
           }
 

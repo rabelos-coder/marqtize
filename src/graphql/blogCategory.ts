@@ -5,21 +5,16 @@ import { WhereAndOrderInput } from "@/types/common";
 
 const FRAGMENT_BLOG_CATEGORY_PROPS = gql`
   fragment BlogCategoryProps on BlogCategory {
+    id
     name
     slug
+    createdAt
+    updatedAt
+    deletedAt
     posts {
+      id
       slug
       title
-      isPublished
-      publishedAt
-      tags {
-        name
-        slug
-      }
-      categories {
-        name
-        slug
-      }
     }
   }
 `;

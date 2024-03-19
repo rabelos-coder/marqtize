@@ -4,15 +4,14 @@
 //colors
 .clockpicker-canvas {
   line {
-    stroke: var(--theme-deafult);
+    stroke: var(--theme-default);
   }
 }
 
 .clockpicker-canvas-fg,
 .clockpicker-canvas-bearing {
-  fill: var(--theme-deafult);
+  fill: var(--theme-default);
 }
-
 
 .datepicker {
   z-index: 99;
@@ -28,16 +27,16 @@
     color: $black;
     border-radius: 5px;
     font-weight: bold;
-    border: 2px solid var(--theme-deafult);
+    border: 2px solid var(--theme-default);
   }
 
   &.-focus- {
-    background: var(--theme-deafult);
+    background: var(--theme-default);
     color: $white;
   }
 
   &.-selected- {
-    background: var(--theme-deafult) !important;
+    background: var(--theme-default) !important;
   }
 
   &-day {
@@ -59,7 +58,6 @@
     line-height: 1.3;
   }
 }
-
 
 // timepicker css
 .clockpicker-popover {
@@ -103,10 +101,10 @@
 
     .fc-h-event {
       padding: 12px;
-      background-color: var(--theme-deafult);
-      border: 1px solid var(--theme-deafult);
+      background-color: var(--theme-default);
+      border: 1px solid var(--theme-default);
 
-      +.fc-h-event {
+      + .fc-h-event {
         margin-top: 10px;
       }
 
@@ -148,7 +146,7 @@
 
     .fc-toolbar-chunk {
       .fc-button-group {
-        ~.fc-today-button {
+        ~ .fc-today-button {
           margin: 0 8px;
         }
       }
@@ -158,7 +156,7 @@
 
 .fc-event-dragging {
   padding: 10px;
-  background-color: var(--theme-deafult);
+  background-color: var(--theme-default);
 }
 
 .fc {
@@ -173,8 +171,6 @@
     }
   }
 }
-
-
 
 // Date-picker flatpickr
 .main-inline-calender {
@@ -275,16 +271,14 @@
 }
 
 .flatpickr-day {
-
   &.selected,
   .endRange {
-    background-color: var(--theme-deafult);
-    border-color: var(--theme-deafult);
+    background-color: var(--theme-default);
+    border-color: var(--theme-default);
 
     &:hover {
-      background-color: var(--theme-deafult);
-      border-color: var(--theme-deafult);
-
+      background-color: var(--theme-default);
+      border-color: var(--theme-default);
     }
   }
 }
@@ -305,11 +299,9 @@
   font-size: calc(14px + (19 - 14) * ((100vw - 320px) / (1920 - 320)));
 }
 
-
 .flatpickr-calendar {
   &.animate {
-
-    @media (max-width:400px) {
+    @media (max-width: 400px) {
       width: 77%;
       left: 50% !important;
       transform: translateX(-50%);
@@ -329,7 +321,7 @@
 
 .flatpicker-calender {
   .form-control {
-    @media (max-width:768px) {
+    @media (max-width: 768px) {
       font-size: 14px;
     }
   }
@@ -339,7 +331,10 @@
   // }
 }
 
-.input-group> :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+.input-group
+  > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(
+    .invalid-feedback
+  ) {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
@@ -359,7 +354,7 @@
     .react-datepicker__week {
       .react-datepicker__day {
         &.react-datepicker__day--selected {
-          background-color: var(--theme-deafult);
+          background-color: var(--theme-default);
         }
 
         &.react-datepicker__day--disabled {
@@ -376,19 +371,18 @@
   .rmdp-day-picker {
     .rmdp-week {
       .rmdp-week-day {
-        color: var(--theme-deafult);
+        color: var(--theme-default);
       }
 
       .rmdp-day {
         &.rmdp-selected {
           span {
-            background-color: var(--theme-deafult);
+            background-color: var(--theme-default);
           }
         }
 
         &.rmdp-range {
-          background-color: var(--theme-deafult);
-
+          background-color: var(--theme-default);
         }
 
         span {
@@ -414,7 +408,7 @@
       .react-datepicker__time-list {
         .react-datepicker__time-list-item {
           &.react-datepicker__time-list-item--selected {
-            background-color: var(--theme-deafult);
+            background-color: var(--theme-default);
           }
         }
       }
@@ -430,7 +424,7 @@
   &.bottom {
     .rmdp-arrow-container {
       .rmdp-arrow {
-        border: solid var(--theme-deafult);
+        border: solid var(--theme-default);
         border-top: initial;
         border-left: initial;
       }

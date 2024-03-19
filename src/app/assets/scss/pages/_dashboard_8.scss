@@ -7,7 +7,7 @@
     font-weight: 500;
     background-color: var(--light-slate);
 
-    @media (max-width:350px) {
+    @media (max-width: 350px) {
         padding: 6px;
     }
 }
@@ -32,8 +32,7 @@
 
 .main-our-product {
     .scroll-product {
-
-        @media (min-width:1200px) and (max-width:1400px) {
+        @media (min-width: 1200px) and (max-width: 1400px) {
             height: 725px;
             overflow-y: auto;
             scroll-behavior: smooth;
@@ -63,7 +62,7 @@
     &.card-body {
         padding-top: 0;
 
-        @media (max-width:1445px) {
+        @media (max-width: 1445px) {
             padding-top: 30px;
         }
     }
@@ -74,17 +73,17 @@
     justify-content: space-between;
     position: relative;
 
-    @media (max-width:991px) {
+    @media (max-width: 991px) {
         margin-bottom: 18px;
     }
 
-    @media (max-width:499px) {
+    @media (max-width: 499px) {
         margin-bottom: 42px;
     }
 
     .product-header {
         p {
-            @media (max-width:1445px) {
+            @media (max-width: 1445px) {
                 display: none;
             }
         }
@@ -97,8 +96,7 @@
         gap: 15px;
 
         .product-search {
-
-            @media (max-width:1445px) {
+            @media (max-width: 1445px) {
                 position: absolute;
                 top: 40px;
                 left: 0;
@@ -110,7 +108,7 @@
                 }
             }
 
-            @media (max-width:500px) {
+            @media (max-width: 500px) {
                 width: 64%;
             }
 
@@ -123,7 +121,7 @@
                     width: 20px;
                     height: 20px;
 
-                    @media (min-width:1400px) and (max-width:1920px) {
+                    @media (min-width: 1400px) and (max-width: 1920px) {
                         width: calc(18px + (20 - 18) * ((100vw - 1400px) / (1920 - 1400)));
                         width: calc(18px + (20 - 18) * ((100vw - 1400px) / (1920 - 1400)));
                     }
@@ -139,7 +137,6 @@
                 border-top-left-radius: 0 !important;
                 border-bottom-left-radius: 0 !important;
 
-
                 [dir="rtl"] & {
                     border-left: 1px solid rgba(229, 229, 243, 0.8);
                     border-right: unset;
@@ -147,13 +144,11 @@
                     border-top-right-radius: unset !important;
                     border-bottom-left-radius: 5px !important;
                     border-bottom-right-radius: unset !important;
-
                 }
 
                 &:focus {
                     box-shadow: unset;
                 }
-
             }
         }
 
@@ -164,15 +159,14 @@
                 padding: 11px 15px;
                 background-color: unset;
 
-                @media (max-width:575px) {
+                @media (max-width: 575px) {
                     width: 142px;
                     padding: 11px 9px;
                 }
 
-                @media (max-width:499px) {
+                @media (max-width: 499px) {
                     display: none;
                 }
-
             }
         }
     }
@@ -209,12 +203,12 @@
             gap: 12px;
             padding: 5px 13px;
 
-            @media (max-width:1525px) {
+            @media (max-width: 1525px) {
                 padding: 4px 8px;
                 gap: 8px;
             }
 
-            @media (max-width:1290px) {
+            @media (max-width: 1290px) {
                 padding: 4px 8px;
                 gap: 5px;
             }
@@ -233,19 +227,17 @@
                 padding: 0;
                 font-size: 12px;
 
-                @media (max-width:1235px) {
+                @media (max-width: 1235px) {
                     width: 16px;
                 }
             }
-
         }
     }
 }
 
 // Right Order Details
 .customer-sidebar-left {
-
-    @media (max-width:1199px) {
+    @media (max-width: 1199px) {
         order: -1;
     }
 
@@ -253,20 +245,19 @@
         &.md-sidebar-aside {
             height: 100%;
 
-            @media (max-width:1199px) {
+            @media (max-width: 1199px) {
                 width: 330px;
             }
 
-            @media (max-width:400px) {
+            @media (max-width: 400px) {
                 width: 280px;
             }
         }
     }
-
 }
 
 .customer-sticky {
-    @media (min-width:1200px) and (max-width:1920px) {
+    @media (min-width: 1200px) and (max-width: 1920px) {
         height: calc(100% - 30px);
     }
 }
@@ -291,7 +282,7 @@
             display: flex;
             gap: 10px;
 
-            @media (max-width:1700px) {
+            @media (max-width: 1700px) {
                 gap: 8px;
             }
 
@@ -310,7 +301,7 @@
                     padding: 15px 20px;
                     width: 100px;
 
-                    @media (min-width:1400px) and (max-width:1920px) {
+                    @media (min-width: 1400px) and (max-width: 1920px) {
                         width: calc(50px + (100 - 50) * ((100vw - 320px) / (1920 - 320)));
                         height: calc(45px + (100 - 45) * ((100vw - 320px) / (1920 - 320)));
                     }
@@ -320,7 +311,7 @@
                         height: 100%;
                         object-fit: contain;
 
-                        @media (min-width:1400px) and (max-width:1920px) {
+                        @media (min-width: 1400px) and (max-width: 1920px) {
                             height: calc(40% + (100 - 90) * ((100vw - 320px) / (1920 - 1500)));
                         }
                     }
@@ -335,7 +326,7 @@
                 -webkit-box-flex: 1;
                 flex: 1;
 
-                @media (max-width:1700px) {
+                @media (max-width: 1700px) {
                     flex-direction: column;
                     gap: 12px;
                     align-items: flex-start;
@@ -348,18 +339,18 @@
                     text-align: center;
                     margin: 0;
 
-                    @media (min-width:1400px) and (max-width:1700px) {
+                    @media (min-width: 1400px) and (max-width: 1700px) {
                         width: 70%;
                     }
 
-                    @media (max-width:1400px) {
+                    @media (max-width: 1400px) {
                         width: 100px;
                     }
 
                     .touchspin-wrapper {
                         display: block;
 
-                        @media (max-width:1700px) {
+                        @media (max-width: 1700px) {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
@@ -376,13 +367,13 @@
                             background-color: var(--white);
                             padding: 0;
 
-                            @media (min-width:1400px) and (max-width:1920px) {
+                            @media (min-width: 1400px) and (max-width: 1920px) {
                                 width: calc(18px + (27 - 18) * ((100vw - 1400px) / (1920 - 1400)));
                                 height: calc(18px + (27 - 18) * ((100vw - 1400px) / (1920 - 1400)));
                             }
                         }
 
-                        input[type='number'] {
+                        input[type="number"] {
                             width: 27px;
                             padding: 0;
                             text-align: center;
@@ -390,20 +381,18 @@
                             background-color: unset;
                             color: var(--body-font-color);
 
-                            @media (max-width:1700px) {
+                            @media (max-width: 1700px) {
                                 padding: 0;
                             }
 
-                            @media (min-width:1400px) and (max-width:1920px) {
+                            @media (min-width: 1400px) and (max-width: 1920px) {
                                 width: calc(18px + (27 - 18) * ((100vw - 1400px) / (1920 - 1400)));
                             }
                         }
-
                     }
                 }
 
                 .order-details-right {
-
                     .last-order-detail {
                         display: flex;
                         align-items: center;
@@ -415,11 +404,9 @@
                                 font-size: 15px;
                             }
                         }
-
                     }
                 }
             }
-
 
             &.product-remove {
                 display: none;
@@ -458,31 +445,31 @@
         height: 80px;
         border: 1px solid transparent;
 
-        @media (max-width:1785px) {
+        @media (max-width: 1785px) {
             width: 85px;
         }
 
-        @media (max-width:1720px) {
+        @media (max-width: 1720px) {
             width: 75px;
             height: 71px;
         }
 
-        @media (max-width:1585px) {
+        @media (max-width: 1585px) {
             width: 68px;
             height: 68px;
         }
 
-        @media (max-width:1485px) {
+        @media (max-width: 1485px) {
             width: 64px;
             height: 64px;
         }
 
-        @media (max-width:1445px) {
+        @media (max-width: 1445px) {
             width: 64px;
             height: 64px;
         }
 
-        @media (max-width:1455px) {
+        @media (max-width: 1455px) {
             width: 60px;
             height: 60px;
         }
@@ -495,7 +482,7 @@
         &:hover,
         &.active,
         :focus {
-            border: 1px solid var(--theme-deafult);
+            border: 1px solid var(--theme-default);
             background-color: $light-primary;
 
             img {
@@ -542,7 +529,7 @@
         border-radius: 50%;
         background: var(--light-slate);
 
-        @media screen and (max-width:1920px) and (min-width: 1400px) {
+        @media screen and (max-width: 1920px) and (min-width: 1400px) {
             width: calc(85px + (100 - 45) * ((100vw - 1400px) / (1920 - 1400)));
             height: calc(85px + (100 - 45) * ((100vw - 1400px) / (1920 - 1400)));
         }
@@ -563,7 +550,7 @@
     &.main-plan {
         .card-body {
             img {
-                @media (max-width:1660px) {
+                @media (max-width: 1660px) {
                     height: 100%;
                 }
             }
