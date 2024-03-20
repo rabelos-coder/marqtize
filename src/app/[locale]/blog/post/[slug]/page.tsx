@@ -8,6 +8,7 @@ import { Fragment } from "react";
 import { Col, Container, Row } from "reactstrap";
 
 import { CustomButton } from "@/components/common/CustomButton";
+import { ShareButtons } from "@/components/common/ShareButtons";
 import { SvgBorder } from "@/components/frontend/common/SvgBorder";
 import {
   APP_META_DESCRIPTION,
@@ -15,7 +16,6 @@ import {
   APP_WEBSITE,
 } from "@/environment";
 import { FIND_FIRST_POST } from "@/graphql/blogPost";
-import { PostShare } from "@/layout/frontend/landing/Blog/PostShare";
 import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 import { Link } from "@/navigation";
 import { createApolloClient } from "@/utils/apollo";
@@ -85,12 +85,12 @@ export async function generateMetadata({
       siteName: APP_META_TITLE,
       images: [
         {
-          url: "/assets/images/theme/landing/og-image-800x600.png",
+          url: "/assets/images/themes/landing/og-image-800x600.png",
           width: 800,
           height: 600,
         },
         {
-          url: "/assets/images/theme/landing/og-image-1800x1600.png",
+          url: "/assets/images/themes/landing/og-image-1800x1600.png",
           width: 1800,
           height: 1600,
         },
@@ -137,9 +137,11 @@ export default async function BlogPostPage({ params: { locale, slug } }: any) {
           <Row className="gx-5 justify-content-center">
             <Col lg={10} xl={8}>
               <div className="single-post">
-                <h1>{title}</h1>
-                <p className="lead text-justify">{findFirstBlogPost.resume}</p>
-                <div className="d-flex align-items-center justify-content-between mb-1">
+                <h1 className="mb-4">{title}</h1>
+                <p className="lead text-justify mb-5">
+                  {findFirstBlogPost.resume}
+                </p>
+                <div className="d-flex align-items-center justify-content-between mb-1 pb-3">
                   <div className="single-post-meta me-4">
                     <Image
                       width={300}
@@ -147,7 +149,7 @@ export default async function BlogPostPage({ params: { locale, slug } }: any) {
                       className="single-post-meta-img"
                       src={
                         findFirstBlogPost.author?.image ??
-                        "/assets/images/theme/landing/profiles/profile-2.png"
+                        "/assets/images/user/user.jpg"
                       }
                       alt={findFirstBlogPost.author?.name ?? "Avatar"}
                     />
@@ -164,9 +166,10 @@ export default async function BlogPostPage({ params: { locale, slug } }: any) {
                       </div>
                     </div>
                   </div>
-                  <PostShare />
+                  <ShareButtons />
                 </div>
-                <Row className="gx-5 mt-5 mb-0 post-meta-data">
+                <hr className="my-0" />
+                <Row className="gx-5 mt-3 mb-0 post-meta-data">
                   <Col md={6} sm={12} className="post-meta-categories">
                     <h6>{t("blog.categories.title")}</h6>
                     {findFirstBlogPost.categories?.map((category, i) => (

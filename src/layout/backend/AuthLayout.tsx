@@ -16,6 +16,16 @@ import { Header } from "./Header";
 import { SideBar } from "./Sidebar";
 import { ThemeCustomizer } from "./ThemeCustomizer";
 
+/**
+ * Renders the authentication layout for the back-end application.
+ *
+ * The Authentication Layout contains the default components and scripts to shared across the back-end application.
+ *
+ * @param {ChildrenProps} children - The children components to be rendered.
+ *
+ * @param {ChildrenProps} children - The children components to be rendered.
+ * @return {JSX.Element} The rendered authentication layout.
+ */
 export const AuthLayout = ({ children }: ChildrenProps) => {
   const { layout, setLayout } = useCustomizer();
   const default_color = Theme.data.color.primary_color;

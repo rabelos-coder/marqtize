@@ -11,7 +11,7 @@ import { Button, Col, FormFeedback, Input, Label, Row } from "reactstrap";
 import * as yup from "yup";
 
 import { EMAIL_REGEX } from "@/configs";
-import { IS_DEVELOPMENT } from "@/environment";
+import { IS_DEVELOPMENT, IS_PRODUCTION } from "@/environment";
 import { CONTACT } from "@/graphql/contact";
 import { ContactInput } from "@/types/contact";
 
@@ -65,6 +65,7 @@ export const ContactUs = () => {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues,
     mode: "onBlur",
@@ -96,17 +97,18 @@ export const ContactUs = () => {
         .then(({ data }) => {
           if (data?.sendContact) {
             toast.success(t("contactSuccess"));
+            if (IS_PRODUCTION) reset();
           } else {
             toast.error(t("contactError"));
           }
         })
         .catch((error) => toast.error(error?.message ?? t("loginError")));
     },
-    [contact, executeRecaptcha, t]
+    [contact, executeRecaptcha, reset, t]
   );
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)} autoComplete="on">
       <Row className="gx-5 mb-4">
         <Col md={6}>
           <Label className="text-dark mb-2" htmlFor="name">
@@ -121,6 +123,7 @@ export const ContactUs = () => {
               <Input
                 id={name}
                 type="text"
+                autoFocus
                 className="py-4"
                 disabled={loading}
                 placeholder={t("namePlaceholder")}

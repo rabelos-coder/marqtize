@@ -41,10 +41,10 @@ export default async function ProfilePage({ params: { locale } }: any) {
   });
 
   const languages: Array<{ label: string; value: string }> = [
-    {
-      label: t("english"),
-      value: "en",
-    },
+    // {
+    //   label: t("english"),
+    //   value: "en",
+    // },
     {
       label: t("portuguese"),
       value: "pt-br",

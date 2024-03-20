@@ -54,76 +54,55 @@ export const FooterMenu = () => {
         </Col>
         <Col lg={9}>
           <Row className="gx-5">
-            <Col lg={3} md={6} className="col-md-6 mb-5 mb-lg-0">
+            <Col lg={4} md={6} className="mb-5 mb-lg-0">
               <div className="text-uppercase-expanded text-xs mb-4">
-                Product
+                {t("products")}
               </div>
               <List type="unstyled" className="mb-0">
                 <li className="mb-2">
-                  <Link href="#!">Landing</Link>
+                  <Link href="/products/ecommerce-platform">
+                    {t("productsMenu.ecommerce")}
+                  </Link>
                 </li>
                 <li className="mb-2">
-                  <Link href="#!">Pages</Link>
+                  <Link href="/products/order-management-system">
+                    {t("productsMenu.orderManagement")}
+                  </Link>
                 </li>
                 <li className="mb-2">
-                  <Link href="#!">Sections</Link>
+                  <Link href="/products/design-management-system">
+                    {t("productsMenu.designManagement")}
+                  </Link>
                 </li>
                 <li className="mb-2">
-                  <Link href="#!">Documentation</Link>
+                  <Link href="/products/marketplace-management-system">
+                    {t("productsMenu.marketplaceManagement")}
+                  </Link>
                 </li>
                 <li>
-                  <Link href="#!">Changelog</Link>
+                  <Link href="/products/sellers-management-system">
+                    {t("productsMenu.sellersManagement")}
+                  </Link>
                 </li>
               </List>
             </Col>
-            <Col lg={3} md={6} className="mb-5 mb-lg-0">
+            <Col lg={4} md={6} className="mb-5 mb-lg-0">
               <div className="text-uppercase-expanded text-xs mb-4">
-                Technical
+                {t("technical")}
               </div>
               <List type="unstyled" className="mb-0">
                 <li className="mb-2">
-                  <Link href="#!">Documentation</Link>
+                  <Link href="/documentation">{t("documentation.title")}</Link>
                 </li>
                 <li className="mb-2">
-                  <Link href="#!">Changelog</Link>
+                  <Link href="/components">{t("components.title")}</Link>
                 </li>
                 <li className="mb-2">
-                  <Link href="#!">Theme Customizer</Link>
-                </li>
-                <li>
-                  <Link href="#!">UI Kit</Link>
+                  <Link href="/changelog">{t("changelog.title")}</Link>
                 </li>
               </List>
             </Col>
-            <Col lg={3} md={6} className="mb-5 mb-md-0">
-              <div className="text-uppercase-expanded text-xs mb-4">
-                Includes
-              </div>
-              <List type="unstyled" className="mb-0">
-                <li className="mb-2">
-                  <Link href="#!">Utilities</Link>
-                </li>
-                <li className="mb-2">
-                  <Link href="#!">Components</Link>
-                </li>
-                <li className="mb-2">
-                  <Link href="#!">Layouts</Link>
-                </li>
-                <li className="mb-2">
-                  <Link href="#!">Code Samples</Link>
-                </li>
-                <li className="mb-2">
-                  <Link href="#!">Products</Link>
-                </li>
-                <li className="mb-2">
-                  <Link href="#!">Affiliates</Link>
-                </li>
-                <li>
-                  <Link href="#!">Updates</Link>
-                </li>
-              </List>
-            </Col>
-            <Col lg={3} md={6}>
+            <Col lg={4} md={6}>
               <div className="text-uppercase-expanded text-xs mb-4">
                 {t("legal")}
               </div>

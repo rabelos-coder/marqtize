@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import {
   FacebookShareButton,
@@ -8,11 +9,13 @@ import {
   TwitterShareButton,
 } from "react-share";
 
-export const PostShare = () => {
+export const ShareButtons = () => {
   const t = useTranslations();
+  const [url, setUrl] = useState("");
 
-  let url = "#";
-  if (typeof window !== "undefined") url = window.location.href;
+  useEffect(() => {
+    if (typeof window !== "undefined") setUrl(window.location.href);
+  }, []);
 
   return (
     <div className="single-post-meta-links">

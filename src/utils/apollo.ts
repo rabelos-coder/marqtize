@@ -22,25 +22,23 @@ type ApolloClientParams = {
 };
 
 export const createApolloClient = (params?: ApolloClientParams) => {
+  let token: any = null;
+  let lang: any = null;
+
+  if (!params?.token) token = Cookies.get(STORAGE_AUTH_TOKEN);
+  else token = params.token;
+  if (!params?.locale) lang = Cookies.get(STORAGE_LOCALE);
+  else lang = params.locale;
+
+  lang = lang?.replace("_", "-")?.toLowerCase();
+
   const authMiddleware = setContext(async (operation, { headers }) => {
-    let token = null;
-    let lang = null;
-    if (!params?.token) token = Cookies.get(STORAGE_AUTH_TOKEN);
-    else token = params.token;
-    if (!params?.locale) lang = Cookies.get(STORAGE_LOCALE);
-    else lang = params.locale;
-
-    lang = lang?.replace("_", "-")?.toLowerCase();
-
     return {
       headers: {
         ...headers,
         "X-Lang": lang ?? APP_LANGUAGE,
         "Apollo-Require-Preflight": "true",
         Authorization: token ? `Bearer ${token}` : "",
-      },
-      connectionParams: {
-        authToken: token ?? "",
       },
     };
   });
@@ -59,6 +57,9 @@ export const createApolloClient = (params?: ApolloClientParams) => {
   const wsLink = new GraphQLWsLink(
     createClient({
       url: graphqlWsLink,
+      connectionParams: {
+        authToken: token ? `Bearer ${token}` : "",
+      },
     })
   );
 
@@ -101,7 +102,7 @@ export const createApolloClient = (params?: ApolloClientParams) => {
   const client = new ApolloClient({
     name: APP_META_TITLE,
     version: APP_VERSION,
-    connectToDevTools: false,
+    connectToDevTools: IS_DEVELOPMENT,
     link: from([errorLink, authMiddleware, splitLink]),
     cache: new InMemoryCache(),
   });

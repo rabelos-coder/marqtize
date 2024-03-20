@@ -33,7 +33,7 @@ export default function NotFound() {
             <Col xl={6}>
               <div className="text-center mt-4">
                 <Image
-                  src="/assets/images/theme/landing/404-error.svg"
+                  src="/assets/images/themes/landing/404-error.svg"
                   width={462}
                   height={287}
                   alt={APP_META_TITLE}

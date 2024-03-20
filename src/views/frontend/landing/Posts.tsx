@@ -60,8 +60,7 @@ export const Posts = ({ posts, meta }: PostsProps) => {
                         height={300}
                         className="post-preview-meta-img"
                         src={
-                          post.author?.image ??
-                          "/assets/images/theme/landing/profiles/profile-2.png"
+                          post.author?.image ?? "/assets/images/user/user.jpg"
                         }
                         alt={post.author?.name ?? ""}
                       />

@@ -22,7 +22,7 @@ export default function BadRequest() {
             <Col xl={6}>
               <div className="text-center mt-4">
                 <Image
-                  src="/assets/images/theme/landing/400-error-bad-request.svg"
+                  src="/assets/images/themes/landing/400-error-bad-request.svg"
                   width={462}
                   height={309}
                   alt={APP_META_TITLE}

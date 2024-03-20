@@ -17,7 +17,9 @@ import {
   Input,
   Label,
   Row,
+  Tooltip,
 } from "reactstrap";
+import Sawl from "sweetalert2";
 import * as yup from "yup";
 
 import CommonCardHeading from "@/components/common/CommonCardHeading";
@@ -38,6 +40,11 @@ const defaultImageUrl = "/assets/images/user/user.jpg";
 
 const EditMyProfile = () => {
   const t = useTranslations();
+  const [tooltipOpen1, setTooltipOpen1] = useState(false);
+  const [tooltipOpen2, setTooltipOpen2] = useState(false);
+
+  const toggle1 = () => setTooltipOpen1(!tooltipOpen1);
+  const toggle2 = () => setTooltipOpen2(!tooltipOpen2);
 
   const basePasswordSchema = useMemo(
     () => ({
@@ -164,9 +171,21 @@ const EditMyProfile = () => {
   };
 
   const handleRemoveImageClick = () => {
-    setImgSrc(defaultImageUrl);
-    setImageFile(null);
-    setRemoveImage(true);
+    Sawl.fire({
+      title: t("confirmation"),
+      text: t("removeProfilePhotoConfirm"),
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: t("yes"),
+      cancelButtonText: t("no"),
+    }).then(({ isConfirmed }) => {
+      if (isConfirmed) {
+        setImgSrc(defaultImageUrl);
+        setImageFile(null);
+        setRemoveImage(true);
+        toast.success(t("removeProfilePhotoSuccess"));
+      }
+    });
   };
 
   useEffect(() => {
@@ -227,6 +246,7 @@ const EditMyProfile = () => {
                       id="imageFile"
                     />
                     <div
+                      id="removeFile"
                       className="icon-wrapper remove"
                       onClick={handleRemoveImageClick}
                     >
@@ -235,22 +255,39 @@ const EditMyProfile = () => {
                         data-intro="Remove profile image here"
                       ></i>
                     </div>
+                    <Tooltip
+                      autohide
+                      flip
+                      isOpen={tooltipOpen1}
+                      target="removeFile"
+                      toggle={toggle1}
+                    >
+                      {t("removeProfilePhoto")}
+                    </Tooltip>
                     <div
+                      id="changeFile"
                       className="icon-wrapper update"
                       onClick={handleInputFileClick}
                     >
-                      <i
-                        className="icofont icofont-pencil-alt-5 step2"
-                        data-intro="Change profile image here"
-                      ></i>
+                      <i className="icofont icofont-pencil-alt-5 step2"></i>
                     </div>
+                    <Tooltip
+                      autohide
+                      flip
+                      isOpen={tooltipOpen2}
+                      target="changeFile"
+                      toggle={toggle2}
+                    >
+                      {t("changeProfilePhoto")}
+                    </Tooltip>
                   </div>
                 </div>
               </div>
               <Col>
                 <h5 className="mb-1">{user?.name}</h5>
                 <p className="mb-4">
-                  {user?.roles?.map((role) => role.name)?.join(", ")}
+                  {user?.roles?.map((role) => role.name)?.join(", ") ??
+                    t("user")}
                 </p>
               </Col>
             </Row>

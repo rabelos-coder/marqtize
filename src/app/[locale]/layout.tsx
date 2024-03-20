@@ -81,12 +81,12 @@ export async function generateMetadata({
       siteName: APP_META_TITLE,
       images: [
         {
-          url: "/assets/images/theme/landing/og-image-800x600.png",
+          url: "/assets/images/themes/landing/og-image-800x600.png",
           width: 800,
           height: 600,
         },
         {
-          url: "/assets/images/theme/landing/og-image-1800x1600.png",
+          url: "/assets/images/themes/landing/og-image-1800x1600.png",
           width: 1800,
           height: 1600,
         },
@@ -126,8 +126,11 @@ export default async function LocaleLayout({
   if (!locales.includes(locale)) notFound();
 
   return (
-    <html lang={locale === "pt-br" ? "pt-BR" : locale} suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html
+      lang={locale === "pt-br" ? "pt-BR" : locale}
+      suppressHydrationWarning={true}
+    >
+      <body suppressHydrationWarning={true}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ApolloProvider>
             <ReduxProvider host={host}>

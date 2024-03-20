@@ -37,7 +37,7 @@ export default async function HomePage({ params: { locale } }: any) {
             >
               <img
                 className="img-fluid"
-                src="/assets/images/theme/landing/loja-virtual-2.svg"
+                src="/assets/images/themes/landing/loja-virtual-2.svg"
                 alt=""
               />
             </Col>
@@ -86,7 +86,7 @@ export default async function HomePage({ params: { locale } }: any) {
               <div className="content-skewed content-skewed-right">
                 <img
                   className="content-skewed-item img-fluid shadow-lg rounded-3"
-                  src="/assets/images/theme/landing/loja-virtual-1.svg"
+                  src="/assets/images/themes/landing/loja-virtual-1.svg"
                   alt=""
                 />
               </div>

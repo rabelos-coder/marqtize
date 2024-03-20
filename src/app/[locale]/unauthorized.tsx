@@ -22,7 +22,7 @@ export default function Unauthorized() {
             <Col xl={6}>
               <div className="text-center mt-4">
                 <Image
-                  src="/assets/images/theme/landing/401-error-unauthorized.svg"
+                  src="/assets/images/themes/landing/401-error-unauthorized.svg"
                   width={462}
                   height={309}
                   alt={APP_META_TITLE}

@@ -141,7 +141,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                       className="p-lg-3 bg-img-cover overlay overlay-primary overlay-70 d-none d-lg-block"
                       style={{
                         backgroundImage:
-                          "url(/assets/images/theme/landing/bg-dropdown-xl.jpg)",
+                          "url(/assets/images/themes/landing/bg-dropdown-xl.jpg)",
                       }}
                     >
                       <div className="d-flex h-100 w-100 align-items-center justify-content-center">
@@ -304,9 +304,9 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
               {loggedIn ? (
                 <>
                   <NavItem>
-                    <NavLink href="/backend" tag={Link}>
-                      {t("dashboard")}
-                    </NavLink>
+                    <a className="nav-link" href="/backend">
+                      {t("panel")}
+                    </a>
                   </NavItem>
                   <NavItem className="d-none d-md-block">
                     <Button

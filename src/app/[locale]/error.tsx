@@ -43,7 +43,7 @@ export default function ErrorPage({
             <Col xl={8}>
               <div className="text-center mt-4">
                 <Image
-                  src="/assets/images/theme/landing/500-internal-server-error.svg"
+                  src="/assets/images/themes/landing/500-internal-server-error.svg"
                   width={662}
                   height={475}
                   alt={APP_META_TITLE}

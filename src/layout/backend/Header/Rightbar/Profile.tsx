@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -40,21 +42,21 @@ const Profile = () => {
         <img
           className="b-r-10"
           src={user?.image ?? "/assets/images/user/user.jpg"}
-          alt=""
+          alt={user?.systemName}
           width={35}
           height={35}
         />
         <div className="media-body">
           <span>{user?.systemName}</span>
           <p className="mb-0 font-roboto">
-            {user?.roles?.map((item) => item.name).join(", ") ?? t("user")}{" "}
+            {user?.roles?.map((item) => item.name)?.join(", ") ?? t("user")}{" "}
             <i className="middle fa fa-angle-down" />
           </p>
         </div>
       </div>
       <ul className="profile-dropdown onhover-show-div">
         <li>
-          <a href="/">
+          <a href="/" target="_blank">
             <HiOutlineGlobeAlt />
             <span>{t("website")}</span>
           </a>

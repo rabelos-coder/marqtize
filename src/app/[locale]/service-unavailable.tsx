@@ -22,7 +22,7 @@ export default function ServiceUnavailable() {
             <Col xl={6}>
               <div className="text-center mt-4">
                 <Image
-                  src="/assets/images/theme/landing/503-error-service-unavailable.svg"
+                  src="/assets/images/themes/landing/503-error-service-unavailable.svg"
                   width={462}
                   height={287}
                   alt={APP_META_TITLE}

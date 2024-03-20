@@ -6,6 +6,14 @@ import Theme from "@/configs/theme";
 import { useAppSelector } from "@/hooks";
 import { ChildrenProps } from "@/types/common";
 
+/**
+ * Renders the guest layout component for the application.
+ *
+ * The Guest Layout contains some theme settings and components that are shared across the application.
+ *
+ * @param {ChildrenProps} children - The children components to be rendered within the layout.
+ * @return {JSX.Element} The rendered guest layout.
+ */
 export const GuestLayout = ({ children }: ChildrenProps) => {
   const { theme } = useAppSelector((state) => state.theme);
   const default_color = Theme.data.color.primary_color;
