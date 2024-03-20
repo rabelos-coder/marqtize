@@ -30,7 +30,7 @@
     "component": "cypress open --component",
     "component:headless": "cypress run --component",
     "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test:watch": "jest --watch",
     "test:ci": "jest --ci",
     "prepare": "./node_modules/husky/bin.mjs",
     "commit": "git-cz"
