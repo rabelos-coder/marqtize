@@ -20,16 +20,16 @@ jobs:
           check-latest: true
 
       - name: Install Npm Dependencies
-        run: yarn install
+        run: npm install
 
       - name: Build App
-        run: yarn build
+        run: npm run build
 
       - name: Run tests with jest
-        run: yarn test:ci
+        run: npm run test:ci
 
       - name: Cypress.io
         uses: cypress-io/github-action@v2
         with:
-          start: yarn start
+          start: npm run start
           wait-on: 'http://localhost:3000'
