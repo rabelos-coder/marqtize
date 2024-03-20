@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react'
 
-import CommonUL from "../CommonUL";
+import CommonUL from '../CommonUL'
 
 type PropsType = {
-  handleSidebarType: (data: string) => void;
-  layout?: string;
-};
+  handleSidebarType: (data: string) => void
+  layout?: string
+}
 
 const Horizontal = ({ handleSidebarType, layout }: PropsType) => {
   return (
     <li
       data-attr="compact-sidebar"
-      className={`border-0 ${layout === "compact-wrapper" ? "active" : ""}`}
-      onClick={() => handleSidebarType("compact-wrapper")}
+      className={`border-0 ${layout === 'compact-wrapper' ? 'active' : ''}`}
+      onClick={() => handleSidebarType('compact-wrapper')}
     >
       <div className="header bg-light">
         <CommonUL />
@@ -24,7 +24,7 @@ const Horizontal = ({ handleSidebarType, layout }: PropsType) => {
         </ul>
       </div>
     </li>
-  );
-};
+  )
+}
 
-export default Horizontal;
+export default Horizontal

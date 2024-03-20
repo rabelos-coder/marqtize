@@ -1,7 +1,7 @@
-import { gql, TypedDocumentNode } from "@apollo/client";
+import { gql, TypedDocumentNode } from '@apollo/client'
 
-import { WhereAndOrderInput } from "@/types/common";
-import { FindManyTimezone } from "@/types/timezone";
+import { WhereAndOrderInput } from '@/types/common'
+import { FindManyTimezone } from '@/types/timezone'
 
 const FRAGMENT_TIMEZONE_PROPS = gql`
   fragment TimezoneProps on Timezone {
@@ -11,7 +11,7 @@ const FRAGMENT_TIMEZONE_PROPS = gql`
     createdAt
     updatedAt
   }
-`;
+`
 
 export const FIND_TIMEZONES: TypedDocumentNode<
   FindManyTimezone,
@@ -26,4 +26,4 @@ export const FIND_TIMEZONES: TypedDocumentNode<
       ...TimezoneProps
     }
   }
-`;
+`

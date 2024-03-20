@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { Col, List, Row } from "reactstrap";
+import Image from 'next/image'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react'
+import { FaFacebook, FaInstagram } from 'react-icons/fa'
+import { Col, List, Row } from 'reactstrap'
 
-import { APP_META_TITLE, FACEBOOK_URL, INSTAGRAM_URL } from "@/environment";
-import { Link, usePathname } from "@/navigation";
+import { APP_META_TITLE, FACEBOOK_URL, INSTAGRAM_URL } from '@/environment'
+import { Link, usePathname } from '@/navigation'
 
 export const FooterMenu = () => {
-  const t = useTranslations();
+  const t = useTranslations()
 
-  const pathname = usePathname();
+  const pathname = usePathname()
   const [imgSrc] = useState(
-    pathname === "/"
-      ? "/assets/images/logo/marqtize_logo.png"
-      : "/assets/images/logo/marqtize_logo_dark.png"
-  );
+    pathname === '/'
+      ? '/assets/images/logo/marqtize_logo.png'
+      : '/assets/images/logo/marqtize_logo_dark.png'
+  )
 
   return (
     <>
@@ -33,7 +33,7 @@ export const FooterMenu = () => {
             />
           </div>
           <div className="mb-3">
-            {t("madeWithLove", { company: APP_META_TITLE })}
+            {t('madeWithLove', { company: APP_META_TITLE })}
           </div>
           <div className="icon-list-social mb-5">
             <Link
@@ -56,67 +56,67 @@ export const FooterMenu = () => {
           <Row className="gx-5">
             <Col lg={4} md={6} className="mb-5 mb-lg-0">
               <div className="text-uppercase-expanded text-xs mb-4">
-                {t("products")}
+                {t('products')}
               </div>
               <List type="unstyled" className="mb-0">
                 <li className="mb-2">
                   <Link href="/products/ecommerce-platform">
-                    {t("productsMenu.ecommerce")}
+                    {t('productsMenu.ecommerce')}
                   </Link>
                 </li>
                 <li className="mb-2">
                   <Link href="/products/order-management-system">
-                    {t("productsMenu.orderManagement")}
+                    {t('productsMenu.orderManagement')}
                   </Link>
                 </li>
                 <li className="mb-2">
                   <Link href="/products/design-management-system">
-                    {t("productsMenu.designManagement")}
+                    {t('productsMenu.designManagement')}
                   </Link>
                 </li>
                 <li className="mb-2">
                   <Link href="/products/marketplace-management-system">
-                    {t("productsMenu.marketplaceManagement")}
+                    {t('productsMenu.marketplaceManagement')}
                   </Link>
                 </li>
                 <li>
                   <Link href="/products/sellers-management-system">
-                    {t("productsMenu.sellersManagement")}
+                    {t('productsMenu.sellersManagement')}
                   </Link>
                 </li>
               </List>
             </Col>
             <Col lg={4} md={6} className="mb-5 mb-lg-0">
               <div className="text-uppercase-expanded text-xs mb-4">
-                {t("technical")}
+                {t('technical')}
               </div>
               <List type="unstyled" className="mb-0">
                 <li className="mb-2">
-                  <Link href="/documentation">{t("documentation.title")}</Link>
+                  <Link href="/documentation">{t('documentation.title')}</Link>
                 </li>
                 <li className="mb-2">
-                  <Link href="/components">{t("components.title")}</Link>
+                  <Link href="/components">{t('components.title')}</Link>
                 </li>
                 <li className="mb-2">
-                  <Link href="/changelog">{t("changelog.title")}</Link>
+                  <Link href="/changelog">{t('changelog.title')}</Link>
                 </li>
               </List>
             </Col>
             <Col lg={4} md={6}>
               <div className="text-uppercase-expanded text-xs mb-4">
-                {t("legal")}
+                {t('legal')}
               </div>
               <List type="unstyled" className="mb-0">
                 <li className="mb-2">
-                  <Link href="/privacy-policy">{t("privacyPolicy.title")}</Link>
+                  <Link href="/privacy-policy">{t('privacyPolicy.title')}</Link>
                 </li>
                 <li className="mb-2">
                   <Link href="/terms-and-conditions">
-                    {t("termsAndConditions.title")}
+                    {t('termsAndConditions.title')}
                   </Link>
                 </li>
                 <li>
-                  <Link href="/license">{t("license.title")}</Link>
+                  <Link href="/license">{t('license.title')}</Link>
                 </li>
               </List>
             </Col>
@@ -125,5 +125,5 @@ export const FooterMenu = () => {
       </Row>
       <hr className="my-5"></hr>
     </>
-  );
-};
+  )
+}

@@ -1,19 +1,19 @@
-"use client";
+'use client'
 
-import "../../../app/assets/scss/landing.scss";
+import '../../../app/assets/scss/landing.scss'
 
-import { useLocale } from "next-intl";
-import { ReCaptchaProvider } from "next-recaptcha-v3";
-import { useEffect } from "react";
-import { ToastContainer } from "react-toastify";
+import { useLocale } from 'next-intl'
+import { ReCaptchaProvider } from 'next-recaptcha-v3'
+import { useEffect } from 'react'
+import { ToastContainer } from 'react-toastify'
 
-import { SpinnerBoxed } from "@/components/common/SpinnerBoxed";
-import { RECAPTCHA_SITE_KEY } from "@/environment";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { GuestLayout } from "@/layout/common/GuestLayout";
-import { AuthProvider } from "@/providers/AuthProvider";
-import { setLoading } from "@/store/slices/themeSlice";
-import { ChildrenProps } from "@/types/common";
+import { SpinnerBoxed } from '@/components/common/SpinnerBoxed'
+import { RECAPTCHA_SITE_KEY } from '@/environment'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { GuestLayout } from '@/layout/common/GuestLayout'
+import { AuthProvider } from '@/providers/AuthProvider'
+import { setLoading } from '@/store/slices/themeSlice'
+import { ChildrenProps } from '@/types/common'
 
 /**
  * Renders the default layout for the application.
@@ -24,18 +24,18 @@ import { ChildrenProps } from "@/types/common";
  * @return {JSX.Element} The rendered default layout.
  */
 export const DefaultLayout = ({ children }: ChildrenProps) => {
-  const locale = useLocale();
-  const dispatch = useAppDispatch();
-  const { loading } = useAppSelector((state) => state.theme);
+  const locale = useLocale()
+  const dispatch = useAppDispatch()
+  const { loading } = useAppSelector((state) => state.theme)
 
   useEffect(() => {
-    dispatch(setLoading(false));
-  }, [dispatch]);
+    dispatch(setLoading(false))
+  }, [dispatch])
 
   return (
     <ReCaptchaProvider
       reCaptchaKey={RECAPTCHA_SITE_KEY}
-      language={locale === "pt-br" ? "pt-BR" : locale}
+      language={locale === 'pt-br' ? 'pt-BR' : locale}
     >
       {loading ? (
         <SpinnerBoxed color="primary" />
@@ -46,5 +46,5 @@ export const DefaultLayout = ({ children }: ChildrenProps) => {
       )}
       <ToastContainer position="top-right" closeOnClick />
     </ReCaptchaProvider>
-  );
-};
+  )
+}

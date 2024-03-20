@@ -1,20 +1,20 @@
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { Col, Container, Row } from "reactstrap";
+import Image from 'next/image'
+import { useTranslations } from 'next-intl'
+import { Col, Container, Row } from 'reactstrap'
 
-import { SvgBorder } from "@/components/frontend/common/SvgBorder";
-import { APP_META_TITLE } from "@/environment";
-import { Header } from "@/layout/frontend/landing/Header";
-import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
+import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import { APP_META_TITLE } from '@/environment'
+import { Header } from '@/layout/frontend/landing/Header'
+import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
 
 export default function ServiceUnavailable() {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
     <LandingLayout>
       <Header
         className="not-found"
-        style={{ paddingTop: "6rem", paddingBottom: "6rem" }}
+        style={{ paddingTop: '6rem', paddingBottom: '6rem' }}
       />
       <section className="bg-white py-10">
         <Container className="px-5">
@@ -28,7 +28,7 @@ export default function ServiceUnavailable() {
                   alt={APP_META_TITLE}
                   className="img-fluid pb-4 text-purple"
                 />
-                <p className="lead">{t("maintenanceInfo")}</p>
+                <p className="lead">{t('maintenanceInfo')}</p>
               </div>
             </Col>
           </Row>
@@ -36,5 +36,5 @@ export default function ServiceUnavailable() {
         <SvgBorder className="text-dark" />
       </section>
     </LandingLayout>
-  );
+  )
 }

@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react'
 
-import CommonUL from "../CommonUL";
+import CommonUL from '../CommonUL'
 
 type propsType = {
-  handleCustomizerMix_Background: (item: string) => void;
-  mixLayout: string;
-};
+  handleCustomizerMix_Background: (item: string) => void
+  mixLayout: string
+}
 
 const BgLight = ({ handleCustomizerMix_Background, mixLayout }: propsType) => {
   return (
     <li
-      className={`color-layout border-0 ${mixLayout === "light-only" ? "active" : ""}`}
+      className={`color-layout border-0 ${mixLayout === 'light-only' ? 'active' : ''}`}
       data-attr="light-only"
-      onClick={() => handleCustomizerMix_Background("light-only")}
+      onClick={() => handleCustomizerMix_Background('light-only')}
     >
       <div className="header bg-light">
         <CommonUL />
@@ -24,7 +24,7 @@ const BgLight = ({ handleCustomizerMix_Background, mixLayout }: propsType) => {
         </ul>
       </div>
     </li>
-  );
-};
+  )
+}
 
-export default BgLight;
+export default BgLight

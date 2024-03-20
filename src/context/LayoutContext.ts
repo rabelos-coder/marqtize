@@ -1,6 +1,6 @@
-import { createContext } from "react";
+import { createContext } from 'react'
 
-import { LayoutContextType } from "@/types/layout";
+import { LayoutContextType } from '@/types/layout'
 
 export const LayoutContext = createContext<LayoutContextType>({
   searchableMenu: [],
@@ -14,4 +14,4 @@ export const LayoutContext = createContext<LayoutContextType>({
   setSearchIcon: () => {},
   bookMarkClass: false,
   setBookMarkClass: () => {},
-});
+})

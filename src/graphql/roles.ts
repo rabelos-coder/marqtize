@@ -1,4 +1,4 @@
-import { gql, TypedDocumentNode } from "@apollo/client";
+import { gql, TypedDocumentNode } from '@apollo/client'
 
 import {
   FindByIdInput,
@@ -7,7 +7,7 @@ import {
   PaginatedObject,
   WhereAndOrderInput,
   WhereInput,
-} from "@/types/common";
+} from '@/types/common'
 import {
   CountRole,
   CreateRole,
@@ -20,7 +20,7 @@ import {
   Role,
   UpdateRole,
   UpdateRoleInput,
-} from "@/types/role";
+} from '@/types/role'
 
 const FRAGMENT_ROLE_PROPS = gql`
   fragment RoleProps on Role {
@@ -45,13 +45,13 @@ const FRAGMENT_ROLE_PROPS = gql`
       slug
     }
   }
-`;
+`
 
 export const COUNT_ROLES: TypedDocumentNode<CountRole, WhereInput> = gql`
   query CountRole($where: SearchRoleInput) {
     countRole(where: $where)
   }
-`;
+`
 
 export const FIND_ROLES: TypedDocumentNode<FindManyRole, WhereAndOrderInput> =
   gql`
@@ -61,7 +61,7 @@ export const FIND_ROLES: TypedDocumentNode<FindManyRole, WhereAndOrderInput> =
         ...RoleProps
       }
     }
-  `;
+  `
 
 export const PAGINATED_ROLES: TypedDocumentNode<
   PaginatedObject<Role>,
@@ -93,7 +93,7 @@ export const PAGINATED_ROLES: TypedDocumentNode<
       }
     }
   }
-`;
+`
 
 export const FIND_ROLE: TypedDocumentNode<FindByIdRole, FindByIdInput> = gql`
   ${FRAGMENT_ROLE_PROPS}
@@ -102,7 +102,7 @@ export const FIND_ROLE: TypedDocumentNode<FindByIdRole, FindByIdInput> = gql`
       ...RoleProps
     }
   }
-`;
+`
 
 export const FIND_FIRST_ROLE: TypedDocumentNode<
   FindFirstRole,
@@ -114,7 +114,7 @@ export const FIND_FIRST_ROLE: TypedDocumentNode<
       ...RoleProps
     }
   }
-`;
+`
 
 export const CREATE_ROLE: TypedDocumentNode<CreateRole, CreateRoleInput> = gql`
   mutation CreateRole($data: CreateRoleInput!) {
@@ -122,7 +122,7 @@ export const CREATE_ROLE: TypedDocumentNode<CreateRole, CreateRoleInput> = gql`
       id
     }
   }
-`;
+`
 
 export const UPDATE_ROLE: TypedDocumentNode<UpdateRole, UpdateRoleInput> = gql`
   mutation UpdateRole($data: UpdateRoleInput!) {
@@ -130,17 +130,17 @@ export const UPDATE_ROLE: TypedDocumentNode<UpdateRole, UpdateRoleInput> = gql`
       id
     }
   }
-`;
+`
 
 export const DELETE_ROLE: TypedDocumentNode<DeleteRole, FindByIdInput> = gql`
   mutation DeleteRole($id: String!) {
     deleteRole(id: $id)
   }
-`;
+`
 
 export const DELETE_ROLES: TypedDocumentNode<DeleteManyRole, FindByIdsInput> =
   gql`
     mutation DeleteManyRole($ids: [String!]!) {
       deleteManyRole(ids: $ids)
     }
-  `;
+  `

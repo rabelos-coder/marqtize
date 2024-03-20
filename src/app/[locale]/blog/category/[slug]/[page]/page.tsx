@@ -1,22 +1,22 @@
-import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
-import { Container } from "reactstrap";
+import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
+import { Container } from 'reactstrap'
 
-import { SvgBorder } from "@/components/frontend/common/SvgBorder";
-import { FIND_FIRST_CATEGORY } from "@/graphql/blogCategory";
-import { PAGINATED_POSTS } from "@/graphql/blogPost";
-import { Header } from "@/layout/frontend/landing/Header";
-import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
-import { Link } from "@/navigation";
-import { createApolloClient } from "@/utils/apollo";
-import { concatTitle } from "@/utils/helpers";
-import { Posts } from "@/views/frontend/landing/Posts";
+import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import { FIND_FIRST_CATEGORY } from '@/graphql/blogCategory'
+import { PAGINATED_POSTS } from '@/graphql/blogPost'
+import { Header } from '@/layout/frontend/landing/Header'
+import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import { Link } from '@/navigation'
+import { createApolloClient } from '@/utils/apollo'
+import { concatTitle } from '@/utils/helpers'
+import { Posts } from '@/views/frontend/landing/Posts'
 
-const client = createApolloClient();
+const client = createApolloClient()
 
 export async function generateMetadata({ params: { locale, slug } }: any) {
-  const t = await getTranslations({ locale });
-  let title = concatTitle(t("blog.tags.title"));
+  const t = await getTranslations({ locale })
+  let title = concatTitle(t('blog.tags.title'))
 
   const { data, error } = await client.query({
     query: FIND_FIRST_CATEGORY,
@@ -26,26 +26,26 @@ export async function generateMetadata({ params: { locale, slug } }: any) {
         deletedAt: null,
       },
     },
-  });
+  })
 
-  if (error) throw new Error(error?.message);
+  if (error) throw new Error(error?.message)
 
   if (data?.findFirstBlogCategory)
     title = concatTitle(
-      t("blog.categories.title2", { category: data.findFirstBlogCategory.name })
-    );
+      t('blog.categories.title2', { category: data.findFirstBlogCategory.name })
+    )
 
   return {
     title,
-  };
+  }
 }
 
 export default async function PostsByCategoryPage({
   params: { locale, slug, page },
 }: any) {
-  const t = await getTranslations({ locale });
+  const t = await getTranslations({ locale })
 
-  page = parseInt(`${page}`);
+  page = parseInt(`${page}`)
 
   const category = await client.query({
     query: FIND_FIRST_CATEGORY,
@@ -55,9 +55,9 @@ export default async function PostsByCategoryPage({
         deletedAt: null,
       },
     },
-  });
+  })
 
-  if (!category || category.error) throw new Error(category.error?.message);
+  if (!category || category.error) throw new Error(category.error?.message)
 
   const posts = await client.query({
     query: PAGINATED_POSTS,
@@ -83,15 +83,15 @@ export default async function PostsByCategoryPage({
         deletedAt: null,
       },
       orderBy: {
-        publishedAt: "desc",
+        publishedAt: 'desc',
       },
     },
-  });
+  })
 
-  if (!posts || posts.error) throw new Error(posts.error?.message);
+  if (!posts || posts.error) throw new Error(posts.error?.message)
 
-  const { findFirstBlogCategory } = category.data;
-  const { paginatedBlogPost } = posts.data;
+  const { findFirstBlogCategory } = category.data
+  const { paginatedBlogPost } = posts.data
 
   if (
     page <= 0 ||
@@ -99,16 +99,16 @@ export default async function PostsByCategoryPage({
       paginatedBlogPost.meta.lastPage < page) ||
     !findFirstBlogCategory
   ) {
-    notFound();
+    notFound()
   }
 
   return (
     <LandingLayout>
       <Header
-        title={t("blog.categories.title2", {
+        title={t('blog.categories.title2', {
           category: findFirstBlogCategory.name,
         })}
-        description={t("blog.categories.shortDescription")}
+        description={t('blog.categories.shortDescription')}
       />
       <section className="bg-light py-10">
         <Posts
@@ -119,12 +119,12 @@ export default async function PostsByCategoryPage({
           <hr className="my-3" />
           <div className="text-center">
             <Link className="btn btn-transparent-dark" href="/blog/1">
-              {t("backToBlog")}
+              {t('backToBlog')}
             </Link>
           </div>
         </Container>
         <SvgBorder className="text-dark" />
       </section>
     </LandingLayout>
-  );
+  )
 }

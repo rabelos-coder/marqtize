@@ -1,86 +1,86 @@
-"use client";
+'use client'
 
-import { useMutation } from "@apollo/client";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { Button, FormFeedback, FormGroup, Input, Label } from "reactstrap";
-import * as yup from "yup";
+import { useMutation } from '@apollo/client'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { Button, FormFeedback, FormGroup, Input, Label } from 'reactstrap'
+import * as yup from 'yup'
 
-import { CommonLogo } from "@/components/common/CommonLogo";
-import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from "@/configs";
-import { IS_DEVELOPMENT } from "@/environment";
-import { RESET_PASSWORD } from "@/graphql/auth";
-import { Link, useRouter } from "@/navigation";
-import { AuthFormProps } from "@/types/common";
+import { CommonLogo } from '@/components/common/CommonLogo'
+import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
+import { IS_DEVELOPMENT } from '@/environment'
+import { RESET_PASSWORD } from '@/graphql/auth'
+import { Link, useRouter } from '@/navigation'
+import { AuthFormProps } from '@/types/common'
 
 type FormData = {
-  email: string;
-  resetToken: string;
-  password: string;
-  passwordConfirmation: string;
-};
+  email: string
+  resetToken: string
+  password: string
+  passwordConfirmation: string
+}
 
 export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
-    useState(false);
-  const [resetPassword, { loading }] = useMutation(RESET_PASSWORD);
+    useState(false)
+  const [resetPassword, { loading }] = useMutation(RESET_PASSWORD)
 
-  const t = useTranslations();
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email") ?? "";
-  const resetToken = searchParams.get("token") ?? "";
+  const t = useTranslations()
+  const searchParams = useSearchParams()
+  const email = searchParams.get('email') ?? ''
+  const resetToken = searchParams.get('token') ?? ''
 
   const defaultValues = IS_DEVELOPMENT
     ? {
         email,
         resetToken,
-        password: "abClK1@Xa",
-        passwordConfirmation: "abClK1@X",
+        password: 'abClK1@Xa',
+        passwordConfirmation: 'abClK1@X',
       }
     : {
         email,
         resetToken,
-        password: "",
-        passwordConfirmation: "",
-      };
+        password: '',
+        passwordConfirmation: '',
+      }
 
   const schema = yup.object().shape({
     email: yup
       .string()
-      .email(t("propertyEmail", { property: t("email") }))
-      .required(t("propertyRequired", { property: t("email") }))
+      .email(t('propertyEmail', { property: t('email') }))
+      .required(t('propertyRequired', { property: t('email') }))
       .matches(
         new RegExp(EMAIL_REGEX),
-        t("propertyEmail", { property: t("email") })
+        t('propertyEmail', { property: t('email') })
       ),
     resetToken: yup
       .string()
-      .required(t("propertyRequired", { property: t("resetToken") })),
+      .required(t('propertyRequired', { property: t('resetToken') })),
     password: yup
       .string()
       .trim()
-      .required(t("propertyRequired", { property: t("password") }))
+      .required(t('propertyRequired', { property: t('password') }))
       .matches(
         new RegExp(PASSWORD_STRENGTH_REGEX),
-        t("propertyStrength", { property: t("password") })
+        t('propertyStrength', { property: t('password') })
       ),
     passwordConfirmation: yup
       .string()
       .trim()
-      .required(t("propertyRequired", { property: t("passwordConfirmation") }))
+      .required(t('propertyRequired', { property: t('passwordConfirmation') }))
       .oneOf(
-        [yup.ref("password")],
-        t("propertyMatch", {
-          property: t("passwordConfirmation"),
-          match: t("password"),
+        [yup.ref('password')],
+        t('propertyMatch', {
+          property: t('passwordConfirmation'),
+          match: t('password'),
         })
       ),
-  });
+  })
 
   const {
     control,
@@ -88,11 +88,11 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
     formState: { errors },
   } = useForm({
     defaultValues,
-    mode: "onBlur",
+    mode: 'onBlur',
     resolver: yupResolver(schema),
-  });
+  })
 
-  const router = useRouter();
+  const router = useRouter()
 
   const onSubmit = async (form: FormData) => {
     await resetPassword({
@@ -106,14 +106,14 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
     })
       .then(({ data }) => {
         if (data?.resetPassword) {
-          toast.success(t("resetPasswordSuccess"));
-          router.push("/auth/login");
+          toast.success(t('resetPasswordSuccess'))
+          router.push('/auth/login')
         } else {
-          toast.error(t("resetPasswordError"));
+          toast.error(t('resetPasswordError'))
         }
       })
-      .catch((error) => toast.error(error?.message ?? t("resetPasswordError")));
-  };
+      .catch((error) => toast.error(error?.message ?? t('resetPasswordError')))
+  }
 
   return (
     <div className="login-card login-dark">
@@ -128,11 +128,11 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
             autoComplete="off"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h4>{t("resetPassword")}</h4>
-            <p>{t("resetPasswordInfo")}</p>
+            <h4>{t('resetPassword')}</h4>
+            <p>{t('resetPasswordInfo')}</p>
             <FormGroup>
               <Label htmlFor="email" className="col-form-label">
-                {t("email")}
+                {t('email')}
               </Label>
               <Controller
                 name="email"
@@ -143,7 +143,7 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
                   <Input
                     id={name}
                     type="email"
-                    placeholder={t("emailPlaceholder")}
+                    placeholder={t('emailPlaceholder')}
                     autoComplete="on"
                     invalid={Boolean(errors.email)}
                     {...rest}
@@ -156,7 +156,7 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
             </FormGroup>
             <FormGroup>
               <Label htmlFor="resetToken" className="col-form-label">
-                {t("resetToken")}
+                {t('resetToken')}
               </Label>
               <Controller
                 name="resetToken"
@@ -178,7 +178,7 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
             </FormGroup>
             <FormGroup>
               <Label htmlFor="password" className="col-form-label">
-                {t("password")}
+                {t('password')}
               </Label>
               <div className="form-input position-relative">
                 <Controller
@@ -189,7 +189,7 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
                   render={({ field: { name, ...rest } }) => (
                     <Input
                       id={name}
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       autoFocus
                       autoComplete="off"
                       invalid={Boolean(errors.password)}
@@ -203,16 +203,16 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
                 <div className="show-hide">
                   <span
                     onClick={() => setShowPassword(!showPassword)}
-                    className={!showPassword ? "show" : ""}
+                    className={!showPassword ? 'show' : ''}
                   >
-                    {showPassword ? t("hide") : t("show")}
+                    {showPassword ? t('hide') : t('show')}
                   </span>
                 </div>
               </div>
             </FormGroup>
             <FormGroup>
               <Label htmlFor="passwordConfirmation" className="col-form-label">
-                {t("passwordConfirmation")}
+                {t('passwordConfirmation')}
               </Label>
               <div className="form-input position-relative">
                 <Controller
@@ -223,7 +223,7 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
                   render={({ field: { name, ...rest } }) => (
                     <Input
                       id={name}
-                      type={showPasswordConfirmation ? "text" : "password"}
+                      type={showPasswordConfirmation ? 'text' : 'password'}
                       autoComplete="off"
                       invalid={Boolean(errors.passwordConfirmation)}
                       {...rest}
@@ -239,9 +239,9 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
                     onClick={() =>
                       setShowPasswordConfirmation(!showPasswordConfirmation)
                     }
-                    className={!showPasswordConfirmation ? "show" : ""}
+                    className={!showPasswordConfirmation ? 'show' : ''}
                   >
-                    {showPasswordConfirmation ? t("hide") : t("show")}
+                    {showPasswordConfirmation ? t('hide') : t('show')}
                   </span>
                 </div>
               </div>
@@ -254,13 +254,13 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
                   type="submit"
                   disabled={loading}
                 >
-                  {t("resetPassword")}
+                  {t('resetPassword')}
                 </Button>
               </div>
               <p className="mt-4 mb-0 text-center">
-                {t("alreadyPasswordYourPassword")}
+                {t('alreadyPasswordYourPassword')}
                 <Link className="ms-2" href="/auth/login">
-                  {t("signIn")}
+                  {t('signIn')}
                 </Link>
               </p>
             </FormGroup>
@@ -268,5 +268,5 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

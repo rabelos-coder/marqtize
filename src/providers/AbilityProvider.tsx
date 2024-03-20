@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { AbilityContext } from "@/context/AbilityContext";
-import { AbilityProviderProps } from "@/types/ability";
+import { AbilityContext } from '@/context/AbilityContext'
+import { AbilityProviderProps } from '@/types/ability'
 
 /**
  * AbilityProvider component that provides abilities to its children.
@@ -18,5 +18,5 @@ export function AbilityProvider({
     <AbilityContext.Provider value={ability}>
       {children}
     </AbilityContext.Provider>
-  );
+  )
 }

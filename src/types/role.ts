@@ -1,75 +1,75 @@
 export type Role = {
-  id: string;
-  name: string;
-  slug: string;
-  claims: string[];
-  createdAt: Date;
-  updatedAt: Date;
-};
+  id: string
+  name: string
+  slug: string
+  claims: string[]
+  createdAt: Date
+  updatedAt: Date
+}
 
 export type CountRole = {
-  countRole: number;
-};
+  countRole: number
+}
 
 export type FindManyRole = {
-  findManyRole: Role[];
-};
+  findManyRole: Role[]
+}
 
 export type FindByIdRole = {
-  findByIdRole: Role;
-};
+  findByIdRole: Role
+}
 
 export type FindFirstRole = {
-  findFirstRole: Role;
-};
+  findFirstRole: Role
+}
 
 export type CreateRole = {
-  createRole: Role;
-};
+  createRole: Role
+}
 
 export type UpdateRole = {
-  updateRole: Role;
-};
+  updateRole: Role
+}
 
 export type DeleteRole = {
-  deleteRole: boolean;
-};
+  deleteRole: boolean
+}
 
 export type DeleteManyRole = {
-  deleteManyRole: boolean;
-};
+  deleteManyRole: boolean
+}
 
 export type RemoveRole = {
-  removeRole: boolean;
-};
+  removeRole: boolean
+}
 
 export type RemoveManyRole = {
-  removeManyRole: boolean;
-};
+  removeManyRole: boolean
+}
 
 export type RestoreRole = {
-  restoreRole: boolean;
-};
+  restoreRole: boolean
+}
 
 export type RestoreManyRole = {
-  restoreManyRole: boolean;
-};
+  restoreManyRole: boolean
+}
 
 type RoleInput = {
-  customerId?: string;
-  name: string;
-  isDefault: boolean;
-  claims?: string[];
-};
+  customerId?: string
+  name: string
+  isDefault: boolean
+  claims?: string[]
+}
 
 export type CreateRoleInput = {
-  data: RoleInput;
-};
+  data: RoleInput
+}
 
 type RoleUpdateInput = {
-  id: string;
-} & RoleInput;
+  id: string
+} & RoleInput
 
 export type UpdateRoleInput = {
-  data: RoleUpdateInput;
-};
+  data: RoleUpdateInput
+}

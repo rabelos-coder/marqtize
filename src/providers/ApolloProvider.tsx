@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { ApolloProvider as ApolloClientProvider } from "@apollo/client";
+import { ApolloProvider as ApolloClientProvider } from '@apollo/client'
 
-import { ChildrenProps } from "@/types/common";
-import { createApolloClient } from "@/utils/apollo";
+import { ChildrenProps } from '@/types/common'
+import { createApolloClient } from '@/utils/apollo'
 
 /**
  * ApolloProvider component to provide Apollo client to its children.
@@ -16,5 +16,5 @@ export function ApolloProvider({ children }: ChildrenProps): JSX.Element {
     <ApolloClientProvider client={createApolloClient()}>
       {children}
     </ApolloClientProvider>
-  );
+  )
 }

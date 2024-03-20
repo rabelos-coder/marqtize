@@ -1,16 +1,16 @@
-import { getTranslations } from "next-intl/server";
-import { BsArrowRight, BsCart, BsCreditCard } from "react-icons/bs";
-import { FaCheckCircle, FaCircle, FaQuestionCircle } from "react-icons/fa";
-import { FiUser } from "react-icons/fi";
-import { Badge, Card, CardBody, Col, Container, List, Row } from "reactstrap";
+import { getTranslations } from 'next-intl/server'
+import { BsArrowRight, BsCart, BsCreditCard } from 'react-icons/bs'
+import { FaCheckCircle, FaCircle, FaQuestionCircle } from 'react-icons/fa'
+import { FiUser } from 'react-icons/fi'
+import { Badge, Card, CardBody, Col, Container, List, Row } from 'reactstrap'
 
-import { SvgBorder } from "@/components/frontend/common/SvgBorder";
-import { Header } from "@/layout/frontend/landing/Header";
-import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
-import { Link } from "@/navigation";
+import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import { Header } from '@/layout/frontend/landing/Header'
+import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import { Link } from '@/navigation'
 
 export default async function HomePage({ params: { locale } }: any) {
-  const t = await getTranslations({ locale });
+  const t = await getTranslations({ locale })
 
   return (
     <LandingLayout>
@@ -22,9 +22,9 @@ export default async function HomePage({ params: { locale } }: any) {
               className="aos-init aos-animate text-white"
               data-aos="fade-up"
             >
-              <h1 className="page-header-ui-title">{t("headerHome")}</h1>
+              <h1 className="page-header-ui-title">{t('headerHome')}</h1>
               <p className="page-header-ui-text mb-5">
-                {t.rich("whoWeAreDescription", {
+                {t.rich('whoWeAreDescription', {
                   b: (chunk) => <strong>{chunk}</strong>,
                 })}
               </p>
@@ -51,24 +51,24 @@ export default async function HomePage({ params: { locale } }: any) {
               <div className="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">
                 <BsCart />
               </div>
-              <h3 id="builtFor">{t("increaseYourSales")}</h3>
-              <p className="mb-0">{t("increaseYourSalesDescription")}</p>
+              <h3 id="builtFor">{t('increaseYourSales')}</h3>
+              <p className="mb-0">{t('increaseYourSalesDescription')}</p>
             </Col>
             <Col lg={4} className="mb-5 mb-lg-0">
               <div className="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">
                 <FiUser />
               </div>
-              <h3>{t("improveCustomerExperience")}</h3>
+              <h3>{t('improveCustomerExperience')}</h3>
               <p className="mb-0">
-                {t("improveCustomerExperienceDescription")}
+                {t('improveCustomerExperienceDescription')}
               </p>
             </Col>
             <Col lg={4}>
               <div className="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">
                 <BsCreditCard />
               </div>
-              <h3>{t("incomeDiversification")}</h3>
-              <p className="mb-0">{t("incomeDiversificationDescription")}</p>
+              <h3>{t('incomeDiversification')}</h3>
+              <p className="mb-0">{t('incomeDiversificationDescription')}</p>
             </Col>
           </Row>
         </Container>
@@ -97,52 +97,52 @@ export default async function HomePage({ params: { locale } }: any) {
               data-aos="fade-up"
             >
               <div className="mb-5">
-                <h2>{t("whatYouWillGet")}</h2>
-                <p className="lead">{t("whatYouWillGetDescription")}</p>
+                <h2>{t('whatYouWillGet')}</h2>
+                <p className="lead">{t('whatYouWillGetDescription')}</p>
               </div>
               <Row className="gx-5">
                 <Col md={6} className="mb-4">
-                  <h6>{t("landingPages")}</h6>
-                  <p className="mb-2 small">{t("landingPagesDescription")}</p>
+                  <h6>{t('landingPages')}</h6>
+                  <p className="mb-2 small">{t('landingPagesDescription')}</p>
                   <Link
                     className="small text-arrow-icon"
                     href="/about/landing-pages"
                   >
-                    {t("learnMore")}
+                    {t('learnMore')}
                     <BsArrowRight />
                   </Link>
                 </Col>
                 <Col md={6} className="mb-4">
-                  <h6>{t("paymentMethods")}</h6>
+                  <h6>{t('paymentMethods')}</h6>
                   <p className="mb-2 small mb-0">
-                    {t("paymentMethodsDescription")}
+                    {t('paymentMethodsDescription')}
                   </p>
                   <Link
                     className="small text-arrow-icon"
                     href="/about/payments"
                   >
-                    {t("learnMore")}
+                    {t('learnMore')}
                     <BsArrowRight />
                   </Link>
                 </Col>
               </Row>
               <Row className="gx-5">
                 <Col md={6} className="mb-4">
-                  <h6>{t("layouts")}</h6>
-                  <p className="mb-2 small mb-0">{t("layoutsInfo")}</p>
+                  <h6>{t('layouts')}</h6>
+                  <p className="mb-2 small mb-0">{t('layoutsInfo')}</p>
                   <Link className="small text-arrow-icon" href="/about/layouts">
-                    {t("learnMore")}
+                    {t('learnMore')}
                     <BsArrowRight />
                   </Link>
                 </Col>
                 <Col md={6} className="mb-4">
-                  <h6>{t("robustPlatform")}</h6>
-                  <p className="small mb-0">{t("robustPlatformDescription")}</p>
+                  <h6>{t('robustPlatform')}</h6>
+                  <p className="small mb-0">{t('robustPlatformDescription')}</p>
                   <Link
                     className="small text-arrow-icon"
                     href="/about/robust-platform"
                   >
-                    {t("learnMore")}
+                    {t('learnMore')}
                     <BsArrowRight />
                   </Link>
                 </Col>
@@ -155,8 +155,8 @@ export default async function HomePage({ params: { locale } }: any) {
       <section id="pricing" className="bg-light pt-10">
         <Container className="px-5">
           <div className="text-center mb-5">
-            <h2>{t("pricingTable")}</h2>
-            <p className="lead">{t("pricingTableDescription")}</p>
+            <h2>{t('pricingTable')}</h2>
+            <p className="lead">{t('pricingTableDescription')}</p>
           </div>
           <Row className="gx-5 z-1">
             <Col
@@ -169,11 +169,11 @@ export default async function HomePage({ params: { locale } }: any) {
                 <CardBody className="p-5">
                   <div className="text-center">
                     <div className="badge bg-light text-dark rounded-pill badge-marketing badge-sm">
-                      {t("free")}
+                      {t('free')}
                     </div>
                     <div className="pricing-price">
-                      <sup>{t("usd")}</sup>0
-                      <span className="pricing-price-period">/{t("mo")}</span>
+                      <sup>{t('usd')}</sup>0
+                      <span className="pricing-price-period">/{t('mo')}</span>
                     </div>
                   </div>
                   <List type="unstyled" className="fa-ul pricing-list">
@@ -181,51 +181,51 @@ export default async function HomePage({ params: { locale } }: any) {
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
-                      <span className="text-dark">1 {t("user")}</span>
+                      <span className="text-dark">1 {t('user')}</span>
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
                       <span className="text-dark">
-                        {t("upToCountProducts", { count: 10 })}
+                        {t('upToCountProducts', { count: 10 })}
                       </span>
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
-                      <span className="text-dark">{t("communitySupport")}</span>
+                      <span className="text-dark">{t('communitySupport')}</span>
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCircle className="text-gray-200" />
                       </span>
-                      {t("styleCustomizer")}
+                      {t('styleCustomizer')}
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCircle className="text-gray-200" />
                       </span>
-                      {t("customComponents")}
+                      {t('customComponents')}
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCircle className="text-gray-200" />
                       </span>
-                      {t("expandedUtilities")}
+                      {t('expandedUtilities')}
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCircle className="text-gray-200" />
                       </span>
-                      {t("thirdPartyIntegration")}
+                      {t('thirdPartyIntegration')}
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCircle className="text-gray-200" />
                       </span>
-                      {t("layoutOptions")}
+                      {t('layoutOptions')}
                     </li>
                   </List>
                 </CardBody>
@@ -240,12 +240,12 @@ export default async function HomePage({ params: { locale } }: any) {
                 <CardBody className="p-5">
                   <div className="text-center">
                     <div className="badge bg-primary-soft rounded-pill badge-marketing badge-sm text-primary">
-                      {t("standard")}
+                      {t('standard')}
                     </div>
                     <div className="pricing-price">
-                      <sup>{t("usd")}</sup>
+                      <sup>{t('usd')}</sup>
                       149
-                      <span className="pricing-price-period">/{t("mo")}</span>
+                      <span className="pricing-price-period">/{t('mo')}</span>
                     </div>
                   </div>
                   <List type="unstyled" className="fa-ul pricing-list">
@@ -254,7 +254,7 @@ export default async function HomePage({ params: { locale } }: any) {
                         <FaCheckCircle className="text-teal" />
                       </span>
                       <span className="text-dark">
-                        {t("upToCountUsers", { count: 10 })}
+                        {t('upToCountUsers', { count: 10 })}
                       </span>
                     </li>
                     <li className="pricing-list-item">
@@ -262,7 +262,7 @@ export default async function HomePage({ params: { locale } }: any) {
                         <FaCheckCircle className="text-teal" />
                       </span>
                       <span className="text-dark">
-                        {t("upToCountProducts", { count: 100 })}
+                        {t('upToCountProducts', { count: 100 })}
                       </span>
                     </li>
                     <li className="pricing-list-item">
@@ -270,42 +270,42 @@ export default async function HomePage({ params: { locale } }: any) {
                         <FaCheckCircle className="text-teal" />
                       </span>
                       <span className="text-dark">
-                        {t("ticketAndLiveChatSupport")}
+                        {t('ticketAndLiveChatSupport')}
                       </span>
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
-                      <span className="text-dark">{t("styleCustomizer")}</span>
+                      <span className="text-dark">{t('styleCustomizer')}</span>
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
-                      <span className="text-dark">{t("customComponents")}</span>
-                    </li>
-                    <li className="pricing-list-item">
-                      <span className="fa-li me-2">
-                        <FaCheckCircle className="text-teal" />
-                      </span>
-                      <span className="text-dark">
-                        {t("expandedUtilities")}
-                      </span>
+                      <span className="text-dark">{t('customComponents')}</span>
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
                       <span className="text-dark">
-                        {t("thirdPartyIntegration")}
+                        {t('expandedUtilities')}
                       </span>
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
-                      <span className="text-dark">{t("layoutOptions")}</span>
+                      <span className="text-dark">
+                        {t('thirdPartyIntegration')}
+                      </span>
+                    </li>
+                    <li className="pricing-list-item">
+                      <span className="fa-li me-2">
+                        <FaCheckCircle className="text-teal" />
+                      </span>
+                      <span className="text-dark">{t('layoutOptions')}</span>
                     </li>
                   </List>
                 </CardBody>
@@ -325,12 +325,12 @@ export default async function HomePage({ params: { locale } }: any) {
                       pill
                       className="text-dark badge-marketing"
                     >
-                      {t("enterprise")}
+                      {t('enterprise')}
                     </Badge>
                     <div className="pricing-price">
-                      <sup>{t("usd")}</sup>
+                      <sup>{t('usd')}</sup>
                       599
-                      <span className="pricing-price-period">/{t("mo")}</span>
+                      <span className="pricing-price-period">/{t('mo')}</span>
                     </div>
                   </div>
                   <List type="unstyled" className="fa-ul pricing-list">
@@ -338,42 +338,14 @@ export default async function HomePage({ params: { locale } }: any) {
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
-                      <span className="text-dark">{t("unlimitedUsers")}</span>
+                      <span className="text-dark">{t('unlimitedUsers')}</span>
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
                       <span className="text-dark">
-                        {t("unlimitedProducts")}
-                      </span>
-                    </li>
-                    <li className="pricing-list-item">
-                      <span className="fa-li me-2">
-                        <FaCheckCircle className="text-teal" />
-                      </span>
-                      <span className="text-dark">
-                        {t("ticketAndLiveChatSupport")}
-                      </span>
-                    </li>
-                    <li className="pricing-list-item">
-                      <span className="fa-li me-2">
-                        <FaCheckCircle className="text-teal" />
-                      </span>
-                      <span className="text-dark">{t("styleCustomizer")}</span>
-                    </li>
-                    <li className="pricing-list-item">
-                      <span className="fa-li me-2">
-                        <FaCheckCircle className="text-teal" />
-                      </span>
-                      <span className="text-dark">{t("customComponents")}</span>
-                    </li>
-                    <li className="pricing-list-item">
-                      <span className="fa-li me-2">
-                        <FaCheckCircle className="text-teal" />
-                      </span>
-                      <span className="text-dark">
-                        {t("expandedUtilities")}
+                        {t('unlimitedProducts')}
                       </span>
                     </li>
                     <li className="pricing-list-item">
@@ -381,14 +353,42 @@ export default async function HomePage({ params: { locale } }: any) {
                         <FaCheckCircle className="text-teal" />
                       </span>
                       <span className="text-dark">
-                        {t("thirdPartyIntegration")}
+                        {t('ticketAndLiveChatSupport')}
                       </span>
                     </li>
                     <li className="pricing-list-item">
                       <span className="fa-li me-2">
                         <FaCheckCircle className="text-teal" />
                       </span>
-                      <span className="text-dark">{t("layoutOptions")}</span>
+                      <span className="text-dark">{t('styleCustomizer')}</span>
+                    </li>
+                    <li className="pricing-list-item">
+                      <span className="fa-li me-2">
+                        <FaCheckCircle className="text-teal" />
+                      </span>
+                      <span className="text-dark">{t('customComponents')}</span>
+                    </li>
+                    <li className="pricing-list-item">
+                      <span className="fa-li me-2">
+                        <FaCheckCircle className="text-teal" />
+                      </span>
+                      <span className="text-dark">
+                        {t('expandedUtilities')}
+                      </span>
+                    </li>
+                    <li className="pricing-list-item">
+                      <span className="fa-li me-2">
+                        <FaCheckCircle className="text-teal" />
+                      </span>
+                      <span className="text-dark">
+                        {t('thirdPartyIntegration')}
+                      </span>
+                    </li>
+                    <li className="pricing-list-item">
+                      <span className="fa-li me-2">
+                        <FaCheckCircle className="text-teal" />
+                      </span>
+                      <span className="text-dark">{t('layoutOptions')}</span>
                     </li>
                   </List>
                 </CardBody>
@@ -407,9 +407,9 @@ export default async function HomePage({ params: { locale } }: any) {
                   <FaQuestionCircle />
                 </div>
                 <div className="ms-4">
-                  <h5 className="text-white">{t("whatIsCommunitySupport")}</h5>
+                  <h5 className="text-white">{t('whatIsCommunitySupport')}</h5>
                   <p className="text-white-50">
-                    {t("communitySupportDescription")}
+                    {t('communitySupportDescription')}
                   </p>
                 </div>
               </div>
@@ -421,10 +421,10 @@ export default async function HomePage({ params: { locale } }: any) {
                 </div>
                 <div className="ms-4">
                   <h5 className="text-white">
-                    {t("whatCanIDoWithPayedPlans")}
+                    {t('whatCanIDoWithPayedPlans')}
                   </h5>
                   <p className="text-white-50">
-                    {t("whatCanIDoWithPayedPlansDescription")}
+                    {t('whatCanIDoWithPayedPlansDescription')}
                   </p>
                 </div>
               </div>
@@ -435,9 +435,9 @@ export default async function HomePage({ params: { locale } }: any) {
                   <FaQuestionCircle />
                 </div>
                 <div className="ms-4">
-                  <h5 className="text-white">{t("doIWillGetUpdates")}</h5>
+                  <h5 className="text-white">{t('doIWillGetUpdates')}</h5>
                   <p className="text-white-50">
-                    {t("doIWillGetUpdatesDescription")}
+                    {t('doIWillGetUpdatesDescription')}
                   </p>
                 </div>
               </div>
@@ -448,9 +448,9 @@ export default async function HomePage({ params: { locale } }: any) {
                   <FaQuestionCircle />
                 </div>
                 <div className="ms-4">
-                  <h5 className="text-white">{t("whatDoesItIntegrateWith")}</h5>
+                  <h5 className="text-white">{t('whatDoesItIntegrateWith')}</h5>
                   <p className="text-white-50">
-                    {t("whatDoesItIntegrateWithDescription")}
+                    {t('whatDoesItIntegrateWithDescription')}
                   </p>
                 </div>
               </div>
@@ -463,18 +463,18 @@ export default async function HomePage({ params: { locale } }: any) {
                 pill
                 className="bg-transparent-light badge-marketing mb-4"
               >
-                {t("getStarted")}
+                {t('getStarted')}
               </Badge>
-              <h2 className="text-white">{t("getStartedTitle")}</h2>
+              <h2 className="text-white">{t('getStartedTitle')}</h2>
               <p className="lead text-white-50 mb-5">
-                {t("getStartedDescription")}
+                {t('getStartedDescription')}
               </p>
               <Link
                 color="teal"
                 className="btn btn-primary fw-500"
                 href="/auth/register"
               >
-                {t("buyNow")}!
+                {t('buyNow')}!
               </Link>
             </Col>
           </Row>
@@ -483,5 +483,5 @@ export default async function HomePage({ params: { locale } }: any) {
       </section>
       <hr className="m-0" />
     </LandingLayout>
-  );
+  )
 }

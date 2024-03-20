@@ -1,6 +1,6 @@
-import { AnyAbility } from "@casl/ability";
+import { AnyAbility } from '@casl/ability'
 
 export type AbilityProviderProps = {
-  children: React.ReactNode;
-  ability: AnyAbility;
-};
+  children: React.ReactNode
+  ability: AnyAbility
+}

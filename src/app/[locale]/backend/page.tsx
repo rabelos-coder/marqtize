@@ -1,23 +1,23 @@
-import { getTranslations } from "next-intl/server";
-import { Card, CardBody, Col, Container, Row } from "reactstrap";
+import { getTranslations } from 'next-intl/server'
+import { Card, CardBody, Col, Container, Row } from 'reactstrap'
 
-import { Breadcrumbs } from "@/components/backend/Breadcrumbs";
-import { AclGuard } from "@/components/backend/Guards/AclGuard";
-import CommonCardHeading from "@/components/common/CommonCardHeading";
-import { APP_META_SLOGAN } from "@/environment";
-import { concatTitle } from "@/utils/helpers";
+import { Breadcrumbs } from '@/components/backend/Breadcrumbs'
+import { AclGuard } from '@/components/backend/Guards/AclGuard'
+import CommonCardHeading from '@/components/common/CommonCardHeading'
+import { APP_META_SLOGAN } from '@/environment'
+import { concatTitle } from '@/utils/helpers'
 
 export async function generateMetadata() {
-  const title = concatTitle(APP_META_SLOGAN);
+  const title = concatTitle(APP_META_SLOGAN)
 
   return {
     title,
-  };
+  }
 }
 
 export default async function BackendPage({ params: { locale } }: any) {
-  const t = await getTranslations({ locale });
-  const title = t("home");
+  const t = await getTranslations({ locale })
+  const title = t('home')
 
   return (
     <AclGuard>
@@ -49,5 +49,5 @@ export default async function BackendPage({ params: { locale } }: any) {
         </Container>
       </div>
     </AclGuard>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { AnyAbility } from "@casl/ability";
-import { createContext } from "react";
+import { AnyAbility } from '@casl/ability'
+import { createContext } from 'react'
 
-export const AbilityContext = createContext<AnyAbility>(undefined!);
+export const AbilityContext = createContext<AnyAbility>(undefined!)

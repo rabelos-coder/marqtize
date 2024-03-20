@@ -1,19 +1,19 @@
-"use client";
+'use client'
 
-import "../../../app/assets/scss/landing.scss";
+import '../../../app/assets/scss/landing.scss'
 
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
-import { TapTop } from "@/components/common/TapTop";
+import { TapTop } from '@/components/common/TapTop'
 
-import { DefaultLayout } from "../default/DefaultLayout";
-import { Footer } from "./Footer";
-import { NavBar } from "./Navbar/index";
+import { DefaultLayout } from '../default/DefaultLayout'
+import { Footer } from './Footer'
+import { NavBar } from './Navbar/index'
 
 type LandingProps = {
-  children: React.ReactNode;
-  navbarExpanded?: boolean;
-};
+  children: React.ReactNode
+  navbarExpanded?: boolean
+}
 
 /**
  * Renders the landing layout for the application.
@@ -25,8 +25,8 @@ type LandingProps = {
  */
 export const LandingLayout = ({ navbarExpanded, children }: LandingProps) => {
   useEffect(() => {
-    if (typeof window !== "undefined") window.scrollTo({ top: 0, left: 0 });
-  }, []);
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, left: 0 })
+  }, [])
 
   return (
     <DefaultLayout>
@@ -39,5 +39,5 @@ export const LandingLayout = ({ navbarExpanded, children }: LandingProps) => {
         <TapTop />
       </div>
     </DefaultLayout>
-  );
-};
+  )
+}

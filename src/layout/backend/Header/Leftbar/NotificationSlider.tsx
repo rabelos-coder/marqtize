@@ -1,11 +1,11 @@
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import React from "react";
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import React from 'react'
 
-import { Link } from "@/navigation";
+import { Link } from '@/navigation'
 
 // @ts-ignore
-const Slider = dynamic(() => import("react-slick"), { ssr: false });
+const Slider = dynamic(() => import('react-slick'), { ssr: false })
 
 export const NotificationSlider = () => {
   // given slider options which i need ,you can add options which you want to use in slider
@@ -18,7 +18,7 @@ export const NotificationSlider = () => {
     autoplay: true,
     autoplaySpeed: 2500,
     arrows: false,
-  };
+  }
 
   return (
     <Slider
@@ -27,7 +27,7 @@ export const NotificationSlider = () => {
     >
       <div className="d-flex h-100">
         <Image
-          src={"/assets/images/giftools.gif"}
+          src={'/assets/images/giftools.gif'}
           alt="git"
           width={26}
           height={26}
@@ -41,7 +41,7 @@ export const NotificationSlider = () => {
       </div>
       <div className="d-flex h-100">
         <Image
-          src={"/assets/images/giftools.gif"}
+          src={'/assets/images/giftools.gif'}
           alt="git"
           width={26}
           height={26}
@@ -59,5 +59,5 @@ export const NotificationSlider = () => {
         </Link>
       </div>
     </Slider>
-  );
-};
+  )
+}

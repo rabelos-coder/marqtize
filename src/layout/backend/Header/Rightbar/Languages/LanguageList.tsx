@@ -1,31 +1,31 @@
-import { useTranslations } from "next-intl";
-import React, { Dispatch, SetStateAction } from "react";
+import { useTranslations } from 'next-intl'
+import React, { Dispatch, SetStateAction } from 'react'
 
-import { useAppDispatch } from "@/hooks";
-import { usePathname, useRouter } from "@/navigation";
-import { setLanguage } from "@/store/slices/authSlice";
-import { LanguagesData } from "@/types/language";
+import { useAppDispatch } from '@/hooks'
+import { usePathname, useRouter } from '@/navigation'
+import { setLanguage } from '@/store/slices/authSlice'
+import { LanguagesData } from '@/types/language'
 
 type ListStateType = {
-  selected: string;
-  setSelected: Dispatch<SetStateAction<string>>;
-};
+  selected: string
+  setSelected: Dispatch<SetStateAction<string>>
+}
 
 export const LanguageList = ({ selected, setSelected }: ListStateType) => {
-  const pathname = usePathname();
-  const router = useRouter();
+  const pathname = usePathname()
+  const router = useRouter()
 
-  const t = useTranslations();
-  const dispatch = useAppDispatch();
+  const t = useTranslations()
+  const dispatch = useAppDispatch()
 
   const changeLanguage = (locale: string) => {
-    setSelected(locale);
-    dispatch(setLanguage(locale));
-    router.push(pathname, { locale });
-  };
+    setSelected(locale)
+    dispatch(setLanguage(locale))
+    router.push(pathname, { locale })
+  }
 
   return (
-    <div className={`more_lang ${selected ? "active" : ""}`}>
+    <div className={`more_lang ${selected ? 'active' : ''}`}>
       {LanguagesData &&
         LanguagesData.map((item, index) => (
           <div
@@ -41,5 +41,5 @@ export const LanguageList = ({ selected, setSelected }: ListStateType) => {
           </div>
         ))}
     </div>
-  );
-};
+  )
+}

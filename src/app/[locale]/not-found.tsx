@@ -1,31 +1,31 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { FiArrowLeft } from "react-icons/fi";
-import { Col, Container, Row } from "reactstrap";
+import Image from 'next/image'
+import { useTranslations } from 'next-intl'
+import { FiArrowLeft } from 'react-icons/fi'
+import { Col, Container, Row } from 'reactstrap'
 
-import { SvgBorder } from "@/components/frontend/common/SvgBorder";
-import { APP_META_TITLE } from "@/environment";
-import { Header } from "@/layout/frontend/landing/Header";
-import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
-import { Link, useRouter } from "@/navigation";
+import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import { APP_META_TITLE } from '@/environment'
+import { Header } from '@/layout/frontend/landing/Header'
+import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import { Link, useRouter } from '@/navigation'
 
 export default function NotFound() {
-  const t = useTranslations();
+  const t = useTranslations()
 
-  const router = useRouter();
+  const router = useRouter()
 
   const handleBack = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    router.back();
-  };
+    e.preventDefault()
+    router.back()
+  }
 
   return (
     <LandingLayout>
       <Header
         className="not-found"
-        style={{ paddingTop: "6rem", paddingBottom: "6rem" }}
+        style={{ paddingTop: '6rem', paddingBottom: '6rem' }}
       />
       <section className="bg-white py-10">
         <Container className="px-5">
@@ -39,14 +39,14 @@ export default function NotFound() {
                   alt={APP_META_TITLE}
                   className="img-fluid pb-4 text-purple"
                 />
-                <p className="lead">{t("notFoundInfo")}</p>
+                <p className="lead">{t('notFoundInfo')}</p>
                 <Link
                   className="text-arrow-icon"
                   href="#!"
                   onClick={handleBack}
                 >
                   <FiArrowLeft width={24} height={24} className="ms-0 me-1" />
-                  {t("back")}
+                  {t('back')}
                 </Link>
               </div>
             </Col>
@@ -55,5 +55,5 @@ export default function NotFound() {
         <SvgBorder className="text-dark" />
       </section>
     </LandingLayout>
-  );
+  )
 }

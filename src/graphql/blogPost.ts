@@ -1,7 +1,7 @@
-import { gql, TypedDocumentNode } from "@apollo/client";
+import { gql, TypedDocumentNode } from '@apollo/client'
 
-import { FindFirstBlogPost, PaginatedBlogPost } from "@/types/blog";
-import { PaginatedInput, WhereAndOrderInput } from "@/types/common";
+import { FindFirstBlogPost, PaginatedBlogPost } from '@/types/blog'
+import { PaginatedInput, WhereAndOrderInput } from '@/types/common'
 
 const FRAGMENT_BLOG_POST_PROPS = gql`
   fragment BlogPostProps on BlogPost {
@@ -33,7 +33,7 @@ const FRAGMENT_BLOG_POST_PROPS = gql`
       slug
     }
   }
-`;
+`
 
 export const PAGINATED_POSTS: TypedDocumentNode<
   PaginatedBlogPost,
@@ -65,7 +65,7 @@ export const PAGINATED_POSTS: TypedDocumentNode<
       }
     }
   }
-`;
+`
 
 export const FIND_FIRST_POST: TypedDocumentNode<
   FindFirstBlogPost,
@@ -80,4 +80,4 @@ export const FIND_FIRST_POST: TypedDocumentNode<
       ...BlogPostProps
     }
   }
-`;
+`

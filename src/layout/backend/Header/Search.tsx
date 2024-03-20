@@ -1,34 +1,34 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from 'react'
 
-import { useLayout } from "@/hooks";
-import { SearchableMenuType } from "@/types/layout";
+import { useLayout } from '@/hooks'
+import { SearchableMenuType } from '@/types/layout'
 
-import SearchBarContain from "./SearchBarContain";
+import SearchBarContain from './SearchBarContain'
 
 const Search = () => {
-  const [suggestion, setSuggestion] = useState<SearchableMenuType[]>([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [fieldTouch, setFieldTouch] = useState(false);
-  const { searchableMenu } = useLayout();
+  const [suggestion, setSuggestion] = useState<SearchableMenuType[]>([])
+  const [searchValue, setSearchValue] = useState('')
+  const [fieldTouch, setFieldTouch] = useState(false)
+  const { searchableMenu } = useLayout()
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchKey = event.target.value.toLowerCase();
-    setFieldTouch(true);
-    setSearchValue(event.target.value);
-    if (searchKey !== "") {
-      if (typeof document !== "undefined")
-        document.body.classList.add("offcanvas");
+    const searchKey = event.target.value.toLowerCase()
+    setFieldTouch(true)
+    setSearchValue(event.target.value)
+    if (searchKey !== '') {
+      if (typeof document !== 'undefined')
+        document.body.classList.add('offcanvas')
       const search = searchableMenu.filter((item) => {
-        return item.title.toLowerCase().includes(searchKey);
-      });
-      setSuggestion(search);
+        return item.title.toLowerCase().includes(searchKey)
+      })
+      setSuggestion(search)
     }
-    if (searchKey === "") {
-      if (typeof document !== "undefined")
-        document.body.classList.remove("offcanvas");
-      setSuggestion([]);
+    if (searchKey === '') {
+      if (typeof document !== 'undefined')
+        document.body.classList.remove('offcanvas')
+      setSuggestion([])
     }
-  };
+  }
 
   return (
     <SearchBarContain
@@ -39,7 +39,7 @@ const Search = () => {
       fieldTouch={fieldTouch}
       setFieldTouch={setFieldTouch}
     />
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

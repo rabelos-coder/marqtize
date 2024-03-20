@@ -1,19 +1,19 @@
-import Image from "next/image";
-import { AlignCenter } from "react-feather";
-import { Col } from "reactstrap";
+import Image from 'next/image'
+import { FiAlignCenter } from 'react-icons/fi'
+import { Col } from 'reactstrap'
 
-import { APP_META_TITLE } from "@/environment";
-import { useLayout } from "@/hooks";
-import { Link } from "@/navigation";
+import { APP_META_TITLE } from '@/environment'
+import { useLayout } from '@/hooks'
+import { Link } from '@/navigation'
 
 export const Leftbar = () => {
-  const { sideBarToggle, setSideBarToggle } = useLayout();
+  const { sideBarToggle, setSideBarToggle } = useLayout()
 
   return (
     <>
       <Col className="header-logo-wrapper col-auto p-0">
         <div className="logo-wrapper">
-          <Link href={"/backend"}>
+          <Link href={'/backend'}>
             <Image
               className="img-fluid for-light"
               src={`/assets/images/logo/marqtize_logo.png`}
@@ -34,7 +34,7 @@ export const Leftbar = () => {
           className="toggle-sidebar"
           onClick={() => setSideBarToggle(!sideBarToggle)}
         >
-          <AlignCenter
+          <FiAlignCenter
             className="status_toggle middle sidebar-toggle"
             id="sidebar-toggle"
           />
@@ -44,5 +44,5 @@ export const Leftbar = () => {
         {/* <NotificationSlider /> */}
       </Col>
     </>
-  );
-};
+  )
+}

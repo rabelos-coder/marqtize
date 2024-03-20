@@ -16,9 +16,9 @@ export const Spinner = () => (
           values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
           result="goo"
         >
-          {" "}
+          {' '}
         </feColorMatrix>
       </filter>
     </svg>
   </div>
-);
+)

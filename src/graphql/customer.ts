@@ -1,4 +1,4 @@
-import { gql, TypedDocumentNode } from "@apollo/client";
+import { gql, TypedDocumentNode } from '@apollo/client'
 
 import {
   FindByIdInput,
@@ -8,7 +8,7 @@ import {
   PaginatedObject,
   WhereAndOrderInput,
   WhereInput,
-} from "@/types/common";
+} from '@/types/common'
 import {
   CountCustomer,
   CreateCustomer,
@@ -26,7 +26,7 @@ import {
   RestoreManyCustomer,
   UpdateCustomer,
   UpdateCustomerInput,
-} from "@/types/customer";
+} from '@/types/customer'
 
 const FRAGMENT_CUSTOMER_PROPS = gql`
   fragment CustomerProps on Customer {
@@ -64,14 +64,14 @@ const FRAGMENT_CUSTOMER_PROPS = gql`
       name
     }
   }
-`;
+`
 
 export const COUNT_CUSTOMERS: TypedDocumentNode<CountCustomer, WhereInput> =
   gql`
     query CountCustomer($where: SearchCustomerInput) {
       countCustomer(where: $where)
     }
-  `;
+  `
 
 export const FIND_CUSTOMERS: TypedDocumentNode<
   FindManyCustomer,
@@ -86,7 +86,7 @@ export const FIND_CUSTOMERS: TypedDocumentNode<
       ...CustomerProps
     }
   }
-`;
+`
 
 export const PAGINATED_CUSTOMERS: TypedDocumentNode<
   PaginatedObject<Customer>,
@@ -118,7 +118,7 @@ export const PAGINATED_CUSTOMERS: TypedDocumentNode<
       }
     }
   }
-`;
+`
 
 export const FIND_CUSTOMER: TypedDocumentNode<FindByIdCustomer, FindByIdInput> =
   gql`
@@ -128,7 +128,7 @@ export const FIND_CUSTOMER: TypedDocumentNode<FindByIdCustomer, FindByIdInput> =
         ...CustomerProps
       }
     }
-  `;
+  `
 
 export const FIND_FIRST_CUSTOMER: TypedDocumentNode<
   FindFirstCustomer,
@@ -143,7 +143,7 @@ export const FIND_FIRST_CUSTOMER: TypedDocumentNode<
       ...CustomerProps
     }
   }
-`;
+`
 
 export const FIND_CUSTOMER_BY_SLUG: TypedDocumentNode<
   FindBySlugCustomer,
@@ -155,7 +155,7 @@ export const FIND_CUSTOMER_BY_SLUG: TypedDocumentNode<
       ...CustomerProps
     }
   }
-`;
+`
 
 export const CREATE_CUSTOMER: TypedDocumentNode<
   CreateCustomer,
@@ -166,7 +166,7 @@ export const CREATE_CUSTOMER: TypedDocumentNode<
       id
     }
   }
-`;
+`
 
 export const UPDATE_CUSTOMER: TypedDocumentNode<
   UpdateCustomer,
@@ -177,14 +177,14 @@ export const UPDATE_CUSTOMER: TypedDocumentNode<
       id
     }
   }
-`;
+`
 
 export const DELETE_CUSTOMER: TypedDocumentNode<DeleteCustomer, FindByIdInput> =
   gql`
     mutation DeleteCustomer($id: String!) {
       deleteCustomer(id: $id)
     }
-  `;
+  `
 
 export const DELETE_CUSTOMERS: TypedDocumentNode<
   DeleteManyCustomer,
@@ -193,14 +193,14 @@ export const DELETE_CUSTOMERS: TypedDocumentNode<
   mutation DeleteManyCustomer($ids: [String!]!) {
     deleteManyCustomer(ids: $ids)
   }
-`;
+`
 
 export const REMOVE_CUSTOMER: TypedDocumentNode<RemoveCustomer, FindByIdInput> =
   gql`
     mutation RemoveCustomer($id: String!) {
       removeCustomer(id: $id)
     }
-  `;
+  `
 
 export const REMOVE_CUSTOMERS: TypedDocumentNode<
   RemoveManyCustomer,
@@ -209,7 +209,7 @@ export const REMOVE_CUSTOMERS: TypedDocumentNode<
   mutation RemoveManyCustomer($ids: [String!]!) {
     removeManyCustomer(ids: $ids)
   }
-`;
+`
 
 export const RESTORE_CUSTOMER: TypedDocumentNode<
   RestoreCustomer,
@@ -218,7 +218,7 @@ export const RESTORE_CUSTOMER: TypedDocumentNode<
   mutation RestoreCustomer($id: String!) {
     restoreCustomer(id: $id)
   }
-`;
+`
 
 export const RESTORE_CUSTOMERS: TypedDocumentNode<
   RestoreManyCustomer,
@@ -227,4 +227,4 @@ export const RESTORE_CUSTOMERS: TypedDocumentNode<
   mutation RestoreManyCustomer($ids: [String!]!) {
     restoreManyCustomer(ids: $ids)
   }
-`;
+`

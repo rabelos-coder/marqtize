@@ -1,7 +1,7 @@
-import { gql, TypedDocumentNode } from "@apollo/client";
+import { gql, TypedDocumentNode } from '@apollo/client'
 
-import { FindFirstBlogTag } from "@/types/blog";
-import { WhereAndOrderInput } from "@/types/common";
+import { FindFirstBlogTag } from '@/types/blog'
+import { WhereAndOrderInput } from '@/types/common'
 
 const FRAGMENT_BLOG_TAG_PROPS = gql`
   fragment BlogTagProps on BlogTag {
@@ -17,7 +17,7 @@ const FRAGMENT_BLOG_TAG_PROPS = gql`
       title
     }
   }
-`;
+`
 
 export const FIND_FIRST_TAG: TypedDocumentNode<
   FindFirstBlogTag,
@@ -32,4 +32,4 @@ export const FIND_FIRST_TAG: TypedDocumentNode<
       ...BlogTagProps
     }
   }
-`;
+`

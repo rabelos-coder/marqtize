@@ -1,26 +1,26 @@
-"use client";
-import { useEffect, useRef } from "react";
+'use client'
+import { useEffect, useRef } from 'react'
 
 type ComponentProps = {
-  className?: string;
-  src: string;
-  alt: string;
-};
+  className?: string
+  src: string
+  alt: string
+}
 
 const RatioImage = (props: ComponentProps) => {
-  const { alt } = props;
-  const bgImg = useRef<HTMLImageElement>(null);
+  const { alt } = props
+  const bgImg = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
-    const image = bgImg.current;
-    if (image && image.classList.contains("bg-img-cover")) {
-      const parentElement = image.parentElement;
-      const src = image.getAttribute("src");
+    const image = bgImg.current
+    if (image && image.classList.contains('bg-img-cover')) {
+      const parentElement = image.parentElement
+      const src = image.getAttribute('src')
       if (parentElement) {
-        parentElement.classList.add("bg-size");
-        image.style.display = "none";
+        parentElement.classList.add('bg-size')
+        image.style.display = 'none'
         parentElement.setAttribute(
-          "style",
+          'style',
           `
           background-image: url(${src});
           background-size: cover;
@@ -28,11 +28,11 @@ const RatioImage = (props: ComponentProps) => {
           background-repeat: no-repeat;
           display: block;
           `
-        );
+        )
       }
     }
-  }, []);
+  }, [])
 
-  return <img ref={bgImg} {...props} alt={alt} />;
-};
-export default RatioImage;
+  return <img ref={bgImg} {...props} alt={alt} />
+}
+export default RatioImage

@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import { Col, Container, Row } from "reactstrap";
+import { Col, Container, Row } from 'reactstrap'
 
-import { SvgBorder } from "@/components/frontend/common/SvgBorder";
+import { SvgBorder } from '@/components/frontend/common/SvgBorder'
 
 type HeaderProps = {
-  title?: string | React.ReactNode;
-  description?: string | React.ReactNode;
-  children?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-};
+  title?: string | React.ReactNode
+  description?: string | React.ReactNode
+  children?: React.ReactNode
+  className?: string
+  style?: React.CSSProperties
+}
 
 export const Header = ({
   title,
@@ -25,7 +25,7 @@ export const Header = ({
       style={{ ...style }}
     >
       <div
-        className={`page-header-ui-content ${className ? className : "pt-10"}`}
+        className={`page-header-ui-content ${className ? className : 'pt-10'}`}
       >
         {title ? (
           <Container className="px-5 text-center">
@@ -44,5 +44,5 @@ export const Header = ({
       </div>
       <SvgBorder className="text-white" />
     </header>
-  );
-};
+  )
+}

@@ -1,10 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit'
 
-import { APP_META_TITLE, IS_DEVELOPMENT } from "@/environment";
+import { APP_META_TITLE, IS_DEVELOPMENT } from '@/environment'
 
-import auth from "./slices/authSlice";
-import customer from "./slices/customerSlice";
-import theme from "./slices/themeSlice";
+import auth from './slices/authSlice'
+import customer from './slices/customerSlice'
+import theme from './slices/themeSlice'
 
 export const makeStore = () => {
   return configureStore({
@@ -16,9 +16,9 @@ export const makeStore = () => {
       getDefaultMiddleware({
         serializableCheck: false,
       }),
-  });
-};
+  })
+}
 
-export type AppStore = ReturnType<typeof makeStore>;
-export type RootState = ReturnType<AppStore["getState"]>;
-export type AppDispatch = AppStore["dispatch"];
+export type AppStore = ReturnType<typeof makeStore>
+export type RootState = ReturnType<AppStore['getState']>
+export type AppDispatch = AppStore['dispatch']

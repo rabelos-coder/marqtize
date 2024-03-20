@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { FiChevronsUp } from "react-icons/fi";
+import React, { useEffect, useState } from 'react'
+import { FiChevronsUp } from 'react-icons/fi'
 
 export const TapTop = () => {
-  const [tapTopStyle, setTapTopStyle] = useState("none");
+  const [tapTopStyle, setTapTopStyle] = useState('none')
 
   const executeScroll = () => {
-    if (typeof window !== "undefined")
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  };
+    if (typeof window !== 'undefined')
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }
 
   const handleScroll = () => {
-    if (typeof window !== "undefined" && window.scrollY > 100) {
-      setTapTopStyle("block");
+    if (typeof window !== 'undefined' && window.scrollY > 100) {
+      setTapTopStyle('block')
     } else {
-      setTapTopStyle("none");
+      setTapTopStyle('none')
     }
-  };
+  }
 
   useEffect(() => {
-    if (typeof window !== "undefined")
-      window.addEventListener("scroll", handleScroll);
-    handleScroll();
+    if (typeof window !== 'undefined')
+      window.addEventListener('scroll', handleScroll)
+    handleScroll()
 
     return () => {
-      if (typeof window !== "undefined")
-        window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      if (typeof window !== 'undefined')
+        window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <div className="tap-top" style={{ display: tapTopStyle }}>
       <FiChevronsUp onClick={() => executeScroll()} />
     </div>
-  );
-};
+  )
+}

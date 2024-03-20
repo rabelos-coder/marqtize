@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react'
 
-import CommonUL from "../CommonUL";
+import CommonUL from '../CommonUL'
 
 type propsType = {
-  handleCustomizerMix_Background: (item: string) => void;
-  mixLayout: string;
-};
+  handleCustomizerMix_Background: (item: string) => void
+  mixLayout: string
+}
 
 const BgDark = ({ mixLayout, handleCustomizerMix_Background }: propsType) => {
   return (
     <li
-      className={`color-layout border-0 ${mixLayout === "dark-only" ? "active" : ""}`}
+      className={`color-layout border-0 ${mixLayout === 'dark-only' ? 'active' : ''}`}
       data-attr="dark-only"
-      onClick={() => handleCustomizerMix_Background("dark-only")}
+      onClick={() => handleCustomizerMix_Background('dark-only')}
     >
       <div className="header bg-dark">
         <CommonUL />
@@ -24,7 +24,7 @@ const BgDark = ({ mixLayout, handleCustomizerMix_Background }: propsType) => {
         </ul>
       </div>
     </li>
-  );
-};
+  )
+}
 
-export default BgDark;
+export default BgDark

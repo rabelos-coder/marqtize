@@ -1,17 +1,17 @@
-"use client";
+'use client'
 
-import React from "react";
-import { Col, Container, Row } from "reactstrap";
+import React from 'react'
+import { Col, Container, Row } from 'reactstrap'
 
-import SvgIcon from "@/components/common/SvgIcon";
-import { Link } from "@/navigation";
+import SvgIcon from '@/components/common/SvgIcon'
+import { Link } from '@/navigation'
 
 type BreadcrumbProps = {
-  title?: string;
-  pageTitle: string;
-  parent?: string;
-  subParent?: string;
-};
+  title?: string
+  pageTitle: string
+  parent?: string
+  subParent?: string
+}
 
 export const Breadcrumbs = ({
   title,
@@ -38,7 +38,7 @@ export const Breadcrumbs = ({
                 {subParent ? (
                   <li className="breadcrumb-item">{subParent}</li>
                 ) : (
-                  ""
+                  ''
                 )}
                 {title && <li className="breadcrumb-item active">{title}</li>}
               </ol>
@@ -47,5 +47,5 @@ export const Breadcrumbs = ({
         </div>
       </Container>
     </div>
-  );
-};
+  )
+}

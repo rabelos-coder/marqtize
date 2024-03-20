@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import { Link } from "@/navigation";
-import { PaginationMeta } from "@/types/common";
+import { Link } from '@/navigation'
+import { PaginationMeta } from '@/types/common'
 
 type PaginationProps = {
-  meta?: PaginationMeta | null | undefined;
-};
+  meta?: PaginationMeta | null | undefined
+}
 
 export const Pagination = ({ meta }: PaginationProps) => {
-  if (!meta) return <></>;
+  if (!meta) return <></>
 
-  const { lastPage, currentPage, prev, next } = meta;
+  const { lastPage, currentPage, prev, next } = meta
 
   return (
     lastPage > 1 && (
@@ -36,7 +36,7 @@ export const Pagination = ({ meta }: PaginationProps) => {
           {new Array(lastPage >= 3 ? 3 : lastPage).fill(0).map((_, index) => (
             <li
               className={`page-item ${
-                currentPage === index + 1 ? "active" : ""
+                currentPage === index + 1 ? 'active' : ''
               }`}
               key={index}
             >
@@ -84,5 +84,5 @@ export const Pagination = ({ meta }: PaginationProps) => {
         </ul>
       </nav>
     )
-  );
-};
+  )
+}

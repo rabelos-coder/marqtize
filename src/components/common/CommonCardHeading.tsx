@@ -1,6 +1,6 @@
-import { CardHeader } from "reactstrap";
+import { CardHeader } from 'reactstrap'
 
-import { CommonCardHeadingPropsType } from "@/types/common";
+import { CommonCardHeadingPropsType } from '@/types/common'
 
 const CommonCardHeading = ({
   headingClassName,
@@ -11,18 +11,18 @@ const CommonCardHeading = ({
   bigHeadingClassName,
 }: CommonCardHeadingPropsType) => {
   return (
-    <CardHeader className={headingClassName ? headingClassName : ""}>
+    <CardHeader className={headingClassName ? headingClassName : ''}>
       {smallHeading ? (
         <h5>{smallHeading}</h5>
       ) : (
-        <h4 className={bigHeadingClassName ? bigHeadingClassName : ""}>
+        <h4 className={bigHeadingClassName ? bigHeadingClassName : ''}>
           {Heading}
         </h4>
       )}
       {span && <span dangerouslySetInnerHTML={{ __html: span }} />}
       {span2 && <span dangerouslySetInnerHTML={{ __html: span2 }} />}
     </CardHeader>
-  );
-};
+  )
+}
 
-export default CommonCardHeading;
+export default CommonCardHeading

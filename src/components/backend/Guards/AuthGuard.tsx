@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { useAuth } from "@/hooks";
-import { ChildrenProps } from "@/types/common";
+import { useAuth } from '@/hooks'
+import { ChildrenProps } from '@/types/common'
 
 /**
  * Asynchronous function to guard access to authenticated routes by checking for a server session.
@@ -10,11 +10,11 @@ import { ChildrenProps } from "@/types/common";
  * @return {JSX.Element} The original child components to be rendered if the user is authenticated.
  */
 export const AuthGuard = ({ children }: ChildrenProps): JSX.Element => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth()
 
   if (isLoggedIn) {
-    return <>{children}</>;
+    return <>{children}</>
   }
 
-  return <></>;
-};
+  return <></>
+}

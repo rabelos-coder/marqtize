@@ -1,9 +1,9 @@
-import { useTranslations } from "next-intl";
-import React from "react";
-import { Col, Container, Row } from "reactstrap";
+import { useTranslations } from 'next-intl'
+import React from 'react'
+import { Col, Container, Row } from 'reactstrap'
 
 export const Footer = () => {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
     <footer className="footer">
@@ -11,7 +11,7 @@ export const Footer = () => {
         <Row>
           <Col md={12} className="footer-copyright text-center">
             <p className="mb-0">
-              {t("copyright", {
+              {t('copyright', {
                 year: new Date().getFullYear(),
                 company: "Rabelo's Coder",
               })}
@@ -20,5 +20,5 @@ export const Footer = () => {
         </Row>
       </Container>
     </footer>
-  );
-};
+  )
+}

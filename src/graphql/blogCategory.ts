@@ -1,7 +1,7 @@
-import { gql, TypedDocumentNode } from "@apollo/client";
+import { gql, TypedDocumentNode } from '@apollo/client'
 
-import { FindFirstBlogCategory } from "@/types/blog";
-import { WhereAndOrderInput } from "@/types/common";
+import { FindFirstBlogCategory } from '@/types/blog'
+import { WhereAndOrderInput } from '@/types/common'
 
 const FRAGMENT_BLOG_CATEGORY_PROPS = gql`
   fragment BlogCategoryProps on BlogCategory {
@@ -17,7 +17,7 @@ const FRAGMENT_BLOG_CATEGORY_PROPS = gql`
       title
     }
   }
-`;
+`
 
 export const FIND_FIRST_CATEGORY: TypedDocumentNode<
   FindFirstBlogCategory,
@@ -32,4 +32,4 @@ export const FIND_FIRST_CATEGORY: TypedDocumentNode<
       ...BlogCategoryProps
     }
   }
-`;
+`

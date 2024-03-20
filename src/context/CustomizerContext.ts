@@ -1,14 +1,14 @@
-import { createContext } from "react";
+import { createContext } from 'react'
 
-import { CustomizerContextType } from "@/types/customizer";
+import { CustomizerContextType } from '@/types/customizer'
 
 export const CustomizerContext = createContext<CustomizerContextType>({
-  layout: "",
-  sidebarIconType: "",
-  layoutName: "",
+  layout: '',
+  sidebarIconType: '',
+  layoutName: '',
   mixLayout: false,
   toggleIcon: false,
-  mix_background_layout: "",
+  mix_background_layout: '',
   sidebarResponsive: false,
   IsOpen: false,
   setIsClose: () => {},
@@ -24,4 +24,4 @@ export const CustomizerContext = createContext<CustomizerContextType>({
   setSidebarResponsive: () => {},
   addColor: () => {},
   addMixBackgroundLayout: () => {},
-});
+})

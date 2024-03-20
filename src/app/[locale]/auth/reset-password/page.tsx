@@ -1,17 +1,17 @@
-import { getTranslations } from "next-intl/server";
-import { Col, Container, Row } from "reactstrap";
+import { getTranslations } from 'next-intl/server'
+import { Col, Container, Row } from 'reactstrap'
 
-import RatioImage from "@/components/backend/RatioImage";
-import { concatTitle } from "@/utils/helpers";
-import { ResetPasswordForm } from "@/views/auth/ResetPasswordForm";
+import RatioImage from '@/components/backend/RatioImage'
+import { concatTitle } from '@/utils/helpers'
+import { ResetPasswordForm } from '@/views/auth/ResetPasswordForm'
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale });
-  const title = concatTitle(t("resetPassword"));
+  const t = await getTranslations({ locale })
+  const title = concatTitle(t('resetPassword'))
 
   return {
     title,
-  };
+  }
 }
 
 export default async function ResetPasswordPage() {
@@ -30,5 +30,5 @@ export default async function ResetPasswordPage() {
         </Col>
       </Row>
     </Container>
-  );
+  )
 }

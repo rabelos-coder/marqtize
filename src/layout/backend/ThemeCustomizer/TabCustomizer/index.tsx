@@ -1,14 +1,14 @@
-import React from "react";
-import { TabContent, TabPane } from "reactstrap";
+import React from 'react'
+import { TabContent, TabPane } from 'reactstrap'
 
-import CheckLayout from "../Tabs/CheckLayout";
-import SidebarCustomizer from "../Tabs/SidebarCustomizer";
-import TabHeader from "./TabHeader";
+import CheckLayout from '../Tabs/CheckLayout'
+import SidebarCustomizer from '../Tabs/SidebarCustomizer'
+import TabHeader from './TabHeader'
 
 type TabCustomizerType = {
-  callbackNav: (test: string, open: boolean) => void;
-  selected: string;
-};
+  callbackNav: (test: string, open: boolean) => void
+  selected: string
+}
 
 const TabCustomizer = ({ callbackNav, selected }: TabCustomizerType) => {
   return (
@@ -23,7 +23,7 @@ const TabCustomizer = ({ callbackNav, selected }: TabCustomizerType) => {
         </TabPane>
       </div>
     </TabContent>
-  );
-};
+  )
+}
 
-export default TabCustomizer;
+export default TabCustomizer

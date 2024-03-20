@@ -1,16 +1,16 @@
-import React from "react";
-import { useTranslations } from "use-intl";
+import React from 'react'
+import { useTranslations } from 'use-intl'
 
-import { CheckLayoutData } from "@/configs/customizer";
-import { useCustomizer } from "@/hooks";
+import { CheckLayoutData } from '@/configs/customizer'
+import { useCustomizer } from '@/hooks'
 
 const CheckLayout = () => {
-  const { setLayoutName } = useCustomizer();
-  const t = useTranslations();
+  const { setLayoutName } = useCustomizer()
+  const t = useTranslations()
 
   const handlePageLayouts = (type: string) => {
-    setLayoutName(type.toLowerCase().replace(" ", ""));
-  };
+    setLayoutName(type.toLowerCase().replace(' ', ''))
+  }
 
   return (
     <ul className="sidebar-type layout-grid layout-types">
@@ -19,9 +19,9 @@ const CheckLayout = () => {
           <li
             key={index}
             data-attr={item.attr}
-            className={`${item.class ? item.class : ""}`}
+            className={`${item.class ? item.class : ''}`}
             onClick={() => {
-              handlePageLayouts(item.slug);
+              handlePageLayouts(item.slug)
             }}
           >
             <div className="layout-img">
@@ -36,7 +36,7 @@ const CheckLayout = () => {
           </li>
         ))}
     </ul>
-  );
-};
+  )
+}
 
-export default CheckLayout;
+export default CheckLayout

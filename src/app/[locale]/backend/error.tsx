@@ -1,22 +1,22 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { useEffect } from "react";
-import { Button, Col, Container } from "reactstrap";
+import Image from 'next/image'
+import { useTranslations } from 'next-intl'
+import { useEffect } from 'react'
+import { Button, Col, Container } from 'reactstrap'
 
 export default function ErrorPage({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
-  reset: () => void;
+  error: Error & { digest?: string }
+  reset: () => void
 }) {
-  const t = useTranslations();
+  const t = useTranslations()
 
   useEffect(() => {
-    console.error(error);
-  }, [error]);
+    console.error(error)
+  }, [error])
 
   return (
     <div className="page-wrapper compact-wrapper" id="pageWrapper">
@@ -33,7 +33,7 @@ export default function ErrorPage({
             <h2 className={`headline font-primary`}>500</h2>
           </div>
           <Col md={8} className="offset-md-2">
-            <div className="sub-content">{t("internalServerErrorInfo")}</div>
+            <div className="sub-content">{t('internalServerErrorInfo')}</div>
           </Col>
           <div>
             <Button
@@ -42,11 +42,11 @@ export default function ErrorPage({
               className={`text-uppercase`}
               onClick={reset}
             >
-              {t("reload")}
+              {t('reload')}
             </Button>
           </div>
         </Container>
       </div>
     </div>
-  );
+  )
 }

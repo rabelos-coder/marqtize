@@ -1,17 +1,17 @@
-import { getTranslations } from "next-intl/server";
-import { Col, Container, Row } from "reactstrap";
+import { getTranslations } from 'next-intl/server'
+import { Col, Container, Row } from 'reactstrap'
 
-import RatioImage from "@/components/backend/RatioImage";
-import { concatTitle } from "@/utils/helpers";
-import { ForgotPasswordForm } from "@/views/auth/ForgotPasswordForm";
+import RatioImage from '@/components/backend/RatioImage'
+import { concatTitle } from '@/utils/helpers'
+import { ForgotPasswordForm } from '@/views/auth/ForgotPasswordForm'
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale });
-  const title = concatTitle(t("forgotPassword"));
+  const t = await getTranslations({ locale })
+  const title = concatTitle(t('forgotPassword'))
 
   return {
     title,
-  };
+  }
 }
 
 export default async function ForgotPasswordPage() {
@@ -30,5 +30,5 @@ export default async function ForgotPasswordPage() {
         </Col>
       </Row>
     </Container>
-  );
+  )
 }

@@ -1,47 +1,47 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { useTranslations } from "next-intl";
-import React from "react";
+import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import React from 'react'
 import {
   HiOutlineArrowRightOnRectangle,
   HiOutlineGlobeAlt,
-} from "react-icons/hi2";
-import { toast } from "react-toastify";
-import Sawl from "sweetalert2";
+} from 'react-icons/hi2'
+import { toast } from 'react-toastify'
+import Sawl from 'sweetalert2'
 
-import { ProfileListData } from "@/configs/profile";
-import { useAppDispatch, useAuth } from "@/hooks";
-import { setLoading } from "@/store/slices/themeSlice";
+import { ProfileListData } from '@/configs/profile'
+import { useAppDispatch, useAuth } from '@/hooks'
+import { setLoading } from '@/store/slices/themeSlice'
 
 const Profile = () => {
-  const dispatch = useAppDispatch();
-  const { logout, user } = useAuth();
-  const t = useTranslations();
+  const dispatch = useAppDispatch()
+  const { logout, user } = useAuth()
+  const t = useTranslations()
 
   const logoutConfirm = () => {
     Sawl.fire({
-      title: t("confirmation"),
-      text: t("logoutConfirm"),
-      icon: "question",
+      title: t('confirmation'),
+      text: t('logoutConfirm'),
+      icon: 'question',
       showCancelButton: true,
-      confirmButtonText: t("yes"),
-      cancelButtonText: t("no"),
+      confirmButtonText: t('yes'),
+      cancelButtonText: t('no'),
     }).then(({ isConfirmed }) => {
       if (isConfirmed) {
-        dispatch(setLoading(true));
-        logout();
-        toast.success(t("logoutSuccess"));
+        dispatch(setLoading(true))
+        logout()
+        toast.success(t('logoutSuccess'))
       }
-    });
-  };
+    })
+  }
 
   return (
     <li className="profile-nav onhover-dropdown pe-0 py-0">
       <div className="media profile-media">
         <img
           className="b-r-10"
-          src={user?.image ?? "/assets/images/user/user.jpg"}
+          src={user?.image ?? '/assets/images/user/user.jpg'}
           alt={user?.systemName}
           width={35}
           height={35}
@@ -49,7 +49,7 @@ const Profile = () => {
         <div className="media-body">
           <span>{user?.systemName}</span>
           <p className="mb-0 font-roboto">
-            {user?.roles?.map((item) => item.name)?.join(", ") ?? t("user")}{" "}
+            {user?.roles?.map((item) => item.name)?.join(', ') ?? t('user')}{' '}
             <i className="middle fa fa-angle-down" />
           </p>
         </div>
@@ -58,7 +58,7 @@ const Profile = () => {
         <li>
           <a href="/" target="_blank">
             <HiOutlineGlobeAlt />
-            <span>{t("website")}</span>
+            <span>{t('website')}</span>
           </a>
         </li>
         {ProfileListData &&
@@ -73,12 +73,12 @@ const Profile = () => {
         <li onClick={logoutConfirm}>
           <a href="#123">
             <HiOutlineArrowRightOnRectangle />
-            <span>{t("logout")}</span>
+            <span>{t('logout')}</span>
           </a>
         </li>
       </ul>
     </li>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

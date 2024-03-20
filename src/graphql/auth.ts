@@ -1,4 +1,4 @@
-import { gql, TypedDocumentNode } from "@apollo/client";
+import { gql, TypedDocumentNode } from '@apollo/client'
 
 import {
   ForgotPassword,
@@ -12,9 +12,9 @@ import {
   UpdateProfile,
   UpdateProfileInput,
   WhoAmI,
-} from "@/types/auth";
+} from '@/types/auth'
 
-import { FRAGMENT_USER_PROPS } from "./users";
+import { FRAGMENT_USER_PROPS } from './users'
 
 export const WHO_AM_I: TypedDocumentNode<WhoAmI> = gql`
   ${FRAGMENT_USER_PROPS}
@@ -23,7 +23,7 @@ export const WHO_AM_I: TypedDocumentNode<WhoAmI> = gql`
       ...UserProps
     }
   }
-`;
+`
 
 export const LOGIN: TypedDocumentNode<Login, LoginInput> = gql`
   ${FRAGMENT_USER_PROPS}
@@ -36,7 +36,7 @@ export const LOGIN: TypedDocumentNode<Login, LoginInput> = gql`
       }
     }
   }
-`;
+`
 
 export const REGISTER: TypedDocumentNode<Register, RegisterInput> = gql`
   ${FRAGMENT_USER_PROPS}
@@ -45,7 +45,7 @@ export const REGISTER: TypedDocumentNode<Register, RegisterInput> = gql`
       ...UserProps
     }
   }
-`;
+`
 
 export const FORGOT_PASSWORD: TypedDocumentNode<
   ForgotPassword,
@@ -54,7 +54,7 @@ export const FORGOT_PASSWORD: TypedDocumentNode<
   mutation ForgotPassword($data: ForgotPasswordInput!) {
     forgotPassword(data: $data)
   }
-`;
+`
 
 export const RESET_PASSWORD: TypedDocumentNode<
   ResetPassword,
@@ -63,7 +63,7 @@ export const RESET_PASSWORD: TypedDocumentNode<
   mutation ResetPassword($data: ResetPasswordInput!) {
     resetPassword(data: $data)
   }
-`;
+`
 
 export const UPDATE_PROFILE: TypedDocumentNode<
   UpdateProfile,
@@ -75,4 +75,4 @@ export const UPDATE_PROFILE: TypedDocumentNode<
       ...UserProps
     }
   }
-`;
+`

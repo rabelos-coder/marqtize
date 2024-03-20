@@ -1,6 +1,6 @@
 type SvgBorderProps = {
-  className?: string;
-};
+  className?: string
+}
 
 export const SvgBorder = ({ className }: SvgBorderProps) => {
   return (
@@ -14,5 +14,5 @@ export const SvgBorder = ({ className }: SvgBorderProps) => {
         <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
       </svg>
     </div>
-  );
-};
+  )
+}

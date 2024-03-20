@@ -1,22 +1,22 @@
-import { useTranslations } from "next-intl";
-import React from "react";
+import { useTranslations } from 'next-intl'
+import React from 'react'
 
-import CommonUL from "../CommonUL";
+import CommonUL from '../CommonUL'
 
 type LtrDataType = {
-  handleLayout: (item: string) => void;
-  layout_type: string;
-};
+  handleLayout: (item: string) => void
+  layout_type: string
+}
 
 const LTR = ({ handleLayout, layout_type }: LtrDataType) => {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
     <li
-      className={`${layout_type === "ltr" ? "active" : ""} border-0`}
+      className={`${layout_type === 'ltr' ? 'active' : ''} border-0`}
       data-attr="ltr"
       onClick={() => {
-        handleLayout("ltr");
+        handleLayout('ltr')
       }}
     >
       <div className="header bg-light">
@@ -26,12 +26,12 @@ const LTR = ({ handleLayout, layout_type }: LtrDataType) => {
         <ul>
           <li className="bg-light sidebar"></li>
           <li className="bg-light body">
-            <span className="badge badge-primary">{t("ltr")}</span>
+            <span className="badge badge-primary">{t('ltr')}</span>
           </li>
         </ul>
       </div>
     </li>
-  );
-};
+  )
+}
 
-export default LTR;
+export default LTR

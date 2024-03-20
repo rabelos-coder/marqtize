@@ -1,18 +1,18 @@
-import { Action } from "./action";
+import { Action } from './action'
 
 export type Claim = {
-  action: Action;
-  subject: string;
-};
+  action: Action
+  subject: string
+}
 
 export type CountClaim = {
-  countClaim: number;
-};
+  countClaim: number
+}
 
 export type FindManyClaim = {
-  findManyClaim: Claim[];
-};
+  findManyClaim: Claim[]
+}
 
 export type FindFirstClaim = {
-  findFirstClaim: Claim;
-};
+  findFirstClaim: Claim
+}

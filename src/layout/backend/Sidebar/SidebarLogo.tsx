@@ -1,25 +1,25 @@
-import Image from "next/image";
-import { FiGrid } from "react-icons/fi";
+import Image from 'next/image'
+import { FiGrid } from 'react-icons/fi'
 
-import { useLayout } from "@/hooks";
-import { Link } from "@/navigation";
+import { useLayout } from '@/hooks'
+import { Link } from '@/navigation'
 
 export const SidebarLogo = () => {
-  const { setSideBarToggle, sideBarToggle } = useLayout();
+  const { setSideBarToggle, sideBarToggle } = useLayout()
 
   return (
     <div className="logo-wrapper">
-      <Link href={"/backend"}>
+      <Link href={'/backend'}>
         <Image
           className="img-fluid for-light"
-          src={"/assets/images/logo/marqtize_logo.png"}
+          src={'/assets/images/logo/marqtize_logo.png'}
           alt=""
           width={75}
           height={37}
         />
         <Image
           className="img-fluid for-dark"
-          src={"/assets/images/logo/marqtize_logo_dark.png"}
+          src={'/assets/images/logo/marqtize_logo_dark.png'}
           alt=""
           width={75}
           height={37}
@@ -38,5 +38,5 @@ export const SidebarLogo = () => {
         <FiGrid className="status_toggle middle sidebar-toggle" />
       </div>
     </div>
-  );
-};
+  )
+}

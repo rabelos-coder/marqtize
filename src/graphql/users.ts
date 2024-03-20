@@ -1,4 +1,4 @@
-import { gql, TypedDocumentNode } from "@apollo/client";
+import { gql, TypedDocumentNode } from '@apollo/client'
 
 import {
   FindByIdInput,
@@ -7,7 +7,7 @@ import {
   PaginatedObject,
   WhereAndOrderInput,
   WhereInput,
-} from "@/types/common";
+} from '@/types/common'
 import {
   CountUser,
   CreateUser,
@@ -24,7 +24,7 @@ import {
   UpdateUser,
   UpdateUserInput,
   User,
-} from "@/types/user";
+} from '@/types/user'
 
 export const FRAGMENT_USER_PROPS = gql`
   fragment UserProps on User {
@@ -52,13 +52,13 @@ export const FRAGMENT_USER_PROPS = gql`
       slug
     }
   }
-`;
+`
 
 export const COUNT_USERS: TypedDocumentNode<CountUser, WhereInput> = gql`
   query CountUser($where: SearchUserInput) {
     countUser(where: $where)
   }
-`;
+`
 
 export const FIND_USERS: TypedDocumentNode<FindManyUser, WhereAndOrderInput> =
   gql`
@@ -68,7 +68,7 @@ export const FIND_USERS: TypedDocumentNode<FindManyUser, WhereAndOrderInput> =
         ...UserProps
       }
     }
-  `;
+  `
 
 export const PAGINATED_USERS: TypedDocumentNode<
   PaginatedObject<User>,
@@ -100,7 +100,7 @@ export const PAGINATED_USERS: TypedDocumentNode<
       }
     }
   }
-`;
+`
 
 export const FIND_USER: TypedDocumentNode<FindByIdUser, FindByIdInput> = gql`
   ${FRAGMENT_USER_PROPS}
@@ -109,7 +109,7 @@ export const FIND_USER: TypedDocumentNode<FindByIdUser, FindByIdInput> = gql`
       ...UserProps
     }
   }
-`;
+`
 
 export const FIND_FIRST_USER: TypedDocumentNode<FindFirstUser, WhereInput> =
   gql`
@@ -119,7 +119,7 @@ export const FIND_FIRST_USER: TypedDocumentNode<FindFirstUser, WhereInput> =
         ...UserProps
       }
     }
-  `;
+  `
 
 export const CREATE_USER: TypedDocumentNode<CreateUser, CreateUserInput> = gql`
   mutation CreateUser($data: CreateUserInput!) {
@@ -127,7 +127,7 @@ export const CREATE_USER: TypedDocumentNode<CreateUser, CreateUserInput> = gql`
       id
     }
   }
-`;
+`
 
 export const UPDATE_USER: TypedDocumentNode<UpdateUser, UpdateUserInput> = gql`
   mutation UpdateUser($data: UpdateUserInput!) {
@@ -135,43 +135,43 @@ export const UPDATE_USER: TypedDocumentNode<UpdateUser, UpdateUserInput> = gql`
       id
     }
   }
-`;
+`
 
 export const DELETE_USER: TypedDocumentNode<DeleteUser, FindByIdInput> = gql`
   mutation DeleteUser($id: String!) {
     deleteUser(id: $id)
   }
-`;
+`
 
 export const DELETE_USERS: TypedDocumentNode<DeleteManyUser, FindByIdsInput> =
   gql`
     mutation DeleteManyUser($ids: [String!]!) {
       deleteManyUser(ids: $ids)
     }
-  `;
+  `
 
 export const REMOVE_USER: TypedDocumentNode<RemoveUser, FindByIdInput> = gql`
   mutation RemoveUser($id: String!) {
     removeUser(id: $id)
   }
-`;
+`
 
 export const REMOVE_USERS: TypedDocumentNode<RemoveManyUser, FindByIdsInput> =
   gql`
     mutation RemoveManyUser($ids: [String!]!) {
       removeManyUser(ids: $ids)
     }
-  `;
+  `
 
 export const RESTORE_USER: TypedDocumentNode<RestoreUser, FindByIdInput> = gql`
   mutation RestoreUser($id: String!) {
     restoreUser(id: $id)
   }
-`;
+`
 
 export const RESTORE_USERS: TypedDocumentNode<RestoreManyUser, FindByIdsInput> =
   gql`
     mutation RestoreManyUser($ids: [String!]!) {
       restoreManyUser(ids: $ids)
     }
-  `;
+  `

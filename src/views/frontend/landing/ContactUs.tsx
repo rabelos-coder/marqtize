@@ -1,65 +1,65 @@
-"use client";
+'use client'
 
-import { useMutation } from "@apollo/client";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslations } from "next-intl";
-import { useReCaptcha } from "next-recaptcha-v3";
-import { useCallback } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { Button, Col, FormFeedback, Input, Label, Row } from "reactstrap";
-import * as yup from "yup";
+import { useMutation } from '@apollo/client'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useTranslations } from 'next-intl'
+import { useReCaptcha } from 'next-recaptcha-v3'
+import { useCallback } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { Button, Col, FormFeedback, Input, Label, Row } from 'reactstrap'
+import * as yup from 'yup'
 
-import { EMAIL_REGEX } from "@/configs";
-import { IS_DEVELOPMENT, IS_PRODUCTION } from "@/environment";
-import { CONTACT } from "@/graphql/contact";
-import { ContactInput } from "@/types/contact";
+import { EMAIL_REGEX } from '@/configs'
+import { IS_DEVELOPMENT, IS_PRODUCTION } from '@/environment'
+import { CONTACT } from '@/graphql/contact'
+import { ContactInput } from '@/types/contact'
 
 type FormData = {
-  name: string;
-  email: string;
-  message: string;
-};
+  name: string
+  email: string
+  message: string
+}
 
 const defaultValues = IS_DEVELOPMENT
   ? {
-      name: "Amanda Smith",
-      email: "amandasmith@me.com",
-      message: "I am interested in your product, please contact me.",
+      name: 'Amanda Smith',
+      email: 'amandasmith@me.com',
+      message: 'I am interested in your product, please contact me.',
     }
   : {
-      name: "",
-      email: "",
-      message: "",
-    };
+      name: '',
+      email: '',
+      message: '',
+    }
 
 export const ContactUs = () => {
-  const t = useTranslations();
+  const t = useTranslations()
 
-  const { executeRecaptcha } = useReCaptcha();
+  const { executeRecaptcha } = useReCaptcha()
 
   const [contact, { loading }] = useMutation(CONTACT, {
-    fetchPolicy: "no-cache",
-  });
+    fetchPolicy: 'no-cache',
+  })
 
   const schema = yup.object().shape({
     name: yup
       .string()
       .trim()
-      .required(t("propertyRequired", { property: t("fullName") })),
+      .required(t('propertyRequired', { property: t('fullName') })),
     email: yup
       .string()
-      .email(t("propertyEmail", { property: t("email") }))
-      .required(t("propertyRequired", { property: t("email") }))
+      .email(t('propertyEmail', { property: t('email') }))
+      .required(t('propertyRequired', { property: t('email') }))
       .matches(
         new RegExp(EMAIL_REGEX),
-        t("propertyEmail", { property: t("email") })
+        t('propertyEmail', { property: t('email') })
       ),
     message: yup
       .string()
       .trim()
-      .required(t("propertyRequired", { property: t("message") })),
-  });
+      .required(t('propertyRequired', { property: t('message') })),
+  })
 
   const {
     control,
@@ -68,23 +68,23 @@ export const ContactUs = () => {
     reset,
   } = useForm({
     defaultValues,
-    mode: "onBlur",
+    mode: 'onBlur',
     resolver: yupResolver(schema),
-  });
+  })
 
   const onSubmit = useCallback(
     async (form: FormData) => {
-      const recaptcha = await executeRecaptcha("form_submit");
+      const recaptcha = await executeRecaptcha('form_submit')
 
       if (!recaptcha) {
-        toast.error(t("reCaptchaError"));
+        toast.error(t('reCaptchaError'))
 
-        return;
+        return
       }
 
       const variables: ContactInput = {
-        data: { ...form, subject: t("contact") },
-      };
+        data: { ...form, subject: t('contact') },
+      }
 
       await contact({
         variables,
@@ -96,23 +96,23 @@ export const ContactUs = () => {
       })
         .then(({ data }) => {
           if (data?.sendContact) {
-            toast.success(t("contactSuccess"));
-            if (IS_PRODUCTION) reset();
+            toast.success(t('contactSuccess'))
+            if (IS_PRODUCTION) reset()
           } else {
-            toast.error(t("contactError"));
+            toast.error(t('contactError'))
           }
         })
-        .catch((error) => toast.error(error?.message ?? t("loginError")));
+        .catch((error) => toast.error(error?.message ?? t('loginError')))
     },
     [contact, executeRecaptcha, reset, t]
-  );
+  )
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)} autoComplete="on">
       <Row className="gx-5 mb-4">
         <Col md={6}>
           <Label className="text-dark mb-2" htmlFor="name">
-            {t("fullName")}
+            {t('fullName')}
           </Label>
           <Controller
             name="name"
@@ -126,7 +126,7 @@ export const ContactUs = () => {
                 autoFocus
                 className="py-4"
                 disabled={loading}
-                placeholder={t("namePlaceholder")}
+                placeholder={t('namePlaceholder')}
                 invalid={Boolean(errors.name)}
                 {...rest}
               />
@@ -136,7 +136,7 @@ export const ContactUs = () => {
         </Col>
         <Col md={6}>
           <Label className="text-dark mb-2" htmlFor="email">
-            {t("email")}
+            {t('email')}
           </Label>
           <Controller
             name="email"
@@ -149,7 +149,7 @@ export const ContactUs = () => {
                 type="email"
                 className=" py-4"
                 disabled={loading}
-                placeholder={t("emailPlaceholder")}
+                placeholder={t('emailPlaceholder')}
                 invalid={Boolean(errors.email)}
                 {...rest}
               />
@@ -160,7 +160,7 @@ export const ContactUs = () => {
       </Row>
       <div className="mb-4">
         <Label className="text-dark mb-2" htmlFor="message">
-          {t("message")}
+          {t('message')}
         </Label>
         <Controller
           name="message"
@@ -173,7 +173,7 @@ export const ContactUs = () => {
               type="textarea"
               className="py-3"
               disabled={loading}
-              placeholder={t("messagePlaceholder")}
+              placeholder={t('messagePlaceholder')}
               rows={4}
               invalid={Boolean(errors.message)}
               {...rest}
@@ -189,9 +189,9 @@ export const ContactUs = () => {
           className="mt-4"
           type="submit"
         >
-          {t("sendMessage")}
+          {t('sendMessage')}
         </Button>
       </div>
     </form>
-  );
-};
+  )
+}

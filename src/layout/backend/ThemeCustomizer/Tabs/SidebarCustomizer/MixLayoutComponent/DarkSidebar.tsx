@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
-import CommonUL from "../CommonUL";
+import CommonUL from '../CommonUL'
 
 type propsType = {
-  handleCustomizerMix_Background: (item: string) => void;
-  mixLayout: string;
-};
+  handleCustomizerMix_Background: (item: string) => void
+  mixLayout: string
+}
 
 const DarkSidebar = ({
   handleCustomizerMix_Background,
@@ -13,9 +13,9 @@ const DarkSidebar = ({
 }: propsType) => {
   return (
     <li
-      className={`color-layout border-0 ${mixLayout === "dark-sidebar" ? "active" : ""}`}
+      className={`color-layout border-0 ${mixLayout === 'dark-sidebar' ? 'active' : ''}`}
       data-attr="dark-sidebar"
-      onClick={() => handleCustomizerMix_Background("dark-sidebar")}
+      onClick={() => handleCustomizerMix_Background('dark-sidebar')}
     >
       <div className="header bg-light">
         <CommonUL />
@@ -27,7 +27,7 @@ const DarkSidebar = ({
         </ul>
       </div>
     </li>
-  );
-};
+  )
+}
 
-export default DarkSidebar;
+export default DarkSidebar

@@ -1,15 +1,15 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-import { AuthContext } from "@/context/AuthContext";
-import { APP_LANGUAGE, APP_TIMEZONE } from "@/environment";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { useRouter } from "@/navigation";
-import { resetAuth } from "@/store/slices/authSlice";
-import { AuthContextType } from "@/types/auth";
-import { ChildrenProps } from "@/types/common";
-import { User } from "@/types/user";
+import { AuthContext } from '@/context/AuthContext'
+import { APP_LANGUAGE, APP_TIMEZONE } from '@/environment'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { useRouter } from '@/navigation'
+import { resetAuth } from '@/store/slices/authSlice'
+import { AuthContextType } from '@/types/auth'
+import { ChildrenProps } from '@/types/common'
+import { User } from '@/types/user'
 
 /**
  * AuthProvider component that provides authentication context to its children.
@@ -18,18 +18,18 @@ import { User } from "@/types/user";
  * @return {JSX.Element} The authentication context provided to the children.
  */
 export function AuthProvider({ children }: ChildrenProps): JSX.Element {
-  const auth = useProvideAuth();
+  const auth = useProvideAuth()
 
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
 }
 
 type AuthProviderState = {
-  user: User | null;
-  token: string | null;
-  language: string;
-  timezone: string;
-  isLoggedIn: boolean;
-};
+  user: User | null
+  token: string | null
+  language: string
+  timezone: string
+  isLoggedIn: boolean
+}
 
 /**
  * Returns an authentication context with user, token, language, timezone, logout, and register functions.
@@ -43,13 +43,13 @@ function useProvideAuth(): AuthContextType {
     language: APP_LANGUAGE,
     timezone: APP_TIMEZONE,
     isLoggedIn: false,
-  });
+  })
 
-  const router = useRouter();
-  const dispatch = useAppDispatch();
+  const router = useRouter()
+  const dispatch = useAppDispatch()
   const { user, token, language, timezone, isLoggedIn } = useAppSelector(
     (state) => state.auth
-  );
+  )
 
   useEffect(() => {
     setState({
@@ -58,13 +58,13 @@ function useProvideAuth(): AuthContextType {
       language,
       timezone,
       isLoggedIn,
-    });
-  }, [user, token, language, timezone, isLoggedIn]);
+    })
+  }, [user, token, language, timezone, isLoggedIn])
 
   const logout = () => {
-    dispatch(resetAuth());
-    router.push("/auth/login");
-  };
+    dispatch(resetAuth())
+    router.push('/auth/login')
+  }
 
   return {
     user: state.user,
@@ -73,5 +73,5 @@ function useProvideAuth(): AuthContextType {
     timezone: state.timezone,
     isLoggedIn: state.isLoggedIn,
     logout,
-  };
+  }
 }

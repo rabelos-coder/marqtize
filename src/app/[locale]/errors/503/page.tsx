@@ -1,5 +1,5 @@
-import ServiceUnavailable from "../../service-unavailable";
+import ServiceUnavailable from '../../service-unavailable'
 
 export default function MaintenancePage() {
-  return <ServiceUnavailable />;
+  return <ServiceUnavailable />
 }

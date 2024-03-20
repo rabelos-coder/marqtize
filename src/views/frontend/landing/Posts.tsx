@@ -1,33 +1,33 @@
-"use client";
+'use client'
 
-import { capitalize } from "lodash";
-import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
-import { Fragment } from "react";
-import { Card, CardBody, CardFooter, Col, Container, Row } from "reactstrap";
+import { capitalize } from 'lodash'
+import Image from 'next/image'
+import { useLocale, useTranslations } from 'next-intl'
+import { Fragment } from 'react'
+import { Card, CardBody, CardFooter, Col, Container, Row } from 'reactstrap'
 
-import { Pagination } from "@/layout/frontend/landing/Pagination";
-import { Link } from "@/navigation";
-import { BlogPost } from "@/types/blog";
-import { PaginationMeta } from "@/types/common";
-import { DateTime } from "@/utils/date";
-import { createResume } from "@/utils/helpers";
+import { Pagination } from '@/layout/frontend/landing/Pagination'
+import { Link } from '@/navigation'
+import { BlogPost } from '@/types/blog'
+import { PaginationMeta } from '@/types/common'
+import { DateTime } from '@/utils/date'
+import { createResume } from '@/utils/helpers'
 
 type PostsProps = {
-  posts?: BlogPost[] | null | undefined;
-  meta?: PaginationMeta | null | undefined;
-};
+  posts?: BlogPost[] | null | undefined
+  meta?: PaginationMeta | null | undefined
+}
 
 export const Posts = ({ posts, meta }: PostsProps) => {
-  const t = useTranslations();
-  const locale = useLocale();
+  const t = useTranslations()
+  const locale = useLocale()
 
   return (
     <Container className="px-5">
       <Row className="gx-5 blog-posts">
         {meta?.total === 0 ? (
           <Col lg={8}>
-            <div className="alert alert-warning">{t("blog.noPosts")}</div>
+            <div className="alert alert-warning">{t('blog.noPosts')}</div>
           </Col>
         ) : (
           posts?.map((post) => {
@@ -60,9 +60,9 @@ export const Posts = ({ posts, meta }: PostsProps) => {
                         height={300}
                         className="post-preview-meta-img"
                         src={
-                          post.author?.image ?? "/assets/images/user/user.jpg"
+                          post.author?.image ?? '/assets/images/user/user.jpg'
                         }
-                        alt={post.author?.name ?? ""}
+                        alt={post.author?.name ?? ''}
                       />
                       <div className="post-preview-meta-details">
                         {post.author?.name && (
@@ -83,7 +83,7 @@ export const Posts = ({ posts, meta }: PostsProps) => {
                         sm={12}
                         className="post-preview-meta-categories"
                       >
-                        <h6>{t("blog.categories.title")}:</h6>
+                        <h6>{t('blog.categories.title')}:</h6>
                         {post.categories?.map((category, i) => (
                           <Fragment key={category.id}>
                             <Link href={`/blog/category/${category.slug}/1`}>
@@ -96,7 +96,7 @@ export const Posts = ({ posts, meta }: PostsProps) => {
                         ))}
                       </Col>
                       <Col md={6} sm={12} className="post-preview-meta-tags">
-                        <h6>{t("blog.tags.title")}:</h6>
+                        <h6>{t('blog.tags.title')}:</h6>
                         {post.tags?.map((tag, i) => (
                           <Fragment key={tag.id}>
                             <Link key={tag.id} href={`/blog/tag/${tag.slug}/1`}>
@@ -110,11 +110,11 @@ export const Posts = ({ posts, meta }: PostsProps) => {
                   </CardFooter>
                 </Card>
               </Col>
-            );
+            )
           })
         )}
       </Row>
       <Pagination meta={meta} />
     </Container>
-  );
-};
+  )
+}

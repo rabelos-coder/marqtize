@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import { useMutation } from "@apollo/client";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
+import { useMutation } from '@apollo/client'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import {
   Button,
   Col,
@@ -14,89 +14,89 @@ import {
   Input,
   Label,
   Row,
-} from "reactstrap";
-import * as yup from "yup";
+} from 'reactstrap'
+import * as yup from 'yup'
 
-import { CommonLogo } from "@/components/common/CommonLogo";
-import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from "@/configs";
-import { IS_DEVELOPMENT } from "@/environment";
-import { REGISTER } from "@/graphql/auth";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { Link, useRouter } from "@/navigation";
-import { setLoading } from "@/store/slices/themeSlice";
-import { AuthFormProps } from "@/types/common";
+import { CommonLogo } from '@/components/common/CommonLogo'
+import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
+import { IS_DEVELOPMENT } from '@/environment'
+import { REGISTER } from '@/graphql/auth'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { Link, useRouter } from '@/navigation'
+import { setLoading } from '@/store/slices/themeSlice'
+import { AuthFormProps } from '@/types/common'
 
-import { SpinnerBoxed } from "../../components/common/SpinnerBoxed";
+import { SpinnerBoxed } from '../../components/common/SpinnerBoxed'
 
 type FormData = {
-  name: string;
-  systemName: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-};
+  name: string
+  systemName: string
+  email: string
+  password: string
+  passwordConfirmation: string
+}
 
 const defaultValues = IS_DEVELOPMENT
   ? {
-      name: "Amanda Smith",
-      systemName: "Amanda",
-      email: "amandasmith@me.com",
-      password: "abClK1@X",
-      passwordConfirmation: "abClK1@X",
+      name: 'Amanda Smith',
+      systemName: 'Amanda',
+      email: 'amandasmith@me.com',
+      password: 'abClK1@X',
+      passwordConfirmation: 'abClK1@X',
     }
   : {
-      name: "",
-      systemName: "",
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-    };
+      name: '',
+      systemName: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+    }
 
 export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
-  const [disabled, setDisabled] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const [disabled, setDisabled] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
-    useState(false);
-  const [register] = useMutation(REGISTER);
+    useState(false)
+  const [register] = useMutation(REGISTER)
 
-  const t = useTranslations();
-  const dispatch = useAppDispatch();
+  const t = useTranslations()
+  const dispatch = useAppDispatch()
 
-  const { customer, loading } = useAppSelector((state) => state.customer);
+  const { customer, loading } = useAppSelector((state) => state.customer)
 
   const schema = yup.object().shape({
-    name: yup.string().required(t("propertyRequired", { property: t("name") })),
+    name: yup.string().required(t('propertyRequired', { property: t('name') })),
     systemName: yup
       .string()
-      .required(t("propertyRequired", { property: t("systemName") })),
+      .required(t('propertyRequired', { property: t('systemName') })),
     email: yup
       .string()
-      .email(t("propertyEmail", { property: t("email") }))
-      .required(t("propertyRequired", { property: t("email") }))
+      .email(t('propertyEmail', { property: t('email') }))
+      .required(t('propertyRequired', { property: t('email') }))
       .matches(
         new RegExp(EMAIL_REGEX),
-        t("propertyEmail", { property: t("email") })
+        t('propertyEmail', { property: t('email') })
       ),
     password: yup
       .string()
       .trim()
-      .required(t("propertyRequired", { property: t("password") }))
+      .required(t('propertyRequired', { property: t('password') }))
       .matches(
         new RegExp(PASSWORD_STRENGTH_REGEX),
-        t("propertyStrength", { property: t("password") })
+        t('propertyStrength', { property: t('password') })
       ),
     passwordConfirmation: yup
       .string()
       .trim()
-      .required(t("propertyRequired", { property: t("passwordConfirmation") }))
+      .required(t('propertyRequired', { property: t('passwordConfirmation') }))
       .oneOf(
-        [yup.ref("password")],
-        t("propertyMatch", {
-          property: t("passwordConfirmation"),
-          match: t("password"),
+        [yup.ref('password')],
+        t('propertyMatch', {
+          property: t('passwordConfirmation'),
+          match: t('password'),
         })
       ),
-  });
+  })
 
   const {
     control,
@@ -104,14 +104,14 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
     formState: { errors },
   } = useForm({
     defaultValues,
-    mode: "onBlur",
+    mode: 'onBlur',
     resolver: yupResolver(schema),
-  });
+  })
 
-  const router = useRouter();
+  const router = useRouter()
 
   const onSubmit = async (form: FormData) => {
-    setDisabled(true);
+    setDisabled(true)
     await register({
       variables: {
         data: {
@@ -125,20 +125,20 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
     })
       .then(({ data }) => {
         if (data?.register) {
-          toast.success(t("registerSuccess"));
-          router.push("/auth/login");
+          toast.success(t('registerSuccess'))
+          router.push('/auth/login')
         } else {
-          toast.error(t("registerError"));
+          toast.error(t('registerError'))
         }
       })
-      .catch((error) => toast.error(error?.message ?? t("registerError")));
+      .catch((error) => toast.error(error?.message ?? t('registerError')))
 
-    setDisabled(false);
-  };
+    setDisabled(false)
+  }
 
   useEffect(() => {
-    dispatch(setLoading(false));
-  }, [dispatch]);
+    dispatch(setLoading(false))
+  }, [dispatch])
 
   return loading ? (
     <SpinnerBoxed type="grow" />
@@ -157,15 +157,15 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
           >
             <h4 suppressHydrationWarning>
               {customer?.tradingName
-                ? t("createAccountToName", { name: customer.tradingName })
-                : t("createAccount")}
+                ? t('createAccountToName', { name: customer.tradingName })
+                : t('createAccount')}
             </h4>
-            <p>{t("resetPasswordInfo")}</p>
+            <p>{t('resetPasswordInfo')}</p>
             <FormGroup>
               <Row className="g-2">
                 <Col xs={6}>
                   <Label htmlFor="name" className="col-form-label pt-0">
-                    {t("name")}
+                    {t('name')}
                   </Label>
                   <Controller
                     name="name"
@@ -176,7 +176,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                       <Input
                         id={name}
                         autoFocus
-                        placeholder={t("namePlaceholder")}
+                        placeholder={t('namePlaceholder')}
                         autoComplete="on"
                         invalid={Boolean(errors.name)}
                         {...rest}
@@ -189,7 +189,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                 </Col>
                 <Col xs={6}>
                   <Label htmlFor="systemName" className="col-form-label pt-0">
-                    {t("systemName")}
+                    {t('systemName')}
                   </Label>
                   <Controller
                     name="systemName"
@@ -199,7 +199,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                     render={({ field: { name, ...rest } }) => (
                       <Input
                         id={name}
-                        placeholder={t("systemNamePlaceholder")}
+                        placeholder={t('systemNamePlaceholder')}
                         autoComplete="on"
                         invalid={Boolean(errors.systemName)}
                         {...rest}
@@ -214,7 +214,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
             </FormGroup>
             <FormGroup>
               <Label htmlFor="email" className="col-form-label">
-                {t("email")}
+                {t('email')}
               </Label>
               <Controller
                 name="email"
@@ -225,7 +225,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                   <Input
                     id={name}
                     type="email"
-                    placeholder={t("emailPlaceholder")}
+                    placeholder={t('emailPlaceholder')}
                     autoComplete="on"
                     invalid={Boolean(errors.email)}
                     {...rest}
@@ -240,7 +240,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
               <Row className="g-2">
                 <Col xs={6}>
                   <Label htmlFor="password" className="col-form-label pt-0">
-                    {t("password")}
+                    {t('password')}
                   </Label>
                   <div className="form-input position-relative">
                     <Controller
@@ -251,7 +251,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                       render={({ field: { name, ...rest } }) => (
                         <Input
                           id={name}
-                          type={showPassword ? "text" : "password"}
+                          type={showPassword ? 'text' : 'password'}
                           autoComplete="off"
                           invalid={Boolean(errors.password)}
                           {...rest}
@@ -264,9 +264,9 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                     <div className="show-hide">
                       <span
                         onClick={() => setShowPassword(!showPassword)}
-                        className={!showPassword ? "show" : ""}
+                        className={!showPassword ? 'show' : ''}
                       >
-                        {showPassword ? t("hide") : t("show")}
+                        {showPassword ? t('hide') : t('show')}
                       </span>
                     </div>
                   </div>
@@ -276,7 +276,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                     htmlFor="passwordConfirmation"
                     className="col-form-label pt-0"
                   >
-                    {t("passwordConfirmation")}
+                    {t('passwordConfirmation')}
                   </Label>
                   <div className="form-input position-relative">
                     <Controller
@@ -287,7 +287,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                       render={({ field: { name, ...rest } }) => (
                         <Input
                           id={name}
-                          type={showPasswordConfirmation ? "text" : "password"}
+                          type={showPasswordConfirmation ? 'text' : 'password'}
                           autoComplete="off"
                           invalid={Boolean(errors.passwordConfirmation)}
                           {...rest}
@@ -303,9 +303,9 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                         onClick={() =>
                           setShowPasswordConfirmation(!showPasswordConfirmation)
                         }
-                        className={!showPasswordConfirmation ? "show" : ""}
+                        className={!showPasswordConfirmation ? 'show' : ''}
                       >
-                        {showPasswordConfirmation ? t("hide") : t("show")}
+                        {showPasswordConfirmation ? t('hide') : t('show')}
                       </span>
                     </div>
                   </div>
@@ -320,13 +320,13 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                   type="submit"
                   disabled={disabled}
                 >
-                  {t("register")}
+                  {t('register')}
                 </Button>
               </div>
               <p className="mt-4 mb-0 text-center">
-                {t("alreadyHaveAnAccount")}
+                {t('alreadyHaveAnAccount')}
                 <Link className="ms-2" href="/auth/login">
-                  {t("signIn")}
+                  {t('signIn')}
                 </Link>
               </p>
             </FormGroup>
@@ -334,5 +334,5 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

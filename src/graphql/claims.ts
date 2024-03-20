@@ -1,20 +1,20 @@
-import { gql, TypedDocumentNode } from "@apollo/client";
+import { gql, TypedDocumentNode } from '@apollo/client'
 
-import { CountClaim, FindFirstClaim, FindManyClaim } from "@/types/claim";
-import { WhereInput } from "@/types/common";
+import { CountClaim, FindFirstClaim, FindManyClaim } from '@/types/claim'
+import { WhereInput } from '@/types/common'
 
 const FRAGMENT_CLAIM_PROPS = gql`
   fragment ClaimProps on Claim {
     action
     subject
   }
-`;
+`
 
 export const COUNT_CLAIMS: TypedDocumentNode<CountClaim, WhereInput> = gql`
   query CountClaim($where: SearchClaimInput) {
     countClaim(where: $where)
   }
-`;
+`
 
 export const FIND_MANY_CLAIMS: TypedDocumentNode<FindManyClaim, WhereInput> =
   gql`
@@ -24,7 +24,7 @@ export const FIND_MANY_CLAIMS: TypedDocumentNode<FindManyClaim, WhereInput> =
         ...ClaimProps
       }
     }
-  `;
+  `
 
 export const FIND_FIRST_CLAIM: TypedDocumentNode<FindFirstClaim, WhereInput> =
   gql`
@@ -34,4 +34,4 @@ export const FIND_FIRST_CLAIM: TypedDocumentNode<FindFirstClaim, WhereInput> =
         ...ClaimProps
       }
     }
-  `;
+  `

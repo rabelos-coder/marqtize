@@ -1,5 +1,5 @@
-import BadRequest from "../../bad-request";
+import BadRequest from '../../bad-request'
 
 export default function BadRequestPage() {
-  return <BadRequest />;
+  return <BadRequest />
 }

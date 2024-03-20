@@ -1,29 +1,29 @@
-import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 
-import { SvgBorder } from "@/components/frontend/common/SvgBorder";
-import { PAGINATED_POSTS } from "@/graphql/blogPost";
-import { Header } from "@/layout/frontend/landing/Header";
-import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
-import { createApolloClient } from "@/utils/apollo";
-import { concatTitle } from "@/utils/helpers";
-import { Posts } from "@/views/frontend/landing/Posts";
+import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import { PAGINATED_POSTS } from '@/graphql/blogPost'
+import { Header } from '@/layout/frontend/landing/Header'
+import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import { createApolloClient } from '@/utils/apollo'
+import { concatTitle } from '@/utils/helpers'
+import { Posts } from '@/views/frontend/landing/Posts'
 
-const client = createApolloClient();
+const client = createApolloClient()
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale });
-  const title = concatTitle(t("blog.title"));
+  const t = await getTranslations({ locale })
+  const title = concatTitle(t('blog.title'))
 
   return {
     title,
-  };
+  }
 }
 
 export default async function PostsPage({ params: { locale, page } }: any) {
-  const t = await getTranslations({ locale });
+  const t = await getTranslations({ locale })
 
-  page = parseInt(`${page}`);
+  page = parseInt(`${page}`)
 
   const { data, error } = await client.query({
     query: PAGINATED_POSTS,
@@ -42,28 +42,28 @@ export default async function PostsPage({ params: { locale, page } }: any) {
         deletedAt: null,
       },
       orderBy: {
-        publishedAt: "desc",
+        publishedAt: 'desc',
       },
     },
-  });
+  })
 
-  if (error) throw new Error(error?.message);
+  if (error) throw new Error(error?.message)
 
-  const { paginatedBlogPost } = data;
+  const { paginatedBlogPost } = data
 
   if (
     page <= 0 ||
     (paginatedBlogPost?.meta?.lastPage &&
       paginatedBlogPost.meta.lastPage < page)
   ) {
-    notFound();
+    notFound()
   }
 
   return (
     <LandingLayout>
       <Header
-        title={t("blog.title")}
-        description={t("blog.shortDescription")}
+        title={t('blog.title')}
+        description={t('blog.shortDescription')}
       />
       <section className="bg-light py-10">
         <Posts
@@ -73,5 +73,5 @@ export default async function PostsPage({ params: { locale, page } }: any) {
         <SvgBorder className="text-dark" />
       </section>
     </LandingLayout>
-  );
+  )
 }

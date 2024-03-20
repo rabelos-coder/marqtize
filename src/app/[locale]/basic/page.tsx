@@ -1,27 +1,27 @@
-import { getTranslations } from "next-intl/server";
-import { Container } from "reactstrap";
+import { getTranslations } from 'next-intl/server'
+import { Container } from 'reactstrap'
 
-import { SvgBorder } from "@/components/frontend/common/SvgBorder";
-import { Header } from "@/layout/frontend/landing/Header";
-import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
-import { concatTitle } from "@/utils/helpers";
+import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import { Header } from '@/layout/frontend/landing/Header'
+import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import { concatTitle } from '@/utils/helpers'
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale });
-  const title = concatTitle(t("home"));
+  const t = await getTranslations({ locale })
+  const title = concatTitle(t('home'))
 
   return {
     title,
-  };
+  }
 }
 
 export default async function BasicPage({ params: { locale } }: any) {
-  const t = await getTranslations({ locale });
+  const t = await getTranslations({ locale })
 
   return (
     <LandingLayout>
       <Header
-        title={t("home")}
+        title={t('home')}
         description="Create beautiful pages with easy to edit content"
       />
       <section className="bg-white py-10">
@@ -53,5 +53,5 @@ export default async function BasicPage({ params: { locale } }: any) {
         <SvgBorder className="text-dark" />
       </section>
     </LandingLayout>
-  );
+  )
 }

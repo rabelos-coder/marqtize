@@ -1,9 +1,9 @@
 export type Timezone = {
-  id: number;
-  code: string;
-  name: string;
-};
+  id: number
+  code: string
+  name: string
+}
 
 export type FindManyTimezone = {
-  findManyTimezone: Timezone[];
-};
+  findManyTimezone: Timezone[]
+}

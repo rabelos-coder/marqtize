@@ -1,11 +1,11 @@
-import React from "react";
-import { Col } from "reactstrap";
+import React from 'react'
+import { Col } from 'reactstrap'
 
-import { THEME_LOCALE_SWITCHER_ENABLED } from "@/environment";
+import { THEME_LOCALE_SWITCHER_ENABLED } from '@/environment'
 
-import { Language } from "./Languages/index";
-import { MoonLight } from "./MoonLight";
-import Profile from "./Profile";
+import { Language } from './Languages/index'
+import { MoonLight } from './MoonLight'
+import Profile from './Profile'
 
 export const Rightbar = () => {
   return (
@@ -23,5 +23,5 @@ export const Rightbar = () => {
         <Profile />
       </ul>
     </Col>
-  );
-};
+  )
+}

@@ -1,17 +1,17 @@
-import { getTranslations } from "next-intl/server";
-import { Col, Container, Row } from "reactstrap";
+import { getTranslations } from 'next-intl/server'
+import { Col, Container, Row } from 'reactstrap'
 
-import RatioImage from "@/components/backend/RatioImage";
-import { concatTitle } from "@/utils/helpers";
-import { RegisterForm } from "@/views/auth/RegisterForm";
+import RatioImage from '@/components/backend/RatioImage'
+import { concatTitle } from '@/utils/helpers'
+import { RegisterForm } from '@/views/auth/RegisterForm'
 
 export async function generateMetadata({ params: { locale } }: any) {
-  const t = await getTranslations({ locale });
-  const title = concatTitle(t("createAccount"));
+  const t = await getTranslations({ locale })
+  const title = concatTitle(t('createAccount'))
 
   return {
     title,
-  };
+  }
 }
 
 export default async function RegisterPage() {
@@ -30,5 +30,5 @@ export default async function RegisterPage() {
         </Col>
       </Row>
     </Container>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image'
+import React from 'react'
 
 type PropsType = {
-  alignLogo?: string;
-};
+  alignLogo?: string
+}
 
 export const CommonLogo = ({ alignLogo }: PropsType) => {
   return (
-    <a className={`logo ${alignLogo ? alignLogo : ""} `} href="/">
+    <a className={`logo ${alignLogo ? alignLogo : ''} `} href="/">
       <Image
         width={100}
         height={37}
@@ -23,5 +23,5 @@ export const CommonLogo = ({ alignLogo }: PropsType) => {
         alt="logo"
       />
     </a>
-  );
-};
+  )
+}

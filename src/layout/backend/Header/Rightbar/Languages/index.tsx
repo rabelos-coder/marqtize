@@ -1,24 +1,24 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import { CountryClassName } from "@/types/language";
+import { CountryClassName } from '@/types/language'
 
-import { LanguageList } from "./LanguageList";
+import { LanguageList } from './LanguageList'
 
 export const Language = () => {
-  const [dropdownShow, setDropdownShow] = useState(false);
-  const [selected, setSelected] = useState("en");
+  const [dropdownShow, setDropdownShow] = useState(false)
+  const [selected, setSelected] = useState('en')
 
   const LanguageSelection = (dropdownShow: boolean) => {
     if (selected) {
-      setDropdownShow(!dropdownShow);
+      setDropdownShow(!dropdownShow)
     } else {
-      setDropdownShow(!dropdownShow);
+      setDropdownShow(!dropdownShow)
     }
-  };
+  }
 
   return (
     <li className="language-nav">
-      <div className={`translate_wrapper ${dropdownShow ? "active" : ""}`}>
+      <div className={`translate_wrapper ${dropdownShow ? 'active' : ''}`}>
         <div className="current_lang">
           <div className="lang" onClick={() => LanguageSelection(dropdownShow)}>
             <i
@@ -30,5 +30,5 @@ export const Language = () => {
         <LanguageList selected={selected} setSelected={setSelected} />
       </div>
     </li>
-  );
-};
+  )
+}

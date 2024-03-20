@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { Button, Container } from "reactstrap";
+import { useState } from 'react'
+import { Button, Container } from 'reactstrap'
 
-import { SvgBorder } from "@/components/frontend/common/SvgBorder";
-import { Header } from "@/layout/frontend/landing/Header";
-import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
+import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import { Header } from '@/layout/frontend/landing/Header'
+import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
 
 export default function ErrorPage() {
-  const [user, setUser] = useState({ name: "John Doe" });
+  const [user, setUser] = useState({ name: 'John Doe' })
 
   return (
     <LandingLayout>
@@ -31,5 +31,5 @@ export default function ErrorPage() {
         <SvgBorder className="text-dark" />
       </section>
     </LandingLayout>
-  );
+  )
 }

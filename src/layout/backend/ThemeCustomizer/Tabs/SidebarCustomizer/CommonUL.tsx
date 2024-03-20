@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const CommonUL = () => {
   return (
@@ -9,7 +9,7 @@ const CommonUL = () => {
         <li></li>
       </ul>
     </>
-  );
-};
+  )
+}
 
-export default CommonUL;
+export default CommonUL

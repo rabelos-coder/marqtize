@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation'
 
-import { APP_LANGUAGE } from "@/environment";
+import { APP_LANGUAGE } from '@/environment'
 
 export default function AppPage() {
-  redirect(`/${APP_LANGUAGE}`);
+  redirect(`/${APP_LANGUAGE}`)
 }

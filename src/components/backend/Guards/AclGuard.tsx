@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
-import { Spinner } from "@/components/common/Spinner";
+import { Spinner } from '@/components/common/Spinner'
 import {
   AclAbility,
   AppAbility,
   buildAbilityFor,
   defaultAcl,
-} from "@/configs/ability";
-import { useAuth } from "@/hooks";
-import { AuthLayout } from "@/layout/backend/AuthLayout";
-import { AbilityProvider } from "@/providers/AbilityProvider";
+} from '@/configs/ability'
+import { useAuth } from '@/hooks'
+import { AuthLayout } from '@/layout/backend/AuthLayout'
+import { AbilityProvider } from '@/providers/AbilityProvider'
 
-import { NotAuthorized } from "../NotAuthorized";
+import { NotAuthorized } from '../NotAuthorized'
 
 type AclGuardProps = {
-  children: ReactNode;
-  acl?: AclAbility;
-};
+  children: ReactNode
+  acl?: AclAbility
+}
 
 /**
  * A guard component that checks the user's access based on their abilities and renders pages accordingly.
@@ -27,16 +27,16 @@ type AclGuardProps = {
  * @return {JSX.Element} the rendered JSX based on the user's access and abilities
  */
 export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
-  let ability: AppAbility | null = null;
+  let ability: AppAbility | null = null
 
   // Define the acl based on the page
-  const guard = acl ?? defaultAcl;
+  const guard = acl ?? defaultAcl
 
   // Get the user's session
-  const { user, isLoggedIn } = useAuth();
+  const { user, isLoggedIn } = useAuth()
 
   // User is logged in, build ability for the user based on his role
-  if (isLoggedIn && user && !ability) ability = buildAbilityFor(user);
+  if (isLoggedIn && user && !ability) ability = buildAbilityFor(user)
 
   // Check the access of current user and render pages
   if (
@@ -49,11 +49,11 @@ export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
       <AbilityProvider ability={ability}>
         <AuthLayout>{children}</AuthLayout>
       </AbilityProvider>
-    );
+    )
   } else if (!ability || !isLoggedIn) {
-    return <Spinner />;
+    return <Spinner />
   }
 
   // Render Not Authorized component if the current user has limited access
-  return <NotAuthorized />;
-};
+  return <NotAuthorized />
+}

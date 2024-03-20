@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-import { FaChevronCircleRight, FaChevronDown } from "react-icons/fa";
-import { FiBookOpen, FiCode, FiFileText, FiMenu } from "react-icons/fi";
-import { toast } from "react-toastify";
+import Image from 'next/image'
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
+import { FaChevronCircleRight, FaChevronDown } from 'react-icons/fa'
+import { FiBookOpen, FiCode, FiFileText, FiMenu } from 'react-icons/fi'
+import { toast } from 'react-toastify'
 import {
   Button,
   Col,
@@ -21,78 +21,78 @@ import {
   NavLink,
   Row,
   UncontrolledDropdown,
-} from "reactstrap";
-import Sawl from "sweetalert2";
+} from 'reactstrap'
+import Sawl from 'sweetalert2'
 
-import { APP_META_TITLE } from "@/environment";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { Link, usePathname } from "@/navigation";
-import { resetAuth } from "@/store/slices/authSlice";
+import { APP_META_TITLE } from '@/environment'
+import { useAppDispatch, useAppSelector } from '@/hooks'
+import { Link, usePathname } from '@/navigation'
+import { resetAuth } from '@/store/slices/authSlice'
 
 type NavbarProps = {
-  navbarExpanded?: boolean;
-};
+  navbarExpanded?: boolean
+}
 
 export const NavBar = ({ navbarExpanded }: NavbarProps) => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [disabled, setDisabled] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [color, setColor] = useState(navbarExpanded ? "navbar-scrolled" : "");
+  const [isOpen, setIsOpen] = useState(false)
+  const [disabled, setDisabled] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [color, setColor] = useState(navbarExpanded ? 'navbar-scrolled' : '')
 
-  const dispatch = useAppDispatch();
-  const { isLoggedIn } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch()
+  const { isLoggedIn } = useAppSelector((state) => state.auth)
 
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => setIsOpen(!isOpen)
 
-  const t = useTranslations();
+  const t = useTranslations()
 
   const logoutConfirm = () => {
-    setDisabled(true);
+    setDisabled(true)
     Sawl.fire({
-      title: t("confirmation"),
-      text: t("logoutConfirm"),
-      icon: "question",
+      title: t('confirmation'),
+      text: t('logoutConfirm'),
+      icon: 'question',
       showCancelButton: true,
-      confirmButtonText: t("yes"),
-      cancelButtonText: t("no"),
+      confirmButtonText: t('yes'),
+      cancelButtonText: t('no'),
     }).then(({ isConfirmed }) => {
       if (isConfirmed) {
-        dispatch(resetAuth());
-        setLoggedIn(false);
-        toast.success(t("logoutSuccess"));
+        dispatch(resetAuth())
+        setLoggedIn(false)
+        toast.success(t('logoutSuccess'))
       }
-    });
+    })
 
-    setDisabled(false);
-  };
+    setDisabled(false)
+  }
 
   const changeColor = () => {
     if (
       document.documentElement.scrollTop > 99 ||
       document.body.scrollTop > 99
     ) {
-      setColor("navbar-scrolled");
+      setColor('navbar-scrolled')
     } else if (
       document.documentElement.scrollTop < 100 ||
       document.body.scrollTop < 100
     ) {
-      setColor("");
+      setColor('')
     }
-  };
+  }
 
   useEffect(() => {
-    if (!navbarExpanded) window.addEventListener("scroll", changeColor);
-    setLoggedIn(isLoggedIn);
+    if (!navbarExpanded) window.addEventListener('scroll', changeColor)
+    setLoggedIn(isLoggedIn)
 
     return function () {
-      window.removeEventListener("scroll", changeColor);
-    };
-  }, [isLoggedIn, pathname, navbarExpanded]);
+      window.removeEventListener('scroll', changeColor)
+    }
+  }, [isLoggedIn, pathname, navbarExpanded])
 
   return (
-    <div className={`${navbarExpanded ? "navbar-fixed-top" : ""}`}>
+    <div className={`${navbarExpanded ? 'navbar-fixed-top' : ''}`}>
       <Navbar
         className={`navbar-marketing bg-transparent navbar-dark ${color}`}
         fixed="top"
@@ -122,7 +122,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
             <Nav navbar className="ms-auto me-lg-5">
               <NavItem>
                 <NavLink href="/" tag={Link} id="home">
-                  {t("home")}
+                  {t('home')}
                 </NavLink>
               </NavItem>
               <UncontrolledDropdown
@@ -131,7 +131,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                 className="dropdown-xl no-caret"
               >
                 <DropdownToggle nav className="dropdown-toggle" id="products">
-                  {t("products")}
+                  {t('products')}
                   <FaChevronDown className="dropdown-arrow" />
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-end animated--fade-in-up me-lg-n25 me-xl-n15">
@@ -141,16 +141,16 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                       className="p-lg-3 bg-img-cover overlay overlay-primary overlay-70 d-none d-lg-block"
                       style={{
                         backgroundImage:
-                          "url(/assets/images/themes/landing/bg-dropdown-xl.jpg)",
+                          'url(/assets/images/themes/landing/bg-dropdown-xl.jpg)',
                       }}
                     >
                       <div className="d-flex h-100 w-100 align-items-center justify-content-center">
                         <div className="text-white z-1">
                           <h3 className="mb-3 text-white text-normal">
-                            {t("knowHowToWorkOurPlatform")}
+                            {t('knowHowToWorkOurPlatform')}
                           </h3>
                           <div className="mb-3 text-normal">
-                            {t("exploreOurPlatform")}
+                            {t('exploreOurPlatform')}
                           </div>
                           <Button
                             color="white"
@@ -159,7 +159,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                             href="/platform-overview"
                             tag={Link}
                           >
-                            {t("getAnOverview")}
+                            {t('getAnOverview')}
                             <FaChevronCircleRight
                               width={24}
                               height={24}
@@ -173,37 +173,37 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                       <Row>
                         <Col lg={12}>
                           <h6 className="dropdown-header text-primary">
-                            {t("applications")}
+                            {t('applications')}
                           </h6>
                           <DropdownItem
                             tag={Link}
                             href="/products/ecommerce-platform"
                           >
-                            {t("eCommercePlatform.title")}
+                            {t('eCommercePlatform.title')}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
                             href="/products/order-management-system"
                           >
-                            {t("orderManagementSystem.title")}
+                            {t('orderManagementSystem.title')}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
                             href="/products/design-management-system"
                           >
-                            {t("designManagementSystem.title")}
+                            {t('designManagementSystem.title')}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
                             href="/products/marketplace-management-system"
                           >
-                            {t("marketplaceManagementSystem.title")}
+                            {t('marketplaceManagementSystem.title')}
                           </DropdownItem>
                           <DropdownItem
                             tag={Link}
                             href="/products/sellers-management-system"
                           >
-                            {t("sellersManagementSystem.title")}
+                            {t('sellersManagementSystem.title')}
                           </DropdownItem>
                         </Col>
                       </Row>
@@ -217,31 +217,31 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                 className="dropdown-lg no-caret"
               >
                 <DropdownToggle nav className="dropdown-toggle" id="business">
-                  {t("business")}
+                  {t('business')}
                   <FaChevronDown className="dropdown-arrow" />
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-end me-lg-n20 me-xl-n15 animated--fade-in-up">
                   <Row className="g-0">
                     <Col lg={5} className="p-lg-5">
                       <h6 className="dropdown-header text-primary">
-                        {t("about")}
+                        {t('about')}
                       </h6>
                       <DropdownItem tag={Link} href="/about-us">
-                        {t("aboutUs")}
+                        {t('aboutUs')}
                       </DropdownItem>
                       <DropdownItem tag={Link} href="/contact-us">
-                        {t("contactUs")}
+                        {t('contactUs')}
                       </DropdownItem>
                       <DropdownItem tag={Link} href="/support">
-                        {t("helpCenter")}
+                        {t('helpCenter')}
                       </DropdownItem>
                     </Col>
                     <Col lg={7} className="p-lg-5">
                       <h6 className="dropdown-header text-primary">
-                        {t("developers")}
+                        {t('developers')}
                       </h6>
                       <DropdownItem tag={Link} href="/developers">
-                        {t("developerPortal")}
+                        {t('developerPortal')}
                       </DropdownItem>
                     </Col>
                   </Row>
@@ -253,7 +253,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                   className="dropdown-toggle"
                   id="documentation"
                 >
-                  {t("documentation.title")}
+                  {t('documentation.title')}
                   <FaChevronDown className="dropdown-arrow" />
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-menu-end animated--fade-in-up">
@@ -267,9 +267,9 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                     </div>
                     <div>
                       <div className="small text-gray-500">
-                        {t("documentation.title")}
+                        {t('documentation.title')}
                       </div>
-                      {t("usageInstructions")}
+                      {t('usageInstructions')}
                     </div>
                   </DropdownItem>
                   <DropdownItem divider className="m-0" />
@@ -279,9 +279,9 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                     </div>
                     <div>
                       <div className="small text-gray-500">
-                        {t("components.title")}
+                        {t('components.title')}
                       </div>
-                      {t("codeSnippetsAndReference")}
+                      {t('codeSnippetsAndReference')}
                     </div>
                   </DropdownItem>
                   <DropdownItem divider className="m-0" />
@@ -291,16 +291,16 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                     </div>
                     <div>
                       <div className="small text-gray-500">
-                        {t("changelog.title")}
+                        {t('changelog.title')}
                       </div>
-                      {t("updatesAndChanges")}
+                      {t('updatesAndChanges')}
                     </div>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
                 <NavLink href="/blog/1" tag={Link} id="blog">
-                  {t("blog.title2")}
+                  {t('blog.title2')}
                 </NavLink>
               </NavItem>
             </Nav>
@@ -309,7 +309,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                 <>
                   <NavItem>
                     <a className="nav-link" href="/backend" id="backend">
-                      {t("panel")}
+                      {t('panel')}
                     </a>
                   </NavItem>
                   <NavItem className="d-none d-md-block">
@@ -321,22 +321,22 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                       className="ms-2 text-uppercase"
                       onClick={logoutConfirm}
                     >
-                      {t("logout")}
+                      {t('logout')}
                     </Button>
                   </NavItem>
                   <NavItem className="d-block d-md-none">
                     <NavLink
                       id="logoutMobile"
                       href="#"
-                      className={`text-uppercase ${disabled ? "disabled" : ""}`}
+                      className={`text-uppercase ${disabled ? 'disabled' : ''}`}
                       onClick={(e) => {
                         if (!disabled) {
-                          e.preventDefault();
-                          logoutConfirm();
+                          e.preventDefault()
+                          logoutConfirm()
                         }
                       }}
                     >
-                      {t("logout")}
+                      {t('logout')}
                     </NavLink>
                   </NavItem>
                 </>
@@ -347,7 +347,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                     href="/auth/login"
                     className="btn btn-primary text-uppercase"
                   >
-                    {t("signIn")}
+                    {t('signIn')}
                   </a>
                 </NavItem>
               )}
@@ -356,5 +356,5 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
         </Container>
       </Navbar>
     </div>
-  );
-};
+  )
+}

@@ -1,16 +1,16 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from 'next-intl'
 
-import { ErrorPage } from "@/components/common/ErrorPage";
+import { ErrorPage } from '@/components/common/ErrorPage'
 
 export const NotAuthorized = () => {
-  const t = useTranslations();
+  const t = useTranslations()
 
   return (
     <ErrorPage
       title={403}
-      description={t("forbiddenInfo")}
+      description={t('forbiddenInfo')}
       titleClassName="font-warning"
       color="warning-gradient"
     />
-  );
-};
+  )
+}

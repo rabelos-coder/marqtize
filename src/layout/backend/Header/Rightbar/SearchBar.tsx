@@ -1,8 +1,8 @@
-import SvgIcon from "@/components/common/SvgIcon";
-import { useLayout } from "@/hooks";
+import SvgIcon from '@/components/common/SvgIcon'
+import { useLayout } from '@/hooks'
 
 export const SearchBar = () => {
-  const { searchIcon, setSearchIcon } = useLayout();
+  const { searchIcon, setSearchIcon } = useLayout()
 
   return (
     <li>
@@ -10,10 +10,10 @@ export const SearchBar = () => {
         <SvgIcon
           iconId="search"
           onClick={() => {
-            setSearchIcon(!searchIcon);
+            setSearchIcon(!searchIcon)
           }}
         />
       </span>
     </li>
-  );
-};
+  )
+}

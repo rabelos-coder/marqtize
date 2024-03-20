@@ -1,22 +1,22 @@
-import { useTranslations } from "next-intl";
-import { Fragment } from "react";
+import { useTranslations } from 'next-intl'
+import { Fragment } from 'react'
 
-import SvgIcon from "@/components/common/SvgIcon";
-import { useAbility, useAppDispatch, useCustomizer, useLayout } from "@/hooks";
-import { useRouter } from "@/navigation";
-import { setPinnedMenu } from "@/store/slices/themeSlice";
-import { SidebarItemType } from "@/types/layout";
+import SvgIcon from '@/components/common/SvgIcon'
+import { useAbility, useAppDispatch, useCustomizer, useLayout } from '@/hooks'
+import { useRouter } from '@/navigation'
+import { setPinnedMenu } from '@/store/slices/themeSlice'
+import { SidebarItemType } from '@/types/layout'
 
 type MenuListType = {
-  menuItems: SidebarItemType[];
-  handleActive: (title: string, level: number) => void;
-  active: string;
-  setActiveLink: Function;
-  setActive: Function;
-  activeLink: string | undefined;
-  level: number;
-  className?: string;
-};
+  menuItems: SidebarItemType[]
+  handleActive: (title: string, level: number) => void
+  active: string
+  setActiveLink: Function
+  setActive: Function
+  activeLink: string | undefined
+  level: number
+  className?: string
+}
 
 export const MenuList = ({
   setActive,
@@ -27,40 +27,40 @@ export const MenuList = ({
   activeLink,
   setActiveLink,
 }: MenuListType) => {
-  const { pinnedMenu } = useLayout();
-  const dispatch = useAppDispatch();
+  const { pinnedMenu } = useLayout()
+  const dispatch = useAppDispatch()
   const handlePined = (value: string | undefined) => {
-    if (!pinnedMenu?.includes(value || "")) {
-      dispatch(setPinnedMenu([...pinnedMenu, value ?? ""]));
+    if (!pinnedMenu?.includes(value || '')) {
+      dispatch(setPinnedMenu([...pinnedMenu, value ?? '']))
     } else {
-      const filterMenu = pinnedMenu?.filter((item) => item !== value);
-      dispatch(setPinnedMenu(filterMenu));
+      const filterMenu = pinnedMenu?.filter((item) => item !== value)
+      dispatch(setPinnedMenu(filterMenu))
     }
-  };
-  const router = useRouter();
-  const { layoutName, sidebarIconType } = useCustomizer();
-  const t = useTranslations();
-  const ability = useAbility();
+  }
+  const router = useRouter()
+  const { layoutName, sidebarIconType } = useCustomizer()
+  const t = useTranslations()
+  const ability = useAbility()
 
   const can = (level: number, claims: string[]) => {
     if (!claims?.length) {
-      return true;
+      return true
     } else if (claims.length && level === 0) {
       return claims.some((claim) => {
-        const [subject, action] = claim.split(":");
+        const [subject, action] = claim.split(':')
 
-        return ability?.can(action, subject);
-      });
+        return ability?.can(action, subject)
+      })
     } else if (claims.length && level > 0) {
       return claims.every((claim) => {
-        const [subject, action] = claim.split(":");
+        const [subject, action] = claim.split(':')
 
-        return ability?.can(action, subject);
-      });
+        return ability?.can(action, subject)
+      })
     }
 
-    return false;
-  };
+    return false
+  }
 
   return (
     <>
@@ -68,8 +68,8 @@ export const MenuList = ({
         can(level, item?.claims ?? []) ? (
           <li
             key={i}
-            className={`${pinnedMenu.includes(item.title || "") ? "pined" : ""} ${
-              level == 0 ? "sidebar-list" : ""
+            className={`${pinnedMenu.includes(item.title || '') ? 'pined' : ''} ${
+              level == 0 ? 'sidebar-list' : ''
             }  `}
           >
             {level === 0 && (
@@ -79,42 +79,42 @@ export const MenuList = ({
               ></i>
             )}
             <a
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               className={
                 level === 0
                   ? `sidebar-link sidebar-title  ${
                       (item.pathSlice && active.includes(item.pathSlice)) ||
                       activeLink ==
-                        item.path?.split("/")[item.path.split("/").length - 1]
-                        ? "active"
-                        : ""
+                        item.path?.split('/')[item.path.split('/').length - 1]
+                        ? 'active'
+                        : ''
                     }`
                   : `text-decoration-none ${
                       activeLink ==
-                      item.path?.split("/")[item.path.split("/").length - 1]
-                        ? "active"
-                        : ""
+                      item.path?.split('/')[item.path.split('/').length - 1]
+                        ? 'active'
+                        : ''
                     }`
               }
               onClick={() => {
-                if (item.type == "sub") {
-                  handleActive(item.pathSlice ? item.pathSlice : "", level);
+                if (item.type == 'sub') {
+                  handleActive(item.pathSlice ? item.pathSlice : '', level)
                 } else {
                   if (level == 0) {
-                    setActive("");
+                    setActive('')
                   }
                   setActiveLink(
-                    item.path?.split("/")[item.path.split("/").length - 1]
-                  );
+                    item.path?.split('/')[item.path.split('/').length - 1]
+                  )
                   router.push(
                     layoutName
                       ? item.path + `?layout=${layoutName.toLowerCase()}`
                       : `/${item.path}`
-                  );
+                  )
                 }
               }}
             >
-              {typeof item.icon === "string" ? (
+              {typeof item.icon === 'string' ? (
                 <>
                   {item.icon && (
                     <SvgIcon
@@ -133,20 +133,20 @@ export const MenuList = ({
                 <>
                   {item.icon
                     ? item.icon
-                    : sidebarIconType === "stroke-svg"
+                    : sidebarIconType === 'stroke-svg'
                       ? item.iconStroke
                       : item.iconFill}
                 </>
               )}
               <span>
-                {item.title?.endsWith("Name")
+                {item.title?.endsWith('Name')
                   ? t(`${item.title}`, { name: t(`${item.nameArgument}`) })
                   : t(`${item.title}`)}
               </span>
               {item.badge ? (
                 <label className={item.badge}>{item.badgeTxt}</label>
               ) : (
-                ""
+                ''
               )}
               {item.children && (
                 <div className="according-menu">
@@ -162,17 +162,17 @@ export const MenuList = ({
               <ul
                 className={` ${
                   level >= 1
-                    ? "nav-sub-childmenu submenu-content"
-                    : "sidebar-submenu list-group"
+                    ? 'nav-sub-childmenu submenu-content'
+                    : 'sidebar-submenu list-group'
                 }`}
                 style={
                   item.pathSlice && active.includes(item.pathSlice)
                     ? {
-                        opacity: "1",
-                        transition: "opacity 500ms ease-in 0s",
-                        display: "block",
+                        opacity: '1',
+                        transition: 'opacity 500ms ease-in 0s',
+                        display: 'block',
                       }
-                    : { display: "none" }
+                    : { display: 'none' }
                 }
               >
                 <MenuList
@@ -192,5 +192,5 @@ export const MenuList = ({
         )
       )}
     </>
-  );
-};
+  )
+}

@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 
-import ColorComponent from "./ColorComponent";
-import LayoutType from "./LayoutType";
-import MixLayoutComponent from "./MixLayoutComponent";
-import SidebarIconType from "./SidebarIconType";
-import SidebarType from "./SidebarType";
+import ColorComponent from './ColorComponent'
+import LayoutType from './LayoutType'
+import MixLayoutComponent from './MixLayoutComponent'
+import SidebarIconType from './SidebarIconType'
+import SidebarType from './SidebarType'
 
 const SidebarCustomizer = () => {
   return (
@@ -15,7 +15,7 @@ const SidebarCustomizer = () => {
       <ColorComponent />
       <MixLayoutComponent />
     </>
-  );
-};
+  )
+}
 
-export default SidebarCustomizer;
+export default SidebarCustomizer

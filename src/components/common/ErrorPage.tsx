@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { Button, Col, Container } from "reactstrap";
+import Image from 'next/image'
+import { useTranslations } from 'next-intl'
+import { Button, Col, Container } from 'reactstrap'
 
-import { useRouter } from "@/navigation";
-import { CommonErrorPageProps } from "@/types/common";
+import { useRouter } from '@/navigation'
+import { CommonErrorPageProps } from '@/types/common'
 
 export const ErrorPage = ({
   title,
@@ -13,8 +13,8 @@ export const ErrorPage = ({
   titleClassName,
   color,
 }: CommonErrorPageProps) => {
-  const t = useTranslations();
-  const router = useRouter();
+  const t = useTranslations()
+  const router = useRouter()
 
   return (
     <div className="page-wrapper compact-wrapper" id="pageWrapper">
@@ -40,11 +40,11 @@ export const ErrorPage = ({
               className={`text-uppercase`}
               onClick={() => router.back()}
             >
-              {t("backToPreviousPage")}
+              {t('backToPreviousPage')}
             </Button>
           </div>
         </Container>
       </div>
     </div>
-  );
-};
+  )
+}
