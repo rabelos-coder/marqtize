@@ -1,9 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { Col, Container, Row } from "reactstrap";
 
-import { LoginForm } from "@/views/auth/LoginForm";
 import RatioImage from "@/components/backend/RatioImage";
 import { concatTitle } from "@/utils/helpers";
+import { LoginForm } from "@/views/auth/LoginForm";
 
 export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale });

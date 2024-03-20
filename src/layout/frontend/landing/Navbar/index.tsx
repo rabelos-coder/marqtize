@@ -121,7 +121,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
           <Collapse navbar isOpen={isOpen}>
             <Nav navbar className="ms-auto me-lg-5">
               <NavItem>
-                <NavLink href="/" tag={Link}>
+                <NavLink href="/" tag={Link} id="home">
                   {t("home")}
                 </NavLink>
               </NavItem>
@@ -130,7 +130,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                 inNavbar
                 className="dropdown-xl no-caret"
               >
-                <DropdownToggle nav className="dropdown-toggle">
+                <DropdownToggle nav className="dropdown-toggle" id="products">
                   {t("products")}
                   <FaChevronDown className="dropdown-arrow" />
                 </DropdownToggle>
@@ -216,7 +216,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                 inNavbar
                 className="dropdown-lg no-caret"
               >
-                <DropdownToggle nav className="dropdown-toggle">
+                <DropdownToggle nav className="dropdown-toggle" id="business">
                   {t("business")}
                   <FaChevronDown className="dropdown-arrow" />
                 </DropdownToggle>
@@ -248,7 +248,11 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                 </DropdownMenu>
               </UncontrolledDropdown>
               <UncontrolledDropdown nav inNavbar className="no-caret">
-                <DropdownToggle nav className="dropdown-toggle">
+                <DropdownToggle
+                  nav
+                  className="dropdown-toggle"
+                  id="documentation"
+                >
                   {t("documentation.title")}
                   <FaChevronDown className="dropdown-arrow" />
                 </DropdownToggle>
@@ -295,7 +299,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                 </DropdownMenu>
               </UncontrolledDropdown>
               <NavItem>
-                <NavLink href="/blog/1" tag={Link}>
+                <NavLink href="/blog/1" tag={Link} id="blog">
                   {t("blog.title2")}
                 </NavLink>
               </NavItem>
@@ -304,12 +308,13 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
               {loggedIn ? (
                 <>
                   <NavItem>
-                    <a className="nav-link" href="/backend">
+                    <a className="nav-link" href="/backend" id="backend">
                       {t("panel")}
                     </a>
                   </NavItem>
                   <NavItem className="d-none d-md-block">
                     <Button
+                      id="logout"
                       type="button"
                       color="primary"
                       disabled={disabled}
@@ -321,6 +326,7 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
                   </NavItem>
                   <NavItem className="d-block d-md-none">
                     <NavLink
+                      id="logoutMobile"
                       href="#"
                       className={`text-uppercase ${disabled ? "disabled" : ""}`}
                       onClick={(e) => {
@@ -337,8 +343,9 @@ export const NavBar = ({ navbarExpanded }: NavbarProps) => {
               ) : (
                 <NavItem>
                   <a
-                    className="btn btn-primary text-uppercase"
+                    id="login"
                     href="/auth/login"
+                    className="btn btn-primary text-uppercase"
                   >
                     {t("signIn")}
                   </a>

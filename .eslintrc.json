@@ -2,7 +2,8 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:cypress/recommended"
   ],
   "rules": {
     "no-unused-vars": "off",
@@ -48,9 +49,15 @@
         "count": 1
       }
     ],
-    "@typescript-eslint/ban-types": "off"
+    "@typescript-eslint/ban-types": "off",
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "error",
+    "cypress/assertion-before-screenshot": "warn",
+    "cypress/no-force": "warn",
+    "cypress/no-async-tests": "error",
+    "cypress/no-pause": "error"
   },
-  "plugins": ["import", "unused-imports", "simple-import-sort"],
+  "plugins": ["import", "unused-imports", "simple-import-sort", "cypress"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -60,6 +67,9 @@
         "alwaysTryTypes": true,
         "project": ["./tsconfig.json"]
       }
+    },
+    "env": {
+      "cypress/globals": true
     }
   }
 }

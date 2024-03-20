@@ -2,14 +2,13 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "reactstrap";
 
 import { SvgBorder } from "@/components/frontend/common/SvgBorder";
-import { APP_META_SLOGAN } from "@/environment";
 import { Header } from "@/layout/frontend/landing/Header";
 import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 import { concatTitle } from "@/utils/helpers";
 
 export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale });
-  const title = concatTitle(APP_META_SLOGAN);
+  const title = concatTitle(t("home"));
 
   return {
     title,
@@ -22,7 +21,7 @@ export default async function BasicPage({ params: { locale } }: any) {
   return (
     <LandingLayout>
       <Header
-        title="Basic content page"
+        title={t("home")}
         description="Create beautiful pages with easy to edit content"
       />
       <section className="bg-white py-10">
