@@ -2,7 +2,8 @@
  * @jest-environment jsdom
  */
 import { render, screen } from '@testing-library/react'
-import Page from '@/app/[locale]/tests/page'
+
+import Page from '@/app/tests/page'
 
 describe('Page', () => {
   it('renders a heading', () => {
