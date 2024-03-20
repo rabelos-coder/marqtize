@@ -2,9 +2,9 @@ import { ReactNode } from "react";
 
 export type CommonErrorPageProps = {
   title: number;
-  description: string;
+  description: string | ReactNode;
   titleClassName: string;
-  BtnClassName: string;
+  color: string;
 };
 
 export type CommonCardHeadingPropsType = {

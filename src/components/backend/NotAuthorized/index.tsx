@@ -10,7 +10,7 @@ export const NotAuthorized = () => {
       title={403}
       description={t("forbiddenInfo")}
       titleClassName="font-warning"
-      BtnClassName="btn-warning-gradien"
+      color="warning-gradient"
     />
   );
 };

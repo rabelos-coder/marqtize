@@ -2,19 +2,21 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { Button, Col, Container } from "reactstrap";
 
-import { useRouter } from "@/navigation";
-import { CommonErrorPageProps } from "@/types/common";
-
-export const ErrorPage = ({
-  title,
-  description,
-  titleClassName,
-  color,
-}: CommonErrorPageProps) => {
+export default function ErrorPage({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
   const t = useTranslations();
-  const router = useRouter();
+
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
 
   return (
     <div className="page-wrapper compact-wrapper" id="pageWrapper">
@@ -28,23 +30,23 @@ export const ErrorPage = ({
             alt="Error"
           />
           <div className="error-heading">
-            <h2 className={`headline ${titleClassName}`}>{title}</h2>
+            <h2 className={`headline font-primary`}>500</h2>
           </div>
           <Col md={8} className="offset-md-2">
-            <div className="sub-content">{description}</div>
+            <div className="sub-content">{t("internalServerErrorInfo")}</div>
           </Col>
           <div>
             <Button
-              color={color}
+              color="primary-gradient"
               size="lg"
               className={`text-uppercase`}
-              onClick={() => router.back()}
+              onClick={reset}
             >
-              {t("backToPreviousPage")}
+              {t("reload")}
             </Button>
           </div>
         </Container>
       </div>
     </div>
   );
-};
+}

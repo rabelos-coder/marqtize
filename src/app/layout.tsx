@@ -1,5 +1,5 @@
 import { ChildrenProps } from "@/types/common";
 
-export default function RootLayout({ children }: ChildrenProps) {
+export default function AppLayout({ children }: ChildrenProps) {
   return children;
 }

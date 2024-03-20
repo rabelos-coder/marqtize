@@ -30,34 +30,46 @@ export default function middleware(request: NextRequest) {
   const token = request.cookies.get(STORAGE_AUTH_TOKEN)?.value;
   const locale = request.cookies.get(STORAGE_LOCALE)?.value ?? APP_LANGUAGE;
 
+  // set locale
+  if (!!request.cookies.get(STORAGE_LOCALE)?.value)
+    request.cookies.set(STORAGE_LOCALE, locale);
+
   const isAuth = url.pathname.split("/").includes("auth");
   const isBackend = url.pathname.split("/").includes("backend");
 
   if (isBackend && !token && !isAuth) {
     return NextResponse.redirect(new URL(`/${locale}/auth/login`, request.url));
   } else if (isBackend && token && !isAuth) {
-    const { exp } = jwtDecode(token) as JWT;
-    if (exp < Math.round(Date.now() / 1000)) {
-      return NextResponse.redirect(
-        new URL(`/${locale}/auth/login`, request.url)
-      );
-    }
+    try {
+      const { exp } = jwtDecode(token) as JWT;
+      if (exp < Math.round(Date.now() / 1000)) {
+        return NextResponse.redirect(
+          new URL(`/${locale}/auth/login`, request.url)
+        );
+      }
+    } catch {}
   }
 
   if (isAuth && token && !isBackend) {
-    const { exp } = jwtDecode(token) as JWT;
-    if (exp > Math.round(Date.now() / 1000)) {
-      return NextResponse.redirect(new URL(`/${locale}/backend`, request.url));
+    try {
+      const { exp } = jwtDecode(token) as JWT;
+      if (exp > Math.round(Date.now() / 1000)) {
+        return NextResponse.redirect(
+          new URL(`/${locale}/backend`, request.url)
+        );
+      }
+    } catch {}
+  }
+
+  try {
+    const host = request.headers.get("host");
+    const subdomain = getValidSubdomain(host);
+    if (subdomain) {
+      url.pathname = `/${locale}/sub-domains/${subdomain}${url.pathname}`;
+
+      return NextResponse.rewrite(url);
     }
-  }
-
-  const host = request.headers.get("host");
-  const subdomain = getValidSubdomain(host);
-  if (subdomain) {
-    url.pathname = `/subdomains/${subdomain}${url.pathname}`;
-
-    return NextResponse.rewrite(url);
-  }
+  } catch {}
 
   return intlMiddleware(request);
 }

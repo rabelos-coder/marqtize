@@ -39,7 +39,7 @@
   }
 }
 
-@mixin btn-gradien($deg, $leftcolor, $leftcolor-per, $rightcolor, $rightcolor-per, $font-color) {
+@mixin btn-gradient($deg, $leftcolor, $leftcolor-per, $rightcolor, $rightcolor-per, $font-color) {
   background-image: linear-gradient(to right, $leftcolor 0%, $rightcolor 51%, $leftcolor 100%);
   border: none;
   color: $font-color;
@@ -47,8 +47,8 @@
   transition: all 0.3s ease;
 }
 
-.btn-primary-gradien {
-  @include btn-gradien(60, lighten($primary-color, 8%), 0%, darken($primary-color, 8%), 100%, $white);
+.btn-primary-gradient {
+  @include btn-gradient(60, lighten($primary-color, 8%), 0%, darken($primary-color, 8%), 100%, $white);
   color: $white;
 
   &:focus,
@@ -67,8 +67,8 @@
   }
 }
 
-.btn-secondary-gradien {
-  @include btn-gradien(60, lighten($secondary-color, 8%), 0%, darken($secondary-color, 8%), 100%, $white);
+.btn-secondary-gradient {
+  @include btn-gradient(60, lighten($secondary-color, 8%), 0%, darken($secondary-color, 8%), 100%, $white);
 
   &:hover,
   &:focus,
@@ -88,8 +88,8 @@
   }
 }
 
-.btn-success-gradien {
-  @include btn-gradien(60, lighten($success-color, 8%), 0%, darken($success-color, 8%), 100%, $white);
+.btn-success-gradient {
+  @include btn-gradient(60, lighten($success-color, 8%), 0%, darken($success-color, 8%), 100%, $white);
 
   &:hover,
   &:focus,
@@ -109,8 +109,8 @@
   }
 }
 
-.btn-danger-gradien {
-  @include btn-gradien(60, lighten($danger-color, 8%), 0%, darken($danger-color, 8%), 100%, $white);
+.btn-danger-gradient {
+  @include btn-gradient(60, lighten($danger-color, 8%), 0%, darken($danger-color, 8%), 100%, $white);
 
   &:hover,
   &:focus,
@@ -130,8 +130,8 @@
   }
 }
 
-.btn-warning-gradien {
-  @include btn-gradien(60, lighten($warning-color, 8%), 0%, darken($warning-color, 8%), 100%, $white);
+.btn-warning-gradient {
+  @include btn-gradient(60, lighten($warning-color, 8%), 0%, darken($warning-color, 8%), 100%, $white);
 
   &:hover,
   &:focus,
@@ -151,8 +151,8 @@
   }
 }
 
-.btn-info-gradien {
-  @include btn-gradien(60, lighten($info-color, 8%), 0%, darken($info-color, 8%), 100%, $white);
+.btn-info-gradient {
+  @include btn-gradient(60, lighten($info-color, 8%), 0%, darken($info-color, 8%), 100%, $white);
 
   &:hover,
   &:focus,
@@ -172,8 +172,8 @@
   }
 }
 
-.btn-light-gradien {
-  @include btn-gradien(60, lighten($light-color, 8%), 0%, darken($light-color, 8%), 100%, $white);
+.btn-light-gradient {
+  @include btn-gradient(60, lighten($light-color, 8%), 0%, darken($light-color, 8%), 100%, $white);
 
   &:hover,
   &:focus,
@@ -193,8 +193,8 @@
   }
 }
 
-.btn-dark-gradien {
-  @include btn-gradien(60, lighten($dark-color, 8%), 0%, darken($dark-color, 8%), 100%, $white);
+.btn-dark-gradient {
+  @include btn-gradient(60, lighten($dark-color, 8%), 0%, darken($dark-color, 8%), 100%, $white);
 
   &:hover,
   &:focus,
@@ -297,7 +297,7 @@
   }
 }
 
-.btn-gradient {
+.btn-gradientt {
   color: $white !important;
   font-weight: 500;
   padding: 10px 30px;
@@ -319,7 +319,7 @@
   }
 }
 
-[class*="-gradien"] {
+[class*="-gradient"] {
   &:hover {
     background-size: 50% 100%;
     transition: all 0.3s ease;

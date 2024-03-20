@@ -88,7 +88,7 @@
   }
 
   .sub-content {
-    font-size: 18px;
+    font-size: 1.13rem;
     color: $theme-body-font-color;
     letter-spacing: 1px;
     font-weight: normal;
@@ -97,6 +97,14 @@
     position: relative;
     margin-top: 30px;
     margin-bottom: 0;
+
+    p {
+      font-size: 1.13rem;
+      color: $theme-body-font-color;
+      padding-top: 0;
+      padding-bottom: 0.8rem;
+      margin: 0;
+    }
   }
 
   .btn {

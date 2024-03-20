@@ -11,7 +11,7 @@ import { Header } from "@/layout/frontend/landing/Header";
 import { LandingLayout } from "@/layout/frontend/landing/LandingLayout";
 import { Link, useRouter } from "@/navigation";
 
-export default function NotFoundPage() {
+export default function NotFound() {
   const t = useTranslations();
 
   const router = useRouter();

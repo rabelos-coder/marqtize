@@ -1,4 +1,5 @@
 {
+  "oops": "Oops!",
   "home": "Home",
   "backend": "Back-end",
   "dashboard": "Dashboard",
@@ -225,8 +226,9 @@
   "reload": "Recarregar",
   "forbidden": "Proibido",
   "forbiddenInfo": "A página que você está tentando acessar não está disponível no momento. Você não tem as permissões adequadas para acessar este recurso.",
-  "notFound": "Não Encontrado",
-  "notFoundInfo": "A página que você está tentando acessar não está disponível no momento. Isso pode ocorrer porque a página não existe ou foi movida.",
+  "notFound": "Página Não Encontrada",
+  "notFoundInfo": "<p>A página que você está tentando acessar não está disponível no momento.</p> <p>Isso pode ocorrer porque a página não existe ou foi movida.</p>",
+  "notFoundInfo2": "A página que você está tentando acessar não está disponível no momento.",
   "internalServerError": "Erro Interno do Servidor",
   "internalServerErrorInfo": "Ocorreu um erro interno no servidor. Por favor, tente novamente mais tarde.",
   "badRequest": "Requisição Incorreta",

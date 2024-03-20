@@ -105,7 +105,7 @@ export default async function LocaleLayout({
   let connected = false;
   try {
     const { data } = await axios.get(`http://localhost:8097`, {
-      timeout: 3000,
+      timeout: 1500,
     });
 
     connected = !!data;
