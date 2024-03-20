@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+import { expect } from '@jest/globals'
 import { fireEvent, render, screen } from '@testing-library/react'
 
 import CounterPage from './page'

@@ -9,8 +9,16 @@ const createJestConfig = nextJest({
 
 // Add any custom config to be passed to Jest
 const customJestConfig: Config = {
+  // clearMocks: true,
+  // collectCoverage: true,
+  // coverageDirectory: 'coverage',
+  // collectCoverageFrom: [
+  //   'src/components/**/*.ts(x)?',
+  //   'src/templates/**/*.ts(x)?',
+  //   '!src/**/stories.tsx',
+  // ],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
   moduleDirectories: ['node_modules', '<rootDir>'],
   testPathIgnorePatterns: [
     '<rootDir>/.next/',
@@ -18,6 +26,7 @@ const customJestConfig: Config = {
     '<rootDir>/cypress/',
   ],
   preset: 'ts-jest',
+  modulePaths: ['<rootDir>/src/'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src$1',
   },

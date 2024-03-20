@@ -1,10 +1,24 @@
 {
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "extends": [
+    "next",
     "next/core-web-vitals",
     "plugin:cypress/recommended",
     "plugin:jest-dom/recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "no-unused-vars": "off",
@@ -19,6 +33,9 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     // no unused variables
     "unused-imports/no-unused-vars": [
       "warn",
@@ -58,7 +75,14 @@
     "cypress/no-async-tests": "error",
     "cypress/no-pause": "error"
   },
-  "plugins": ["import", "unused-imports", "simple-import-sort", "cypress"],
+  "plugins": [
+    "import",
+    "unused-imports",
+    "simple-import-sort",
+    "react-hooks",
+    "cypress",
+    "jest-dom"
+  ],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -69,21 +93,5 @@
         "project": ["./tsconfig.json"]
       }
     }
-  },
-  "overrides": [
-    {
-      "files": ["cypress/**/*"],
-      "plugins": ["cypress"],
-      "env": {
-        "cypress/globals": true
-      }
-    },
-    {
-      "files": ["__tests__/**/*"],
-      "plugins": ["jest"],
-      "env": {
-        "jest/globals": true
-      }
-    }
-  ]
+  }
 }
