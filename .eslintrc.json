@@ -68,9 +68,22 @@
         "alwaysTryTypes": true,
         "project": ["./tsconfig.json"]
       }
-    },
-    "env": {
-      "cypress/globals": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["cypress/**/*"],
+      "plugins": ["cypress"],
+      "env": {
+        "cypress/globals": true
+      }
+    },
+    {
+      "files": ["__tests__/**/*"],
+      "plugins": ["jest"],
+      "env": {
+        "jest/globals": true
+      }
+    }
+  ]
 }

@@ -75,7 +75,7 @@ export default function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/',
-    '/((?!api|_next|_vercel|subdomains|.*\\..*).*)',
+    '/((?!api|_next|_vercel|tests|.*\\..*).*)',
     '/(pt-br|en)/:path*',
   ],
 }

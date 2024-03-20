@@ -1,15 +1,16 @@
-import '@testing-library/jest-dom'
-
+/**
+ * @jest-environment jsdom
+ */
 import { render, screen } from '@testing-library/react'
+import Page from '@/app/[locale]/tests/page'
 
-import Home from '../src/app/[locale]/page'
-
-describe('Home', () => {
+describe('Page', () => {
   it('renders a heading', () => {
-    render(<Home />)
+    render(<Page />)
 
     const heading = screen.getByRole('heading', {
-      name: /Construindo o futuro com inovação e alcançando resultados excepcionais/i,
+      level: 1,
+      name: /Welcome to Next\.js!/i,
     })
 
     expect(heading).toBeInTheDocument()
