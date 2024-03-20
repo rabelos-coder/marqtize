@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ChevronsUp } from "react-feather";
+import { FiChevronsUp } from "react-icons/fi";
 
 export const TapTop = () => {
   const [tapTopStyle, setTapTopStyle] = useState("none");
@@ -30,7 +30,7 @@ export const TapTop = () => {
 
   return (
     <div className="tap-top" style={{ display: tapTopStyle }}>
-      <ChevronsUp onClick={() => executeScroll()} />
+      <FiChevronsUp onClick={() => executeScroll()} />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Fragment } from "react";
 
-import SvgIcon from "@/components/common/Icons/SvgIcon";
+import SvgIcon from "@/components/common/SvgIcon";
 import { useAbility, useAppDispatch, useCustomizer, useLayout } from "@/hooks";
 import { useRouter } from "@/navigation";
 import { setPinnedMenu } from "@/store/slices/themeSlice";

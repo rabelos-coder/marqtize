@@ -1,6 +1,6 @@
 import Image from "next/image";
+import { FiGrid } from "react-icons/fi";
 
-import FeatherIconCom from "@/components/common/Icons/FeatherIconCom";
 import { useLayout } from "@/hooks";
 import { Link } from "@/navigation";
 
@@ -35,10 +35,7 @@ export const SidebarLogo = () => {
         className="toggle-sidebar"
         onClick={() => setSideBarToggle(!sideBarToggle)}
       >
-        <FeatherIconCom
-          iconName={"Grid"}
-          className="status_toggle middle sidebar-toggle"
-        />
+        <FiGrid className="status_toggle middle sidebar-toggle" />
       </div>
     </div>
   );

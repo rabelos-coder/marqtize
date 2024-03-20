@@ -3,7 +3,7 @@
 import React from "react";
 import { Col, Container, Row } from "reactstrap";
 
-import SvgIcon from "@/components/common/Icons/SvgIcon";
+import SvgIcon from "@/components/common/SvgIcon";
 import { Link } from "@/navigation";
 
 type BreadcrumbProps = {

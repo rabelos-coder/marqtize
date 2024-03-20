@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { X } from "react-feather";
 import { Form, Input } from "reactstrap";
 
-import SvgIcon from "@/components/common/Icons/SvgIcon";
+import SvgIcon from "@/components/common/SvgIcon";
 import { useLayout } from "@/hooks";
 import { SearchBarContainPropsType } from "@/types/layout";
 

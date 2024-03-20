@@ -1,4 +1,4 @@
-import SvgIcon from "@/components/common/Icons/SvgIcon";
+import SvgIcon from "@/components/common/SvgIcon";
 import { useLayout } from "@/hooks";
 
 export const SearchBar = () => {
