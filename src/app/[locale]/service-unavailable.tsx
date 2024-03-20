@@ -22,13 +22,13 @@ export default function ServiceUnavailable() {
             <Col xl={6}>
               <div className="text-center mt-4">
                 <Image
-                  src="/assets/images/themes/landing/503-error-service-unavailable.svg"
+                  src="/assets/images/themes/landing/504-error-gateway-timeout.svg"
                   width={462}
                   height={287}
                   alt={APP_META_TITLE}
                   className="img-fluid pb-4 text-purple"
                 />
-                <p className="lead">{t('maintenanceInfo')}</p>
+                <p className="lead">{t('serviceUnavailableInfo')}</p>
               </div>
             </Col>
           </Row>

@@ -2,10 +2,9 @@
 
 import { Inter, Roboto } from 'next/font/google'
 import { useTranslations } from 'next-intl'
-import { FaArrowLeft } from 'react-icons/fa6'
+import { useEffect } from 'react'
+import { FaArrowsRotate } from 'react-icons/fa6'
 import { Button } from 'reactstrap'
-
-import { useRouter } from '@/navigation'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -21,26 +20,38 @@ const inter = Inter({
   preload: true,
 })
 
-export default function NotFoundPage() {
+export default function ErrorPage({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
   const t = useTranslations()
-  const router = useRouter()
+
+  useEffect(() => {
+    console.error(error)
+  }, [error])
 
   return (
     <div className="d-flex align-items-center justify-content-center vh-100">
       <div className="text-center">
-        <h1 className={`display-1 fw-bold ${roboto.className}`}>404</h1>
+        <h1 className={`display-1 fw-bold ${roboto.className}`}>500</h1>
         <p className={`fs-3 ${roboto.className}`}>
-          <span className="text-danger">{t('oops')}</span> {t('notFound')}
+          <span className="text-danger">{t('oops')}</span>{' '}
+          {t('internalServerError')}
         </p>
-        <p className={`lead py-3 ${inter.className}`}>{t('notFoundInfo2')}</p>
+        <p className={`lead py-3 ${inter.className}`}>
+          {t('internalServerErrorInfo')}
+        </p>
         <Button
           type="button"
           color="primary"
           className={`${inter.className}`}
-          onClick={() => router.back()}
+          onClick={() => reset()}
         >
-          <FaArrowLeft className="me-2" />
-          {t('back')}
+          <FaArrowsRotate className="me-2" />
+          {t('reload')}
         </Button>
       </div>
     </div>

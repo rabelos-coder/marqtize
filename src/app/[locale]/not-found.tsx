@@ -30,7 +30,7 @@ export default function NotFound() {
       <section className="bg-white py-10">
         <Container className="px-5">
           <Row className="gx-5 justify-content-center">
-            <Col xl={6}>
+            <Col xl={8}>
               <div className="text-center mt-4">
                 <Image
                   src="/assets/images/themes/landing/404-error.svg"
@@ -39,7 +39,9 @@ export default function NotFound() {
                   alt={APP_META_TITLE}
                   className="img-fluid pb-4 text-purple"
                 />
-                <p className="lead">{t('notFoundInfo')}</p>
+                <p className="lead">
+                  {t.rich('notFoundInfo', { p: (chunk) => <p>{chunk}</p> })}
+                </p>
                 <Link
                   className="text-arrow-icon"
                   href="#!"
