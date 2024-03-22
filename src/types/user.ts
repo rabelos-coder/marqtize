@@ -1,4 +1,4 @@
-import { Upload } from './common'
+import { PaginatedObject, Upload } from './common'
 import { Customer } from './customer'
 import { UserType, UserTypeEnum } from './enums'
 import { Language } from './language'
@@ -109,4 +109,8 @@ type UserUpdateInput = {
 
 export type UpdateUserInput = {
   data: UserUpdateInput
+}
+
+export type PaginatedUser = {
+  paginatedUser: PaginatedObject<User>
 }

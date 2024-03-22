@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 import { Spinner } from '@/components/common/Spinner'
 import {
@@ -27,7 +27,8 @@ type AclGuardProps = {
  * @return {JSX.Element} the rendered JSX based on the user's access and abilities
  */
 export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
-  let ability: AppAbility | null = null
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [ability, setAbility] = useState<AppAbility | null>(null)
 
   // Define the acl based on the page
   const guard = acl ?? defaultAcl
@@ -35,22 +36,21 @@ export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
   // Get the user's session
   const { user, isLoggedIn } = useAuth()
 
-  // User is logged in, build ability for the user based on his role
-  if (isLoggedIn && user && !ability) ability = buildAbilityFor(user)
+  useEffect(() => {
+    setLoggedIn(isLoggedIn)
+
+    // User is logged in, build ability for the user based on his role
+    if (isLoggedIn && user) setAbility(buildAbilityFor(user))
+  }, [user, isLoggedIn])
 
   // Check the access of current user and render pages
-  if (
-    ability &&
-    isLoggedIn &&
-    user &&
-    ability.can(guard.action, guard.subject)
-  ) {
+  if (loggedIn && ability && ability.can(guard.action, guard.subject)) {
     return (
       <AbilityProvider ability={ability}>
         <AuthLayout>{children}</AuthLayout>
       </AbilityProvider>
     )
-  } else if (!ability || !isLoggedIn) {
+  } else if (!ability || !loggedIn) {
     return <Spinner />
   }
 

@@ -54,7 +54,7 @@ export type FindManyInput = {
 }
 
 export type OrderByInput = {
-  [key: string]: 'asc' | 'desc'
+  [key: string]: 'asc' | 'desc' | OrderByEnum | string
 }
 
 export type PaginatedInput = {
@@ -98,4 +98,19 @@ export type ReduxProviderProps = {
 
 export type AuthFormProps = {
   alignLogo?: string
+}
+
+export type PageWithChildrenProps = {
+  page: number
+  children?: ReactNode
+}
+
+export enum ModeEnum {
+  SENSITIVE = 'sensitive',
+  INSENSITIVE = 'insensitive',
+}
+
+export enum OrderByEnum {
+  ASC = 'asc',
+  DESC = 'desc',
 }

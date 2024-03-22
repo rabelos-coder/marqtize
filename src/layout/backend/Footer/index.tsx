@@ -2,6 +2,8 @@ import { useTranslations } from 'next-intl'
 import React from 'react'
 import { Col, Container, Row } from 'reactstrap'
 
+import { APP_META_TITLE } from '@/environment'
+
 export const Footer = () => {
   const t = useTranslations()
 
@@ -13,7 +15,7 @@ export const Footer = () => {
             <p className="mb-0">
               {t('copyright', {
                 year: new Date().getFullYear(),
-                company: "Rabelo's Coder",
+                company: APP_META_TITLE,
               })}
             </p>
           </Col>

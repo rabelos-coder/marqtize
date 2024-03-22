@@ -48,10 +48,16 @@ const EditProfileForm = ({ user, timezones, languages }: EditProfileProps) => {
   const pathname = usePathname()
 
   const schema = yup.object().shape({
-    name: yup.string().required(t('invalidNameRequired')),
-    systemName: yup.string().required(t('invalidSystemNameRequired')),
-    language: yup.string().required(t('invalidLanguageRequired')),
-    timezoneId: yup.string().required(t('invalidTimezoneRequired')),
+    name: yup.string().required(t('propertyRequired', { property: t('name') })),
+    systemName: yup
+      .string()
+      .required(t('propertyRequired', { property: t('systemName') })),
+    language: yup
+      .string()
+      .required(t('propertyRequired', { property: t('language') })),
+    timezoneId: yup
+      .string()
+      .required(t('propertyRequired', { property: t('timezone') })),
   })
 
   const defaultValues = Object.assign({ passwordConfirmation: '' }, user)

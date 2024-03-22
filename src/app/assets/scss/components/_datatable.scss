@@ -16,7 +16,7 @@ div {
     }
   }
 
-  .table-avtar {
+  .table-avatar {
     height: 32px;
     margin-right: 10px;
 
@@ -72,6 +72,20 @@ div {
 
 .dataTables_wrapper {
   width: calc(100% - 1px);
+
+  .rdt_Pagination {
+    border-top-style: none !important;
+    border-top-width: 0px !important;
+  }
+
+  .rdt_TableRow {
+    &:hover {
+      border-bottom-color: rgba(0, 0, 0, 0.3);
+      outline-style: none;
+      outline-width: 1px;
+      outline-color: #b8b3b3;
+    }
+  }
 
   &.no-footer {
     .dataTables_scrollBody {

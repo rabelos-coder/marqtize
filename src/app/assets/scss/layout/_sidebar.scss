@@ -881,12 +881,6 @@
                       }
                     }
                   }
-
-                  li {
-                    a {
-                      text-transform: capitalize;
-                    }
-                  }
                 }
               }
             }
@@ -1782,7 +1776,6 @@
 
                   span {
                     letter-spacing: 0.7px;
-                    text-transform: capitalize;
                     color: rgba($theme-body-sub-title-color, 0.8);
                   }
 

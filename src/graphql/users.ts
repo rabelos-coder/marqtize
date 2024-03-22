@@ -4,7 +4,6 @@ import {
   FindByIdInput,
   FindByIdsInput,
   PaginatedInput,
-  PaginatedObject,
   WhereAndOrderInput,
   WhereInput,
 } from '@/types/common'
@@ -17,13 +16,13 @@ import {
   FindByIdUser,
   FindFirstUser,
   FindManyUser,
+  PaginatedUser,
   RemoveManyUser,
   RemoveUser,
   RestoreManyUser,
   RestoreUser,
   UpdateUser,
   UpdateUserInput,
-  User,
 } from '@/types/user'
 
 export const FRAGMENT_USER_PROPS = gql`
@@ -70,37 +69,35 @@ export const FIND_USERS: TypedDocumentNode<FindManyUser, WhereAndOrderInput> =
     }
   `
 
-export const PAGINATED_USERS: TypedDocumentNode<
-  PaginatedObject<User>,
-  PaginatedInput
-> = gql`
-  ${FRAGMENT_USER_PROPS}
-  query PaginatedUser(
-    $page: Int!
-    $perPage: Int!
-    $where: SearchUserInput
-    $orderBy: SortUserInput
-  ) {
-    paginatedUser(
-      page: $page
-      perPage: $perPage
-      where: $where
-      orderBy: $orderBy
+export const PAGINATED_USERS: TypedDocumentNode<PaginatedUser, PaginatedInput> =
+  gql`
+    ${FRAGMENT_USER_PROPS}
+    query PaginatedUser(
+      $page: Int!
+      $perPage: Int!
+      $where: SearchUserInput
+      $orderBy: SortUserInput
     ) {
-      data {
-        ...UserProps
-      }
-      meta {
-        total
-        lastPage
-        currentPage
-        perPage
-        prev
-        next
+      paginatedUser(
+        page: $page
+        perPage: $perPage
+        where: $where
+        orderBy: $orderBy
+      ) {
+        data {
+          ...UserProps
+        }
+        meta {
+          total
+          lastPage
+          currentPage
+          perPage
+          prev
+          next
+        }
       }
     }
-  }
-`
+  `
 
 export const FIND_USER: TypedDocumentNode<FindByIdUser, FindByIdInput> = gql`
   ${FRAGMENT_USER_PROPS}

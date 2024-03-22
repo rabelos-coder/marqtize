@@ -1,9 +1,22 @@
+import { trim } from 'lodash'
+
 // * ENVIRONMENT SETTINGS
 export const ENVIRONMENT = process.env.NODE_ENV ?? 'development'
 export const IS_PRODUCTION = ENVIRONMENT === 'production'
 export const IS_DEVELOPMENT = ENVIRONMENT === 'development'
 
 // * APPLICATION SETTINGS
+export const APP_PAGINATION = parseInt(
+  process.env.NEXT_PUBLIC_APP_PAGINATION ?? '10'
+)
+export const APP_PAGINATION_ROWS = (
+  process.env.NEXT_PUBLIC_APP_PAGINATION_ROWS ?? '10, 15, 20, 25, 30, 50, 100'
+)
+  .split(',')
+  .map((value) => parseInt(trim(`${value}`)))
+export const APP_PAGINATION_SHOW_ALL =
+  (process.env.NEXT_PUBLIC_APP_PAGINATION_SHOW_ALL ?? 'false').toLowerCase() ===
+  'true'
 export const APP_MAIN_DOMAIN =
   process.env.NEXT_PUBLIC_APP_MAIN_DOMAIN ?? 'localhost'
 export const APP_WEBSITE =

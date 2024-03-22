@@ -107,3 +107,45 @@ export function createResume(text: string, maxLength: number = 150): string {
     return text
   }
 }
+
+/**
+ * Returns the initials of a given name.
+ *
+ * @param {string} name - The name to extract the initials from.
+ * @return {string} The initials of the name.
+ */
+export function getInitials(name: string): string {
+  if (name.split(' ').length === 1) {
+    return `${name.split(' ')[0][0]}`
+  }
+
+  return `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`
+}
+
+/**
+ * Generates a background color based on a given name.
+ *
+ * @param {string} name - The name used to generate the color hash.
+ * @return {string} The generated background color in hexadecimal format.
+ */
+export function generateBackground(name: string): string {
+  let hash = 0
+  let i
+
+  for (i = 0; i < name.length; i += 1) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash)
+  }
+
+  // name.charCodeAt() return an int between 0 and 65535
+  // left shift (<<)  operator moves to left by number of specified
+  // bites after <<. The whole for loop will create a color hash
+  // based on username length
+  let color = '#'
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff
+    color += `00${value.toString(16)}`.slice(-2)
+  }
+
+  return color
+}
