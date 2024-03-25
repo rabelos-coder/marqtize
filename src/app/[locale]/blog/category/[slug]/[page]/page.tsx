@@ -8,6 +8,7 @@ import { PAGINATED_POSTS } from '@/graphql/blogPost'
 import { Header } from '@/layout/frontend/landing/Header'
 import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
+import { OrderByEnum } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import { Posts } from '@/views/frontend/landing/Posts'
@@ -16,7 +17,7 @@ const client = createApolloClient()
 
 export async function generateMetadata({ params: { locale, slug } }: any) {
   const t = await getTranslations({ locale })
-  let title = concatTitle(t('blog.tags.title'))
+  let title = concatTitle(t('blog.categories.title'))
 
   const { data, error } = await client.query({
     query: FIND_FIRST_CATEGORY,
@@ -83,7 +84,7 @@ export default async function PostsByCategoryPage({
         deletedAt: null,
       },
       orderBy: {
-        publishedAt: 'desc',
+        publishedAt: OrderByEnum.DESC,
       },
     },
   })

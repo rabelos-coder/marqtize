@@ -5,6 +5,7 @@ import { SvgBorder } from '@/components/frontend/common/SvgBorder'
 import { PAGINATED_POSTS } from '@/graphql/blogPost'
 import { Header } from '@/layout/frontend/landing/Header'
 import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import { OrderByEnum } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import { Posts } from '@/views/frontend/landing/Posts'
@@ -42,7 +43,7 @@ export default async function PostsPage({ params: { locale, page } }: any) {
         deletedAt: null,
       },
       orderBy: {
-        publishedAt: 'desc',
+        publishedAt: OrderByEnum.DESC,
       },
     },
   })

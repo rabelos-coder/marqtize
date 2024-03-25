@@ -8,6 +8,7 @@ import { FIND_FIRST_TAG } from '@/graphql/blogTags'
 import { Header } from '@/layout/frontend/landing/Header'
 import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
+import { OrderByEnum } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import { Posts } from '@/views/frontend/landing/Posts'
@@ -83,7 +84,7 @@ export default async function PostsByTagPage({
         deletedAt: null,
       },
       orderBy: {
-        publishedAt: 'desc',
+        publishedAt: OrderByEnum.DESC,
       },
     },
   })

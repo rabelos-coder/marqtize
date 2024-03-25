@@ -53,6 +53,7 @@ export async function generateMetadata({
           },
         ],
         slug,
+        isPublished: true,
         deletedAt: null,
       },
     },
@@ -102,7 +103,7 @@ export async function generateMetadata({
 export default async function BlogPostPage({ params: { locale, slug } }: any) {
   const t = await getTranslations({ locale })
 
-  let title = t('blog.categories.title')
+  let title = t('blog.post.title')
 
   const { data, error } = await client.query({
     query: FIND_FIRST_POST,
@@ -116,6 +117,7 @@ export default async function BlogPostPage({ params: { locale, slug } }: any) {
           },
         ],
         slug,
+        isPublished: true,
         deletedAt: null,
       },
     },
