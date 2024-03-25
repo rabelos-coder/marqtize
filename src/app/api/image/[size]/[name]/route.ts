@@ -1,4 +1,3 @@
-import { trim } from 'lodash'
 import { ImageResponse } from 'next/og'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -10,8 +9,8 @@ export async function GET(
 ) {
   try {
     let { name, size } = params
-    name = trim(name)
-    size = parseInt(trim(size))
+    name = `${name}`.trim()
+    size = parseInt(`${size}`.trim())
 
     if (!name) {
       return NextResponse.json(
