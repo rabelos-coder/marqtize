@@ -54,7 +54,7 @@ export type FindManyInput = {
 }
 
 export type OrderByInput = {
-  [key: string]: 'asc' | 'desc' | OrderByEnum | string
+  [key: string]: 'ASC' | 'DESC' | OrderByEnum | string
 }
 
 export type PaginatedInput = {
@@ -106,11 +106,18 @@ export type PageWithChildrenProps = {
 }
 
 export enum ModeEnum {
-  SENSITIVE = 'sensitive',
-  INSENSITIVE = 'insensitive',
+  SENSITIVE = 'SENSITIVE',
+  INSENSITIVE = 'INSENSITIVE',
 }
 
 export enum OrderByEnum {
-  ASC = 'asc',
-  DESC = 'desc',
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
+
+export type CardContextType = {
+  cardTitle: string
+  setCardTitle: (title: string) => void
+  cardDescription: string
+  setCardDescription: (description: string) => void
 }

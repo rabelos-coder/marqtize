@@ -1,10 +1,21 @@
+import { PaginatedObject } from './common'
+import { Customer } from './customer'
+import { User } from './user'
+
 export type Role = {
   id: string
+  customerId: string
   name: string
   slug: string
+  isDeleteable?: boolean
+  isDefault?: boolean
   claims: string[]
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
+  deletedAt?: string
+
+  users?: User[]
+  customer?: Customer
 }
 
 export type CountRole = {
@@ -72,4 +83,8 @@ type RoleUpdateInput = {
 
 export type UpdateRoleInput = {
   data: RoleUpdateInput
+}
+
+export type PaginatedRole = {
+  paginatedRole: PaginatedObject<Role>
 }

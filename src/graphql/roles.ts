@@ -4,7 +4,6 @@ import {
   FindByIdInput,
   FindByIdsInput,
   PaginatedInput,
-  PaginatedObject,
   WhereAndOrderInput,
   WhereInput,
 } from '@/types/common'
@@ -17,7 +16,11 @@ import {
   FindByIdRole,
   FindFirstRole,
   FindManyRole,
-  Role,
+  PaginatedRole,
+  RemoveManyRole,
+  RemoveRole,
+  RestoreManyRole,
+  RestoreRole,
   UpdateRole,
   UpdateRoleInput,
 } from '@/types/role'
@@ -27,11 +30,13 @@ const FRAGMENT_ROLE_PROPS = gql`
     id
     customerId
     name
+    slug
     claims
     isDeleteable
     isDefault
     createdAt
     updatedAt
+    deletedAt
     users {
       id
       name
@@ -63,37 +68,35 @@ export const FIND_ROLES: TypedDocumentNode<FindManyRole, WhereAndOrderInput> =
     }
   `
 
-export const PAGINATED_ROLES: TypedDocumentNode<
-  PaginatedObject<Role>,
-  PaginatedInput
-> = gql`
-  ${FRAGMENT_ROLE_PROPS}
-  query RolePaginated(
-    $page: Int!
-    $perPage: Int!
-    $where: RoleWhereDto
-    $orderBy: RoleOrderByDto
-  ) {
-    rolePaginated(
-      page: $page
-      perPage: $perPage
-      where: $where
-      orderBy: $orderBy
+export const PAGINATED_ROLES: TypedDocumentNode<PaginatedRole, PaginatedInput> =
+  gql`
+    ${FRAGMENT_ROLE_PROPS}
+    query PaginatedRole(
+      $page: Int!
+      $perPage: Int!
+      $where: SearchRoleInput
+      $orderBy: SortRoleInput
     ) {
-      data {
-        ...RoleProps
-      }
-      meta {
-        total
-        lastPage
-        currentPage
-        perPage
-        prev
-        next
+      paginatedRole(
+        page: $page
+        perPage: $perPage
+        where: $where
+        orderBy: $orderBy
+      ) {
+        data {
+          ...RoleProps
+        }
+        meta {
+          total
+          lastPage
+          currentPage
+          perPage
+          prev
+          next
+        }
       }
     }
-  }
-`
+  `
 
 export const FIND_ROLE: TypedDocumentNode<FindByIdRole, FindByIdInput> = gql`
   ${FRAGMENT_ROLE_PROPS}
@@ -142,5 +145,31 @@ export const DELETE_ROLES: TypedDocumentNode<DeleteManyRole, FindByIdsInput> =
   gql`
     mutation DeleteManyRole($ids: [String!]!) {
       deleteManyRole(ids: $ids)
+    }
+  `
+
+export const REMOVE_ROLE: TypedDocumentNode<RemoveRole, FindByIdInput> = gql`
+  mutation RemoveRole($id: String!) {
+    removeRole(id: $id)
+  }
+`
+
+export const REMOVE_ROLES: TypedDocumentNode<RemoveManyRole, FindByIdsInput> =
+  gql`
+    mutation RemoveManyRole($ids: [String!]!) {
+      removeManyRole(ids: $ids)
+    }
+  `
+
+export const RESTORE_ROLE: TypedDocumentNode<RestoreRole, FindByIdInput> = gql`
+  mutation RestoreRole($id: String!) {
+    restoreRole(id: $id)
+  }
+`
+
+export const RESTORE_ROLES: TypedDocumentNode<RestoreManyRole, FindByIdsInput> =
+  gql`
+    mutation RestoreManyRole($ids: [String!]!) {
+      restoreManyRole(ids: $ids)
     }
   `

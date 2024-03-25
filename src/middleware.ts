@@ -2,14 +2,14 @@ import { jwtDecode } from 'jwt-decode'
 import { NextRequest, NextResponse } from 'next/server'
 import createMiddleware from 'next-intl/middleware'
 
-import { STORAGE_AUTH_TOKEN, STORAGE_LOCALE } from './configs'
+import { STORAGE_AUTH_TOKEN, STORAGE_LOCALE, STORAGE_TIMEZONE } from './configs'
 import {
   defaultLocale,
   localeDetection,
   localePrefix,
   locales,
 } from './configs/i18n'
-import { APP_LANGUAGE } from './environment'
+import { APP_LANGUAGE, APP_TIMEZONE } from './environment'
 import { JWT } from './types/jwt'
 import { getValidSubdomain } from './utils/helpers'
 
@@ -29,10 +29,15 @@ export default function middleware(request: NextRequest) {
 
   const token = request.cookies.get(STORAGE_AUTH_TOKEN)?.value
   const locale = request.cookies.get(STORAGE_LOCALE)?.value ?? APP_LANGUAGE
+  const timezone = request.cookies.get(STORAGE_TIMEZONE)?.value ?? APP_TIMEZONE
 
   // set locale
   if (!!request.cookies.get(STORAGE_LOCALE)?.value)
     request.cookies.set(STORAGE_LOCALE, locale)
+
+  // set timezone
+  if (!!request.cookies.get(STORAGE_TIMEZONE)?.value)
+    request.cookies.set(STORAGE_TIMEZONE, timezone)
 
   const isAuth = url.pathname.split('/').includes('auth')
   const isBackend = url.pathname.split('/').includes('backend')

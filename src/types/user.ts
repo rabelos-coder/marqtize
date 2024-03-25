@@ -1,3 +1,4 @@
+import { Account, Session } from './auth'
 import { PaginatedObject, Upload } from './common'
 import { Customer } from './customer'
 import { UserType, UserTypeEnum } from './enums'
@@ -11,7 +12,6 @@ export type User = {
   name: string
   systemName: string
   email: string
-  emailVerified: string
   password: string
   isActive: boolean
   isSuperAdmin: boolean
@@ -32,6 +32,8 @@ export type User = {
   roles: Role[]
   timezone: Timezone
   customer: Customer
+  accounts: Account[]
+  sessions: Session[]
 }
 
 export type CountUser = {

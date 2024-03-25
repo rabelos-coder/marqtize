@@ -1,8 +1,8 @@
 import { AbilityBuilder, PureAbility } from '@casl/ability'
 
 import { Action, ActionEnum } from '@/types/action'
-import { AllSubjectsEnum, PublicSubjectEnum, Subject } from '@/types/subject'
-import { User } from '@/types/user'
+import { JWT } from '@/types/jwt'
+import { PublicSubjects, Subject, Subjects } from '@/types/subject'
 
 export type AppAbility = PureAbility<[Action, string]> | undefined
 
@@ -14,27 +14,27 @@ export type AclAbility = {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-vars
-function defineRulesFor(user: User) {
+function defineRulesFor(jwt: JWT) {
   const { can, rules } = new AbilityBuilder(AppAbility)
 
-  const isAdmin = user.roles?.map((role) => role.slug)?.includes('admin')
+  const isAdmin = jwt.roles.includes('admin')
 
-  can(ActionEnum.Read, PublicSubjectEnum.All)
+  can('Read', 'All')
 
   if (isAdmin) {
     for (const action of Object.values(ActionEnum)) {
-      for (const subject of Object.values(PublicSubjectEnum)) {
+      for (const subject of Object.values(PublicSubjects)) {
         can(action, subject)
       }
     }
-  } else if (user.isSuperAdmin) {
+  } else if (jwt.sa) {
     for (const action of Object.values(ActionEnum)) {
-      for (const subject of Object.values(AllSubjectsEnum)) {
+      for (const subject of Object.values(Subjects)) {
         can(action, subject)
       }
     }
-  } else if (!isAdmin || !user.isSuperAdmin) {
-    for (const claim of user.claims) {
+  } else if (!isAdmin || !jwt.sa) {
+    for (const claim of jwt.claims) {
       const [subject, action] = claim.split(':')
       can(action, subject)
     }
@@ -43,8 +43,8 @@ function defineRulesFor(user: User) {
   return rules
 }
 
-export const buildAbilityFor = (user: User): AppAbility => {
-  return new AppAbility(defineRulesFor(user), {
+export const buildAbilityFor = (jwt: JWT): AppAbility => {
+  return new AppAbility(defineRulesFor(jwt), {
     // https://casl.js.org/v5/en/guide/subject-type-detection
     // @ts-ignore
     detectSubjectType: (object) => object!.type,
@@ -52,7 +52,7 @@ export const buildAbilityFor = (user: User): AppAbility => {
 }
 
 export const defaultAcl: AclAbility = {
-  action: ActionEnum.Read,
+  action: 'Read',
   subject: 'All',
 }
 

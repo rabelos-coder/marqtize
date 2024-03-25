@@ -6,7 +6,7 @@ import { LanguageList } from './LanguageList'
 
 export const Language = () => {
   const [dropdownShow, setDropdownShow] = useState(false)
-  const [selected, setSelected] = useState('en')
+  const [selected, setSelected] = useState('pt-br')
 
   const LanguageSelection = (dropdownShow: boolean) => {
     if (selected) {

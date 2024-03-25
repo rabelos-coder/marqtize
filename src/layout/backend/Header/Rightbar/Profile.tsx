@@ -16,7 +16,7 @@ import { setLoading } from '@/store/slices/themeSlice'
 
 const Profile = () => {
   const dispatch = useAppDispatch()
-  const { logout, user } = useAuth()
+  const { logout, user, jwt } = useAuth()
   const t = useTranslations()
 
   const logoutConfirm = () => {
@@ -49,7 +49,7 @@ const Profile = () => {
         <div className="media-body">
           <span>{user?.systemName}</span>
           <p className="mb-0 font-roboto">
-            {user?.roles?.map((item) => item.name)?.join(', ') ?? t('user')}{' '}
+            {jwt?.roles?.join(', ') ?? t('user')}{' '}
             <i className="middle fa fa-angle-down" />
           </p>
         </div>

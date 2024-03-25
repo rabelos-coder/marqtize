@@ -140,7 +140,7 @@ export function generateBackground(name: string): string {
   // left shift (<<)  operator moves to left by number of specified
   // bites after <<. The whole for loop will create a color hash
   // based on username length
-  let color = '#'
+  let color = ''
 
   for (i = 0; i < 3; i += 1) {
     const value = (hash >> (i * 8)) & 0xff

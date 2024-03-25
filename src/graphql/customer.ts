@@ -3,7 +3,6 @@ import { gql, TypedDocumentNode } from '@apollo/client'
 import {
   FindByIdInput,
   FindByIdsInput,
-  FindBySlugInput,
   PaginatedInput,
   PaginatedObject,
   WhereAndOrderInput,
@@ -17,7 +16,8 @@ import {
   DeleteCustomer,
   DeleteManyCustomer,
   FindByIdCustomer,
-  FindBySlugCustomer,
+  FindBySlugOrHostCustomer,
+  FindBySlugOrHostInput,
   FindFirstCustomer,
   FindManyCustomer,
   RemoveCustomer,
@@ -146,13 +146,15 @@ export const FIND_FIRST_CUSTOMER: TypedDocumentNode<
 `
 
 export const FIND_CUSTOMER_BY_SLUG: TypedDocumentNode<
-  FindBySlugCustomer,
-  FindBySlugInput
+  FindBySlugOrHostCustomer,
+  FindBySlugOrHostInput
 > = gql`
-  ${FRAGMENT_CUSTOMER_PROPS}
-  query FindBySlugCustomer($slug: String!) {
-    findBySlugCustomer(slug: $slug) {
-      ...CustomerProps
+  query FindBySlugOrHostCustomer($slug: String!, $host: String!) {
+    findBySlugOrHostCustomer(slug: $slug, host: $host) {
+      systemName
+      tradingName
+      corporateName
+      tradingLogo
     }
   }
 `

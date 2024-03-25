@@ -1,9 +1,14 @@
 @import "bootstrap-scss/bootstrap.scss";
 @import "react-toastify/dist/ReactToastify.css";
+@import "react-tooltip/dist/react-tooltip.css";
 @import "./layout/_tap_top.scss";
 
 html,
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.react-tooltip__show {
+  z-index: 99;
 }

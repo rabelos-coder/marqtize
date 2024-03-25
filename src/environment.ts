@@ -35,6 +35,8 @@ export const APP_META_TITLE_SEPARATOR =
 export const APP_META_KEYWORDS = process.env.NEXT_PUBLIC_APP_META_KEYWORDS ?? ''
 export const APP_META_DESCRIPTION =
   process.env.NEXT_PUBLIC_APP_META_DESCRIPTION ?? ''
+export const APP_GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_APP_GOOGLE_SITE_VERIFICATION ?? ''
 
 // * SOCIAL LINKS
 export const EMAIL = process.env.NEXT_PUBLIC_EMAIL ?? ''

@@ -13,6 +13,7 @@ import { CookieConsent } from '@/components/common/CookieConsent'
 import { Spinner } from '@/components/common/Spinner'
 import { locales } from '@/configs/i18n'
 import {
+  APP_GOOGLE_SITE_VERIFICATION,
   APP_LANGUAGE,
   APP_META_DESCRIPTION,
   APP_META_KEYWORDS,
@@ -72,6 +73,9 @@ export async function generateMetadata({
       },
     },
     appleWebApp: true,
+    verification: {
+      google: APP_GOOGLE_SITE_VERIFICATION,
+    },
     openGraph: {
       title,
       locale,

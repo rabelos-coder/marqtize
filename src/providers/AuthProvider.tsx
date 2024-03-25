@@ -9,6 +9,7 @@ import { useRouter } from '@/navigation'
 import { resetAuth } from '@/store/slices/authSlice'
 import { AuthContextType } from '@/types/auth'
 import { ChildrenProps } from '@/types/common'
+import { JWT } from '@/types/jwt'
 import { User } from '@/types/user'
 
 /**
@@ -26,6 +27,7 @@ export function AuthProvider({ children }: ChildrenProps): JSX.Element {
 type AuthProviderState = {
   user: User | null
   token: string | null
+  jwt: JWT | null
   language: string
   timezone: string
   isLoggedIn: boolean
@@ -40,6 +42,7 @@ function useProvideAuth(): AuthContextType {
   const [state, setState] = useState<AuthProviderState>({
     user: null,
     token: null,
+    jwt: null,
     language: APP_LANGUAGE,
     timezone: APP_TIMEZONE,
     isLoggedIn: false,
@@ -47,7 +50,7 @@ function useProvideAuth(): AuthContextType {
 
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const { user, token, language, timezone, isLoggedIn } = useAppSelector(
+  const { user, token, jwt, language, timezone, isLoggedIn } = useAppSelector(
     (state) => state.auth
   )
 
@@ -55,11 +58,12 @@ function useProvideAuth(): AuthContextType {
     setState({
       user,
       token,
+      jwt,
       language,
       timezone,
       isLoggedIn,
     })
-  }, [user, token, language, timezone, isLoggedIn])
+  }, [user, token, language, timezone, isLoggedIn, jwt])
 
   const logout = () => {
     dispatch(resetAuth())
@@ -67,6 +71,7 @@ function useProvideAuth(): AuthContextType {
   }
 
   return {
+    jwt: state.jwt,
     user: state.user,
     token: state.token,
     language: state.language,

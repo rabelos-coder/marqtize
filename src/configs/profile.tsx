@@ -6,6 +6,6 @@ export const ProfileListData: ProfileType[] = [
   {
     icon: <HiOutlineUser />,
     text: 'profile',
-    path: '/backend/profile',
+    path: '/backend/system/profile',
   },
 ]

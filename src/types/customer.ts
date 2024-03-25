@@ -43,8 +43,13 @@ export type FindByIdCustomer = {
   findByIdCustomer: Customer
 }
 
-export type FindBySlugCustomer = {
-  findBySlugCustomer: Customer
+export type FindBySlugOrHostCustomer = {
+  findBySlugOrHostCustomer: Customer | null
+}
+
+export type FindBySlugOrHostInput = {
+  slug?: string
+  host?: string
 }
 
 export type FindFirstCustomer = {

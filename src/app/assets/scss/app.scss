@@ -34,6 +34,7 @@
 @import "~leaflet/dist/leaflet.css";
 
 // Vendors
+@import "vendors/chartist.scss";
 @import "vendors/themify.scss";
 @import "vendors/whether-icon.scss";
 @import "vendors/icofont.scss";
@@ -41,6 +42,7 @@
 @import "vendors/icoicon/_icons.scss";
 @import "vendors/fontawesome.scss";
 @import "vendors/animate.scss";
+@import "vendors/todo.scss";
 @import "./style.scss";
 @import "./responsive.scss";
 @import "./custom.scss";

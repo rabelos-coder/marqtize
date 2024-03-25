@@ -14,7 +14,7 @@ export const LanguagesData: LanguageDataType[] = [
   },
   {
     name: 'portuguese',
-    shortName: 'pt_BR',
+    shortName: 'pt-br',
     iconClass: 'flag-icon flag-icon-br',
     tag: '(BR)',
   },
@@ -22,7 +22,7 @@ export const LanguagesData: LanguageDataType[] = [
 
 export enum LanguageEnum {
   en = 'en',
-  pt_BR = 'pt_BR',
+  pt_BR = 'pt-br',
 }
 
 export type Language = keyof typeof LanguageEnum

@@ -31,7 +31,7 @@ export const CookieConsent = () => {
 
   return (
     <div
-      className="alert alert-warning text-center mb-0"
+      className="alert alert-default text-white text-center mb-0"
       role="alert"
       style={{
         position: 'fixed',
@@ -42,12 +42,17 @@ export const CookieConsent = () => {
         borderRadius: 0,
       }}
     >
-      &#x1F36A; {t('cookieConsent')}{' '}
-      <Link href="/privacy-policy" className="text-primary">
+      &#x1F36A;&nbsp;&nbsp;{t('cookieConsent')}{' '}
+      <Link href="/privacy-policy" className="text-white">
         {t('knowMore')}
       </Link>
       .
-      <Button color="primary" size="sm" className="ms-3" onClick={acceptCookie}>
+      <Button
+        color="secondary"
+        size="sm"
+        className="ms-3"
+        onClick={acceptCookie}
+      >
         {t('iGotIt')}
       </Button>
     </div>

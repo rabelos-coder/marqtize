@@ -15,6 +15,7 @@ export type AuthState = {
 export type AuthContextType = {
   user: User | null
   token: string | null
+  jwt: JWT | null
   language: string
   timezone: string
   logout: () => void
@@ -108,3 +109,25 @@ export type EditProfileProps = {
   timezones: Array<{ label: string; value: string }>
   languages: Array<{ label: string; value: string }>
 } & ProfileProps
+
+export type Account = {
+  userId: string
+  provider: string
+  providerAccountId: string
+  refreshToken: string
+  accessToken: string
+  createdAt: string
+  updatedAt: string
+
+  user?: User
+}
+
+export type Session = {
+  sessionToken: string
+  userId: string
+  expiresAt: string
+  createdAt: string
+  updatedAt: string
+
+  user?: User
+}

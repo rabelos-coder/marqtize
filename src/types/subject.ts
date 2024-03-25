@@ -1,17 +1,16 @@
-export const PublicSubjectEnum = {
+export const PublicSubjects = {
   All: 'All',
   User: 'User',
   Role: 'Role',
+}
+
+export const ProtectedSubjects = {
   Claim: 'Claim',
 }
 
-export const ProtectedSubjectEnum = {
-  Claim: 'Claim',
+export const Subjects = {
+  ...PublicSubjects,
+  ...ProtectedSubjects,
 }
 
-export const AllSubjectsEnum = {
-  ...ProtectedSubjectEnum,
-  ...PublicSubjectEnum,
-}
-
-export type Subject = keyof typeof AllSubjectsEnum
+export type Subject = keyof typeof Subjects

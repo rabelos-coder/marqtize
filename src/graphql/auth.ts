@@ -26,13 +26,23 @@ export const WHO_AM_I: TypedDocumentNode<WhoAmI> = gql`
 `
 
 export const LOGIN: TypedDocumentNode<Login, LoginInput> = gql`
-  ${FRAGMENT_USER_PROPS}
   mutation Login($data: LoginInput!) {
     login(data: $data) {
       token
-      expiresAt
       user {
-        ...UserProps
+        name
+        systemName
+        image
+        language
+        timezone {
+          code
+        }
+        customer {
+          systemName
+          tradingName
+          corporateName
+          tradingLogo
+        }
       }
     }
   }

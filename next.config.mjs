@@ -27,6 +27,11 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
+        port: '3000',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
         port: '4000',
       },
       {
@@ -36,6 +41,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'scontent.faqa2-1.fna.fbcdn.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ui-avatars.com',
       },
     ],
   },

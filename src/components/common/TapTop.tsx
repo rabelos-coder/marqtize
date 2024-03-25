@@ -30,7 +30,7 @@ export const TapTop = () => {
 
   return (
     <div className="tap-top" style={{ display: tapTopStyle }}>
-      <FiChevronsUp onClick={() => executeScroll()} />
+      <FiChevronsUp size={24} onClick={() => executeScroll()} />
     </div>
   )
 }

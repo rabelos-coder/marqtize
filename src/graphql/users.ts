@@ -38,8 +38,14 @@ export const FRAGMENT_USER_PROPS = gql`
     timezoneId
     type
     claims
-    timezone {
+    createdAt
+    updatedAt
+    deletedAt
+    roles {
       id
+      name
+    }
+    timezone {
       code
       name
     }
@@ -48,7 +54,12 @@ export const FRAGMENT_USER_PROPS = gql`
       corporateName
       tradingName
       systemName
-      slug
+    }
+    accounts {
+      provider
+    }
+    sessions {
+      expiresAt
     }
   }
 `

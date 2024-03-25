@@ -1,6 +1,6 @@
 'use client'
 
-type SpinnerLineProps = {
+export type SpinnerLineProps = {
   type?: 'border' | 'grow'
   className?: string
   color?:

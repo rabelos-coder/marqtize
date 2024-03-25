@@ -8,16 +8,17 @@ import {
   HiUser,
   HiUsers,
 } from 'react-icons/hi2'
+import { v4 as uuidv4 } from 'uuid'
 
 import { SidebarMenuType } from '@/types/layout'
 
 export const MenuListData: SidebarMenuType[] = [
   {
     title: 'general',
-    menuContent: 'Dashboards',
+    menuContent: 'Dashboards,Dashboard',
     items: [
       {
-        id: 1,
+        id: uuidv4(),
         title: 'home',
         path: 'backend',
         iconStroke: <HiOutlineHome className="stroke-icon" />,
@@ -33,8 +34,8 @@ export const MenuListData: SidebarMenuType[] = [
     claims: ['User:Read', 'Role:Read', 'Claim:Read'],
     items: [
       {
+        id: uuidv4(),
         title: 'users',
-        id: 1,
         iconStroke: <HiOutlineUser className="stroke-icon" />,
         iconFill: <HiUser className="fill-icon" />,
         pathSlice: 'users',
@@ -43,14 +44,14 @@ export const MenuListData: SidebarMenuType[] = [
         claims: ['User:Read', 'User:Create'],
         children: [
           {
-            path: 'backend/users/create',
+            path: 'backend/system/users/create',
             title: 'createName',
             nameArgument: 'user',
             type: 'link',
             claims: ['User:Create'],
           },
           {
-            path: 'backend/users',
+            path: 'backend/system/users',
             title: 'listName',
             nameArgument: 'users',
             type: 'link',
@@ -59,8 +60,8 @@ export const MenuListData: SidebarMenuType[] = [
         ],
       },
       {
+        id: uuidv4(),
         title: 'groups',
-        id: 2,
         iconStroke: <HiOutlineUsers className="stroke-icon" />,
         iconFill: <HiUsers className="fill-icon" />,
         pathSlice: 'groups',
@@ -69,13 +70,13 @@ export const MenuListData: SidebarMenuType[] = [
         claims: ['Role:Read', 'Role:Create'],
         children: [
           {
-            path: 'backend/groups/create',
+            path: 'backend/system/groups/create',
             title: 'createName',
             nameArgument: 'group',
             type: 'link',
           },
           {
-            path: 'backend/groups',
+            path: 'backend/system/groups',
             title: 'listName',
             nameArgument: 'groups',
             type: 'link',
@@ -83,9 +84,9 @@ export const MenuListData: SidebarMenuType[] = [
         ],
       },
       {
+        id: uuidv4(),
         title: 'permissions',
-        path: 'backend/permissions',
-        id: 3,
+        path: 'backend/system/permissions',
         claims: ['Claim:Read'],
         iconStroke: <HiOutlineLockClosed className="stroke-icon" />,
         iconFill: <HiLockClosed className="fill-icon" />,

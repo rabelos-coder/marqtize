@@ -2314,6 +2314,11 @@
 
       .page-body-wrapper {
         div.sidebar-wrapper {
+          .back-btn {
+            padding-left: 15px;
+            padding-right: 15px;
+            color: var(--theme-secondary) !important;
+          }
           .sidebar-main {
             .sidebar-links {
               .simplebar-wrapper {

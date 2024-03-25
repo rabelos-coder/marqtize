@@ -9,8 +9,8 @@ import { WHO_AM_I } from '@/graphql/auth'
 import { FIND_TIMEZONES } from '@/graphql/localization'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
-import EditMyProfile from '@/views/backend/profile/EditMyProfile'
-import EditProfileForm from '@/views/backend/profile/EditProfileForm'
+import EditMyProfile from '@/views/backend/system/profile/EditMyProfile'
+import EditProfileForm from '@/views/backend/system/profile/EditProfileForm'
 
 export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })

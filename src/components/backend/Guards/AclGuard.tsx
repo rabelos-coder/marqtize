@@ -34,14 +34,14 @@ export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
   const guard = acl ?? defaultAcl
 
   // Get the user's session
-  const { user, isLoggedIn } = useAuth()
+  const { jwt, isLoggedIn } = useAuth()
 
   useEffect(() => {
     setLoggedIn(isLoggedIn)
 
     // User is logged in, build ability for the user based on his role
-    if (isLoggedIn && user) setAbility(buildAbilityFor(user))
-  }, [user, isLoggedIn])
+    if (isLoggedIn && jwt) setAbility(buildAbilityFor(jwt))
+  }, [jwt, isLoggedIn])
 
   // Check the access of current user and render pages
   if (loggedIn && ability && ability.can(guard.action, guard.subject)) {

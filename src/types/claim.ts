@@ -1,7 +1,5 @@
-import { Action } from './action'
-
 export type Claim = {
-  action: Action
+  action: string
   subject: string
 }
 

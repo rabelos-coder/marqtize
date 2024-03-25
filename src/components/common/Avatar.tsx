@@ -1,41 +1,54 @@
-import Image from 'next/image'
+'use client'
 
-import { generateBackground, getInitials } from '@/utils/helpers'
+import Image from 'next/image'
 
 export type AvatarProps = {
   name: string
+  size?: number
   image?: string
   className?: string
-  size?: number
 }
 
-export function Avatar({ name, size, image, className }: AvatarProps) {
-  const initials = getInitials(name)
-  const color = generateBackground(name)
+/**
+ * Generates an avatar component based on the provided name, size, image, and className.
+ *
+ * @param {AvatarProps} props - The props to be used in the avatar.
+ * @return {JSX.Element} The avatar component to be rendered.
+ */
+export function Avatar({
+  name,
+  size,
+  image,
+  className,
+}: AvatarProps): JSX.Element {
+  const defaultSize = 50
   const style = {
-    display: 'flex',
-    height: size ? `${size}px` : '32px',
-    width: size ? `${size}px` : '32px',
+    height: size ? `${size}px` : `${defaultSize}px`,
+    width: size ? `${size}px` : `${defaultSize}px`,
     borderRadius: '100px',
-    color: 'white',
-    backgroundColor: color as any,
-    margin: 'auto',
   }
+
+  const imageUrl = decodeURIComponent(
+    `/api/image/${size ?? defaultSize}/${name}`
+  )
 
   return image ? (
     <Image
       src={`${image}`}
       alt={name}
-      width={size ?? 32}
-      height={size ?? 32}
+      width={size ?? defaultSize}
+      height={size ?? defaultSize}
       style={style}
       className={`img-fluid table-avatar ${className}`}
     />
   ) : (
-    <div style={style} className="table-avatar">
-      <span style={{ margin: 'auto' }} className={`${className}`}>
-        {initials}
-      </span>
-    </div>
+    <Image
+      src={imageUrl}
+      alt={name}
+      width={size ?? defaultSize}
+      height={size ?? defaultSize}
+      style={style}
+      className={`img-fluid table-avatar ${className}`}
+    />
   )
 }

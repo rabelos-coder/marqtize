@@ -1,20 +1,23 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import secureLocalStorage from 'react-secure-storage'
+import Cookies from 'js-cookie'
 
 import { STORAGE_CUSTOMER } from '@/configs'
-import { APP_MAIN_DOMAIN } from '@/environment'
 import { FIND_CUSTOMER_BY_SLUG } from '@/graphql/customer'
-import { FindBySlugInput } from '@/types/common'
-import { Customer, CustomerState } from '@/types/customer'
+import {
+  Customer,
+  CustomerState,
+  FindBySlugOrHostInput,
+} from '@/types/customer'
 import { createApolloClient } from '@/utils/apollo'
 
-let customer: any =
-  typeof window !== 'undefined'
-    ? (secureLocalStorage.getItem(STORAGE_CUSTOMER) as string) ?? null
-    : null
+let customer: any = Cookies.get(STORAGE_CUSTOMER) ?? null
 
-if (customer) {
-  customer = JSON.parse(customer)
+try {
+  if (customer) {
+    customer = JSON.parse(customer)
+  }
+} catch {
+  customer = null
 }
 
 const initialState: CustomerState = {
@@ -24,25 +27,25 @@ const initialState: CustomerState = {
 }
 
 export const fetchCustomer = createAsyncThunk(
-  'customer/fetchCustomer',
-  async (host: string) => {
+  'customer/paths[2]',
+  async (input: FindBySlugOrHostInput) => {
     const client = createApolloClient()
-    const slug = host?.replace(`.${APP_MAIN_DOMAIN}`, '')?.trim() ?? null
-    const variables: FindBySlugInput = { slug }
+    const { slug, host } = input
+
     if (!slug && !host) return null
 
     try {
       const { data, errors } = await client.mutate({
         mutation: FIND_CUSTOMER_BY_SLUG,
-        variables,
+        variables: { slug, host },
       })
 
       if (!data && errors?.length) throw new Error(errors[0].message)
 
       if (data) {
-        const { findBySlugCustomer } = data
+        const { findBySlugOrHostCustomer } = data
 
-        return findBySlugCustomer
+        return findBySlugOrHostCustomer
       }
     } catch (error) {
       throw error
@@ -60,11 +63,9 @@ export const customerSlice = createSlice({
       state.loading = false
       state.error = null
       state.customer = initialState.customer
-      if (typeof window !== 'undefined') {
-        secureLocalStorage.removeItem(STORAGE_CUSTOMER)
-      }
+      Cookies.remove(STORAGE_CUSTOMER)
     },
-    resetError: (state) => {
+    resetCustomerError: (state) => {
       state.loading = false
       state.error = null
     },
@@ -72,12 +73,7 @@ export const customerSlice = createSlice({
       state.loading = false
       state.error = null
       state.customer = action.payload
-      if (typeof window !== 'undefined') {
-        secureLocalStorage.setItem(
-          STORAGE_CUSTOMER,
-          JSON.stringify(state.customer)
-        )
-      }
+      Cookies.set(STORAGE_CUSTOMER, JSON.stringify(state.customer))
     },
   },
   extraReducers: (builder) => {
@@ -88,21 +84,21 @@ export const customerSlice = createSlice({
     builder.addCase(fetchCustomer.rejected, (state, action) => {
       state.loading = false
       state.error = `${action.error.message}`
+      state.customer = null
+      Cookies.remove(STORAGE_CUSTOMER)
     })
     builder.addCase(fetchCustomer.fulfilled, (state, action) => {
       state.loading = false
       state.error = null
       state.customer = action.payload ?? null
-      if (typeof window !== 'undefined') {
-        if (state.customer)
-          secureLocalStorage.setItem(
-            STORAGE_CUSTOMER,
-            JSON.stringify(state.customer)
-          )
-      }
+
+      if (!!state.customer)
+        Cookies.set(STORAGE_CUSTOMER, JSON.stringify(state.customer))
+      else Cookies.remove(STORAGE_CUSTOMER)
     })
   },
 })
 
-export const { setCustomer, resetCustomer } = customerSlice.actions
+export const { setCustomer, resetCustomerError, resetCustomer } =
+  customerSlice.actions
 export default customerSlice.reducer

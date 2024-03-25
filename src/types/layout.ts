@@ -28,7 +28,7 @@ export type SidebarChildrenType = {
 export type SearchableMenuType = {
   icon: ReactNode
   path: string
-  id: number
+  id: number | string
   bookmarked?: boolean
   title: string
 }
@@ -42,7 +42,7 @@ export type SubChildrenType = {
 }
 
 export type SidebarItemType = {
-  id?: number
+  id?: number | string
   title?: string | undefined
   icon?: string | ReactNode | undefined
   iconFill?: string | ReactNode
