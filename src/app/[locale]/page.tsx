@@ -58,10 +58,8 @@ export default async function HomePage({ params: { locale } }: any) {
               <div className="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">
                 <FiUser />
               </div>
-              <h3>{t('improveCustomerExperience')}</h3>
-              <p className="mb-0">
-                {t('improveCustomerExperienceDescription')}
-              </p>
+              <h3>{t('improveAccountExperience')}</h3>
+              <p className="mb-0">{t('improveAccountExperienceDescription')}</p>
             </Col>
             <Col lg={4}>
               <div className="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">

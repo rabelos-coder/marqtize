@@ -2,13 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import { APP_META_TITLE, IS_DEVELOPMENT } from '@/environment'
 
+import account from './slices/accountSlice'
 import auth from './slices/authSlice'
-import customer from './slices/customerSlice'
 import theme from './slices/themeSlice'
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { auth, customer, theme },
+    reducer: { auth, account, theme },
     devTools: IS_DEVELOPMENT
       ? { name: `${APP_META_TITLE}-store`.toLowerCase() }
       : false,

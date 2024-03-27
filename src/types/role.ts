@@ -1,10 +1,10 @@
+import { Account } from './account'
 import { PaginatedObject } from './common'
-import { Customer } from './customer'
 import { User } from './user'
 
 export type Role = {
   id: string
-  customerId: string
+  accountId: string
   name: string
   slug: string
   isDeleteable?: boolean
@@ -15,7 +15,7 @@ export type Role = {
   deletedAt?: string
 
   users?: User[]
-  customer?: Customer
+  account?: Account
 }
 
 export type CountRole = {
@@ -66,11 +66,13 @@ export type RestoreManyRole = {
   restoreManyRole: boolean
 }
 
-type RoleInput = {
-  customerId?: string
+export type RoleInput = {
+  accountId?: string | null
   name: string
-  isDefault: boolean
+  slug: string
+  isDefault?: boolean
   claims?: string[]
+  users?: string[]
 }
 
 export type CreateRoleInput = {

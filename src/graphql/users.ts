@@ -49,16 +49,16 @@ export const FRAGMENT_USER_PROPS = gql`
       code
       name
     }
-    customer {
+    account {
       id
       corporateName
       tradingName
       systemName
     }
-    accounts {
+    userAccounts {
       provider
     }
-    sessions {
+    userSessions {
       expiresAt
     }
   }
@@ -70,15 +70,17 @@ export const COUNT_USERS: TypedDocumentNode<CountUser, WhereInput> = gql`
   }
 `
 
-export const FIND_USERS: TypedDocumentNode<FindManyUser, WhereAndOrderInput> =
-  gql`
-    ${FRAGMENT_USER_PROPS}
-    query FindManyUser($where: SearchUserInput, $orderBy: SortUserInput) {
-      findManyUser(where: $where, orderBy: $orderBy) {
-        ...UserProps
-      }
+export const FIND_MANY_USERS: TypedDocumentNode<
+  FindManyUser,
+  WhereAndOrderInput
+> = gql`
+  ${FRAGMENT_USER_PROPS}
+  query FindManyUser($where: SearchUserInput, $orderBy: SortUserInput) {
+    findManyUser(where: $where, orderBy: $orderBy) {
+      ...UserProps
     }
-  `
+  }
+`
 
 export const PAGINATED_USERS: TypedDocumentNode<PaginatedUser, PaginatedInput> =
   gql`
@@ -130,17 +132,19 @@ export const FIND_FIRST_USER: TypedDocumentNode<FindFirstUser, WhereInput> =
   `
 
 export const CREATE_USER: TypedDocumentNode<CreateUser, CreateUserInput> = gql`
+  ${FRAGMENT_USER_PROPS}
   mutation CreateUser($data: CreateUserInput!) {
     createUser(data: $data) {
-      id
+      ...UserProps
     }
   }
 `
 
 export const UPDATE_USER: TypedDocumentNode<UpdateUser, UpdateUserInput> = gql`
+  ${FRAGMENT_USER_PROPS}
   mutation UpdateUser($data: UpdateUserInput!) {
     updateUser(data: $data) {
-      id
+      ...UserProps
     }
   }
 `

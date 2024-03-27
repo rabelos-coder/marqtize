@@ -1,6 +1,6 @@
-import { Account, Session } from './auth'
+import { Account } from './account'
+import { UserAccount, UserSession } from './auth'
 import { PaginatedObject, Upload } from './common'
-import { Customer } from './customer'
 import { UserType, UserTypeEnum } from './enums'
 import { Language } from './language'
 import { Role } from './role'
@@ -8,7 +8,7 @@ import { Timezone } from './timezone'
 
 export type User = {
   id: string
-  customerId: string
+  accountId: string
   name: string
   systemName: string
   email: string
@@ -31,9 +31,9 @@ export type User = {
   claims: string[]
   roles: Role[]
   timezone: Timezone
-  customer: Customer
-  accounts: Account[]
-  sessions: Session[]
+  account: Account
+  userAccounts: UserAccount[]
+  userSessions: UserSession[]
 }
 
 export type CountUser = {
@@ -85,7 +85,7 @@ export type RestoreManyUser = {
 }
 
 type UserInput = {
-  customerId?: string
+  accountId?: string
   name: string
   systemName: string
   email: string

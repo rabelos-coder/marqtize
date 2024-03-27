@@ -196,12 +196,17 @@ export const GroupsList = () => {
           await restoreRoles({
             variables: { ids: selectedRows.map((row) => row.id) },
           })
-            .then(async () => {
-              await handleReset()
-              toast.success(t('itemsRestoreSuccess'))
-              setToggleCleared(!toggleCleared)
+            .then(async ({ data }) => {
+              const res = data?.restoreManyRole ?? false
+              if (res) {
+                await handleReset()
+                toast.success(t('itemsRestoreSuccess'))
+                setToggleCleared(!toggleCleared)
+              } else {
+                toast.error(t('itemsRestoreError'))
+              }
             })
-            .catch((err) => toast.error(err.message))
+            .catch((err) => toast.error(err?.message ?? t('itemsRestoreError')))
         } else {
           setToggleCleared(!toggleCleared)
         }
@@ -222,22 +227,36 @@ export const GroupsList = () => {
             await deleteRoles({
               variables: { ids: selectedRows.map((row) => row.id) },
             })
-              .then(async () => {
-                await handleReset()
-                toast.success(t('itemsDeleteSuccess'))
-                setToggleCleared(!toggleCleared)
+              .then(async ({ data }) => {
+                const res = data?.deleteManyRole ?? false
+                if (res) {
+                  await handleReset()
+                  toast.success(t('itemsDeleteSuccess'))
+                  setToggleCleared(!toggleCleared)
+                } else {
+                  toast.error(t('itemsDeleteError'))
+                }
               })
-              .catch((err) => toast.error(err.message))
+              .catch((err) =>
+                toast.error(err?.message ?? t('itemsDeleteError'))
+              )
           } else {
             await removeRoles({
               variables: { ids: selectedRows.map((row) => row.id) },
             })
-              .then(async () => {
-                await handleReset()
-                toast.success(t('itemsRemoveSuccess'))
-                setToggleCleared(!toggleCleared)
+              .then(async ({ data }) => {
+                const res = data?.removeManyRole ?? false
+                if (res) {
+                  await handleReset()
+                  toast.success(t('itemsRemoveSuccess'))
+                  setToggleCleared(!toggleCleared)
+                } else {
+                  toast.error(t('itemsRemoveError'))
+                }
               })
-              .catch((err) => toast.error(err.message))
+              .catch((err) =>
+                toast.error(err?.message ?? t('itemsRemoveError'))
+              )
           }
         } else {
           setToggleCleared(!toggleCleared)
@@ -298,18 +317,28 @@ export const GroupsList = () => {
         if (isConfirmed) {
           if (isTrash) {
             await deleteRole({ variables: { id } })
-              .then(async () => {
-                await handleReset()
-                toast.success(t('itemDeleteSuccess'))
+              .then(async ({ data }) => {
+                const res = data?.deleteRole ?? false
+                if (res) {
+                  await handleReset()
+                  toast.success(t('itemDeleteSuccess'))
+                } else {
+                  toast.error(t('itemDeleteError'))
+                }
               })
-              .catch((err) => toast.error(err.message))
+              .catch((err) => toast.error(err?.message ?? t('itemDeleteError')))
           } else {
             await removeRole({ variables: { id } })
-              .then(async () => {
-                await handleReset()
-                toast.success(t('itemRemoveSuccess'))
+              .then(async ({ data }) => {
+                const res = data?.removeRole ?? false
+                if (res) {
+                  await handleReset()
+                  toast.success(t('itemRemoveSuccess'))
+                } else {
+                  toast.error(t('itemRemoveError'))
+                }
               })
-              .catch((err) => toast.error(err.message))
+              .catch((err) => toast.error(err?.message ?? t('itemRemoveError')))
           }
         }
       })
@@ -331,11 +360,16 @@ export const GroupsList = () => {
       }).then(async ({ isConfirmed }) => {
         if (isConfirmed) {
           await restoreRole({ variables: { id } })
-            .then(async () => {
-              await handleReset()
-              toast.success(t('itemRestoreSuccess'))
+            .then(async ({ data }) => {
+              const res = data?.restoreRole ?? false
+              if (res) {
+                await handleReset()
+                toast.success(t('itemRestoreSuccess'))
+              } else {
+                toast.error(t('itemRestoreError'))
+              }
             })
-            .catch((err) => toast.error(err.message))
+            .catch((err) => toast.error(err?.message ?? t('itemRestoreError')))
         }
       })
     },
@@ -366,7 +400,7 @@ export const GroupsList = () => {
             {ability.can(ActionEnum.Update, Subjects.Role) && !isTrash && (
               <li className="edit">
                 <Link
-                  href={`/backend/groups/edit/${row.id}`}
+                  href={`/backend/system/groups/edit/${row.id}`}
                   data-tooltip-content={t('editName', { name: row.name })}
                   data-tooltip-id="tooltip"
                 >
@@ -386,22 +420,23 @@ export const GroupsList = () => {
                 </Link>
               </li>
             )}
-            {ability.can(ActionEnum.Delete, Subjects.Role) && (
-              <li className="delete">
-                <Link
-                  href="#!"
-                  onClick={(e) => handleDelete(e, row.id)}
-                  data-tooltip-id="tooltip"
-                  data-tooltip-content={
-                    isTrash
-                      ? t('deleteName', { name: row.name })
-                      : t('removeName', { name: row.name })
-                  }
-                >
-                  <i className="fa fa-trash-o" />
-                </Link>
-              </li>
-            )}
+            {ability.can(ActionEnum.Delete, Subjects.Role) &&
+              row.isDeleteable && (
+                <li className="delete">
+                  <Link
+                    href="#!"
+                    onClick={(e) => handleDelete(e, row.id)}
+                    data-tooltip-id="tooltip"
+                    data-tooltip-content={
+                      isTrash
+                        ? t('deleteName', { name: row.name })
+                        : t('removeName', { name: row.name })
+                    }
+                  >
+                    <i className="fa fa-trash-o" />
+                  </Link>
+                </li>
+              )}
           </ul>
         ),
       },
@@ -422,7 +457,7 @@ export const GroupsList = () => {
                   className="me-2 "
                   onClick={toggle}
                 >
-                  <i className="fa fa-reply me-2" /> {t('exitRecycleBin')}
+                  <i className="fa fa-reply me-2" /> {t('back')}
                 </Button>
               ) : (
                 <Button
@@ -495,8 +530,9 @@ export const GroupsList = () => {
               clearSelectedRows={toggleCleared}
               paginationPerPage={variables.perPage}
               highlightOnHover
-              selectableRowDisabled={() =>
-                !ability.can(ActionEnum.Delete, Subjects.Role)
+              selectableRowDisabled={(row) =>
+                !ability.can(ActionEnum.Delete, Subjects.Role) ||
+                !row.isDeleteable
               }
               pagination
               paginationServer

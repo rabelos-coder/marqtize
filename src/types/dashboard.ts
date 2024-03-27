@@ -61,7 +61,7 @@ export type DropdownType = {
   color?: string
   option?: string[]
 }
-export type CustomerSidebarModalProps = {
+export type AccountSidebarModalProps = {
   modal?: boolean
   toggle: () => void
 }

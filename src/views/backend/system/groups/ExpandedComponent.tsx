@@ -39,11 +39,11 @@ export const ExpandedComponent: React.FC<ExpanderComponentProps<Role>> = ({
             </td>
           </tr>
           <tr>
-            <th className="font-weight-bold">{t('customer')}:</th>
+            <th className="font-weight-bold">{t('account')}:</th>
             <td>
-              {data.customer?.systemName ??
-                data.customer?.tradingName ??
-                data.customer?.corporateName ??
+              {data.account?.systemName ??
+                data.account?.tradingName ??
+                data.account?.corporateName ??
                 t('none', { gender: 'male' })}
             </td>
           </tr>

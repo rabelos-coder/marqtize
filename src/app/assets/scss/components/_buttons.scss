@@ -523,3 +523,37 @@
 /**=====================
     2.9 Buttons CSS end
 ==========================**/
+
+.btn-gray-light {
+  color: var(--bs-white);
+  background-color: var(--bs-gray-400);
+  border-color: var(--bs-gray-300);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &.hover {
+    transition: 1.5s;
+    color: var(--bs-gray-100);
+    background-color: var(--bs-gray-500);
+    border-color: var(--bs-gray-400);
+  }
+}
+
+.btn-gray {
+  color: var(--bs-white);
+  background-color: var(--bs-gray-600);
+  border-color: var(--bs-gray-500);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &.hover {
+    transition: 1.5s;
+    color: var(--bs-gray-200);
+    background-color: var(--bs-gray-700);
+    border-color: var(--bs-gray-600);
+  }
+}

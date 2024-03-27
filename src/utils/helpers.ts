@@ -1,4 +1,6 @@
+import { trim } from 'lodash'
 import { Metadata } from 'next/types'
+import { FieldValues, UseFormSetValue } from 'react-hook-form'
 
 import { APP_META_TITLE, APP_META_TITLE_SEPARATOR } from '@/environment'
 
@@ -148,4 +150,25 @@ export function generateBackground(name: string): string {
   }
 
   return color
+}
+
+export function setFormValues<TFieldValues extends FieldValues>(
+  setValue: UseFormSetValue<TFieldValues>,
+  values: FieldValues
+) {
+  const entries = Object.entries(values)
+  for (const [key, value] of entries) {
+    setValue(key as any, value)
+  }
+}
+
+export function validateFormValue(value: any, error: any) {
+  if (typeof value === 'string' && trim(value) === '') {
+    return false
+  }
+  if (Boolean(error)) {
+    return false
+  }
+
+  return true
 }

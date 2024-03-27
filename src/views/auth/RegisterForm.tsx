@@ -62,7 +62,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
   const t = useTranslations()
   const dispatch = useAppDispatch()
 
-  const { customer, loading } = useAppSelector((state) => state.customer)
+  const { account, loading } = useAppSelector((state) => state.account)
 
   const schema = yup.object().shape({
     name: yup.string().required(t('propertyRequired', { property: t('name') })),
@@ -115,7 +115,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
     await register({
       variables: {
         data: {
-          customerId: customer?.id ?? null,
+          accountId: account?.id ?? null,
           name: form.name,
           systemName: form.systemName,
           email: form.email,
@@ -156,8 +156,8 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <h4 suppressHydrationWarning>
-              {customer?.tradingName
-                ? t('createAccountToName', { name: customer.tradingName })
+              {account?.tradingName
+                ? t('createAccountToName', { name: account.tradingName })
                 : t('createAccount')}
             </h4>
             <p>{t('resetPasswordInfo')}</p>

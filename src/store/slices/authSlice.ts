@@ -134,6 +134,15 @@ export const authSlice = createSlice({
       Cookies.set(STORAGE_AUTH_TOKEN, state.token)
       Cookies.set(STORAGE_LOCALE, state.user.language ?? APP_LANGUAGE)
       Cookies.set(STORAGE_TIMEZONE, state.user.timezone.code ?? APP_TIMEZONE)
+
+      try {
+        const jwt = jwtDecode(state.token) as JWT
+        state.jwt = jwt
+      } catch {
+        state.jwt = null
+        Cookies.remove(STORAGE_USER)
+        Cookies.remove(STORAGE_AUTH_TOKEN)
+      }
     },
   },
 })

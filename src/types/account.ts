@@ -1,12 +1,11 @@
-export type CustomerState = {
-  customer: Customer | null
+export type AccountState = {
+  account: Account | null
   loading: boolean
   error: string | null
 }
 
-export type Customer = {
+export type Account = {
   id?: string
-  userId?: string | null
   erpId?: string | null
   corporateNumber?: string | null
   corporateName: string
@@ -31,20 +30,20 @@ export type Customer = {
   deletedAt?: Date | string | null
 }
 
-export type CountCustomer = {
-  countCustomer: number
+export type CountAccount = {
+  countAccount: number
 }
 
-export type FindManyCustomer = {
-  findManyCustomer: Customer[]
+export type FindManyAccount = {
+  findManyAccount: Account[]
 }
 
-export type FindByIdCustomer = {
-  findByIdCustomer: Customer
+export type FindByIdAccount = {
+  findByIdAccount: Account
 }
 
-export type FindBySlugOrHostCustomer = {
-  findBySlugOrHostCustomer: Customer | null
+export type FindBySlugOrHostAccount = {
+  findBySlugOrHostAccount: Account | null
 }
 
 export type FindBySlugOrHostInput = {
@@ -52,44 +51,43 @@ export type FindBySlugOrHostInput = {
   host?: string
 }
 
-export type FindFirstCustomer = {
-  findFirstCustomer: Customer
+export type FindFirstAccount = {
+  findFirstAccount: Account
 }
 
-export type CreateCustomer = {
-  createCustomer: Customer
+export type CreateAccount = {
+  createAccount: Account
 }
 
-export type UpdateCustomer = {
-  updateCustomer: Customer
+export type UpdateAccount = {
+  updateAccount: Account
 }
 
-export type DeleteCustomer = {
-  deleteCustomer: boolean
+export type DeleteAccount = {
+  deleteAccount: boolean
 }
 
-export type DeleteManyCustomer = {
-  deleteManyCustomer: boolean
+export type DeleteManyAccount = {
+  deleteManyAccount: boolean
 }
 
-export type RemoveCustomer = {
-  removeCustomer: boolean
+export type RemoveAccount = {
+  removeAccount: boolean
 }
 
-export type RemoveManyCustomer = {
-  removeManyCustomer: boolean
+export type RemoveManyAccount = {
+  removeManyAccount: boolean
 }
 
-export type RestoreCustomer = {
-  restoreCustomer: boolean
+export type RestoreAccount = {
+  restoreAccount: boolean
 }
 
-export type RestoreManyCustomer = {
-  restoreManyCustomer: boolean
+export type RestoreManyAccount = {
+  restoreManyAccount: boolean
 }
 
-type CustomerInput = {
-  userId?: string | null
+type AccountInput = {
   erpId?: string | null
   corporateNumber?: string | null
   corporateName: string
@@ -111,14 +109,14 @@ type CustomerInput = {
   tradingLogo?: string | null
 }
 
-export type CreateCustomerInput = {
-  data: CustomerInput
+export type CreateAccountInput = {
+  data: AccountInput
 }
 
-type CustomerUpdateInput = {
+type AccountUpdateInput = {
   id: string
-} & CustomerInput
+} & AccountInput
 
-export type UpdateCustomerInput = {
-  data: CustomerUpdateInput
+export type UpdateAccountInput = {
+  data: AccountUpdateInput
 }

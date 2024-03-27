@@ -210,12 +210,17 @@ export const UsersList = () => {
           await restoreUsers({
             variables: { ids: selectedRows.map((row) => row.id) },
           })
-            .then(async () => {
-              await handleReset()
-              toast.success(t('itemsRestoreSuccess'))
-              setToggleCleared(!toggleCleared)
+            .then(async ({ data }) => {
+              const res = data?.restoreManyUser ?? false
+              if (res) {
+                await handleReset()
+                toast.success(t('itemsRestoreSuccess'))
+                setToggleCleared(!toggleCleared)
+              } else {
+                toast.error(t('itemsRestoreError'))
+              }
             })
-            .catch((err) => toast.error(err.message))
+            .catch((err) => toast.error(err?.message ?? t('itemsRestoreError')))
         } else {
           setToggleCleared(!toggleCleared)
         }
@@ -236,22 +241,34 @@ export const UsersList = () => {
             await deleteUsers({
               variables: { ids: selectedRows.map((row) => row.id) },
             })
-              .then(async () => {
-                await handleReset()
-                toast.success(t('itemsDeleteSuccess'))
-                setToggleCleared(!toggleCleared)
+              .then(async ({ data }) => {
+                const res = data?.deleteManyUser ?? false
+                if (res) {
+                  await handleReset()
+                  toast.success(t('itemsDeleteSuccess'))
+                  setToggleCleared(!toggleCleared)
+                } else {
+                  toast.error(t('itemsDeleteError'))
+                }
               })
-              .catch((err) => toast.error(err.message))
+              .catch((err) =>
+                toast.error(err?.message ?? t('itemsDeleteError'))
+              )
           } else {
             await removeUsers({
               variables: { ids: selectedRows.map((row) => row.id) },
             })
-              .then(async () => {
-                await handleReset()
-                toast.success(t('itemsRemoveSuccess'))
-                setToggleCleared(!toggleCleared)
+              .then(async ({ data }) => {
+                const res = data?.removeManyUser ?? false
+                if (res) {
+                  await handleReset()
+                  toast.success(t('itemsRemoveSuccess'))
+                  setToggleCleared(!toggleCleared)
+                } else {
+                  toast.error(t('itemsRemoveError'))
+                }
               })
-              .catch((err) => toast.error(err.message))
+              .catch((err) => toast.error(err.message ?? t('itemsRemoveError')))
           }
         } else {
           setToggleCleared(!toggleCleared)
@@ -312,18 +329,28 @@ export const UsersList = () => {
         if (isConfirmed) {
           if (isTrash) {
             await deleteUser({ variables: { id } })
-              .then(async () => {
-                await handleReset()
-                toast.success(t('itemDeleteSuccess'))
+              .then(async ({ data }) => {
+                const res = data?.deleteUser ?? false
+                if (res) {
+                  await handleReset()
+                  toast.success(t('itemDeleteSuccess'))
+                } else {
+                  toast.error(t('itemDeleteError'))
+                }
               })
-              .catch((err) => toast.error(err.message))
+              .catch((err) => toast.error(err?.message ?? t('itemDeleteError')))
           } else {
             await removeUser({ variables: { id } })
-              .then(async () => {
-                await handleReset()
-                toast.success(t('itemRemoveSuccess'))
+              .then(async ({ data }) => {
+                const res = data?.removeUser ?? false
+                if (res) {
+                  await handleReset()
+                  toast.success(t('itemRemoveSuccess'))
+                } else {
+                  toast.error(t('itemRemoveError'))
+                }
               })
-              .catch((err) => toast.error(err.message))
+              .catch((err) => toast.error(err?.message ?? t('itemRemoveError')))
           }
         }
       })
@@ -345,11 +372,16 @@ export const UsersList = () => {
       }).then(async ({ isConfirmed }) => {
         if (isConfirmed) {
           await restoreUser({ variables: { id } })
-            .then(async () => {
-              await handleReset()
-              toast.success(t('itemRestoreSuccess'))
+            .then(async ({ data }) => {
+              const res = data?.restoreUser ?? false
+              if (res) {
+                await handleReset()
+                toast.success(t('itemRestoreSuccess'))
+              } else {
+                toast.error(t('itemRestoreError'))
+              }
             })
-            .catch((err) => toast.error(err.message))
+            .catch((err) => toast.error(err?.message ?? t('itemRestoreError')))
         }
       })
     },
@@ -410,7 +442,7 @@ export const UsersList = () => {
             {ability.can(ActionEnum.Update, Subjects.User) && !isTrash && (
               <li className="edit">
                 <Link
-                  href={`/backend/users/edit/${row.id}`}
+                  href={`/backend/system/users/edit/${row.id}`}
                   data-tooltip-content={t('editName', { name: row.name })}
                   data-tooltip-id="tooltip"
                 >
@@ -466,7 +498,7 @@ export const UsersList = () => {
                   className="me-2 "
                   onClick={toggle}
                 >
-                  <i className="fa fa-reply me-2" /> {t('exitRecycleBin')}
+                  <i className="fa fa-reply me-2" /> {t('back')}
                 </Button>
               ) : (
                 <Button

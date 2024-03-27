@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 
 import { APP_MAIN_DOMAIN } from '@/environment'
 import { usePathname } from '@/navigation'
-import { fetchCustomer } from '@/store/slices/customerSlice'
+import { fetchAccount } from '@/store/slices/accountSlice'
 import { ReduxProviderProps } from '@/types/common'
 
 import { AppStore, makeStore } from '../store'
@@ -27,7 +27,7 @@ export function ReduxProvider({ host, children }: ReduxProviderProps) {
 
     // Create the store instance the first time this renders
     storeRef.current = makeStore()
-    storeRef.current.dispatch(fetchCustomer({ slug, host }))
+    storeRef.current.dispatch(fetchAccount({ slug, host }))
   }
 
   return <Provider store={storeRef.current}>{children}</Provider>

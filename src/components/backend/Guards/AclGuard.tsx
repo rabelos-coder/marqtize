@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 
 import { Spinner } from '@/components/common/Spinner'
 import {
@@ -12,6 +12,7 @@ import {
 import { useAuth } from '@/hooks'
 import { AuthLayout } from '@/layout/backend/AuthLayout'
 import { AbilityProvider } from '@/providers/AbilityProvider'
+import { JWT } from '@/types/jwt'
 
 import { NotAuthorized } from '../NotAuthorized'
 
@@ -36,12 +37,20 @@ export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
   // Get the user's session
   const { jwt, isLoggedIn } = useAuth()
 
-  useEffect(() => {
-    setLoggedIn(isLoggedIn)
+  // Set the ability based on the user's session
+  const setAbilityBasedOnSession = useCallback(
+    (isLoggedIn: boolean, jwt: JWT | null) => {
+      setLoggedIn(isLoggedIn)
 
-    // User is logged in, build ability for the user based on his role
-    if (isLoggedIn && jwt) setAbility(buildAbilityFor(jwt))
-  }, [jwt, isLoggedIn])
+      // User is logged in, build ability for the user based on his role
+      if (isLoggedIn && jwt) setAbility(buildAbilityFor(jwt))
+    },
+    []
+  )
+
+  useEffect(() => {
+    setAbilityBasedOnSession(isLoggedIn, jwt)
+  }, [jwt, isLoggedIn, setAbilityBasedOnSession])
 
   // Check the access of current user and render pages
   if (loggedIn && ability && ability.can(guard.action, guard.subject)) {

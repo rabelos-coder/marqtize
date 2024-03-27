@@ -89,7 +89,7 @@ export default function Table<T>(props: TableProps<T> & CustomTableProps) {
         theme={dataTableTheme}
         disabled={props.disabled ?? false}
         responsive={true}
-        striped={false}
+        striped={props.striped ?? false}
         progressPending={props.progressPending ?? false}
         progressComponent={
           props.progressComponent ?? (

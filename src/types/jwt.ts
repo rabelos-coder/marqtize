@@ -6,7 +6,7 @@ export type JWT = {
   tokenId: string | null
   sa: boolean
   systemName: string
-  customer: object | null
+  account: object | null
   email: string
   roles: string[]
   claims: string[]

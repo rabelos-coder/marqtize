@@ -28,7 +28,7 @@ import {
 const FRAGMENT_ROLE_PROPS = gql`
   fragment RoleProps on Role {
     id
-    customerId
+    accountId
     name
     slug
     claims
@@ -42,7 +42,7 @@ const FRAGMENT_ROLE_PROPS = gql`
       name
       systemName
     }
-    customer {
+    account {
       id
       corporateName
       tradingName
@@ -120,17 +120,19 @@ export const FIND_FIRST_ROLE: TypedDocumentNode<
 `
 
 export const CREATE_ROLE: TypedDocumentNode<CreateRole, CreateRoleInput> = gql`
+  ${FRAGMENT_ROLE_PROPS}
   mutation CreateRole($data: CreateRoleInput!) {
     createRole(data: $data) {
-      id
+      ...RoleProps
     }
   }
 `
 
 export const UPDATE_ROLE: TypedDocumentNode<UpdateRole, UpdateRoleInput> = gql`
+  ${FRAGMENT_ROLE_PROPS}
   mutation UpdateRole($data: UpdateRoleInput!) {
     updateRole(data: $data) {
-      id
+      ...RoleProps
     }
   }
 `

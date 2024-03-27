@@ -46,11 +46,12 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
   const [disabled, setDisabled] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [tradingName, setTradingName] = useState('')
   const [login] = useMutation(LOGIN, { fetchPolicy: 'no-cache' })
 
   const t = useTranslations()
   const dispatch = useAppDispatch()
-  const { customer, loading } = useAppSelector((state) => state.customer)
+  const { account, loading } = useAppSelector((state) => state.account)
 
   const schema = yup.object().shape({
     email: yup
@@ -113,7 +114,8 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
 
   useEffect(() => {
     dispatch(setLoading(false))
-  }, [dispatch])
+    if (account) setTradingName(account.tradingName ?? account.systemName)
+  }, [dispatch, account])
 
   return loading ? (
     <SpinnerBoxed type="grow" />
@@ -130,10 +132,10 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
             autoComplete="off"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h4 suppressHydrationWarning>
-              {customer?.tradingName
+            <h4>
+              {tradingName
                 ? t('signInToAccountName', {
-                    name: customer.tradingName,
+                    name: tradingName,
                   })
                 : t('signInToAccount')}
             </h4>

@@ -37,7 +37,7 @@ export const LOGIN: TypedDocumentNode<Login, LoginInput> = gql`
         timezone {
           code
         }
-        customer {
+        account {
           systemName
           tradingName
           corporateName

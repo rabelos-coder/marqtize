@@ -121,3 +121,8 @@ export type CardContextType = {
   cardDescription: string
   setCardDescription: (description: string) => void
 }
+
+export type ReactSelectType = {
+  label: string
+  value: string
+}

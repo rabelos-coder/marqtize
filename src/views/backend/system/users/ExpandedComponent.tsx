@@ -55,27 +55,27 @@ export const ExpandedComponent: React.FC<ExpanderComponentProps<User>> = ({
             </td>
           </tr>
           <tr>
-            <th className="font-weight-bold">{t('customer')}:</th>
+            <th className="font-weight-bold">{t('account')}:</th>
             <td>
-              {data.customer?.systemName ??
-                data.customer?.tradingName ??
-                data.customer?.corporateName ??
+              {data.account?.systemName ??
+                data.account?.tradingName ??
+                data.account?.corporateName ??
                 t('none', { gender: 'male' })}
             </td>
           </tr>
           <tr>
             <th className="font-weight-bold">{t('accounts')}:</th>
             <td>
-              {data.accounts?.length
-                ? data.accounts?.map((a) => t(a.provider)).join(', ')
+              {data.userAccounts?.length
+                ? data.userAccounts?.map((a) => t(a.provider)).join(', ')
                 : t('none', { gender: 'female' })}
             </td>
           </tr>
           <tr>
             <th className="font-weight-bold">{t('sessions')}:</th>
             <td>
-              {data.sessions?.length
-                ? data.sessions.filter(
+              {data.userSessions?.length
+                ? data.userSessions.filter(
                     ({ expiresAt }) =>
                       DateTime.fromISO(expiresAt)
                         .setZone(timezone)

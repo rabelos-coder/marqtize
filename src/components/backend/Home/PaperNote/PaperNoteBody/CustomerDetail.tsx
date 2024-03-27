@@ -2,12 +2,12 @@ import { Fragment } from 'react'
 
 import DetailList from './DetailList'
 
-const CustomerDetail = () => {
+const AccountDetail = () => {
   const data = [1, 6, 7, 3, 8, 5]
 
   return (
     <div className="mt-sm-4 mt-2 user-details">
-      <div className="customers">
+      <div className="accounts">
         <ul>
           {data.map((item, i, arr) => (
             <Fragment key={i}>
@@ -36,4 +36,4 @@ const CustomerDetail = () => {
   )
 }
 
-export default CustomerDetail
+export default AccountDetail

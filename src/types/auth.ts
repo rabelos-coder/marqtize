@@ -74,7 +74,7 @@ export type LoginInput = {
 
 export type RegisterInput = {
   data: {
-    customerId?: string | null
+    accountId?: string | null
     name: string
     systemName: string
     email: string
@@ -110,7 +110,7 @@ export type EditProfileProps = {
   languages: Array<{ label: string; value: string }>
 } & ProfileProps
 
-export type Account = {
+export type UserAccount = {
   userId: string
   provider: string
   providerAccountId: string
@@ -122,7 +122,7 @@ export type Account = {
   user?: User
 }
 
-export type Session = {
+export type UserSession = {
   sessionToken: string
   userId: string
   expiresAt: string
