@@ -6,6 +6,8 @@ import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { Button, Col, Container } from 'reactstrap'
 
+import { IS_DEVELOPMENT } from '@/environment'
+
 export default function ErrorPage({
   error,
   reset,
@@ -16,8 +18,7 @@ export default function ErrorPage({
   const t = useTranslations()
 
   useEffect(() => {
-    Sentry.captureException(error)
-    console.error(error)
+    !IS_DEVELOPMENT ? Sentry.captureException(error) : console.error(error)
   }, [error])
 
   return (

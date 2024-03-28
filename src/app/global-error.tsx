@@ -6,6 +6,8 @@ import { useEffect } from 'react'
 import { FaArrowsRotate } from 'react-icons/fa6'
 import { Button } from 'reactstrap'
 
+import { IS_DEVELOPMENT } from '@/environment'
+
 const roboto = Roboto({
   subsets: ['latin'],
   weight: ['500', '700'],
@@ -28,8 +30,7 @@ export default function GlobalError({
   reset: () => void
 }) {
   useEffect(() => {
-    Sentry.captureException(error)
-    console.error(error)
+    !IS_DEVELOPMENT ? Sentry.captureException(error) : console.error(error)
   }, [error])
 
   return (

@@ -1,8 +1,13 @@
 'use client'
 
 import * as Sentry from '@sentry/nextjs'
+import { notFound } from 'next/navigation'
+
+import { IS_DEVELOPMENT } from '@/environment'
 
 export default function SentryExamplePage() {
+  if (!IS_DEVELOPMENT) notFound()
+
   return (
     <div>
       <main

@@ -8,7 +8,7 @@ import { FiRefreshCw } from 'react-icons/fi'
 import { Col, Container, Row } from 'reactstrap'
 
 import { SvgBorder } from '@/components/frontend/common/SvgBorder'
-import { APP_META_TITLE } from '@/environment'
+import { APP_META_TITLE, IS_DEVELOPMENT } from '@/environment'
 import { Header } from '@/layout/frontend/landing/Header'
 import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
 import { Link, usePathname } from '@/navigation'
@@ -29,8 +29,7 @@ export default function ErrorPage({
   }
 
   useEffect(() => {
-    Sentry.captureException(error)
-    console.error(error)
+    !IS_DEVELOPMENT ? Sentry.captureException(error) : console.error(error)
   }, [error])
 
   return (

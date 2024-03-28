@@ -1,7 +1,9 @@
+import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { Container } from 'reactstrap'
 
 import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import { IS_DEVELOPMENT } from '@/environment'
 import { Header } from '@/layout/frontend/landing/Header'
 import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
 import { concatTitle } from '@/utils/helpers'
@@ -17,6 +19,8 @@ export async function generateMetadata({ params: { locale } }: any) {
 
 export default async function BasicPage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
+
+  if (!IS_DEVELOPMENT) notFound()
 
   return (
     <LandingLayout>
