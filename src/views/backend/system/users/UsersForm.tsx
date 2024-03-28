@@ -391,7 +391,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
           if (data?.createUser) {
             toast.success(t('nameCreatedSuccess', { name: t('user') }))
 
-            router.push(`/backend/system/users/edit/${data.createUser.id}`)
+            router.push(`/backend/system/users`)
           } else {
             toast.error(
               t('nameCreatedError', { name: t('user').toLowerCase() })

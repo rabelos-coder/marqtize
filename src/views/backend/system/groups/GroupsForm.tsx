@@ -251,7 +251,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
           if (data?.createRole) {
             toast.success(t('nameCreatedSuccess', { name: t('role') }))
 
-            router.push(`/backend/system/groups/edit/${data.createRole.id}`)
+            router.push(`/backend/system/groups`)
           } else {
             toast.error(
               t('nameCreatedError', { name: t('role').toLowerCase() })
