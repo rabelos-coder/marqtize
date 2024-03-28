@@ -46,6 +46,7 @@ next-env.d.ts
 .env.test
 
 /public/*.js
+/public/*.map
 
 # Sentry Config File
 .sentryclirc
