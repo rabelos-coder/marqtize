@@ -1,6 +1,10 @@
 import { gql, TypedDocumentNode } from '@apollo/client'
 
-import { FindFirstBlogPost, PaginatedBlogPost } from '@/types/blog'
+import {
+  FindFirstBlogPost,
+  FindManyBlogPost,
+  PaginatedBlogPost,
+} from '@/types/blog'
 import { PaginatedInput, WhereAndOrderInput } from '@/types/common'
 
 const FRAGMENT_BLOG_POST_PROPS = gql`
@@ -31,6 +35,21 @@ const FRAGMENT_BLOG_POST_PROPS = gql`
       id
       name
       slug
+    }
+  }
+`
+
+export const FIND_MANY_POSTS: TypedDocumentNode<
+  FindManyBlogPost,
+  WhereAndOrderInput
+> = gql`
+  ${FRAGMENT_BLOG_POST_PROPS}
+  query FindManyBlogPost(
+    $where: SearchBlogPostInput
+    $orderBy: SortBlogPostInput
+  ) {
+    findManyBlogPost(where: $where, orderBy: $orderBy) {
+      ...BlogPostProps
     }
   }
 `

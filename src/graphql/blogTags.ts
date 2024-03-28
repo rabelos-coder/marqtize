@@ -1,6 +1,6 @@
 import { gql, TypedDocumentNode } from '@apollo/client'
 
-import { FindFirstBlogTag } from '@/types/blog'
+import { FindFirstBlogTag, FindManyBlogTag } from '@/types/blog'
 import { WhereAndOrderInput } from '@/types/common'
 
 const FRAGMENT_BLOG_TAG_PROPS = gql`
@@ -15,6 +15,21 @@ const FRAGMENT_BLOG_TAG_PROPS = gql`
       id
       slug
       title
+    }
+  }
+`
+
+export const FIND_MANY_TAGS: TypedDocumentNode<
+  FindManyBlogTag,
+  WhereAndOrderInput
+> = gql`
+  ${FRAGMENT_BLOG_TAG_PROPS}
+  query FindManyBlogTag(
+    $where: SearchBlogTagInput
+    $orderBy: SortBlogTagInput
+  ) {
+    findManyBlogTag(where: $where, orderBy: $orderBy) {
+      ...BlogTagProps
     }
   }
 `

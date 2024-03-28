@@ -151,6 +151,13 @@ export function generateBackground(name: string): string {
   return color
 }
 
+/**
+ * Sets the values of a form using the provided setValue function and values object.
+ *
+ * @param {UseFormSetValue<TFieldValues>} setValue - The function used to set the values of the form.
+ * @param {FieldValues} values - The object containing the values to be set.
+ * @return {void} This function does not return anything.
+ */
 export function setFormValues<TFieldValues extends FieldValues>(
   setValue: UseFormSetValue<TFieldValues>,
   values: FieldValues
@@ -161,6 +168,13 @@ export function setFormValues<TFieldValues extends FieldValues>(
   }
 }
 
+/**
+ * Validates a form value based on its type and error status.
+ *
+ * @param {any} value - The value to be validated.
+ * @param {any} error - The error status of the value.
+ * @return {boolean} Returns true if the value is valid, false otherwise.
+ */
 export function validateFormValue(value: any, error: any) {
   if (typeof value === 'string' && value?.trim() === '') {
     return false

@@ -1,6 +1,6 @@
 import { gql, TypedDocumentNode } from '@apollo/client'
 
-import { FindFirstBlogCategory } from '@/types/blog'
+import { FindFirstBlogCategory, FindManyBlogCategory } from '@/types/blog'
 import { WhereAndOrderInput } from '@/types/common'
 
 const FRAGMENT_BLOG_CATEGORY_PROPS = gql`
@@ -15,6 +15,21 @@ const FRAGMENT_BLOG_CATEGORY_PROPS = gql`
       id
       slug
       title
+    }
+  }
+`
+
+export const FIND_MANY_CATEGORIES: TypedDocumentNode<
+  FindManyBlogCategory,
+  WhereAndOrderInput
+> = gql`
+  ${FRAGMENT_BLOG_CATEGORY_PROPS}
+  query FindManyBlogCategory(
+    $where: SearchBlogCategoryInput
+    $orderBy: SortBlogCategoryInput
+  ) {
+    findManyBlogCategory(where: $where, orderBy: $orderBy) {
+      ...BlogCategoryProps
     }
   }
 `

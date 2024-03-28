@@ -1,5 +1,6 @@
 'use client'
 
+import * as Sentry from '@sentry/nextjs'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
@@ -28,6 +29,7 @@ export default function ErrorPage({
   }
 
   useEffect(() => {
+    Sentry.captureException(error)
     console.error(error)
   }, [error])
 

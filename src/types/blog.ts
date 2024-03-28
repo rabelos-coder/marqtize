@@ -43,8 +43,20 @@ export type FindFirstBlogTag = {
   findFirstBlogTag: BlogTag
 }
 
+export type FindManyBlogTag = {
+  findManyBlogTag: BlogTag[]
+}
+
 export type FindFirstBlogCategory = {
   findFirstBlogCategory: BlogCategory
+}
+
+export type FindManyBlogCategory = {
+  findManyBlogCategory: BlogCategory[]
+}
+
+export type FindManyBlogPost = {
+  findManyBlogPost: BlogPost[]
 }
 
 export type FindFirstBlogPost = {
