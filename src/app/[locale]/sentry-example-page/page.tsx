@@ -3,10 +3,10 @@
 import * as Sentry from '@sentry/nextjs'
 import { notFound } from 'next/navigation'
 
-import { IS_DEVELOPMENT } from '@/environment'
+import { SENTRY_EXAMPLE_PAGE_ENABLED } from '@/environment'
 
 export default function SentryExamplePage() {
-  if (!IS_DEVELOPMENT) notFound()
+  if (!SENTRY_EXAMPLE_PAGE_ENABLED) notFound()
 
   return (
     <div>
