@@ -42,17 +42,11 @@ export const MenuList = ({
   const t = useTranslations()
   const ability = useAbility()
 
-  const can = (level: number, claims: string[]) => {
+  const can = (claims: string[]) => {
     if (!claims?.length) {
       return true
-    } else if (claims.length && level === 0) {
+    } else if (claims?.length) {
       return claims.some((claim) => {
-        const [subject, action] = claim.split(':')
-
-        return ability?.can(action, subject)
-      })
-    } else if (claims.length && level > 0) {
-      return claims.every((claim) => {
         const [subject, action] = claim.split(':')
 
         return ability?.can(action, subject)
@@ -65,7 +59,7 @@ export const MenuList = ({
   return (
     <>
       {menuItems.map((item, i) =>
-        can(level, item?.claims ?? []) ? (
+        can(item?.claims ?? []) ? (
           <li
             key={i}
             className={`${pinnedMenu.includes(item.title || '') ? 'pined' : ''} ${

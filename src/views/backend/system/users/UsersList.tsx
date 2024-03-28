@@ -577,25 +577,32 @@ export const UsersList = () => {
         <Container fluid className="px-0 gx-5">
           <Row>
             <Col lg={6} sm={12} className="text-lg-start">
-              {isTrash ? (
-                <Button
-                  type="button"
-                  color="light"
-                  className="me-2 "
-                  onClick={toggle}
-                >
-                  <i className="fa fa-reply me-2" /> {t('back')}
-                </Button>
-              ) : (
-                <Button
-                  type="button"
-                  color="light"
-                  className="me-2 "
-                  onClick={toggle}
-                >
-                  <i className="fa fa-trash me-2" /> {t('recycleBin')}
-                </Button>
-              )}
+              <CanAny
+                acls={[
+                  { action: ActionEnum.Manage, subject: Subjects.User },
+                  { action: ActionEnum.Delete, subject: Subjects.User },
+                ]}
+              >
+                {isTrash ? (
+                  <Button
+                    type="button"
+                    color="light"
+                    className="me-2 "
+                    onClick={toggle}
+                  >
+                    <i className="fa fa-reply me-2" /> {t('back')}
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    color="light"
+                    className="me-2 "
+                    onClick={toggle}
+                  >
+                    <i className="fa fa-trash me-2" /> {t('recycleBin')}
+                  </Button>
+                )}
+              </CanAny>
             </Col>
             <Col lg={6} sm={12}>
               <FormGroup row className="justify-content-lg-end">

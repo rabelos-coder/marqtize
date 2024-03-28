@@ -79,8 +79,6 @@ const defaultValues: FormData = {
   roles: [],
 }
 
-const defaultImageUrl = '/assets/images/user/user.jpg'
-
 export const UsersForm = ({ id, mode }: UsersFormProps) => {
   const t = useTranslations()
 
@@ -95,7 +93,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
   )
   const baseSchema = useMemo(
     () => ({
-      accountId: yup.string().optional(),
+      accountId: yup.string().nullable().optional(),
       name: yup
         .string()
         .required(t('propertyRequired', { property: t('name') })),
@@ -109,20 +107,23 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
         .matches(
           new RegExp(EMAIL_REGEX),
           t('propertyEmail', { property: t('email') })
-        ),
+        )
+        .default(''),
       language: yup
         .string()
         .nullable()
-        .required(t('propertyRequired', { property: t('language') })),
+        .required(t('propertyRequired', { property: t('language') }))
+        .default(null),
       timezoneId: yup
         .string()
         .nullable()
-        .required(t('propertyRequired', { property: t('timezone') })),
-      removeImage: yup.boolean().optional(),
-      isActive: yup.boolean().optional(),
-      isSuperAdmin: yup.boolean().optional(),
-      claims: yup.array().optional(),
-      roles: yup.array().optional(),
+        .required(t('propertyRequired', { property: t('timezone') }))
+        .default(null),
+      removeImage: yup.boolean().optional().default(false),
+      isActive: yup.boolean().optional().default(false),
+      isSuperAdmin: yup.boolean().optional().default(false),
+      claims: yup.array().optional().default([]),
+      roles: yup.array().optional().default([]),
     }),
     [t]
   )
@@ -152,7 +153,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
     [t]
   )
   const schema = useMemo(() => {
-    if (password?.trim() !== '') {
+    if (password?.trim() !== '' || mode === 'create') {
       return yup.object().shape({
         ...baseSchema,
         ...passwordSchema,
@@ -163,11 +164,11 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
         ...basePasswordSchema,
       })
     }
-  }, [basePasswordSchema, baseSchema, password, passwordSchema])
+  }, [basePasswordSchema, baseSchema, password, passwordSchema, mode])
 
   const [level, setLevel] = useState(1)
   const [disabled, setDisabled] = useState(false)
-  const [imgSrc, setImgSrc] = useState(defaultImageUrl)
+  const [imgSrc, setImgSrc] = useState('')
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
@@ -521,7 +522,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                     <Col lg={3} sm={12} className="d-flex justify-content-end">
                       <Avatar
                         image={imgSrc}
-                        name={getValues('name')}
+                        name={getValues('name') ?? 'X'}
                         size={70}
                         rounded
                         className="me-2 img-fluid"
@@ -533,9 +534,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                   <FormGroup
                     row
                     className={
-                      mode === 'update' && imgSrc !== defaultImageUrl
-                        ? ''
-                        : 'd-none'
+                      mode === 'update' && imgSrc !== '' ? '' : 'd-none'
                     }
                   >
                     <Label for="removeImage" lg={4} className="fw-bold px-3">
@@ -558,7 +557,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                             invalid={Boolean(errors.removeImage)}
                             onChange={(e) => {
                               setImageFile(null)
-                              setImgSrc(defaultImageUrl)
+                              setImgSrc('')
                               onChange(e.target.checked)
                               const imgFile = document?.getElementById(
                                 'imageFile'
