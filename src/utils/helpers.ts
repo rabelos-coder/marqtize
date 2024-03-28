@@ -1,4 +1,3 @@
-import { trim } from 'lodash'
 import { Metadata } from 'next/types'
 import { FieldValues, UseFormSetValue } from 'react-hook-form'
 
@@ -163,7 +162,7 @@ export function setFormValues<TFieldValues extends FieldValues>(
 }
 
 export function validateFormValue(value: any, error: any) {
-  if (typeof value === 'string' && trim(value) === '') {
+  if (typeof value === 'string' && value?.trim() === '') {
     return false
   }
   if (Boolean(error)) {
