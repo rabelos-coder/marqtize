@@ -153,7 +153,6 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
                   <Input
                     id={name}
                     type="email"
-                    autoFocus
                     autoComplete="on"
                     placeholder={t('emailPlaceholder')}
                     invalid={Boolean(errors.email)}
