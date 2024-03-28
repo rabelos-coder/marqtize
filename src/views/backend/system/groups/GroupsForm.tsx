@@ -4,7 +4,7 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
-import { useCallback, useEffect, useState } from 'react'
+import { Fragment, useCallback, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import Select from 'react-select'
 import { toast } from 'react-toastify'
@@ -29,11 +29,17 @@ import { FIND_MANY_ACCOUNTS } from '@/graphql/account'
 import { FIND_MANY_CLAIMS } from '@/graphql/claims'
 import { CREATE_ROLE, FIND_ROLE, UPDATE_ROLE } from '@/graphql/roles'
 import { FIND_MANY_USERS } from '@/graphql/users'
-import { useAppSelector } from '@/hooks'
+import { useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
 import { Claim } from '@/types/claim'
-import { OrderByEnum, ReactSelectType } from '@/types/common'
+import {
+  OrderByEnum,
+  ReactSelectType,
+  WhereAndOrderInput,
+} from '@/types/common'
+import { UserTypeEnum } from '@/types/enums'
 import { CreateRoleInput, Role, RoleInput, UpdateRoleInput } from '@/types/role'
+import { Subjects } from '@/types/subject'
 import { User } from '@/types/user'
 import { setFormValues, validateFormValue } from '@/utils/helpers'
 
@@ -57,6 +63,7 @@ const defaultValues: FormData = {
   name: '',
   slug: '',
   isDefault: false,
+  isDeleteable: true,
   claims: [],
   users: [],
 }
@@ -69,17 +76,11 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
   const [claims, setClaims] = useState<Claim[]>([])
   const [users, setUsers] = useState<User[]>([])
 
-  const [getAccounts] = useLazyQuery(FIND_MANY_ACCOUNTS, {
-    variables: {
-      orderBy: { systemName: OrderByEnum.ASC },
-    },
-  })
+  const { jwt } = useAuth()
+
+  const [getAccounts] = useLazyQuery(FIND_MANY_ACCOUNTS)
   const [getClaims] = useLazyQuery(FIND_MANY_CLAIMS)
-  const [getUsers] = useLazyQuery(FIND_MANY_USERS, {
-    variables: {
-      orderBy: { systemName: OrderByEnum.ASC },
-    },
-  })
+  const [getUsers] = useLazyQuery(FIND_MANY_USERS)
   const [getRole] = useLazyQuery(FIND_ROLE, {
     variables: { id: `${id}` },
     fetchPolicy: 'no-cache',
@@ -89,7 +90,6 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
 
   const t = useTranslations()
   const router = useRouter()
-  const { jwt } = useAppSelector((state) => state.auth)
 
   const schema = yup.object().shape({
     name: yup
@@ -125,12 +125,48 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
 
   const handleRole = useCallback(async () => {
     setDisabled(true)
+
+    let accountsVariables: WhereAndOrderInput = {
+      where: {
+        deletedAt: null,
+      },
+      orderBy: { systemName: OrderByEnum.ASC },
+    }
+    let usersVariables: WhereAndOrderInput = {
+      where: {
+        AND: [{ id: { not: { in: [jwt?.id || '123'] } } }],
+        deletedAt: null,
+        type: UserTypeEnum.CREDENTIAL,
+      },
+      orderBy: { systemName: OrderByEnum.ASC },
+    }
+
+    if (!jwt?.sa && jwt?.accountId) {
+      accountsVariables = {
+        where: {
+          id: jwt.accountId,
+          deletedAt: null,
+        },
+        orderBy: { systemName: OrderByEnum.ASC },
+      }
+
+      usersVariables = {
+        where: {
+          AND: [{ id: { not: { in: [jwt.id] } } }],
+          accountId: jwt.accountId,
+          type: UserTypeEnum.CREDENTIAL,
+          deletedAt: null,
+        },
+        orderBy: { systemName: OrderByEnum.ASC },
+      }
+    }
+
     if (mode === 'update') {
       const [role, accounts, claims, users] = await Promise.all([
         getRole(),
-        getAccounts(),
+        getAccounts({ variables: accountsVariables }),
         getClaims(),
-        getUsers(),
+        getUsers({ variables: usersVariables }),
       ])
 
       if (role?.data?.findByIdRole) {
@@ -162,9 +198,9 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
       if (users?.error) toast.error(users?.error?.message)
     } else {
       const [accounts, claims, users] = await Promise.all([
-        getAccounts(),
+        getAccounts({ variables: accountsVariables }),
         getClaims(),
-        getUsers(),
+        getUsers({ variables: usersVariables }),
       ])
 
       if (accounts?.data?.findManyAccount)
@@ -185,13 +221,13 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
       if (users?.error) toast.error(users?.error?.message)
     }
     setDisabled(false)
-  }, [getClaims, getAccounts, getRole, getUsers, mode, setValue])
+  }, [getClaims, getAccounts, getRole, getUsers, mode, setValue, jwt])
 
   const onSubmit = async (form: FormData) => {
     const isDeleteable = role?.isDeleteable ?? false
 
     const data: RoleInput = {
-      accountId: form.accountId ?? null,
+      accountId: jwt?.accountId ?? null,
       name: form.name,
       slug: slugify(form.slug).toLowerCase(),
       isDefault: form.isDefault,
@@ -402,7 +438,9 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                               {...rest}
                               value={
                                 accounts.find(
-                                  (option) => option.value === role?.accountId
+                                  ({ value }) =>
+                                    value === role?.accountId ||
+                                    value === jwt?.accountId
                                 )?.label ?? t('none', { gender: 'female' })
                               }
                             />
@@ -444,6 +482,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                               onChange(e.target.value)
                               setValue(
                                 'slug',
+
                                 slugify(e.target.value).toLowerCase()
                               )
                             }}
@@ -531,6 +570,16 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                         {claims?.map(({ action, subject }) => {
                           const key = `${subject}:${action}`
                           const label = `${t(action)} ${t(subject)}`
+
+                          if (!jwt?.sa && !jwt?.roles.includes('admin')) {
+                            if (!jwt?.claims?.includes(key))
+                              return <Fragment key={key}></Fragment>
+                            if (subject === Subjects.Claim)
+                              return <Fragment key={key}></Fragment>
+                          } else if (!jwt?.sa && jwt?.roles.includes('admin')) {
+                            if (subject === Subjects.Claim)
+                              return <Fragment key={key}></Fragment>
+                          }
 
                           return (
                             <Label key={key} for={key} lg={4} sm={6}>
@@ -628,6 +677,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                     type="button"
                     color="secondary"
                     className="px-3"
+                    disabled={disabled}
                     onClick={handleBackButton}
                   >
                     <i className="fa fa-arrow-left me-2"></i>
@@ -637,9 +687,9 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                 {level < 4 && (
                   <Button
                     type="button"
-                    disabled={disabled}
                     color="primary"
                     className="px-3"
+                    disabled={disabled}
                     onClick={handleNextButton}
                   >
                     <i className="fa fa-arrow-right me-2"></i>

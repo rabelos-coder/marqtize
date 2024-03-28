@@ -6,6 +6,8 @@ import { APP_META_TITLE } from '@/environment'
 import { useLayout } from '@/hooks'
 import { Link } from '@/navigation'
 
+import { Trading } from './Trading'
+
 export const Leftbar = () => {
   const { sideBarToggle, setSideBarToggle } = useLayout()
 
@@ -41,7 +43,7 @@ export const Leftbar = () => {
         </div>
       </Col>
       <Col xxl={5} xl={6} lg={5} md={4} sm={3} className="left-header p-0">
-        {/* <NotificationSlider /> */}
+        <Trading />
       </Col>
     </>
   )

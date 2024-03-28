@@ -1,5 +1,5 @@
 export type Timezone = {
-  id: number
+  id: string
   code: string
   name: string
 }

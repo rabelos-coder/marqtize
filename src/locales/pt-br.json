@@ -90,6 +90,8 @@
   "general": "Geral",
   "account": "Conta",
   "accounts": "Contas",
+  "connections": "Conexões",
+  "connectionPlural": "{count, plural, =0 {Conexão} =1 {Conexão} other {Conexões}}",
   "application": "Aplicativo",
   "applications": "Aplicativos",
   "website": "Website",

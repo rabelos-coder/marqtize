@@ -21,6 +21,10 @@ body {
       }
     }
 
+    .font-primary {
+      color: var(--theme-secondary) !important;
+    }
+
     .form-control {
       background-color: $dark-card-background;
       border-color: $dark-card-border;

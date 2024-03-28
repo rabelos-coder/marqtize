@@ -12,6 +12,7 @@ import {
 import { useAuth } from '@/hooks'
 import { AuthLayout } from '@/layout/backend/AuthLayout'
 import { AbilityProvider } from '@/providers/AbilityProvider'
+import { ActionEnum } from '@/types/action'
 import { JWT } from '@/types/jwt'
 
 import { NotAuthorized } from '../NotAuthorized'
@@ -53,7 +54,12 @@ export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
   }, [jwt, isLoggedIn, setAbilityBasedOnSession])
 
   // Check the access of current user and render pages
-  if (loggedIn && ability && ability.can(guard.action, guard.subject)) {
+  if (
+    loggedIn &&
+    ability &&
+    (ability.can(ActionEnum.Manage, guard.subject) ||
+      ability.can(guard.action, guard.subject))
+  ) {
     return (
       <AbilityProvider ability={ability}>
         <AuthLayout>{children}</AuthLayout>

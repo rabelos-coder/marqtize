@@ -4,7 +4,14 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import {
+  ChangeEvent,
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import Select from 'react-select'
 import { toast } from 'react-toastify'
@@ -25,18 +32,24 @@ import { Avatar } from '@/components/common/Avatar'
 import FinishForm from '@/components/common/NumberingWizard/FinishForm'
 import StepperHorizontal from '@/components/common/NumberingWizard/StepperHorizontal'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
+import { APP_TIMEZONE } from '@/environment'
 import { FIND_MANY_ACCOUNTS } from '@/graphql/account'
 import { FIND_MANY_CLAIMS } from '@/graphql/claims'
 import { FIND_MANY_TIMEZONES } from '@/graphql/localization'
 import { FIND_MANY_ROLES } from '@/graphql/roles'
 import { CREATE_USER, FIND_USER, UPDATE_USER } from '@/graphql/users'
-import { useAppSelector } from '@/hooks'
+import { useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
 import { Claim } from '@/types/claim'
-import { OrderByEnum, ReactSelectType } from '@/types/common'
+import {
+  OrderByEnum,
+  ReactSelectType,
+  WhereAndOrderInput,
+} from '@/types/common'
 import { UserTypeEnum } from '@/types/enums'
 import { LanguageEnum } from '@/types/language'
 import { Role } from '@/types/role'
+import { Subjects } from '@/types/subject'
 import { CreateUserInput, UpdateUserInput, User, UserInput } from '@/types/user'
 import { setFormValues, validateFormValue } from '@/utils/helpers'
 
@@ -58,8 +71,8 @@ type FormData = {
   timezoneId: string
   isActive: boolean
   isSuperAdmin: boolean
-  claims: any[]
-  roles: any[]
+  claims: string[]
+  roles: string[]
 }
 
 const defaultValues: FormData = {
@@ -81,6 +94,7 @@ const defaultValues: FormData = {
 
 export const UsersForm = ({ id, mode }: UsersFormProps) => {
   const t = useTranslations()
+  const { jwt } = useAuth()
 
   const [password, setPassword] = useState('')
 
@@ -93,7 +107,6 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
   )
   const baseSchema = useMemo(
     () => ({
-      accountId: yup.string().nullable().optional(),
       name: yup
         .string()
         .required(t('propertyRequired', { property: t('name') })),
@@ -122,6 +135,9 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
       removeImage: yup.boolean().optional().default(false),
       isActive: yup.boolean().optional().default(false),
       isSuperAdmin: yup.boolean().optional().default(false),
+      languages: yup.array().optional().default([]),
+      timezones: yup.array().optional().default([]),
+      accounts: yup.array().optional().default([]),
       claims: yup.array().optional().default([]),
       roles: yup.array().optional().default([]),
     }),
@@ -209,7 +225,6 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
   const [updateUser] = useMutation(UPDATE_USER, { fetchPolicy: 'no-cache' })
 
   const router = useRouter()
-  const { jwt } = useAppSelector((state) => state.auth)
 
   const {
     control,
@@ -220,15 +235,33 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
   } = useForm({
     defaultValues,
     mode: 'onBlur',
-    resolver: yupResolver(schema as any),
+    resolver: yupResolver(schema as unknown as yup.ObjectSchema<FormData>),
   })
 
   const handleUser = useCallback(async () => {
     setDisabled(true)
+
+    let accountsVariables: WhereAndOrderInput = {
+      where: {
+        deletedAt: null,
+      },
+      orderBy: { systemName: OrderByEnum.ASC },
+    }
+
+    if (!jwt?.sa && jwt?.accountId) {
+      accountsVariables = {
+        where: {
+          id: jwt.accountId,
+          deletedAt: null,
+        },
+        orderBy: { systemName: OrderByEnum.ASC },
+      }
+    }
+
     if (mode === 'update') {
       const [user, accounts, claims, roles, timezones] = await Promise.all([
         getUser(),
-        getAccounts(),
+        getAccounts({ variables: accountsVariables }),
         getClaims(),
         getRoles(),
         getTimezones(),
@@ -278,13 +311,13 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
       if (timezones?.error) toast.error(timezones?.error?.message)
     } else {
       const [accounts, claims, roles, timezones] = await Promise.all([
-        getAccounts(),
+        getAccounts({ variables: accountsVariables }),
         getClaims(),
         getRoles(),
         getTimezones(),
       ])
 
-      if (timezones?.data?.findManyTimezone)
+      if (timezones?.data?.findManyTimezone) {
         setTimezones(
           timezones?.data?.findManyTimezone?.map(
             ({ id, name }) =>
@@ -294,6 +327,11 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
               }) as unknown as ReactSelectType
           )
         )
+        const timezoneId = timezones?.data?.findManyTimezone.find(
+          ({ code }) => code === APP_TIMEZONE
+        )?.id
+        setValue('timezoneId', timezoneId ?? '')
+      }
       if (accounts?.data?.findManyAccount)
         setAccounts(
           accounts?.data?.findManyAccount?.map(
@@ -313,11 +351,20 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
       if (timezones?.error) toast.error(timezones?.error?.message)
     }
     setDisabled(false)
-  }, [mode, getUser, getAccounts, getClaims, getRoles, getTimezones, setValue])
+  }, [
+    mode,
+    getUser,
+    getAccounts,
+    getClaims,
+    getRoles,
+    getTimezones,
+    setValue,
+    jwt,
+  ])
 
   const onSubmit = async (form: FormData) => {
     const data: UserInput = {
-      accountId: form.accountId ?? null,
+      accountId: jwt?.accountId ?? null,
       name: form.name,
       systemName: form.systemName,
       email: form.email,
@@ -755,7 +802,9 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                               {...rest}
                               value={
                                 accounts.find(
-                                  (option) => option.value === user?.accountId
+                                  ({ value }) =>
+                                    value === user?.accountId ||
+                                    value === jwt?.accountId
                                 )?.label ?? t('none', { gender: 'female' })
                               }
                             />
@@ -1067,7 +1116,57 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                     disabled={disabled}
                     render={({ field: { onChange, value } }) => (
                       <>
-                        {roles?.map(({ id, name }) => {
+                        {roles?.map(({ id, name, slug }) => {
+                          if (!jwt?.sa && !jwt?.roles.includes('admin')) {
+                            if (
+                              !jwt?.roles?.includes(slug) &&
+                              !value.includes(id)
+                            ) {
+                              return <Fragment key={id}></Fragment>
+                            } else if (
+                              !jwt?.roles?.includes(slug) &&
+                              value.includes(id)
+                            ) {
+                              return (
+                                <Label key={id} htmlFor={id} lg={4} sm={6}>
+                                  <Input
+                                    id={id}
+                                    type="checkbox"
+                                    className="me-2"
+                                    value={id}
+                                    disabled
+                                    checked
+                                  />
+                                  {name}
+                                </Label>
+                              )
+                            }
+                          } else if (!jwt?.sa && jwt?.roles.includes('admin')) {
+                            if (
+                              !jwt?.roles?.includes(slug) &&
+                              !value.includes(id)
+                            ) {
+                              return <Fragment key={id}></Fragment>
+                            } else if (
+                              !jwt?.roles?.includes(slug) &&
+                              value.includes(id)
+                            ) {
+                              return (
+                                <Label key={id} htmlFor={id} lg={4} sm={6}>
+                                  <Input
+                                    id={id}
+                                    type="checkbox"
+                                    className="me-2"
+                                    value={id}
+                                    disabled
+                                    checked
+                                  />
+                                  {name}
+                                </Label>
+                              )
+                            }
+                          }
+
                           return (
                             <Label key={id} htmlFor={id} lg={4} sm={6}>
                               <Input
@@ -1110,6 +1209,16 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                         {claims?.map(({ action, subject }) => {
                           const key = `${subject}:${action}`
                           const label = `${t(action)} ${t(subject)}`
+
+                          if (!jwt?.sa && !jwt?.roles.includes('admin')) {
+                            if (!jwt?.claims?.includes(key))
+                              return <Fragment key={key}></Fragment>
+                            if (subject === Subjects.Claim)
+                              return <Fragment key={key}></Fragment>
+                          } else if (!jwt?.sa && jwt?.roles.includes('admin')) {
+                            if (subject === Subjects.Claim)
+                              return <Fragment key={key}></Fragment>
+                          }
 
                           return (
                             <Label key={key} for={key} lg={4} sm={6}>
@@ -1167,6 +1276,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                     type="button"
                     color="secondary"
                     className="px-3"
+                    disabled={disabled}
                     onClick={handleBackButton}
                   >
                     <i className="fa fa-arrow-left me-2"></i>
@@ -1176,9 +1286,9 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                 {level < 4 && (
                   <Button
                     type="button"
-                    disabled={disabled}
                     color="primary"
                     className="px-3"
+                    disabled={disabled}
                     onClick={handleNextButton}
                   >
                     <i className="fa fa-arrow-right me-2"></i>

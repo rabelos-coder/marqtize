@@ -31,7 +31,13 @@ export const MenuListData: SidebarMenuType[] = [
   {
     title: 'authentication',
     menuContent: 'Users,Roles,Claims',
-    claims: ['User:Read', 'Role:Read', 'Claim:Read'],
+    claims: [
+      'User:Manage',
+      'User:Read',
+      'Role:Manage',
+      'Role:Read',
+      'Claim:Read',
+    ],
     items: [
       {
         id: uuidv4(),

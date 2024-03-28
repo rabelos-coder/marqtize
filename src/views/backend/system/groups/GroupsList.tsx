@@ -41,7 +41,7 @@ import {
   RESTORE_ROLE,
   RESTORE_ROLES,
 } from '@/graphql/roles'
-import { useAbility } from '@/hooks'
+import { useAbility, useAuth } from '@/hooks'
 import { Link } from '@/navigation'
 import { ActionEnum } from '@/types/action'
 import {
@@ -69,6 +69,8 @@ export const GroupsList = () => {
     name: t('groups').toLowerCase(),
   })
 
+  const { jwt } = useAuth()
+
   const defaultVariables: PaginatedInput = useMemo(() => {
     const variables: PaginatedInput = {
       page: 1,
@@ -77,11 +79,14 @@ export const GroupsList = () => {
       where: { deletedAt: null, AND: [], OR: [] },
     }
 
+    // @ts-ignore
+    if (!jwt?.sa && jwt?.accountId) variables.where['accountId'] = jwt.accountId
+
     if (variables.where?.AND?.length === 0) delete variables.where.AND
     if (variables.where?.OR?.length === 0) delete variables.where.OR
 
     return variables
-  }, [])
+  }, [jwt])
 
   const [cardTitle, setCardTitle] = useState(pageTitle)
   const [cardDescription, setCardDescription] = useState(pageDescription)

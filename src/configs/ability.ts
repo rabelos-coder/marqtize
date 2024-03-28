@@ -2,7 +2,7 @@ import { AbilityBuilder, PureAbility } from '@casl/ability'
 
 import { Action, ActionEnum } from '@/types/action'
 import { JWT } from '@/types/jwt'
-import { PublicSubjects, Subject, Subjects } from '@/types/subject'
+import { PublicSubjectsEnum, Subject, Subjects } from '@/types/subject'
 
 export type AppAbility = PureAbility<[Action, string]> | undefined
 
@@ -10,7 +10,7 @@ export const AppAbility = PureAbility as any
 
 export type AclAbility = {
   action: Action
-  subject: Subject
+  subject: Subject | keyof typeof Subjects
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-vars
@@ -19,11 +19,11 @@ function defineRulesFor(jwt: JWT) {
 
   const isAdmin = jwt.roles.includes('admin')
 
-  can('Manage', 'All')
+  can(ActionEnum.Manage, Subjects.All)
 
   if (isAdmin) {
     for (const action of Object.values(ActionEnum)) {
-      for (const subject of Object.values(PublicSubjects)) {
+      for (const subject of Object.values(PublicSubjectsEnum)) {
         can(action, subject)
       }
     }
@@ -52,8 +52,8 @@ export const buildAbilityFor = (jwt: JWT): AppAbility => {
 }
 
 export const defaultAcl: AclAbility = {
-  action: 'Manage',
-  subject: 'All',
+  action: ActionEnum.Manage,
+  subject: Subjects.All,
 }
 
 export default defineRulesFor

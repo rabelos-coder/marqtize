@@ -42,7 +42,7 @@ export const MenuList = ({
   const t = useTranslations()
   const ability = useAbility()
 
-  const can = (claims: string[]) => {
+  const canAny = (claims: string[]) => {
     if (!claims?.length) {
       return true
     } else if (claims?.length) {
@@ -59,7 +59,7 @@ export const MenuList = ({
   return (
     <>
       {menuItems.map((item, i) =>
-        can(item?.claims ?? []) ? (
+        canAny(item?.claims ?? []) ? (
           <li
             key={i}
             className={`${pinnedMenu.includes(item.title || '') ? 'pined' : ''} ${

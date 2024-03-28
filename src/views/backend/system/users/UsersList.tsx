@@ -81,10 +81,13 @@ export const UsersList = () => {
       where: {
         deletedAt: null,
         type: UserTypeEnum.CREDENTIAL,
-        AND: [{ id: { not: { in: [jwt?.id || '65a6cbf5cc661e98f1af152a'] } } }],
+        AND: [{ id: { not: { in: [jwt?.id || '123'] } } }],
         OR: [],
       },
     }
+
+    // @ts-ignore
+    if (!jwt?.sa && jwt?.accountId) variables.where['accountId'] = jwt.accountId
 
     if (variables.where?.AND?.length === 0) delete variables.where.AND
     if (variables.where?.OR?.length === 0) delete variables.where.OR
@@ -147,9 +150,12 @@ export const UsersList = () => {
       const where: FindManyInput = {
         deletedAt: null,
         type: UserTypeEnum.CREDENTIAL,
-        AND: [{ id: { not: { in: [jwt?.id || '65a6cbf5cc661e98f1af152a'] } } }],
+        AND: [{ id: { not: { in: [jwt?.id || '123'] } } }],
         OR: [],
       }
+
+      // @ts-ignore
+      if (!jwt?.sa && jwt?.accountId) where['accountId'] = jwt.accountId
 
       if (isTrashed) {
         delete where.deletedAt

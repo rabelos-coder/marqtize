@@ -5,6 +5,7 @@ import { Language } from './language'
 export type JWT = {
   id: string
   tokenId: string | null
+  accountId: string | null
   sa: boolean
   systemName: string
   account: Account | null

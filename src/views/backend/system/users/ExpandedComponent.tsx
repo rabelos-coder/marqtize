@@ -64,7 +64,10 @@ export const ExpandedComponent: React.FC<ExpanderComponentProps<User>> = ({
             </td>
           </tr>
           <tr>
-            <th className="font-weight-bold">{t('accounts')}:</th>
+            <th className="font-weight-bold">
+              {t('connectionPlural', { count: data.userAccounts?.length ?? 0 })}
+              :
+            </th>
             <td>
               {data.userAccounts?.length
                 ? data.userAccounts?.map((a) => t(a.provider)).join(', ')
