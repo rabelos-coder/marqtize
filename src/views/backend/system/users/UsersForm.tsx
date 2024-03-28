@@ -1082,27 +1082,29 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                   </FormGroup>
                 </Col>
                 <Col lg={6} sm={12}>
-                  <FormGroup row>
-                    <Label for="isSuperAdmin" lg={4} className="fw-bold px-3">
-                      {t('superAdmin')}:
-                    </Label>
-                    <Col lg={8} className="px-3">
-                      <Controller
-                        name="isSuperAdmin"
-                        control={control}
-                        disabled={disabled}
-                        render={({ field: { name, value, ...rest } }) => (
-                          <Input
-                            id={name}
-                            type="checkbox"
-                            value="true"
-                            checked={value}
-                            {...rest}
-                          />
-                        )}
-                      />
-                    </Col>
-                  </FormGroup>
+                  {jwt?.sa && (
+                    <FormGroup row>
+                      <Label for="isSuperAdmin" lg={4} className="fw-bold px-3">
+                        {t('superAdmin')}:
+                      </Label>
+                      <Col lg={8} className="px-3">
+                        <Controller
+                          name="isSuperAdmin"
+                          control={control}
+                          disabled={disabled}
+                          render={({ field: { name, value, ...rest } }) => (
+                            <Input
+                              id={name}
+                              type="checkbox"
+                              value="true"
+                              checked={value}
+                              {...rest}
+                            />
+                          )}
+                        />
+                      </Col>
+                    </FormGroup>
+                  )}
                 </Col>
               </Row>
             </div>
