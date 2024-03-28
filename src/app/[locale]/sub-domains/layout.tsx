@@ -1,5 +1,5 @@
 import { ChildrenProps } from '@/types/common'
 
-export default function SubDomainLayout({ children }: ChildrenProps) {
+export default function SubDomainsLayout({ children }: ChildrenProps) {
   return <>{children}</>
 }

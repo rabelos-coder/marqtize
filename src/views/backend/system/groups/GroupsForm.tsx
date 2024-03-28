@@ -39,7 +39,7 @@ import { setFormValues, validateFormValue } from '@/utils/helpers'
 
 type GroupsFormProps = {
   id?: string
-  mode: 'create' | 'update' | 'view'
+  mode: 'create' | 'update'
 }
 
 type FormData = {
@@ -89,7 +89,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
 
   const t = useTranslations()
   const router = useRouter()
-  const { user } = useAppSelector((state) => state.auth)
+  const { jwt } = useAppSelector((state) => state.auth)
 
   const schema = yup.object().shape({
     name: yup
@@ -125,7 +125,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
 
   const handleRole = useCallback(async () => {
     setDisabled(true)
-    if (mode === 'update' || mode === 'view') {
+    if (mode === 'update') {
       const [role, accounts, claims, users] = await Promise.all([
         getRole(),
         getAccounts(),
@@ -150,7 +150,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
               ({
                 value: id,
                 label: systemName,
-              }) as ReactSelectType
+              }) as unknown as ReactSelectType
           )
         )
       if (claims?.data?.findManyClaim) setClaims(claims?.data?.findManyClaim)
@@ -174,7 +174,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
               ({
                 value: id,
                 label: systemName,
-              }) as ReactSelectType
+              }) as unknown as ReactSelectType
           )
         )
       if (claims?.data?.findManyClaim) setClaims(claims?.data?.findManyClaim)
@@ -318,15 +318,15 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
             ]}
           />
           <div className="step-content">
-            <div className={`gx-3 pt-4 px-4 ${level === 1 ? '' : 'd-none'}`}>
-              {user?.isSuperAdmin ? (
+            <div className={`pt-3 ${level === 1 ? '' : 'd-none'}`}>
+              {jwt?.sa ? (
                 <Row className="g-3">
                   <Col lg={12}>
                     <FormGroup row>
-                      <Label for="accountId" sm={2} className="fw-bold px-4">
+                      <Label for="accountId" lg={2} className="fw-bold px-3">
                         {t('account')}:
                       </Label>
-                      <Col sm={10} className="px-4">
+                      <Col lg={10} className="px-3">
                         <Controller
                           name="accountId"
                           control={control}
@@ -385,10 +385,10 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                 <Row className="gx-3">
                   <Col lg={12}>
                     <FormGroup row>
-                      <Label for="accountId" sm={2} className="fw-bold px-4">
+                      <Label for="accountId" lg={2} className="fw-bold px-3">
                         {t('account')}:
                       </Label>
-                      <Col sm={10} className="px-4">
+                      <Col lg={10} className="px-3">
                         <Controller
                           control={control}
                           name="accountId"
@@ -402,8 +402,8 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                               {...rest}
                               value={
                                 accounts.find(
-                                  (option) => option.value === user?.accountId
-                                )?.label ?? t('none', { gender: 'male' })
+                                  (option) => option.value === role?.accountId
+                                )?.label ?? t('none', { gender: 'female' })
                               }
                             />
                           )}
@@ -421,10 +421,10 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
               <Row className="g-3">
                 <Col lg={6} sm={12}>
                   <FormGroup row>
-                    <Label for="name" sm={4} className="fw-bold px-4 required">
+                    <Label for="name" lg={4} className="fw-bold px-3 required">
                       {t('name')}:
                     </Label>
-                    <Col sm={8} className="px-4">
+                    <Col lg={8} className="px-3">
                       <Controller
                         control={control}
                         name="name"
@@ -459,10 +459,10 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                 </Col>
                 <Col lg={6} sm={12}>
                   <FormGroup row>
-                    <Label for="slug" sm={4} className="fw-bold px-4 required">
+                    <Label for="slug" lg={4} className="fw-bold px-3 required">
                       {t('slug')}:
                     </Label>
-                    <Col sm={8} className="px-4">
+                    <Col lg={8} className="px-3">
                       <Controller
                         control={control}
                         name="slug"
@@ -495,10 +495,10 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
               <Row className="g-3">
                 <Col lg={6} sm={12}>
                   <FormGroup row>
-                    <Label for="isDefault" sm={4} className="fw-bold px-4">
+                    <Label for="isDefault" lg={4} className="fw-bold px-3">
                       {t('default')}:
                     </Label>
-                    <Col sm={8} className="px-4">
+                    <Col lg={8} className="px-3">
                       <Controller
                         name="isDefault"
                         control={control}
@@ -519,7 +519,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
               </Row>
             </div>
 
-            <Row className={`gx-3 pt-4 px-4 ${level === 2 ? '' : 'd-none'}`}>
+            <Row className={`pt-3 ${level === 2 ? '' : 'd-none'}`}>
               <Col>
                 <FormGroup row>
                   <Controller
@@ -562,7 +562,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
               </Col>
             </Row>
 
-            <Row className={`gx-3 pt-4 px-4 ${level === 3 ? '' : 'd-none'}`}>
+            <Row className={`pt-3 ${level === 3 ? '' : 'd-none'}`}>
               <Col>
                 <FormGroup row>
                   <Controller
@@ -602,7 +602,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
               </Col>
             </Row>
 
-            <div className={`gx-3 pt-4 px-4 ${level === 4 ? '' : 'd-none'}`}>
+            <div className={`pt-3 ${level === 4 ? '' : 'd-none'}`}>
               <FinishForm />
             </div>
           </div>
@@ -612,7 +612,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
             <Col lg={6} sm={12}>
               <Button
                 color="gray"
-                className="px-4"
+                className="px-3"
                 type="button"
                 disabled={disabled}
                 onClick={() => router.push('/backend/system/groups')}
@@ -627,7 +627,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                   <Button
                     type="button"
                     color="secondary"
-                    className="px-4"
+                    className="px-3"
                     onClick={handleBackButton}
                   >
                     <i className="fa fa-arrow-left me-2"></i>
@@ -639,7 +639,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                     type="button"
                     disabled={disabled}
                     color="primary"
-                    className="px-4"
+                    className="px-3"
                     onClick={handleNextButton}
                   >
                     <i className="fa fa-arrow-right me-2"></i>
@@ -651,7 +651,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                     type="submit"
                     disabled={disabled}
                     color="primary"
-                    className="px-4"
+                    className="px-3"
                   >
                     <i className="fa fa-save me-2"></i>
                     {t('save')}

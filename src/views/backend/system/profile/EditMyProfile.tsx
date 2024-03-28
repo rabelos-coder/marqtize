@@ -2,7 +2,6 @@
 
 import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
 import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -40,6 +39,8 @@ const defaultImageUrl = '/assets/images/user/user.jpg'
 
 const EditMyProfile = () => {
   const t = useTranslations()
+
+  const [password, setPassword] = useState('')
   const [tooltipOpen1, setTooltipOpen1] = useState(false)
   const [tooltipOpen2, setTooltipOpen2] = useState(false)
 
@@ -92,14 +93,20 @@ const EditMyProfile = () => {
     }),
     [t]
   )
+  const schema = useMemo(() => {
+    if (password?.trim() !== '') {
+      return yup.object().shape({
+        ...baseSchema,
+        ...passwordSchema,
+      })
+    } else {
+      return yup.object().shape({
+        ...baseSchema,
+        ...basePasswordSchema,
+      })
+    }
+  }, [basePasswordSchema, baseSchema, password, passwordSchema])
 
-  const [schema, setSchema] = useState(
-    yup.object().shape({
-      ...baseSchema,
-      ...basePasswordSchema,
-    })
-  )
-  const [password, setPassword] = useState('')
   const [removeImage, setRemoveImage] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
@@ -107,18 +114,21 @@ const EditMyProfile = () => {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imgSrc, setImgSrc] = useState(defaultImageUrl)
 
-  const { user } = useAuth()
+  const { jwt, user } = useAuth()
   const [updateProfile, { loading }] = useMutation(UPDATE_PROFILE, {
     fetchPolicy: 'no-cache',
   })
 
   const dispatch = useAppDispatch()
 
-  const defaultValues = {
-    email: user?.email ?? '',
-    password: '',
-    passwordConfirmation: '',
-  }
+  const defaultValues = useMemo(
+    () => ({
+      email: user?.email ?? '',
+      password: '',
+      passwordConfirmation: '',
+    }),
+    [user]
+  )
 
   const onSubmit = async (form: FormData) => {
     const variables: UpdateProfileInput = {
@@ -130,7 +140,7 @@ const EditMyProfile = () => {
       },
     }
 
-    if (!user?.isSuperAdmin) delete variables.data.email
+    if (!jwt?.sa) delete variables.data.email
 
     await updateProfile({ variables })
       .then(({ data }) => {
@@ -188,29 +198,7 @@ const EditMyProfile = () => {
 
   useEffect(() => {
     if (user?.image) setImgSrc(user?.image)
-    if (trim(password) !== '') {
-      setSchema(
-        yup.object().shape({
-          ...baseSchema,
-          ...passwordSchema,
-        })
-      )
-    } else {
-      setSchema(
-        yup.object().shape({
-          ...baseSchema,
-          ...basePasswordSchema,
-        })
-      )
-    }
-  }, [
-    dispatch,
-    user?.image,
-    password,
-    baseSchema,
-    passwordSchema,
-    basePasswordSchema,
-  ])
+  }, [user?.image])
 
   return (
     <Col xl={4}>
@@ -284,13 +272,16 @@ const EditMyProfile = () => {
               <Col>
                 <h5 className="mb-1">{user?.name}</h5>
                 <p className="mb-4">
-                  {user?.roles?.map((role) => role.name)?.join(', ') ??
-                    t('user')}
+                  {user?.roles?.length
+                    ? user?.roles?.map((role) => role.name)?.join(', ')
+                    : t('user')}
                 </p>
               </Col>
             </Row>
             <FormGroup>
-              <Label htmlFor="email">{t('email')}</Label>
+              <Label for="email" className={`fw-bold required`}>
+                {t('email')}
+              </Label>
               <Controller
                 name="email"
                 control={control}
@@ -300,11 +291,11 @@ const EditMyProfile = () => {
                   <Input
                     id={name}
                     type="email"
-                    autoComplete="on"
+                    autoComplete="off"
                     placeholder={t('emailPlaceholder')}
                     invalid={Boolean(errors.email)}
-                    readOnly={!!!user?.isSuperAdmin}
-                    className={!user?.isSuperAdmin ? 'disabled' : ''}
+                    readOnly={!jwt?.sa}
+                    className={!jwt?.sa ? 'disabled' : ''}
                     {...rest}
                   />
                 )}
@@ -314,7 +305,12 @@ const EditMyProfile = () => {
               </FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="password">{t('password')}</Label>
+              <Label
+                for="password"
+                className={`fw-bold ${password ? 'required' : ''}`}
+              >
+                {t('password')}
+              </Label>
               <div className="form-input position-relative">
                 <Controller
                   name="password"
@@ -349,7 +345,10 @@ const EditMyProfile = () => {
               </div>
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="passwordConfirmation">
+              <Label
+                for="passwordConfirmation"
+                className={`fw-bold ${password ? 'required' : ''}`}
+              >
                 {t('passwordConfirmation')}
               </Label>
               <div className="form-input position-relative">

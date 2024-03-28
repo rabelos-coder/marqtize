@@ -34,8 +34,12 @@ export const LOGIN: TypedDocumentNode<Login, LoginInput> = gql`
         systemName
         image
         language
+        email
         timezone {
           code
+        }
+        roles {
+          name
         }
         account {
           systemName

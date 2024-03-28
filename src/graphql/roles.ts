@@ -58,15 +58,17 @@ export const COUNT_ROLES: TypedDocumentNode<CountRole, WhereInput> = gql`
   }
 `
 
-export const FIND_ROLES: TypedDocumentNode<FindManyRole, WhereAndOrderInput> =
-  gql`
-    ${FRAGMENT_ROLE_PROPS}
-    query FindManyRole($where: SearchRoleInput, $orderBy: SortRoleInput) {
-      findManyRole(where: $where, orderBy: $orderBy) {
-        ...RoleProps
-      }
+export const FIND_MANY_ROLES: TypedDocumentNode<
+  FindManyRole,
+  WhereAndOrderInput
+> = gql`
+  ${FRAGMENT_ROLE_PROPS}
+  query FindManyRole($where: SearchRoleInput, $orderBy: SortRoleInput) {
+    findManyRole(where: $where, orderBy: $orderBy) {
+      ...RoleProps
     }
-  `
+  }
+`
 
 export const PAGINATED_ROLES: TypedDocumentNode<PaginatedRole, PaginatedInput> =
   gql`

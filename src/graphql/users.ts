@@ -28,6 +28,7 @@ import {
 export const FRAGMENT_USER_PROPS = gql`
   fragment UserProps on User {
     id
+    accountId
     name
     systemName
     email

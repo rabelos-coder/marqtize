@@ -19,7 +19,7 @@ function defineRulesFor(jwt: JWT) {
 
   const isAdmin = jwt.roles.includes('admin')
 
-  can('Read', 'All')
+  can('Manage', 'All')
 
   if (isAdmin) {
     for (const action of Object.values(ActionEnum)) {
@@ -52,7 +52,7 @@ export const buildAbilityFor = (jwt: JWT): AppAbility => {
 }
 
 export const defaultAcl: AclAbility = {
-  action: 'Read',
+  action: 'Manage',
   subject: 'All',
 }
 

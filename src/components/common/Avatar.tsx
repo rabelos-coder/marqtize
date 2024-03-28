@@ -6,6 +6,7 @@ export type AvatarProps = {
   name: string
   size?: number
   image?: string
+  rounded?: boolean
   className?: string
 }
 
@@ -19,13 +20,14 @@ export function Avatar({
   name,
   size,
   image,
+  rounded,
   className,
 }: AvatarProps): JSX.Element {
   const defaultSize = 50
   const style = {
     height: size ? `${size}px` : `${defaultSize}px`,
     width: size ? `${size}px` : `${defaultSize}px`,
-    borderRadius: '100px',
+    borderRadius: rounded ? '100px' : 'none',
   }
 
   const imageUrl = decodeURIComponent(

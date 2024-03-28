@@ -557,3 +557,17 @@
     border-color: var(--bs-gray-600);
   }
 }
+
+.btn-dotted {
+  border: none;
+  border-radius: 0;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &.hover {
+    border: none;
+    border-radius: 0;
+  }
+}

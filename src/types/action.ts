@@ -3,6 +3,7 @@ export enum ActionEnum {
   Read = 'Read',
   Update = 'Update',
   Delete = 'Delete',
+  Manage = 'Manage',
 }
 
 export type Action = keyof typeof ActionEnum

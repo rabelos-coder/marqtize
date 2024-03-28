@@ -40,6 +40,19 @@ div {
       }
     }
 
+    .view {
+      margin-right: 5px;
+
+      i {
+        font-size: 14px;
+        color: $font-gray-color;
+      }
+
+      [dir="rtl"] & {
+        margin-left: 5px;
+      }
+    }
+
     .edit {
       margin-right: 5px;
 

@@ -1,3 +1,4 @@
+import { Account } from './account'
 import { UserType } from './enums'
 import { Language } from './language'
 
@@ -6,7 +7,7 @@ export type JWT = {
   tokenId: string | null
   sa: boolean
   systemName: string
-  account: object | null
+  account: Account | null
   email: string
   roles: string[]
   claims: string[]

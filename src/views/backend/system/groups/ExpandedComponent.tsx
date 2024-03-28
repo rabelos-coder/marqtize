@@ -27,14 +27,18 @@ export const ExpandedComponent: React.FC<ExpanderComponentProps<Role>> = ({
 
           <tr>
             <th className="font-weight-bold">{t('users')}:</th>
-            <td>{data.users?.length ?? t('none', { gender: 'male' })}</td>
+            <td>
+              {data.users?.length ?? 0 > 0
+                ? data.users?.length
+                : t('none', { gender: 'male' })}
+            </td>
           </tr>
 
           <tr>
             <th className="font-weight-bold">{t('permissions')}:</th>
             <td>
-              {data.claims.length
-                ? data.claims?.map((c) => c).join(', ')
+              {data.claims.length > 0
+                ? data.claims.length
                 : t('none', { gender: 'female' })}
             </td>
           </tr>

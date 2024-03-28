@@ -5,7 +5,8 @@ import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { TableColumn } from 'react-data-table-component'
-import { HiBolt } from 'react-icons/hi2'
+import { HiDotsVertical, HiRefresh } from 'react-icons/hi'
+import { HiBolt, HiEye, HiPencilSquare, HiTrash } from 'react-icons/hi2'
 import { toast } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
 import {
@@ -14,6 +15,10 @@ import {
   CardBody,
   Col,
   Container,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   FormGroup,
   Input,
   InputGroup,
@@ -22,6 +27,8 @@ import {
 } from 'reactstrap'
 import Swal from 'sweetalert2'
 
+import { Can } from '@/components/backend/Guards/Can'
+import { CanAny } from '@/components/backend/Guards/CanAny'
 import { Avatar } from '@/components/common/Avatar'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
 import Table, { SelectChangeState } from '@/components/common/Table'
@@ -35,7 +42,7 @@ import {
   RESTORE_USER,
   RESTORE_USERS,
 } from '@/graphql/users'
-import { useAbility } from '@/hooks'
+import { useAbility, useAppSelector } from '@/hooks'
 import { Link } from '@/navigation'
 import { ActionEnum } from '@/types/action'
 import {
@@ -64,6 +71,8 @@ export const UsersList = () => {
     name: t('users').toLowerCase(),
   })
 
+  const { jwt } = useAppSelector((state) => state.auth)
+
   const defaultVariables: PaginatedInput = useMemo(() => {
     const variables: PaginatedInput = {
       page: 1,
@@ -72,7 +81,7 @@ export const UsersList = () => {
       where: {
         deletedAt: null,
         type: UserTypeEnum.CREDENTIAL,
-        AND: [],
+        AND: [{ id: { not: { in: [jwt?.id || '65a6cbf5cc661e98f1af152a'] } } }],
         OR: [],
       },
     }
@@ -81,7 +90,7 @@ export const UsersList = () => {
     if (variables.where?.OR?.length === 0) delete variables.where.OR
 
     return variables
-  }, [])
+  }, [jwt])
 
   const [cardTitle, setCardTitle] = useState(pageTitle)
   const [cardDescription, setCardDescription] = useState(pageDescription)
@@ -92,6 +101,7 @@ export const UsersList = () => {
   const [toggleCleared, setToggleCleared] = useState(false)
   const [displayError, setDisplayError] = useState(true)
   const [isTrash, setIsTrash] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState<any>({})
   const [variables, setVariables] = useState<PaginatedInput>(defaultVariables)
 
   const [removeUser] = useMutation(REMOVE_USER)
@@ -109,6 +119,19 @@ export const UsersList = () => {
     variables,
   })
 
+  const toggleDropdown = useCallback(
+    (id: string) => {
+      setDropdownOpen({
+        ...Object.keys(dropdownOpen).reduce(
+          (acc, cur) => ({ ...acc, [cur]: false }),
+          {}
+        ),
+        [id]: !dropdownOpen[id],
+      })
+    },
+    [dropdownOpen]
+  )
+
   const handleSelectedRows = useCallback((state: SelectChangeState<User>) => {
     setSelectedRows(state.selectedRows)
   }, [])
@@ -124,7 +147,7 @@ export const UsersList = () => {
       const where: FindManyInput = {
         deletedAt: null,
         type: UserTypeEnum.CREDENTIAL,
-        AND: [],
+        AND: [{ id: { not: { in: [jwt?.id || '65a6cbf5cc661e98f1af152a'] } } }],
         OR: [],
       }
 
@@ -166,6 +189,7 @@ export const UsersList = () => {
       setVariables({ ...variables, page: 1, where })
     },
     [
+      jwt,
       isTrash,
       filterText,
       pageDescription,
@@ -184,6 +208,12 @@ export const UsersList = () => {
     setCardDescription(pageDescription)
     await handleUsers().then(({ data }) => {
       setRows(data?.paginatedUser.data || [])
+      setDropdownOpen(
+        data?.paginatedUser.data.reduce(
+          (acc, cur) => ({ ...acc, [cur.id]: false }),
+          {}
+        )
+      )
       setTotalRows(data?.paginatedUser.meta.total || 0)
     })
   }, [defaultVariables, handleUsers, pageDescription, pageTitle])
@@ -315,8 +345,11 @@ export const UsersList = () => {
   ])
 
   const handleDelete = useCallback(
-    async (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-      e.preventDefault()
+    async (
+      e: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLElement>,
+      id: string
+    ) => {
+      e?.preventDefault()
 
       Swal.fire({
         title: t('confirmation'),
@@ -359,8 +392,11 @@ export const UsersList = () => {
   )
 
   const handleRestore = useCallback(
-    async (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-      e.preventDefault()
+    async (
+      e: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLElement>,
+      id: string
+    ) => {
+      e?.preventDefault()
 
       Swal.fire({
         title: t('confirmation'),
@@ -402,6 +438,7 @@ export const UsersList = () => {
               name={row.name}
               size={32}
               className="me-2"
+              rounded
             />
             {row.name}
           </>
@@ -436,53 +473,102 @@ export const UsersList = () => {
       {
         name: <HiBolt className="h-4 w-4" />,
         center: true,
-        width: '80px',
+        width: '70px',
         cell: (row) => (
-          <ul className="action">
-            {ability.can(ActionEnum.Update, Subjects.User) && !isTrash && (
-              <li className="edit">
-                <Link
-                  href={`/backend/system/users/edit/${row.id}`}
-                  data-tooltip-content={t('editName', { name: row.name })}
-                  data-tooltip-id="tooltip"
+          <CanAny
+            acls={[
+              { action: ActionEnum.Read, subject: Subjects.User },
+              { action: ActionEnum.Update, subject: Subjects.User },
+              { action: ActionEnum.Delete, subject: Subjects.User },
+              { action: ActionEnum.Manage, subject: Subjects.User },
+            ]}
+          >
+            <Dropdown
+              isOpen={dropdownOpen[row.id] ?? false}
+              toggle={() => toggleDropdown(row.id)}
+            >
+              <DropdownToggle
+                color="transparent"
+                className="btn-dotted d-flex align-items-start justify-content-center"
+                caret={false}
+              >
+                <HiDotsVertical />
+              </DropdownToggle>
+              <DropdownMenu flip>
+                <DropdownItem
+                  header
+                  className="d-flex justify-content-center align-items-center"
                 >
-                  <i className="fa fa-pencil-square-o" />
-                </Link>
-              </li>
-            )}
-            {ability.can(ActionEnum.Delete, Subjects.User) && isTrash && (
-              <li className="restore">
-                <Link
-                  href="#!"
-                  onClick={(e) => handleRestore(e, row.id)}
-                  data-tooltip-content={t('restoreName', { name: row.name })}
-                  data-tooltip-id="tooltip"
+                  {t('actions')}
+                </DropdownItem>
+                <Can action={ActionEnum.Read} subject={Subjects.User}>
+                  <DropdownItem
+                    className="d-flex justify-content-start align-items-center"
+                    href={`/backend/system/users/view/${row.id}`}
+                    tag={Link}
+                  >
+                    <HiEye className="me-2" />
+                    {t('viewName', { name: t('user') })}
+                  </DropdownItem>
+                </Can>
+                {!isTrash && (
+                  <CanAny
+                    acls={[
+                      { action: ActionEnum.Update, subject: Subjects.User },
+                      { action: ActionEnum.Manage, subject: Subjects.User },
+                    ]}
+                  >
+                    <DropdownItem
+                      className="d-flex justify-content-start align-items-center"
+                      href={`/backend/system/users/edit/${row.id}`}
+                      tag={Link}
+                    >
+                      <HiPencilSquare className="me-2" />
+                      {t('editName', { name: t('user') })}
+                    </DropdownItem>
+                  </CanAny>
+                )}
+                {isTrash && (
+                  <CanAny
+                    acls={[
+                      { action: ActionEnum.Delete, subject: Subjects.User },
+                      { action: ActionEnum.Manage, subject: Subjects.User },
+                    ]}
+                  >
+                    <DropdownItem
+                      className="d-flex justify-content-start align-items-center"
+                      href="#!"
+                      onClick={(e) => handleRestore(e, row.id)}
+                      tag={Link}
+                    >
+                      <HiRefresh className="me-2" />
+                      {t('restoreName', { name: t('user') })}
+                    </DropdownItem>
+                  </CanAny>
+                )}
+                <CanAny
+                  acls={[
+                    { action: ActionEnum.Delete, subject: Subjects.User },
+                    { action: ActionEnum.Manage, subject: Subjects.User },
+                  ]}
                 >
-                  <i className="fa fa-undo" />
-                </Link>
-              </li>
-            )}
-            {ability.can(ActionEnum.Delete, Subjects.User) && (
-              <li className="delete">
-                <Link
-                  href="#!"
-                  onClick={(e) => handleDelete(e, row.id)}
-                  data-tooltip-id="tooltip"
-                  data-tooltip-content={
-                    isTrash
-                      ? t('deleteName', { name: row.name })
-                      : t('removeName', { name: row.name })
-                  }
-                >
-                  <i className="fa fa-trash-o" />
-                </Link>
-              </li>
-            )}
-          </ul>
+                  <DropdownItem
+                    className="d-flex justify-content-start align-items-center"
+                    href="#!"
+                    onClick={(e) => handleDelete(e, row.id)}
+                    tag={Link}
+                  >
+                    <HiTrash className="me-2" />
+                    {t('deleteName', { name: t('user') })}
+                  </DropdownItem>
+                </CanAny>
+              </DropdownMenu>
+            </Dropdown>
+          </CanAny>
         ),
       },
     ],
-    [t, ability, isTrash, handleRestore, handleDelete]
+    [t, dropdownOpen, isTrash, toggleDropdown, handleRestore, handleDelete]
   )
 
   const subHeaderComponentMemo = useMemo(() => {
@@ -548,6 +634,12 @@ export const UsersList = () => {
     }
     if (data) {
       setRows(data.paginatedUser.data)
+      setDropdownOpen(
+        data.paginatedUser.data.reduce(
+          (acc, cur) => ({ ...acc, [cur.id]: false }),
+          {}
+        )
+      )
       setTotalRows(data.paginatedUser.meta.total)
     }
   }, [error, data, pageTitle, pageDescription, displayError])

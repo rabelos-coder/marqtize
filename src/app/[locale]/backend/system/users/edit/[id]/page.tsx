@@ -5,29 +5,29 @@ import { Breadcrumbs } from '@/components/backend/Breadcrumbs'
 import { AclGuard } from '@/components/backend/Guards/AclGuard'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
 import { concatTitle } from '@/utils/helpers'
-import { GroupsForm } from '@/views/backend/system/groups/GroupsForm'
+import { UsersForm } from '@/views/backend/system/users/UsersForm'
 
 export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
-  const title = concatTitle(t('createName', { name: t('role') }))
+  const title = concatTitle(t('updateName', { name: t('user') }))
 
   return {
     title,
   }
 }
 
-export default async function RoleCreatePage({ params: { locale } }: any) {
+export default async function UserEditPage({ params: { locale, id } }: any) {
   const t = await getTranslations({ locale })
-  const title = t('createName', { name: t('role') })
-  const pageTitle = t('role')
+  const title = t('editName', { name: t('user') })
+  const pageTitle = t('user')
 
   return (
-    <AclGuard acl={{ action: 'Create', subject: 'Role' }}>
+    <AclGuard acl={{ action: 'Update', subject: 'User' }}>
       <div className="page-body">
         <Breadcrumbs
           title={title}
           pageTitle={pageTitle}
-          subParent={t('roles')}
+          subParent={t('users')}
         />
         <Container fluid>
           <Row>
@@ -35,12 +35,12 @@ export default async function RoleCreatePage({ params: { locale } }: any) {
               <Card className="height-equal">
                 <CommonCardHeading
                   smallHeading={title}
-                  span={t('createFormAboutName', {
+                  span={t('editFormAboutName', {
                     gender: 'male',
-                    name: t('role').toLowerCase(),
+                    name: t('user').toLowerCase(),
                   })}
                 />
-                <GroupsForm mode="create" />
+                <UsersForm mode="update" id={id} />
               </Card>
             </Col>
           </Row>

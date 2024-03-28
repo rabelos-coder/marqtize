@@ -6,7 +6,7 @@ import { Breadcrumbs } from '@/components/backend/Breadcrumbs'
 import { AclGuard } from '@/components/backend/Guards/AclGuard'
 import { STORAGE_AUTH_TOKEN } from '@/configs'
 import { WHO_AM_I } from '@/graphql/auth'
-import { FIND_TIMEZONES } from '@/graphql/localization'
+import { FIND_MANY_TIMEZONES } from '@/graphql/localization'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import EditMyProfile from '@/views/backend/system/profile/EditMyProfile'
@@ -37,7 +37,7 @@ export default async function ProfilePage({ params: { locale } }: any) {
   })
 
   const { data: timezonesData } = await client.query({
-    query: FIND_TIMEZONES,
+    query: FIND_MANY_TIMEZONES,
   })
 
   const languages: Array<{ label: string; value: string }> = [

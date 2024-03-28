@@ -5,29 +5,29 @@ import { Breadcrumbs } from '@/components/backend/Breadcrumbs'
 import { AclGuard } from '@/components/backend/Guards/AclGuard'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
 import { concatTitle } from '@/utils/helpers'
-import { GroupsForm } from '@/views/backend/system/groups/GroupsForm'
+import { UsersView } from '@/views/backend/system/users/UsersView'
 
 export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
-  const title = concatTitle(t('createName', { name: t('role') }))
+  const title = concatTitle(t('viewName', { name: t('user') }))
 
   return {
     title,
   }
 }
 
-export default async function RoleCreatePage({ params: { locale } }: any) {
+export default async function UserViewPage({ params: { locale, id } }: any) {
   const t = await getTranslations({ locale })
-  const title = t('createName', { name: t('role') })
-  const pageTitle = t('role')
+  const title = t('viewName', { name: t('user') })
+  const pageTitle = t('user')
 
   return (
-    <AclGuard acl={{ action: 'Create', subject: 'Role' }}>
+    <AclGuard acl={{ action: 'Read', subject: 'User' }}>
       <div className="page-body">
         <Breadcrumbs
           title={title}
           pageTitle={pageTitle}
-          subParent={t('roles')}
+          subParent={t('users')}
         />
         <Container fluid>
           <Row>
@@ -35,12 +35,12 @@ export default async function RoleCreatePage({ params: { locale } }: any) {
               <Card className="height-equal">
                 <CommonCardHeading
                   smallHeading={title}
-                  span={t('createFormAboutName', {
+                  span={t('viewFormAboutName', {
                     gender: 'male',
-                    name: t('role').toLowerCase(),
+                    name: t('user').toLowerCase(),
                   })}
                 />
-                <GroupsForm mode="create" />
+                <UsersView id={id} />
               </Card>
             </Col>
           </Row>

@@ -5,24 +5,24 @@ import { Breadcrumbs } from '@/components/backend/Breadcrumbs'
 import { AclGuard } from '@/components/backend/Guards/AclGuard'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
 import { concatTitle } from '@/utils/helpers'
-import { GroupsForm } from '@/views/backend/system/groups/GroupsForm'
+import { GroupsView } from '@/views/backend/system/groups/GroupsView'
 
 export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
-  const title = concatTitle(t('createName', { name: t('role') }))
+  const title = concatTitle(t('viewName', { name: t('role') }))
 
   return {
     title,
   }
 }
 
-export default async function RoleCreatePage({ params: { locale } }: any) {
+export default async function RoleViewPage({ params: { locale, id } }: any) {
   const t = await getTranslations({ locale })
-  const title = t('createName', { name: t('role') })
+  const title = t('viewName', { name: t('role') })
   const pageTitle = t('role')
 
   return (
-    <AclGuard acl={{ action: 'Create', subject: 'Role' }}>
+    <AclGuard acl={{ action: 'Read', subject: 'Role' }}>
       <div className="page-body">
         <Breadcrumbs
           title={title}
@@ -35,12 +35,12 @@ export default async function RoleCreatePage({ params: { locale } }: any) {
               <Card className="height-equal">
                 <CommonCardHeading
                   smallHeading={title}
-                  span={t('createFormAboutName', {
+                  span={t('viewFormAboutName', {
                     gender: 'male',
                     name: t('role').toLowerCase(),
                   })}
                 />
-                <GroupsForm mode="create" />
+                <GroupsView id={id} />
               </Card>
             </Col>
           </Row>

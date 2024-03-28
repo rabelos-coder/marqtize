@@ -107,7 +107,9 @@ const EditProfileForm = ({ user, timezones, languages }: EditProfileProps) => {
           <Row>
             <Col sm={6} md={6}>
               <FormGroup>
-                <Label htmlFor="name">{t('name')}</Label>
+                <Label for="name" className="fw-bold required">
+                  {t('name')}
+                </Label>
                 <Controller
                   name="name"
                   disabled={loading}
@@ -131,7 +133,9 @@ const EditProfileForm = ({ user, timezones, languages }: EditProfileProps) => {
             </Col>
             <Col sm={6} md={6}>
               <FormGroup>
-                <Label htmlFor="systemName">{t('systemName')}</Label>
+                <Label for="systemName" className="fw-bold required">
+                  {t('systemName')}
+                </Label>
                 <Controller
                   name="systemName"
                   control={control}
@@ -154,7 +158,7 @@ const EditProfileForm = ({ user, timezones, languages }: EditProfileProps) => {
             </Col>
             <Col md={12}>
               <FormGroup>
-                <Label>{t('language')}</Label>
+                <Label className="fw-bold required">{t('language')}</Label>
                 <Controller
                   name="language"
                   control={control}
@@ -203,7 +207,7 @@ const EditProfileForm = ({ user, timezones, languages }: EditProfileProps) => {
               </FormGroup>
             </Col>
             <Col md={12}>
-              <Label>{t('timezone')}</Label>
+              <Label className="fw-bold required">{t('timezone')}</Label>
               <Controller
                 name="timezoneId"
                 control={control}

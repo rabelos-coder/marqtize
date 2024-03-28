@@ -16,23 +16,28 @@ export async function generateMetadata({ params: { locale } }: any) {
   }
 }
 
-export default async function RoleCreatePage({ params: { locale, id } }: any) {
+export default async function RoleEditPage({ params: { locale, id } }: any) {
   const t = await getTranslations({ locale })
-  const title = t('updateName', { name: t('role') })
+  const title = t('editName', { name: t('role') })
+  const pageTitle = t('role')
 
   return (
     <AclGuard acl={{ action: 'Update', subject: 'Role' }}>
       <div className="page-body">
-        <Breadcrumbs title={title} pageTitle={title} subParent={t('roles')} />
+        <Breadcrumbs
+          title={title}
+          pageTitle={pageTitle}
+          subParent={t('roles')}
+        />
         <Container fluid>
           <Row>
             <Col sm="12">
               <Card className="height-equal">
                 <CommonCardHeading
                   smallHeading={title}
-                  span={t('seeInformationAboutName', {
+                  span={t('editFormAboutName', {
                     gender: 'male',
-                    name: t('roles').toLowerCase(),
+                    name: t('role').toLowerCase(),
                   })}
                 />
                 <GroupsForm mode="update" id={id} />

@@ -1,6 +1,6 @@
 import { Account } from './account'
 import { UserAccount, UserSession } from './auth'
-import { PaginatedObject, Upload } from './common'
+import { PaginatedObject } from './common'
 import { UserType, UserTypeEnum } from './enums'
 import { Language } from './language'
 import { Role } from './role'
@@ -84,19 +84,20 @@ export type RestoreManyUser = {
   restoreManyUser: boolean
 }
 
-type UserInput = {
-  accountId?: string
+export type UserInput = {
+  accountId?: string | null
   name: string
   systemName: string
   email: string
-  password: string
-  image?: string
-  imageFile?: Upload
+  password?: string | null
+  image?: string | null
+  imageFile?: File | null
+  removeImage?: boolean
   isActive: boolean
   isSuperAdmin: boolean
   language: string
   type: UserTypeEnum
-  timezoneId: string
+  timezoneId?: string | null
   claims?: string[]
   roles?: string[]
 }

@@ -1,19 +1,21 @@
-import { Roboto } from 'next/font/google'
-import { Container } from 'reactstrap'
+import { headers } from 'next/headers'
+import { getTranslations } from 'next-intl/server'
 
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['500', '700'],
-  display: 'swap',
-  preload: true,
-})
+import { concatTitle } from '@/utils/helpers'
+import { DefaultPage } from '@/views/frontend/sub-domains/DefaultPage'
 
-export default function SubDomainPage({ params: { locale, subdomain } }: any) {
-  return (
-    <Container>
-      <h1 className={` fw-bold ${roboto.className}`}>
-        Page Sub-domain {subdomain} em {locale}
-      </h1>
-    </Container>
-  )
+export async function generateMetadata({ params: { locale } }: any) {
+  const t = await getTranslations({ locale })
+  const title = concatTitle(t('support'))
+
+  return {
+    title,
+  }
+}
+
+export default async function SubDomainPage({ params: { subdomain } }: any) {
+  const header = headers()
+  const host = header.get('host') ?? ''
+
+  return <DefaultPage host={host} slug={subdomain} />
 }

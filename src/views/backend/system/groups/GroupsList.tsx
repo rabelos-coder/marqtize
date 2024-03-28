@@ -5,7 +5,8 @@ import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { TableColumn } from 'react-data-table-component'
-import { HiBolt } from 'react-icons/hi2'
+import { HiDotsVertical, HiRefresh } from 'react-icons/hi'
+import { HiBolt, HiEye, HiPencilSquare, HiTrash } from 'react-icons/hi2'
 import { toast } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
 import {
@@ -14,6 +15,10 @@ import {
   CardBody,
   Col,
   Container,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
   FormGroup,
   Input,
   InputGroup,
@@ -22,6 +27,8 @@ import {
 } from 'reactstrap'
 import Swal from 'sweetalert2'
 
+import { Can } from '@/components/backend/Guards/Can'
+import { CanAny } from '@/components/backend/Guards/CanAny'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
 import Table, { SelectChangeState } from '@/components/common/Table'
 import { APP_PAGINATION } from '@/environment'
@@ -85,6 +92,7 @@ export const GroupsList = () => {
   const [toggleCleared, setToggleCleared] = useState(false)
   const [displayError, setDisplayError] = useState(true)
   const [isTrash, setIsTrash] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState<any>({})
   const [variables, setVariables] = useState<PaginatedInput>(defaultVariables)
 
   const [removeRole] = useMutation(REMOVE_ROLE)
@@ -101,6 +109,19 @@ export const GroupsList = () => {
     fetchPolicy: 'no-cache',
     variables,
   })
+
+  const toggleDropdown = useCallback(
+    (id: string) => {
+      setDropdownOpen({
+        ...Object.keys(dropdownOpen).reduce(
+          (acc, cur) => ({ ...acc, [cur]: false }),
+          {}
+        ),
+        [id]: !dropdownOpen[id],
+      })
+    },
+    [dropdownOpen]
+  )
 
   const handleSelectedRows = useCallback((state: SelectChangeState<Role>) => {
     setSelectedRows(state.selectedRows)
@@ -170,6 +191,12 @@ export const GroupsList = () => {
     setCardDescription(pageDescription)
     await handleRoles().then(({ data }) => {
       setRows(data?.paginatedRole.data || [])
+      setDropdownOpen(
+        data?.paginatedRole.data.reduce(
+          (acc, cur) => ({ ...acc, [cur.id]: false }),
+          {}
+        )
+      )
       setTotalRows(data?.paginatedRole.meta.total || 0)
     })
   }, [defaultVariables, handleRoles, pageDescription, pageTitle])
@@ -303,8 +330,11 @@ export const GroupsList = () => {
   ])
 
   const handleDelete = useCallback(
-    async (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-      e.preventDefault()
+    async (
+      e: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLElement>,
+      id: string
+    ) => {
+      e?.preventDefault()
 
       Swal.fire({
         title: t('confirmation'),
@@ -347,8 +377,11 @@ export const GroupsList = () => {
   )
 
   const handleRestore = useCallback(
-    async (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-      e.preventDefault()
+    async (
+      e: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLElement>,
+      id: string
+    ) => {
+      e?.preventDefault()
 
       Swal.fire({
         title: t('confirmation'),
@@ -394,54 +427,104 @@ export const GroupsList = () => {
       {
         name: <HiBolt className="h-4 w-4" />,
         center: true,
-        width: '80px',
+        width: '70px',
         cell: (row) => (
-          <ul className="action">
-            {ability.can(ActionEnum.Update, Subjects.Role) && !isTrash && (
-              <li className="edit">
-                <Link
-                  href={`/backend/system/groups/edit/${row.id}`}
-                  data-tooltip-content={t('editName', { name: row.name })}
-                  data-tooltip-id="tooltip"
+          <CanAny
+            acls={[
+              { action: ActionEnum.Read, subject: Subjects.Role },
+              { action: ActionEnum.Update, subject: Subjects.Role },
+              { action: ActionEnum.Delete, subject: Subjects.Role },
+              { action: ActionEnum.Manage, subject: Subjects.Role },
+            ]}
+          >
+            <Dropdown
+              isOpen={dropdownOpen[row.id] ?? false}
+              toggle={() => toggleDropdown(row.id)}
+            >
+              <DropdownToggle
+                color="transparent"
+                className="btn-dotted d-flex align-items-start justify-content-center"
+                caret={false}
+              >
+                <HiDotsVertical />
+              </DropdownToggle>
+              <DropdownMenu flip>
+                <DropdownItem
+                  header
+                  className="d-flex justify-content-center align-items-center"
                 >
-                  <i className="fa fa-pencil-square-o" />
-                </Link>
-              </li>
-            )}
-            {ability.can(ActionEnum.Delete, Subjects.Role) && isTrash && (
-              <li className="restore">
-                <Link
-                  href="#!"
-                  onClick={(e) => handleRestore(e, row.id)}
-                  data-tooltip-content={t('restoreName', { name: row.name })}
-                  data-tooltip-id="tooltip"
-                >
-                  <i className="fa fa-undo" />
-                </Link>
-              </li>
-            )}
-            {ability.can(ActionEnum.Delete, Subjects.Role) &&
-              row.isDeleteable && (
-                <li className="delete">
-                  <Link
-                    href="#!"
-                    onClick={(e) => handleDelete(e, row.id)}
-                    data-tooltip-id="tooltip"
-                    data-tooltip-content={
-                      isTrash
-                        ? t('deleteName', { name: row.name })
-                        : t('removeName', { name: row.name })
-                    }
+                  {t('actions')}
+                </DropdownItem>
+                <Can action={ActionEnum.Read} subject={Subjects.Role}>
+                  <DropdownItem
+                    className="d-flex justify-content-start align-items-center"
+                    href={`/backend/system/groups/view/${row.id}`}
+                    tag={Link}
                   >
-                    <i className="fa fa-trash-o" />
-                  </Link>
-                </li>
-              )}
-          </ul>
+                    <HiEye className="me-2" />
+                    {t('viewName', { name: t('role') })}
+                  </DropdownItem>
+                </Can>
+                {!isTrash && (
+                  <CanAny
+                    acls={[
+                      { action: ActionEnum.Update, subject: Subjects.Role },
+                      { action: ActionEnum.Manage, subject: Subjects.Role },
+                    ]}
+                  >
+                    <DropdownItem
+                      className="d-flex justify-content-start align-items-center"
+                      href={`/backend/system/groups/edit/${row.id}`}
+                      tag={Link}
+                    >
+                      <HiPencilSquare className="me-2" />
+                      {t('editName', { name: t('role') })}
+                    </DropdownItem>
+                  </CanAny>
+                )}
+                {isTrash && (
+                  <CanAny
+                    acls={[
+                      { action: ActionEnum.Delete, subject: Subjects.Role },
+                      { action: ActionEnum.Manage, subject: Subjects.Role },
+                    ]}
+                  >
+                    <DropdownItem
+                      className="d-flex justify-content-start align-items-center"
+                      href="#!"
+                      onClick={(e) => handleRestore(e, row.id)}
+                      tag={Link}
+                    >
+                      <HiRefresh className="me-2" />
+                      {t('restoreName', { name: t('role') })}
+                    </DropdownItem>
+                  </CanAny>
+                )}
+                {row.isDeleteable && (
+                  <CanAny
+                    acls={[
+                      { action: ActionEnum.Delete, subject: Subjects.Role },
+                      { action: ActionEnum.Manage, subject: Subjects.Role },
+                    ]}
+                  >
+                    <DropdownItem
+                      className="d-flex justify-content-start align-items-center"
+                      href="#!"
+                      onClick={(e) => handleDelete(e, row.id)}
+                      tag={Link}
+                    >
+                      <HiTrash className="me-2" />
+                      {t('deleteName', { name: t('role') })}
+                    </DropdownItem>
+                  </CanAny>
+                )}
+              </DropdownMenu>
+            </Dropdown>
+          </CanAny>
         ),
       },
     ],
-    [t, ability, isTrash, handleRestore, handleDelete]
+    [t, dropdownOpen, isTrash, toggleDropdown, handleRestore, handleDelete]
   )
 
   const subHeaderComponentMemo = useMemo(() => {
@@ -507,6 +590,12 @@ export const GroupsList = () => {
     }
     if (data) {
       setRows(data.paginatedRole.data)
+      setDropdownOpen(
+        data.paginatedRole.data.reduce(
+          (acc, cur) => ({ ...acc, [cur.id]: false }),
+          {}
+        )
+      )
       setTotalRows(data.paginatedRole.meta.total)
     }
   }, [error, data, pageTitle, pageDescription, displayError])
@@ -517,7 +606,7 @@ export const GroupsList = () => {
         <CommonCardHeading smallHeading={cardTitle} span={cardDescription} />
         <CardBody>
           <Tooltip id="tooltip" />
-          <div className="table-responsive">
+          <div className="table-responsive d-flex">
             <Table
               data={rows}
               columns={columns}
