@@ -51,7 +51,7 @@ export const DefaultPage = ({ host, slug }: Props) => {
     <div className="d-flex align-items-center justify-content-center vh-100">
       <div className="text-center">
         <h1 className={`display-5 fw-bold ${roboto.className}`}>
-          {siteAccount?.tradingName ?? (
+          {siteAccount?.systemName || siteAccount?.tradingName || (
             <span className="text-capitalize">{slug}</span>
           )}
         </h1>
