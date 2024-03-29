@@ -47,7 +47,12 @@ export const CookieConsent = () => {
         {t('knowMore')}
       </Link>
       .
-      <Button color="warning" size="sm" className="ms-3" onClick={acceptCookie}>
+      <Button
+        color="warning"
+        size="sm"
+        className="ms-3 text-white"
+        onClick={acceptCookie}
+      >
         {t('iGotIt')}
       </Button>
     </div>
