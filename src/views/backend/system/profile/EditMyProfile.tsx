@@ -21,6 +21,7 @@ import {
 import Sawl from 'sweetalert2'
 import * as yup from 'yup'
 
+import { Avatar } from '@/components/common/Avatar'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
 import { UPDATE_PROFILE } from '@/graphql/auth'
@@ -34,8 +35,6 @@ type FormData = {
   passwordConfirmation?: string | null
   imageFile?: File | null
 }
-
-const defaultImageUrl = '/assets/images/user/user.jpg'
 
 const EditMyProfile = () => {
   const t = useTranslations()
@@ -112,7 +111,7 @@ const EditMyProfile = () => {
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false)
   const [imageFile, setImageFile] = useState<File | null>(null)
-  const [imgSrc, setImgSrc] = useState(defaultImageUrl)
+  const [imgSrc, setImgSrc] = useState('')
 
   const { jwt, user } = useAuth()
   const [updateProfile, { loading }] = useMutation(UPDATE_PROFILE, {
@@ -188,7 +187,7 @@ const EditMyProfile = () => {
       cancelButtonText: t('no'),
     }).then(({ isConfirmed }) => {
       if (isConfirmed) {
-        setImgSrc(defaultImageUrl)
+        setImgSrc('')
         setImageFile(null)
         setRemoveImage(true)
         toast.success(t('removeProfilePhotoSuccess'))
@@ -197,7 +196,7 @@ const EditMyProfile = () => {
   }
 
   useEffect(() => {
-    if (user?.image) setImgSrc(user?.image)
+    if (user?.image) setImgSrc(user?.image ?? '')
   }, [user?.image])
 
   return (
@@ -218,10 +217,11 @@ const EditMyProfile = () => {
                 <div className="hovercard">
                   <div className="user-image">
                     <div className="avatar">
-                      <img
+                      <Avatar
+                        image={imgSrc ?? null}
+                        name={user?.name ?? 'User'}
+                        size={70}
                         className="img-70 rounded-circle"
-                        alt=""
-                        src={imgSrc}
                       />
                     </div>
                     <input

@@ -443,7 +443,7 @@ export const UsersList = () => {
               image={row.image}
               name={row.name}
               size={32}
-              className="me-2"
+              className="img-fluid table-avatar me-2"
               rounded
             />
             {row.name}

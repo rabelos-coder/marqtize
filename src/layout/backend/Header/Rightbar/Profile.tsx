@@ -10,6 +10,7 @@ import {
 import { toast } from 'react-toastify'
 import Sawl from 'sweetalert2'
 
+import { Avatar } from '@/components/common/Avatar'
 import { ProfileListData } from '@/configs/profile'
 import { useAppDispatch, useAuth } from '@/hooks'
 import { setLoading } from '@/store/slices/themeSlice'
@@ -39,12 +40,12 @@ const Profile = () => {
   return (
     <li className="profile-nav onhover-dropdown pe-0 py-0">
       <div className="media profile-media">
-        <img
+        <Avatar
+          image={user?.image ?? null}
+          name={user?.name ?? 'User'}
+          size={35}
           className="b-r-10"
-          src={user?.image ?? '/assets/images/user/user.jpg'}
-          alt={user?.systemName}
-          width={35}
-          height={35}
+          rounded
         />
         <div className="media-body">
           <span>{user?.systemName}</span>

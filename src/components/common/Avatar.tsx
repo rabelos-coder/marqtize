@@ -1,11 +1,13 @@
 'use client'
 
 import Image from 'next/image'
+import { v4 as uuidv4 } from 'uuid'
 
 export type AvatarProps = {
   name: string
+  id?: string
   size?: number
-  image?: string
+  image?: string | null
   rounded?: boolean
   className?: string
 }
@@ -17,6 +19,7 @@ export type AvatarProps = {
  * @return {JSX.Element} The avatar component to be rendered.
  */
 export function Avatar({
+  id,
   name,
   size,
   image,
@@ -24,33 +27,37 @@ export function Avatar({
   className,
 }: AvatarProps): JSX.Element {
   const defaultSize = 50
-  const style = {
+  const style: any = {
     height: size ? `${size}px` : `${defaultSize}px`,
     width: size ? `${size}px` : `${defaultSize}px`,
-    borderRadius: rounded ? '100px' : 'none',
+    borderRadius: '100px',
   }
+
+  if (!rounded) delete style.borderRadius
 
   const imageUrl = decodeURIComponent(
     `/api/image/${size ?? defaultSize}/${name}`
   )
 
   return image ? (
-    <Image
+    <img
+      id={id ?? uuidv4()}
       src={`${image}`}
       alt={name}
       width={size ?? defaultSize}
       height={size ?? defaultSize}
       style={style}
-      className={`img-fluid table-avatar ${className}`}
+      className={`${className}`}
     />
   ) : (
     <Image
+      id={id ?? uuidv4()}
       src={imageUrl}
       alt={name}
       width={size ?? defaultSize}
       height={size ?? defaultSize}
       style={style}
-      className={`img-fluid table-avatar ${className}`}
+      className={`${className}`}
     />
   )
 }
