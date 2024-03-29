@@ -1,6 +1,7 @@
 'use client'
 
 import { Inter, Roboto } from 'next/font/google'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
@@ -50,6 +51,16 @@ export const DefaultPage = ({ host, slug }: Props) => {
   ) : account ? (
     <div className="d-flex align-items-center justify-content-center vh-100">
       <div className="text-center">
+        {siteAccount?.tradingLogo && (
+          <div className="d-flex align-items-center justify-content-center my-4">
+            <Image
+              src={siteAccount.tradingLogo}
+              alt={siteAccount.systemName ?? siteAccount.tradingName}
+              width={100}
+              height={100}
+            />
+          </div>
+        )}
         <h1 className={`display-5 fw-bold ${roboto.className}`}>
           {siteAccount?.systemName || siteAccount?.tradingName || (
             <span className="text-capitalize">{slug}</span>
