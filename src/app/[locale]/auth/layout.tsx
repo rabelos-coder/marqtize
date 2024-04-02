@@ -1,16 +1,17 @@
 import '../../assets/scss/app.scss'
 
 import { Metadata } from 'next/types'
+import { ReCaptchaProvider } from 'next-recaptcha-v3'
 import { ToastContainer } from 'react-toastify'
 
 import {
   APP_META_DESCRIPTION,
   APP_META_KEYWORDS,
   APP_META_SLOGAN,
+  RECAPTCHA_SITE_KEY,
 } from '@/environment'
 import { GuestLayout } from '@/layout/common/GuestLayout'
 import { AuthProvider } from '@/providers/AuthProvider'
-import { ChildrenProps } from '@/types/common'
 import { concatTitle, icons } from '@/utils/helpers'
 
 export function generateMetadata(): Metadata {
@@ -24,11 +25,16 @@ export function generateMetadata(): Metadata {
   }
 }
 
-export default function AuthLayout({ children }: ChildrenProps) {
+export default function AuthLayout({ children, params: { locale } }: any) {
   return (
-    <AuthProvider>
-      <GuestLayout>{children}</GuestLayout>
-      <ToastContainer />
-    </AuthProvider>
+    <ReCaptchaProvider
+      reCaptchaKey={RECAPTCHA_SITE_KEY}
+      language={locale === 'pt-br' ? 'pt-BR' : locale}
+    >
+      <AuthProvider>
+        <GuestLayout>{children}</GuestLayout>
+        <ToastContainer />
+      </AuthProvider>
+    </ReCaptchaProvider>
   )
 }

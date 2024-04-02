@@ -1,8 +1,10 @@
 'use client'
 
-import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useTranslations } from 'next-intl'
+import axios from 'axios'
+import { useLocale, useTranslations } from 'next-intl'
+import { useReCaptcha } from 'next-recaptcha-v3'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { Button, FormFeedback, FormGroup, Input, Label } from 'reactstrap'
@@ -11,7 +13,6 @@ import * as yup from 'yup'
 import { CommonLogo } from '@/components/common/CommonLogo'
 import { EMAIL_REGEX } from '@/configs'
 import { IS_DEVELOPMENT } from '@/environment'
-import { FORGOT_PASSWORD } from '@/graphql/auth'
 import { Link, useRouter } from '@/navigation'
 import { AuthFormProps } from '@/types/common'
 
@@ -28,9 +29,10 @@ const defaultValues = IS_DEVELOPMENT
     }
 
 export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
-  const [forgotPassword, { loading }] = useMutation(FORGOT_PASSWORD)
-
   const t = useTranslations()
+  const locale = useLocale()
+  const [disabled, setDisabled] = useState(false)
+  const { executeRecaptcha } = useReCaptcha()
 
   const schema = yup.object().shape({
     email: yup
@@ -56,21 +58,37 @@ export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
   const router = useRouter()
 
   const onSubmit = async (form: FormData) => {
-    const callbackUrl = `${window.location.protocol}//${window.location.host}/auth/reset-password`
-    await forgotPassword({
-      variables: {
-        data: { email: form.email, callbackUrl },
-      },
-    })
+    setDisabled(true)
+
+    const data = {
+      email: form.email ?? '',
+    }
+
+    const recaptcha = await executeRecaptcha('form_submit')
+
+    if (!recaptcha) {
+      toast.error(t('reCaptchaError'))
+
+      return
+    }
+
+    await axios
+      .post(`/api/auth/forgot-password`, data, {
+        headers: { recaptcha, locale },
+      })
       .then(({ data }) => {
-        if (data?.forgotPassword) {
+        if (data) {
           toast.success(t('forgotPasswordSuccess'))
           router.push('/auth/login')
         } else {
           toast.error(t('forgotPasswordError'))
         }
       })
-      .catch((error) => toast.error(error?.message ?? t('forgotPasswordError')))
+      .catch((error) =>
+        toast.error(error?.response?.data?.message ?? t('forgotPasswordError'))
+      )
+
+    setDisabled(false)
   }
 
   return (
@@ -95,13 +113,12 @@ export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
               <Controller
                 name="email"
                 control={control}
-                disabled={loading}
+                disabled={disabled}
                 rules={{ required: true }}
                 render={({ field: { name, ...rest } }) => (
                   <Input
                     id={name}
                     type="email"
-                    autoFocus
                     autoComplete="on"
                     placeholder={t('emailPlaceholder')}
                     invalid={Boolean(errors.email)}
@@ -119,7 +136,7 @@ export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
                   color="primary"
                   className="btn-block w-100"
                   type="submit"
-                  disabled={loading}
+                  disabled={disabled}
                 >
                   {t('resetPassword')}
                 </Button>

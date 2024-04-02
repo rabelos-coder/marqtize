@@ -116,7 +116,8 @@ export const UsersView = ({ id }: UsersViewProps) => {
                     {t('account')}:
                   </Col>
                   <Col lg={10} className="px-4 f-s-italic">
-                    {data?.findByIdUser?.account?.tradingName ??
+                    {data?.findByIdUser?.account?.systemName ??
+                      data?.findByIdUser?.account?.tradingName ??
                       t('none', {
                         gender: 'female',
                       })}

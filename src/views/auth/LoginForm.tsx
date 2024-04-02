@@ -1,9 +1,10 @@
 'use client'
 
-import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useLocale, useTranslations } from 'next-intl'
+import { useReCaptcha } from 'next-recaptcha-v3'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { FaFacebook, FaGoogle } from 'react-icons/fa'
 import { toast } from 'react-toastify'
@@ -13,14 +14,9 @@ import * as yup from 'yup'
 import { CommonLogo } from '@/components/common/CommonLogo'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
 import { IS_DEVELOPMENT, SERVER_URL } from '@/environment'
-import { LOGIN } from '@/graphql/auth'
-import { useAppDispatch, useAppSelector } from '@/hooks'
-import { Link, useRouter } from '@/navigation'
+import { useAppDispatch } from '@/hooks'
+import { Link } from '@/navigation'
 import { setAuth } from '@/store/slices/authSlice'
-import { setLoading } from '@/store/slices/themeSlice'
-import { LoginInput } from '@/types/auth'
-
-import { SpinnerBoxed } from '../../components/common/SpinnerBoxed'
 
 type AuthProps = {
   host?: string
@@ -46,12 +42,11 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
   const [disabled, setDisabled] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const [tradingName, setTradingName] = useState('')
-  const [login] = useMutation(LOGIN, { fetchPolicy: 'no-cache' })
 
   const t = useTranslations()
+  const locale = useLocale()
   const dispatch = useAppDispatch()
-  const { account, loading } = useAppSelector((state) => state.account)
+  const { executeRecaptcha } = useReCaptcha()
 
   const schema = yup.object().shape({
     email: yup
@@ -82,44 +77,47 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
     resolver: yupResolver(schema),
   })
 
-  const router = useRouter()
-
   const onSubmit = async (form: FormData) => {
     setDisabled(true)
 
-    const variables: LoginInput = {
-      data: { email: form.email, password: form.password, rememberMe },
+    const data = {
+      email: form.email ?? '',
+      password: form.password ?? '',
+      rememberMe,
     }
 
-    await login({ variables })
+    const recaptcha = await executeRecaptcha('form_submit')
+
+    if (!recaptcha) {
+      toast.error(t('reCaptchaError'))
+
+      return
+    }
+
+    await axios
+      .post(`/api/auth/login`, data, { headers: { recaptcha, locale } })
       .then(({ data }) => {
-        if (data?.login) {
+        if (data) {
           const {
             user: { language },
-          } = data.login
+          } = data
           toast.success(t('loginSuccess'))
           const locale = language.replace('_', '-').toLowerCase()
-          dispatch(setAuth(data.login))
+          dispatch(setAuth(data))
 
-          router.replace('/backend', { locale })
-          router.refresh()
+          window.location.href = `/${locale}/backend`
         } else {
           toast.error(t('loginError'))
         }
       })
-      .catch((error) => toast.error(error?.message ?? t('loginError')))
+      .catch((error) =>
+        toast.error(error?.response?.data?.message ?? t('loginError'))
+      )
 
     setDisabled(false)
   }
 
-  useEffect(() => {
-    dispatch(setLoading(false))
-    if (account) setTradingName(account.tradingName ?? account.systemName)
-  }, [dispatch, account])
-
-  return loading ? (
-    <SpinnerBoxed type="grow" />
-  ) : (
+  return (
     <div className="login-card login-dark">
       <div>
         <div>
@@ -132,16 +130,10 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
             autoComplete="off"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h4>
-              {tradingName
-                ? t('signInToAccountName', {
-                    name: tradingName,
-                  })
-                : t('signInToAccount')}
-            </h4>
+            <h4>{t('signInToAccount')}</h4>
             <p>{t('signInToAccountInfo')}</p>
             <FormGroup>
-              <Label htmlFor="email" className="col-form-label">
+              <Label for="email" className="col-form-label required">
                 {t('email')}
               </Label>
               <Controller
@@ -165,7 +157,7 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
               </FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="password" className="col-form-label">
+              <Label for="password" className="col-form-label required">
                 {t('password')}
               </Label>
               <div className="form-input position-relative">
@@ -202,6 +194,7 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
                 <Input
                   id="rememberMe"
                   type="checkbox"
+                  disabled={disabled}
                   onChange={() => setRememberMe(!rememberMe)}
                 />
                 <Label className="text-muted" htmlFor="rememberMe">
@@ -225,24 +218,28 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
             <h6 className="text-muted mt-4 or">{t('orSignInWith')}</h6>
             <div className="social mt-4">
               <div className="btn-showcase">
-                <Link
-                  className="btn btn-light"
-                  href={`${SERVER_URL}/auth/facebook`}
-                  rel="noreferrer"
+                <Button
+                  color="light"
+                  onClick={() =>
+                    (window.location.href = `${SERVER_URL}/auth/facebook`)
+                  }
+                  disabled={disabled}
                   title={t('facebook')}
                 >
                   <FaFacebook className="social-icon txt-facebook" />
                   {t('facebook')}
-                </Link>
-                <Link
-                  className="btn btn-light"
-                  href={`${SERVER_URL}/auth/google`}
-                  rel="noreferrer"
+                </Button>
+                <Button
+                  color="light"
+                  onClick={() =>
+                    (window.location.href = `${SERVER_URL}/auth/google`)
+                  }
+                  disabled={disabled}
                   title={t('google')}
                 >
                   <FaGoogle className="social-icon txt-google" />
                   {t('google')}
-                </Link>
+                </Button>
               </div>
             </div>
             <p className="mt-4 mb-0 text-center">

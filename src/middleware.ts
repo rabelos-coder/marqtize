@@ -39,48 +39,60 @@ export default function middleware(request: NextRequest) {
   if (!!request.cookies.get(STORAGE_TIMEZONE)?.value)
     request.cookies.set(STORAGE_TIMEZONE, timezone)
 
+  const isApi = url.pathname.split('/').includes('api')
   const isAuth = url.pathname.split('/').includes('auth')
   const isBackend = url.pathname.split('/').includes('backend')
 
-  if (isBackend && !token && !isAuth) {
-    return NextResponse.redirect(new URL(`/${locale}/auth/login`, request.url))
-  } else if (isBackend && token && !isAuth) {
-    try {
-      const { exp } = jwtDecode(token) as JWT
-      if (exp < Math.round(Date.now() / 1000)) {
-        return NextResponse.redirect(
-          new URL(`/${locale}/auth/login`, request.url)
-        )
-      }
-    } catch {}
-  }
-
-  if (isAuth && token && !isBackend) {
-    try {
-      const { exp } = jwtDecode(token) as JWT
-      if (exp > Math.round(Date.now() / 1000)) {
-        return NextResponse.redirect(new URL(`/${locale}/backend`, request.url))
-      }
-    } catch {}
-  }
-
-  try {
-    const host = request.headers.get('host')
-    const subdomain = getValidSubdomain(host)
-    if (subdomain) {
-      url.pathname = `/${locale}/sub-domains/${subdomain}${url.pathname}`
-
-      return NextResponse.rewrite(url)
+  if (!isApi) {
+    if (isBackend && !token && !isAuth) {
+      return NextResponse.redirect(
+        new URL(`/${locale}/auth/login`, request.url)
+      )
+    } else if (isBackend && token) {
+      try {
+        const { exp } = jwtDecode(token) as JWT
+        if (exp < Math.round(Date.now() / 1000)) {
+          return NextResponse.redirect(
+            new URL(`/${locale}/auth/login`, request.url)
+          )
+        }
+      } catch {}
     }
-  } catch {}
 
-  return intlMiddleware(request)
+    if (isAuth && token && !isBackend) {
+      try {
+        const { exp } = jwtDecode(token) as JWT
+        if (exp > Math.round(Date.now() / 1000)) {
+          return NextResponse.redirect(
+            new URL(`/${locale}/backend`, request.url)
+          )
+        }
+      } catch {}
+    }
+
+    try {
+      const host = request.headers.get('host')
+      const subdomain = getValidSubdomain(host)
+      if (subdomain && !isApi) {
+        url.pathname = `/${locale}/sub-domains/${subdomain}${url.pathname}`
+
+        return NextResponse.rewrite(url)
+      }
+    } catch {}
+
+    return intlMiddleware(request)
+  } else if (isApi && isBackend && !token) {
+    return NextResponse.json(
+      {
+        message: 'Unauthorized',
+      },
+      { status: 401 }
+    )
+  }
+
+  return NextResponse.next()
 }
 
 export const config = {
-  matcher: [
-    '/',
-    '/((?!api|_next|_vercel|tests|.*\\..*).*)',
-    '/(pt-br|en)/:path*',
-  ],
+  matcher: ['/', '/((?!_next|_vercel|tests|.*\\..*).*)', '/(pt-br|en)/:path*'],
 }

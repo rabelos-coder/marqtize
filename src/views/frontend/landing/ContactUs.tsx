@@ -123,7 +123,6 @@ export const ContactUs = () => {
               <Input
                 id={name}
                 type="text"
-                autoFocus
                 className="py-4"
                 disabled={loading}
                 placeholder={t('namePlaceholder')}

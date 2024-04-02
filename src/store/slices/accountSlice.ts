@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import axios from 'axios'
 import Cookies from 'js-cookie'
 
 import { STORAGE_ACCOUNT } from '@/configs'
-import { FIND_ACCOUNT_BY_SLUG } from '@/graphql/account'
+import { APP_MAIN_DOMAIN } from '@/environment'
 import { Account, AccountState, FindBySlugOrHostInput } from '@/types/account'
-import { createApolloClient } from '@/utils/apollo'
 
 let account: any = Cookies.get(STORAGE_ACCOUNT) ?? null
 
@@ -24,30 +24,21 @@ const initialState: AccountState = {
 
 export const fetchAccount = createAsyncThunk(
   'account/account',
-  async (input: FindBySlugOrHostInput) => {
-    const client = createApolloClient()
+  async (input: FindBySlugOrHostInput): Promise<Account | null> => {
     const { slug, host } = input
+
+    if (host === APP_MAIN_DOMAIN) return null
 
     if (!slug && !host) return null
 
-    try {
-      const { data, errors } = await client.mutate({
-        mutation: FIND_ACCOUNT_BY_SLUG,
-        variables: { slug, host },
+    return await axios
+      .post<Account>('/api/account', { slug, host })
+      .then(({ data }) => data ?? null)
+      .catch((error) => {
+        console.log(error?.response?.data?.message ?? 'No account found')
+
+        return null
       })
-
-      if (!data && errors?.length) throw new Error(errors[0].message)
-
-      if (data) {
-        const { findBySlugOrHostAccount } = data
-
-        return findBySlugOrHostAccount
-      }
-    } catch (error) {
-      throw error
-    }
-
-    return null
   }
 )
 

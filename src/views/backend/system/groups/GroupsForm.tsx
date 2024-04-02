@@ -2,6 +2,7 @@
 
 import { useLazyQuery, useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
+import axios from 'axios'
 import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
 import { Fragment, useCallback, useEffect, useState } from 'react'
@@ -25,12 +26,10 @@ import * as yup from 'yup'
 import FinishForm from '@/components/common/NumberingWizard/FinishForm'
 import StepperHorizontal from '@/components/common/NumberingWizard/StepperHorizontal'
 import { SLUG_REGEX } from '@/configs'
-import { FIND_MANY_ACCOUNTS } from '@/graphql/account'
-import { FIND_MANY_CLAIMS } from '@/graphql/claims'
 import { CREATE_ROLE, FIND_ROLE, UPDATE_ROLE } from '@/graphql/roles'
-import { FIND_MANY_USERS } from '@/graphql/users'
 import { useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
+import { Account } from '@/types/account'
 import { Claim } from '@/types/claim'
 import {
   OrderByEnum,
@@ -78,9 +77,6 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
 
   const { jwt } = useAuth()
 
-  const [getAccounts] = useLazyQuery(FIND_MANY_ACCOUNTS)
-  const [getClaims] = useLazyQuery(FIND_MANY_CLAIMS)
-  const [getUsers] = useLazyQuery(FIND_MANY_USERS)
   const [getRole] = useLazyQuery(FIND_ROLE, {
     variables: { id: `${id}` },
     fetchPolicy: 'no-cache',
@@ -123,6 +119,43 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
     resolver: yupResolver(schema),
   })
 
+  const getAccounts = useCallback(
+    async (data?: any) =>
+      await axios
+        .post<Account[]>('/api/backend/accounts', data)
+        .then(({ data }) =>
+          setAccounts(
+            data?.map(
+              ({ id, systemName }) =>
+                ({
+                  value: id,
+                  label: systemName,
+                }) as unknown as ReactSelectType
+            )
+          )
+        )
+        .catch((error) => toast.error(error?.response?.data?.message)),
+    []
+  )
+
+  const getClaims = useCallback(
+    async () =>
+      await axios
+        .get<Claim[]>('/api/backend/claims')
+        .then(({ data }) => setClaims(data))
+        .catch((error) => toast.error(error?.response?.data?.message)),
+    []
+  )
+
+  const getUsers = useCallback(
+    async (data?: any) =>
+      await axios
+        .post<User[]>('/api/backend/users', data)
+        .then(({ data }) => setUsers(data))
+        .catch((error) => toast.error(error?.response?.data?.message)),
+    []
+  )
+
   const handleRole = useCallback(async () => {
     setDisabled(true)
 
@@ -162,11 +195,11 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
     }
 
     if (mode === 'update') {
-      const [role, accounts, claims, users] = await Promise.all([
+      const [role] = await Promise.all([
         getRole(),
-        getAccounts({ variables: accountsVariables }),
+        getAccounts(accountsVariables),
         getClaims(),
-        getUsers({ variables: usersVariables }),
+        getUsers(usersVariables),
       ])
 
       if (role?.data?.findByIdRole) {
@@ -179,46 +212,14 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
           users: users?.map((user) => user.id),
         })
       }
-      if (accounts?.data?.findManyAccount)
-        setAccounts(
-          accounts?.data?.findManyAccount?.map(
-            ({ id, systemName }) =>
-              ({
-                value: id,
-                label: systemName,
-              }) as unknown as ReactSelectType
-          )
-        )
-      if (claims?.data?.findManyClaim) setClaims(claims?.data?.findManyClaim)
-      if (users?.data?.findManyUser) setUsers(users?.data?.findManyUser)
 
       if (role?.error) toast.error(role?.error?.message)
-      if (accounts?.error) toast.error(accounts?.error?.message)
-      if (claims?.error) toast.error(claims?.error?.message)
-      if (users?.error) toast.error(users?.error?.message)
     } else {
-      const [accounts, claims, users] = await Promise.all([
-        getAccounts({ variables: accountsVariables }),
+      await Promise.all([
+        getAccounts(accountsVariables),
         getClaims(),
-        getUsers({ variables: usersVariables }),
+        getUsers(usersVariables),
       ])
-
-      if (accounts?.data?.findManyAccount)
-        setAccounts(
-          accounts?.data?.findManyAccount?.map(
-            ({ id, systemName }) =>
-              ({
-                value: id,
-                label: systemName,
-              }) as unknown as ReactSelectType
-          )
-        )
-      if (claims?.data?.findManyClaim) setClaims(claims?.data?.findManyClaim)
-      if (users?.data?.findManyUser) setUsers(users?.data?.findManyUser)
-
-      if (accounts?.error) toast.error(accounts?.error?.message)
-      if (claims?.error) toast.error(claims?.error?.message)
-      if (users?.error) toast.error(users?.error?.message)
     }
     setDisabled(false)
   }, [getClaims, getAccounts, getRole, getUsers, mode, setValue, jwt])
@@ -471,7 +472,6 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                         render={({ field: { name, onChange, ...rest } }) => (
                           <Input
                             id={name}
-                            autoFocus
                             placeholder={t('typeName', {
                               gender: 'male',
                               name: t('name').toLowerCase(),

@@ -13,6 +13,7 @@ import {
   APP_META_TITLE,
   APP_VERSION,
   IS_DEVELOPMENT,
+  SERVER_JWT,
   SERVER_URL,
 } from '@/environment'
 
@@ -33,7 +34,7 @@ export const createApolloClient = (params?: ApolloClientParams) => {
   lang = lang?.replace('_', '-')?.toLowerCase()
 
   const authMiddleware = setContext(async (operation, { headers }) => {
-    return {
+    const params = {
       headers: {
         ...headers,
         'X-Lang': lang ?? APP_LANGUAGE,
@@ -41,6 +42,10 @@ export const createApolloClient = (params?: ApolloClientParams) => {
         Authorization: token ? `Bearer ${token}` : '',
       },
     }
+
+    if (!token) delete params.headers.Authorization
+
+    return params
   })
 
   // GraphQL server URL
@@ -109,3 +114,8 @@ export const createApolloClient = (params?: ApolloClientParams) => {
 
   return client
 }
+
+export const apiClient = createApolloClient({
+  token: SERVER_JWT,
+  locale: APP_LANGUAGE,
+})

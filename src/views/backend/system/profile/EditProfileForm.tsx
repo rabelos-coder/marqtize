@@ -118,7 +118,6 @@ const EditProfileForm = ({ user, timezones, languages }: EditProfileProps) => {
                   render={({ field: { name, ...rest } }) => (
                     <Input
                       id={name}
-                      autoFocus
                       autoComplete="on"
                       placeholder={t('namePlaceholder')}
                       invalid={Boolean(errors.name)}

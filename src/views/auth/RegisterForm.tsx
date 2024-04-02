@@ -1,9 +1,10 @@
 'use client'
 
-import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useLocale, useTranslations } from 'next-intl'
+import { useReCaptcha } from 'next-recaptcha-v3'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import {
@@ -20,13 +21,9 @@ import * as yup from 'yup'
 import { CommonLogo } from '@/components/common/CommonLogo'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
 import { IS_DEVELOPMENT } from '@/environment'
-import { REGISTER } from '@/graphql/auth'
-import { useAppDispatch, useAppSelector } from '@/hooks'
+import { useAppSelector } from '@/hooks'
 import { Link, useRouter } from '@/navigation'
-import { setLoading } from '@/store/slices/themeSlice'
 import { AuthFormProps } from '@/types/common'
-
-import { SpinnerBoxed } from '../../components/common/SpinnerBoxed'
 
 type FormData = {
   name: string
@@ -57,12 +54,12 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false)
-  const [register] = useMutation(REGISTER)
 
   const t = useTranslations()
-  const dispatch = useAppDispatch()
-
-  const { account, loading } = useAppSelector((state) => state.account)
+  const router = useRouter()
+  const locale = useLocale()
+  const { executeRecaptcha } = useReCaptcha()
+  const { account } = useAppSelector((state) => state.account)
 
   const schema = yup.object().shape({
     name: yup.string().required(t('propertyRequired', { property: t('name') })),
@@ -108,41 +105,45 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
     resolver: yupResolver(schema),
   })
 
-  const router = useRouter()
-
   const onSubmit = async (form: FormData) => {
     setDisabled(true)
-    await register({
-      variables: {
-        data: {
-          accountId: account?.id ?? null,
-          name: form.name,
-          systemName: form.systemName,
-          email: form.email,
-          password: form.password,
-        },
-      },
-    })
+
+    const data = {
+      accountId: account?.id ?? null,
+      name: form.name,
+      systemName: form.systemName,
+      email: form.email,
+      password: form.password,
+    }
+
+    const recaptcha = await executeRecaptcha('form_submit')
+
+    if (!recaptcha) {
+      toast.error(t('reCaptchaError'))
+
+      return
+    }
+
+    await axios
+      .post(`/api/auth/register`, data, {
+        headers: { recaptcha, locale },
+      })
       .then(({ data }) => {
-        if (data?.register) {
+        if (data) {
           toast.success(t('registerSuccess'))
           router.push('/auth/login')
         } else {
           toast.error(t('registerError'))
         }
       })
-      .catch((error) => toast.error(error?.message ?? t('registerError')))
+      .catch((error) =>
+        toast.error(error?.response?.data?.message ?? t('registerError'))
+      )
 
     setDisabled(false)
   }
 
-  useEffect(() => {
-    dispatch(setLoading(false))
-  }, [dispatch])
-
-  return loading ? (
-    <SpinnerBoxed type="grow" />
-  ) : (
+  return (
     <div className="login-card login-dark">
       <div>
         <div>
@@ -155,16 +156,12 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
             autoComplete="off"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h4 suppressHydrationWarning>
-              {account?.tradingName
-                ? t('createAccountToName', { name: account.tradingName })
-                : t('createAccount')}
-            </h4>
+            <h4 suppressHydrationWarning>{t('createAccount')}</h4>
             <p>{t('resetPasswordInfo')}</p>
             <FormGroup>
               <Row className="g-2">
                 <Col xs={6}>
-                  <Label htmlFor="name" className="col-form-label pt-0">
+                  <Label for="name" className="col-form-label required pt-0">
                     {t('name')}
                   </Label>
                   <Controller
@@ -175,7 +172,6 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                     render={({ field: { name, ...rest } }) => (
                       <Input
                         id={name}
-                        autoFocus
                         placeholder={t('namePlaceholder')}
                         autoComplete="on"
                         invalid={Boolean(errors.name)}
@@ -188,7 +184,10 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                   </FormFeedback>
                 </Col>
                 <Col xs={6}>
-                  <Label htmlFor="systemName" className="col-form-label pt-0">
+                  <Label
+                    for="systemName"
+                    className="col-form-label required pt-0"
+                  >
                     {t('systemName')}
                   </Label>
                   <Controller
@@ -213,7 +212,7 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
               </Row>
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="email" className="col-form-label">
+              <Label for="email" className="col-form-label required">
                 {t('email')}
               </Label>
               <Controller
@@ -239,7 +238,10 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
             <FormGroup>
               <Row className="g-2">
                 <Col xs={6}>
-                  <Label htmlFor="password" className="col-form-label pt-0">
+                  <Label
+                    for="password"
+                    className="col-form-label required pt-0"
+                  >
                     {t('password')}
                   </Label>
                   <div className="form-input position-relative">
@@ -273,8 +275,8 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
                 </Col>
                 <Col xs={6}>
                   <Label
-                    htmlFor="passwordConfirmation"
-                    className="col-form-label pt-0"
+                    for="passwordConfirmation"
+                    className="col-form-label required pt-0"
                   >
                     {t('passwordConfirmation')}
                   </Label>

@@ -1,9 +1,10 @@
 'use client'
 
-import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
+import axios from 'axios'
 import { useSearchParams } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+import { useReCaptcha } from 'next-recaptcha-v3'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -13,7 +14,6 @@ import * as yup from 'yup'
 import { CommonLogo } from '@/components/common/CommonLogo'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
 import { IS_DEVELOPMENT } from '@/environment'
-import { RESET_PASSWORD } from '@/graphql/auth'
 import { Link, useRouter } from '@/navigation'
 import { AuthFormProps } from '@/types/common'
 
@@ -25,13 +25,15 @@ type FormData = {
 }
 
 export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
+  const [disabled, setDisabled] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showPasswordConfirmation, setShowPasswordConfirmation] =
     useState(false)
-  const [resetPassword, { loading }] = useMutation(RESET_PASSWORD)
 
   const t = useTranslations()
   const searchParams = useSearchParams()
+  const locale = useLocale()
+  const { executeRecaptcha } = useReCaptcha()
   const email = searchParams.get('email') ?? ''
   const resetToken = searchParams.get('token') ?? ''
 
@@ -95,24 +97,39 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
   const router = useRouter()
 
   const onSubmit = async (form: FormData) => {
-    await resetPassword({
-      variables: {
-        data: {
-          email: form.email,
-          resetToken: form.resetToken,
-          password: form.password,
-        },
-      },
-    })
+    setDisabled(true)
+
+    const data = {
+      email: form.email ?? '',
+      resetToken: form.resetToken ?? '',
+      password: form.password ?? '',
+    }
+
+    const recaptcha = await executeRecaptcha('form_submit')
+
+    if (!recaptcha) {
+      toast.error(t('reCaptchaError'))
+
+      return
+    }
+
+    await axios
+      .post(`/api/auth/reset-password`, data, {
+        headers: { recaptcha, locale },
+      })
       .then(({ data }) => {
-        if (data?.resetPassword) {
+        if (data) {
           toast.success(t('resetPasswordSuccess'))
           router.push('/auth/login')
         } else {
           toast.error(t('resetPasswordError'))
         }
       })
-      .catch((error) => toast.error(error?.message ?? t('resetPasswordError')))
+      .catch((error) =>
+        toast.error(error?.response?.data?.message ?? t('resetPasswordError'))
+      )
+
+    setDisabled(false)
   }
 
   return (
@@ -131,13 +148,13 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
             <h4>{t('resetPassword')}</h4>
             <p>{t('resetPasswordInfo')}</p>
             <FormGroup>
-              <Label htmlFor="email" className="col-form-label">
+              <Label for="email" className="col-form-label required">
                 {t('email')}
               </Label>
               <Controller
                 name="email"
                 control={control}
-                disabled={loading}
+                disabled={disabled}
                 rules={{ required: true }}
                 render={({ field: { name, ...rest } }) => (
                   <Input
@@ -155,13 +172,13 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
               </FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="resetToken" className="col-form-label">
+              <Label for="resetToken" className="col-form-label required">
                 {t('resetToken')}
               </Label>
               <Controller
                 name="resetToken"
                 control={control}
-                disabled={loading}
+                disabled={disabled}
                 rules={{ required: true }}
                 render={({ field: { name, ...rest } }) => (
                   <Input
@@ -177,20 +194,19 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
               </FormFeedback>
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="password" className="col-form-label">
+              <Label for="password" className="col-form-label required">
                 {t('password')}
               </Label>
               <div className="form-input position-relative">
                 <Controller
                   name="password"
                   control={control}
-                  disabled={loading}
+                  disabled={disabled}
                   rules={{ required: true }}
                   render={({ field: { name, ...rest } }) => (
                     <Input
                       id={name}
                       type={showPassword ? 'text' : 'password'}
-                      autoFocus
                       autoComplete="off"
                       invalid={Boolean(errors.password)}
                       {...rest}
@@ -211,14 +227,17 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
               </div>
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="passwordConfirmation" className="col-form-label">
+              <Label
+                for="passwordConfirmation"
+                className="col-form-label required"
+              >
                 {t('passwordConfirmation')}
               </Label>
               <div className="form-input position-relative">
                 <Controller
                   name="passwordConfirmation"
                   control={control}
-                  disabled={loading}
+                  disabled={disabled}
                   rules={{ required: true }}
                   render={({ field: { name, ...rest } }) => (
                     <Input
@@ -252,7 +271,7 @@ export const ResetPasswordForm = ({ alignLogo }: AuthFormProps) => {
                   color="primary"
                   className="btn-block w-100"
                   type="submit"
-                  disabled={loading}
+                  disabled={disabled}
                 >
                   {t('resetPassword')}
                 </Button>

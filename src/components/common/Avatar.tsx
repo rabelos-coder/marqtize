@@ -36,7 +36,7 @@ export function Avatar({
   if (!rounded) delete style.borderRadius
 
   const imageUrl = decodeURIComponent(
-    `/api/image/${size ?? defaultSize}/${name}`
+    `/api/image/${size ?? defaultSize}/${name.toUpperCase()}`
   )
 
   return image ? (

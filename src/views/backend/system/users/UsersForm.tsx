@@ -2,6 +2,7 @@
 
 import { useLazyQuery, useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
+import axios from 'axios'
 import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
 import {
@@ -32,14 +33,10 @@ import { Avatar } from '@/components/common/Avatar'
 import FinishForm from '@/components/common/NumberingWizard/FinishForm'
 import StepperHorizontal from '@/components/common/NumberingWizard/StepperHorizontal'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
-import { APP_TIMEZONE } from '@/environment'
-import { FIND_MANY_ACCOUNTS } from '@/graphql/account'
-import { FIND_MANY_CLAIMS } from '@/graphql/claims'
-import { FIND_MANY_TIMEZONES } from '@/graphql/localization'
-import { FIND_MANY_ROLES } from '@/graphql/roles'
 import { CREATE_USER, FIND_USER, UPDATE_USER } from '@/graphql/users'
 import { useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
+import { Account } from '@/types/account'
 import { Claim } from '@/types/claim'
 import {
   OrderByEnum,
@@ -50,6 +47,7 @@ import { UserTypeEnum } from '@/types/enums'
 import { LanguageEnum } from '@/types/language'
 import { Role } from '@/types/role'
 import { Subjects } from '@/types/subject'
+import { Timezone } from '@/types/timezone'
 import { CreateUserInput, UpdateUserInput, User, UserInput } from '@/types/user'
 import { setFormValues, validateFormValue } from '@/utils/helpers'
 
@@ -201,22 +199,6 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
   const [claims, setClaims] = useState<Claim[]>([])
   const [roles, setRoles] = useState<Role[]>([])
 
-  const [getAccounts] = useLazyQuery(FIND_MANY_ACCOUNTS, {
-    variables: {
-      orderBy: { systemName: OrderByEnum.ASC },
-    },
-  })
-  const [getClaims] = useLazyQuery(FIND_MANY_CLAIMS)
-  const [getRoles] = useLazyQuery(FIND_MANY_ROLES, {
-    variables: {
-      orderBy: { name: OrderByEnum.ASC },
-    },
-  })
-  const [getTimezones] = useLazyQuery(FIND_MANY_TIMEZONES, {
-    variables: {
-      orderBy: { name: OrderByEnum.ASC },
-    },
-  })
   const [getUser] = useLazyQuery(FIND_USER, {
     variables: { id: `${id}` },
     fetchPolicy: 'no-cache',
@@ -237,6 +219,62 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
     mode: 'onBlur',
     resolver: yupResolver(schema as unknown as yup.ObjectSchema<FormData>),
   })
+
+  const getAccounts = useCallback(
+    async (data?: any) =>
+      await axios
+        .post<Account[]>('/api/backend/accounts', data)
+        .then(({ data }) =>
+          setAccounts(
+            data?.map(
+              ({ id, systemName }) =>
+                ({
+                  value: id,
+                  label: systemName,
+                }) as unknown as ReactSelectType
+            )
+          )
+        )
+        .catch((error) => toast.error(error?.response?.data?.message)),
+    []
+  )
+
+  const getClaims = useCallback(
+    async () =>
+      await axios
+        .get<Claim[]>('/api/backend/claims')
+        .then(({ data }) => setClaims(data))
+        .catch((error) => toast.error(error?.response?.data?.message)),
+    []
+  )
+
+  const getRoles = useCallback(
+    async () =>
+      await axios
+        .get<Role[]>('/api/backend/roles')
+        .then(({ data }) => setRoles(data))
+        .catch((error) => toast.error(error?.response?.data?.message)),
+    []
+  )
+
+  const getTimezones = useCallback(
+    async () =>
+      await axios
+        .get<Timezone[]>('/api/backend/timezones')
+        .then(({ data }) =>
+          setTimezones(
+            data?.map(
+              ({ id, name }) =>
+                ({
+                  value: id,
+                  label: name,
+                }) as unknown as ReactSelectType
+            )
+          )
+        )
+        .catch((error) => toast.error(error?.response?.data?.message)),
+    []
+  )
 
   const handleUser = useCallback(async () => {
     setDisabled(true)
@@ -259,12 +297,12 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
     }
 
     if (mode === 'update') {
-      const [user, accounts, claims, roles, timezones] = await Promise.all([
+      const [user] = await Promise.all([
         getUser(),
-        getAccounts({ variables: accountsVariables }),
+        getTimezones(),
+        getAccounts(accountsVariables),
         getClaims(),
         getRoles(),
-        getTimezones(),
       ])
 
       if (user?.data?.findByIdUser) {
@@ -281,74 +319,15 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
           roles: roles?.map((role) => role.id),
         })
       }
-      if (timezones?.data?.findManyTimezone)
-        setTimezones(
-          timezones?.data?.findManyTimezone?.map(
-            ({ id, name }) =>
-              ({
-                value: id,
-                label: name,
-              }) as unknown as ReactSelectType
-          )
-        )
-      if (accounts?.data?.findManyAccount)
-        setAccounts(
-          accounts?.data?.findManyAccount?.map(
-            ({ id, systemName }) =>
-              ({
-                value: id,
-                label: systemName,
-              }) as ReactSelectType
-          )
-        )
-      if (claims?.data?.findManyClaim) setClaims(claims?.data?.findManyClaim)
-      if (roles?.data?.findManyRole) setRoles(roles?.data?.findManyRole)
 
       if (user?.error) toast.error(user?.error?.message)
-      if (accounts?.error) toast.error(accounts?.error?.message)
-      if (claims?.error) toast.error(claims?.error?.message)
-      if (roles?.error) toast.error(roles?.error?.message)
-      if (timezones?.error) toast.error(timezones?.error?.message)
     } else {
-      const [accounts, claims, roles, timezones] = await Promise.all([
-        getAccounts({ variables: accountsVariables }),
+      await Promise.all([
+        getTimezones(),
+        getAccounts(accountsVariables),
         getClaims(),
         getRoles(),
-        getTimezones(),
       ])
-
-      if (timezones?.data?.findManyTimezone) {
-        setTimezones(
-          timezones?.data?.findManyTimezone?.map(
-            ({ id, name }) =>
-              ({
-                value: id,
-                label: name,
-              }) as unknown as ReactSelectType
-          )
-        )
-        const timezoneId = timezones?.data?.findManyTimezone.find(
-          ({ code }) => code === APP_TIMEZONE
-        )?.id
-        setValue('timezoneId', timezoneId ?? '')
-      }
-      if (accounts?.data?.findManyAccount)
-        setAccounts(
-          accounts?.data?.findManyAccount?.map(
-            ({ id, systemName }) =>
-              ({
-                value: id,
-                label: systemName,
-              }) as unknown as ReactSelectType
-          )
-        )
-      if (claims?.data?.findManyClaim) setClaims(claims?.data?.findManyClaim)
-      if (roles?.data?.findManyRole) setRoles(roles?.data?.findManyRole)
-
-      if (accounts?.error) toast.error(accounts?.error?.message)
-      if (claims?.error) toast.error(claims?.error?.message)
-      if (roles?.error) toast.error(roles?.error?.message)
-      if (timezones?.error) toast.error(timezones?.error?.message)
     }
     setDisabled(false)
   }, [
@@ -569,7 +548,11 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                     <Col lg={3} sm={12} className="d-flex justify-content-end">
                       <Avatar
                         image={imgSrc}
-                        name={getValues('name') ?? 'X'}
+                        name={
+                          getValues('name')?.trim()?.length > 2
+                            ? getValues('name')?.trim()
+                            : 'U'
+                        }
                         size={70}
                         rounded
                         className="me-2 img-fluid"
@@ -639,7 +622,6 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                         render={({ field: { name, ...rest } }) => (
                           <Input
                             id={name}
-                            autoFocus
                             placeholder={t('typeName', {
                               gender: 'male',
                               name: t('name').toLowerCase(),

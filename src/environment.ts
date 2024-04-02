@@ -57,6 +57,7 @@ export const RECAPTCHA_SITE_KEY =
 // * SERVER SETTINGS
 export const SERVER_URL =
   process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:4000'
+export const SERVER_JWT = process.env.NEXT_PUBLIC_SERVER_JWT ?? '123'
 
 // * IMAGE UPLOAD SETTINGS
 export const IMAGE_UPLOAD_MAX_WIDTH = parseInt(
