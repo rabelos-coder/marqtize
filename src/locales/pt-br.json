@@ -760,7 +760,10 @@
     "paragraph6": "<ul><li><b>Integrações:</b> Explore nossas integrações com outros serviços e aplicativos para expandir as funcionalidades da sua loja.</li><li><b>Personalização:</b> Saiba como personalizar ainda mais sua loja com temas, plugins e recursos avançados.</li></ul>",
     "paragraph7": "<ul><li>Fique por dentro das últimas atualizações e novidades da nossa plataforma, incluindo melhorias de desempenho e novos recursos.</li></ul>",
     "paragraph8": "<ul><li>Se precisar de assistência adicional ou tiver alguma dúvida, entre em contato com nossa equipe de suporte através do nosso formulário de contato ou chat ao vivo.</li></ul>",
-    "paragraph9": "Estamos comprometidos em fornecer a você todas as ferramentas e recursos necessários para ter sucesso na sua jornada de comércio eletrônico. Seja bem-vindo à nossa plataforma e aproveite ao máximo todas as suas funcionalidades!"
+    "paragraph9": "Estamos comprometidos em fornecer a você todas as ferramentas e recursos necessários para ter sucesso na sua jornada de comércio eletrônico. Seja bem-vindo à nossa plataforma e aproveite ao máximo todas as suas funcionalidades!",
+    "api": {
+      "title": "Documentação da API"
+    }
   },
   "changelog": {
     "title": "Mudanças",

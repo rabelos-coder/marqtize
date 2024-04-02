@@ -1,10 +1,10 @@
 'use client'
 
-import { useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useTranslations } from 'next-intl'
+import axios from 'axios'
+import { useLocale, useTranslations } from 'next-intl'
 import { useReCaptcha } from 'next-recaptcha-v3'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { Button, Col, FormFeedback, Input, Label, Row } from 'reactstrap'
@@ -12,8 +12,6 @@ import * as yup from 'yup'
 
 import { EMAIL_REGEX } from '@/configs'
 import { IS_DEVELOPMENT, IS_PRODUCTION } from '@/environment'
-import { CONTACT } from '@/graphql/contact'
-import { ContactInput } from '@/types/contact'
 
 type FormData = {
   name: string
@@ -35,12 +33,11 @@ const defaultValues = IS_DEVELOPMENT
 
 export const ContactUs = () => {
   const t = useTranslations()
+  const locale = useLocale()
+
+  const [disabled, setDisabled] = useState(false)
 
   const { executeRecaptcha } = useReCaptcha()
-
-  const [contact, { loading }] = useMutation(CONTACT, {
-    fetchPolicy: 'no-cache',
-  })
 
   const schema = yup.object().shape({
     name: yup
@@ -74,6 +71,10 @@ export const ContactUs = () => {
 
   const onSubmit = useCallback(
     async (form: FormData) => {
+      setDisabled(true)
+
+      const data = form
+
       const recaptcha = await executeRecaptcha('form_submit')
 
       if (!recaptcha) {
@@ -82,20 +83,15 @@ export const ContactUs = () => {
         return
       }
 
-      const variables: ContactInput = {
-        data: { ...form, subject: t('contact') },
-      }
-
-      await contact({
-        variables,
-        context: {
+      await axios
+        .post('/api/contact', data, {
           headers: {
+            locale,
             recaptcha,
           },
-        },
-      })
+        })
         .then(({ data }) => {
-          if (data?.sendContact) {
+          if (data) {
             toast.success(t('contactSuccess'))
             if (IS_PRODUCTION) reset()
           } else {
@@ -103,8 +99,10 @@ export const ContactUs = () => {
           }
         })
         .catch((error) => toast.error(error?.message ?? t('loginError')))
+
+      setDisabled(false)
     },
-    [contact, executeRecaptcha, reset, t]
+    [executeRecaptcha, locale, reset, t]
   )
 
   return (
@@ -117,14 +115,14 @@ export const ContactUs = () => {
           <Controller
             name="name"
             control={control}
-            disabled={loading}
+            disabled={disabled}
             rules={{ required: true }}
             render={({ field: { name, ...rest } }) => (
               <Input
                 id={name}
                 type="text"
                 className="py-4"
-                disabled={loading}
+                disabled={disabled}
                 placeholder={t('namePlaceholder')}
                 invalid={Boolean(errors.name)}
                 {...rest}
@@ -140,14 +138,14 @@ export const ContactUs = () => {
           <Controller
             name="email"
             control={control}
-            disabled={loading}
+            disabled={disabled}
             rules={{ required: true }}
             render={({ field: { name, ...rest } }) => (
               <Input
                 id={name}
                 type="email"
                 className=" py-4"
-                disabled={loading}
+                disabled={disabled}
                 placeholder={t('emailPlaceholder')}
                 invalid={Boolean(errors.email)}
                 {...rest}
@@ -164,14 +162,14 @@ export const ContactUs = () => {
         <Controller
           name="message"
           control={control}
-          disabled={loading}
+          disabled={disabled}
           rules={{ required: true }}
           render={({ field: { name, ...rest } }) => (
             <Input
               id={name}
               type="textarea"
               className="py-3"
-              disabled={loading}
+              disabled={disabled}
               placeholder={t('messagePlaceholder')}
               rows={4}
               invalid={Boolean(errors.message)}
@@ -184,7 +182,7 @@ export const ContactUs = () => {
       <div className="text-center">
         <Button
           color="primary"
-          disabled={loading}
+          disabled={disabled}
           className="mt-4"
           type="submit"
         >

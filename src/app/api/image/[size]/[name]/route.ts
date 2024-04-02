@@ -32,7 +32,7 @@ export async function GET(
   } catch {
     return NextResponse.json(
       { message: 'Failed to generate image!' },
-      { status: 500 }
+      { status: 400 }
     )
   }
 }

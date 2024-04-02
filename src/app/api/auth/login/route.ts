@@ -1,3 +1,6 @@
+'use server'
+
+import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { getTranslations } from 'next-intl/server'
 
@@ -11,12 +14,13 @@ import { APP_LANGUAGE, APP_TIMEZONE } from '@/environment'
 import { LOGIN } from '@/graphql/auth'
 import { apiClient } from '@/utils/apollo'
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const t = await getTranslations({
     locale: req.headers.get('locale') ?? APP_LANGUAGE,
   })
   const data = await req.json()
   const recaptcha = req.headers.get('recaptcha') ?? ''
+  const skipRecaptcha = req.headers.get('x-recaptcha-skip') ?? 'false'
 
   // sanitize input
   const email = data?.email?.trim() ?? null
@@ -39,37 +43,42 @@ export async function POST(req: NextRequest, res: NextResponse) {
       context: {
         headers: {
           recaptcha,
+          'x-recaptcha-skip': skipRecaptcha,
         },
       },
     })
     .then(({ data }) => {
       if (data?.login) {
         // set  cookies
-        res.cookies.set(STORAGE_USER, JSON.stringify(data.login.user))
-        res.cookies.set(STORAGE_AUTH_TOKEN, data.login.token)
-        res.cookies.set(
-          STORAGE_LOCALE,
-          data.login.user?.language ?? APP_LANGUAGE
-        )
-        res.cookies.set(
+        cookies().set(STORAGE_USER, JSON.stringify(data.login.user))
+        cookies().set(STORAGE_AUTH_TOKEN, data.login.token)
+        cookies().set(STORAGE_LOCALE, data.login.user?.language ?? APP_LANGUAGE)
+        cookies().set(
           STORAGE_TIMEZONE,
           data.login.user?.timezone?.code ?? APP_TIMEZONE
         )
 
-        // delete auth cookies
-        res.cookies.delete(STORAGE_USER)
-        res.cookies.delete(STORAGE_AUTH_TOKEN)
-
-        // set default cookies
-        res.cookies.set(STORAGE_LOCALE, APP_LANGUAGE)
-        res.cookies.set(STORAGE_TIMEZONE, APP_TIMEZONE)
-
         return NextResponse.json(data.login)
       }
+
+      // delete auth cookies
+      cookies().delete(STORAGE_USER)
+      cookies().delete(STORAGE_AUTH_TOKEN)
+
+      // set default cookies
+      cookies().set(STORAGE_LOCALE, APP_LANGUAGE)
+      cookies().set(STORAGE_TIMEZONE, APP_TIMEZONE)
 
       return NextResponse.json(null)
     })
     .catch((error) =>
-      NextResponse.json({ message: error.message }, { status: 500 })
+      NextResponse.json(
+        {
+          name: error.name,
+          message: error.message,
+          stack: error?.stack ?? null,
+        },
+        { status: 400 }
+      )
     )
 }

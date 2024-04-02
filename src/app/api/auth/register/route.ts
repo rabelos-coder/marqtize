@@ -9,6 +9,7 @@ import { apiClient } from '@/utils/apollo'
 export async function POST(req: NextRequest) {
   const locale = req.headers.get('locale') ?? APP_LANGUAGE
   const recaptcha = req.headers.get('recaptcha') ?? ''
+  const skipRecaptcha = req.headers.get('x-recaptcha-skip') ?? 'false'
   const t = await getTranslations({ locale })
   const data = await req.json()
 
@@ -38,11 +39,19 @@ export async function POST(req: NextRequest) {
       context: {
         headers: {
           recaptcha,
+          'x-recaptcha-skip': skipRecaptcha,
         },
       },
     })
     .then(({ data }) => NextResponse.json(data?.register ?? null))
     .catch((error) =>
-      NextResponse.json({ message: error.message }, { status: 500 })
+      NextResponse.json(
+        {
+          name: error.name,
+          message: error.message,
+          stack: error?.stack ?? null,
+        },
+        { status: 400 }
+      )
     )
 }

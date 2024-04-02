@@ -24,6 +24,13 @@ export async function POST(req: NextRequest) {
     })
     .then(({ data }) => NextResponse.json(data?.findManyAccount ?? []))
     .catch((error) =>
-      NextResponse.json({ message: error.message }, { status: 500 })
+      NextResponse.json(
+        {
+          name: error.name,
+          message: error.message,
+          stack: error?.stack ?? null,
+        },
+        { status: 400 }
+      )
     )
 }

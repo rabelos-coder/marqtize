@@ -25,6 +25,13 @@ export async function POST(req: NextRequest) {
       NextResponse.json(data?.findBySlugOrHostAccount ?? null)
     )
     .catch((error) =>
-      NextResponse.json({ message: error.message }, { status: 500 })
+      NextResponse.json(
+        {
+          name: error.name,
+          message: error.message,
+          stack: error?.stack ?? null,
+        },
+        { status: 400 }
+      )
     )
 }
