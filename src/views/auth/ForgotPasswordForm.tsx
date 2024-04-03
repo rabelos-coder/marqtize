@@ -107,7 +107,7 @@ export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
             <h4>{t('forgotPassword')}</h4>
             <p>{t('forgotPasswordInfo')}</p>
             <FormGroup>
-              <Label htmlFor="email" className="col-form-label">
+              <Label for="email" className="col-form-label">
                 {t('email')}
               </Label>
               <Controller

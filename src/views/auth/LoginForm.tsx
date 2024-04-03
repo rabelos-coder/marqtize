@@ -197,7 +197,7 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
                   disabled={disabled}
                   onChange={() => setRememberMe(!rememberMe)}
                 />
-                <Label className="text-muted" htmlFor="rememberMe">
+                <Label className="text-muted" for="rememberMe">
                   {t('rememberMe')}
                 </Label>
               </div>

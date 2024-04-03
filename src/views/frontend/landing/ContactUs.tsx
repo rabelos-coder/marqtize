@@ -109,7 +109,7 @@ export const ContactUs = () => {
     <form noValidate onSubmit={handleSubmit(onSubmit)} autoComplete="on">
       <Row className="gx-5 mb-4">
         <Col md={6}>
-          <Label className="text-dark mb-2" htmlFor="name">
+          <Label className="text-dark mb-2" for="name">
             {t('fullName')}
           </Label>
           <Controller
@@ -132,7 +132,7 @@ export const ContactUs = () => {
           <FormFeedback>{errors.name && errors.name.message}</FormFeedback>
         </Col>
         <Col md={6}>
-          <Label className="text-dark mb-2" htmlFor="email">
+          <Label className="text-dark mb-2" for="email">
             {t('email')}
           </Label>
           <Controller
@@ -156,7 +156,7 @@ export const ContactUs = () => {
         </Col>
       </Row>
       <div className="mb-4">
-        <Label className="text-dark mb-2" htmlFor="message">
+        <Label className="text-dark mb-2" for="message">
           {t('message')}
         </Label>
         <Controller

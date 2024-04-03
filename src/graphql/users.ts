@@ -50,6 +50,10 @@ export const FRAGMENT_USER_PROPS = gql`
       code
       name
     }
+    tokens {
+      id
+      userId
+    }
     account {
       id
       corporateName

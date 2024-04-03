@@ -32,8 +32,18 @@ export type User = {
   roles: Role[]
   timezone: Timezone
   account: Account
+  tokens: UserToken[]
   userAccounts: UserAccount[]
   userSessions: UserSession[]
+}
+
+export type UserToken = {
+  id: string
+  token: string
+  userId: string
+  expiresAt: string
+  createdAt: string
+  updatedAt: string
 }
 
 export type CountUser = {

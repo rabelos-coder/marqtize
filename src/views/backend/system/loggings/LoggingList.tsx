@@ -7,6 +7,7 @@ import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 import { TableColumn } from 'react-data-table-component'
 import { HiDotsVertical } from 'react-icons/hi'
 import { HiBolt, HiEye, HiTrash } from 'react-icons/hi2'
+import Select from 'react-select'
 import { toast } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
 import {
@@ -31,6 +32,7 @@ import { Can } from '@/components/backend/Guards/Can'
 import { CanAny } from '@/components/backend/Guards/CanAny'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
 import Table, { SelectChangeState } from '@/components/common/Table'
+import { api } from '@/configs/axios'
 import { APP_PAGINATION } from '@/environment'
 import {
   DELETE_LOGGING,
@@ -48,6 +50,7 @@ import {
 } from '@/types/common'
 import { Logging } from '@/types/logging'
 import { Subjects } from '@/types/subject'
+import { User, UserToken } from '@/types/user'
 
 import { ExpandedComponent } from './ExpandedComponent'
 
@@ -77,6 +80,11 @@ export const LoggingList = () => {
     return variables
   }, [])
 
+  const [userId, setUserId] = useState('')
+  const [users, setUsers] = useState<User[]>([])
+  const [tokens, setTokens] = useState<
+    Array<{ user: User; tokens: UserToken[] }>
+  >([])
   const [filterText, setFilterText] = useState('')
   const [rows, setRows] = useState<Logging[]>([])
   const [selectedRows, setSelectedRows] = useState<Logging[]>([])
@@ -96,6 +104,27 @@ export const LoggingList = () => {
     fetchPolicy: 'no-cache',
     variables,
   })
+
+  useMemo(
+    async () =>
+      await api
+        .post<User[]>('/backend/users', {
+          where: {
+            deletedAt: null,
+          },
+          orderBy: { systemName: OrderByEnum.ASC },
+        })
+        .then(({ data }) => {
+          setUsers(data)
+          setTokens(
+            data
+              .filter(({ tokens }) => tokens.length)
+              .map((user) => ({ user, tokens: user.tokens }))
+          )
+        })
+        .catch((error) => toast.error(error?.response?.data?.message)),
+    []
+  )
 
   const toggleDropdown = useCallback(
     (id: string) => {
@@ -118,7 +147,7 @@ export const LoggingList = () => {
   )
 
   const handleSearch = useCallback(
-    async (e?: React.FormEvent<HTMLFormElement>) => {
+    async (e?: React.FormEvent<HTMLFormElement> | null, _userId?: string) => {
       if (typeof e !== 'undefined') {
         e?.preventDefault()
       }
@@ -128,9 +157,45 @@ export const LoggingList = () => {
         OR: [],
       }
 
+      if (_userId || userId) {
+        const user = users.find((user) => user.id === (_userId ?? userId))
+
+        if (tokens.length) {
+          const userToken = tokens.find(
+            ({ user }) => user.id === (_userId ?? userId)
+          )
+
+          if (userToken) {
+            where.AND.push({
+              tokenId: {
+                in: userToken.tokens.map((token) => token.id),
+              },
+            })
+          } else if (user) {
+            where.AND.push({
+              userId: {
+                equals: user.id,
+              },
+            })
+          }
+        } else if (user) {
+          where.AND.push({
+            userId: {
+              equals: user.id,
+            },
+          })
+        }
+      }
+
       if (trim(filterText)) {
         where.OR.push({
           operation: {
+            contains: filterText,
+            mode: ModeEnum.INSENSITIVE,
+          },
+        })
+        where.OR.push({
+          endpoint: {
             contains: filterText,
             mode: ModeEnum.INSENSITIVE,
           },
@@ -165,7 +230,15 @@ export const LoggingList = () => {
 
       setVariables({ ...variables, page: 1, where })
     },
-    [filterText, variables]
+    [filterText, tokens, users, variables, userId]
+  )
+
+  const handleSetUser = useCallback(
+    async (option: any) => {
+      setUserId(option?.value ?? '')
+      await handleSearch(null, option?.value ?? '')
+    },
+    [handleSearch]
   )
 
   const handleReset = useCallback(async () => {
@@ -276,7 +349,7 @@ export const LoggingList = () => {
           name: t('operation'),
           sortable: true,
           sortField: 'operation',
-          selector: (row) => row.operation,
+          selector: (row) => row.operation ?? row.endpoint,
         },
         {
           name: t('ipAddress'),
@@ -361,23 +434,58 @@ export const LoggingList = () => {
       <form onSubmit={handleSearch} className="dataTables_filter">
         <Container fluid className="px-0 gx-5">
           <Row>
-            <Col lg={6} sm={12} className="text-lg-start"></Col>
-            <Col lg={6} sm={12}>
+            <Col lg={4} sm={12} className="text-lg-start"></Col>
+            <Col lg={4} sm={12}>
+              <FormGroup row>
+                <Label for="user" lg={4}>
+                  {t('user')}:
+                </Label>
+                <Col lg={8} className="justify-content-start text-start">
+                  <Select
+                    id="user"
+                    name="user"
+                    placeholder="--"
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    isDisabled={loading}
+                    onChange={(newValue) => handleSetUser(newValue as any)}
+                    options={
+                      [{ label: '--', value: '' }].concat(
+                        users.map((user) => ({
+                          label:
+                            `${user.systemName ?? user.name}` +
+                            (user.account
+                              ? ` (${user.account.systemName ?? user.account.tradingName})`
+                              : ''),
+                          value: user.id,
+                        })) as any
+                      ) as any[]
+                    }
+                    noOptionsMessage={({ inputValue }) =>
+                      !trim(inputValue as string) ? '' : t('noResultsFound')
+                    }
+                  />
+                </Col>
+              </FormGroup>
+            </Col>
+            <Col lg={4} sm={12}>
               <FormGroup row className="justify-content-lg-end">
-                <Label htmlFor="search" lg={3}>
+                <Label for="search" lg={4}>
                   {t('search')}:
                 </Label>
-                <Col lg={6}>
+                <Col lg={8}>
                   <InputGroup>
                     <Input
                       id="search"
                       onChange={(e) => setFilterText(e.target.value)}
                       type="text"
+                      disabled={loading}
                       value={filterText}
                     />
                     <Button
                       type="submit"
                       color="primary"
+                      disabled={loading}
                       className="text-white"
                     >
                       <i className="fa fa-search" />
@@ -390,7 +498,7 @@ export const LoggingList = () => {
         </Container>
       </form>
     )
-  }, [filterText, handleSearch, t])
+  }, [filterText, handleSearch, handleSetUser, loading, t, users])
 
   useEffect(() => {
     if (error && displayError) {
@@ -458,7 +566,7 @@ export const LoggingList = () => {
               subHeaderComponent={subHeaderComponentMemo}
               expandableRows
               expandableRowsComponent={ExpandedComponent}
-              spinner={{ type: 'grow' }}
+              spinner={{ type: 'border' }}
               noDataComponentText={t('noDataNameText', {
                 name: t('logging').toLowerCase(),
                 gender: 'male',

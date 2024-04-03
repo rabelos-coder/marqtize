@@ -97,7 +97,7 @@ export const PermissionsList = () => {
           <Row>
             <Col lg={12} sm={12}>
               <FormGroup row className="justify-content-lg-end">
-                <Label htmlFor="search" lg={2}>
+                <Label for="search" lg={2}>
                   {t('module')}:
                 </Label>
                 <Col lg={3}>
@@ -106,11 +106,13 @@ export const PermissionsList = () => {
                       id="search"
                       onChange={(e) => setFilterText(e.target.value)}
                       type="text"
+                      disabled={loading}
                       value={filterText}
                     />
                     <Button
                       type="submit"
                       color="primary"
+                      disabled={loading}
                       className="text-white"
                     >
                       <i className="fa fa-search" />
@@ -123,7 +125,7 @@ export const PermissionsList = () => {
         </Container>
       </form>
     )
-  }, [filterText, handleSearch, t])
+  }, [filterText, handleSearch, loading, t])
 
   useEffect(() => {
     if (error && displayError) {
@@ -169,7 +171,7 @@ export const PermissionsList = () => {
               className="display dataTable"
               subHeader
               subHeaderComponent={subHeaderComponentMemo}
-              spinner={{ type: 'grow' }}
+              spinner={{ type: 'border' }}
               noDataComponentText={t('noDataNameText', {
                 name: t('permission').toLowerCase(),
                 gender: 'female',

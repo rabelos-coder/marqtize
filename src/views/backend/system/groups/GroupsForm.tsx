@@ -630,7 +630,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                       <>
                         {users?.map(({ id, systemName, name }) => {
                           return (
-                            <Label key={id} htmlFor={id} lg={4} sm={6}>
+                            <Label key={id} for={id} lg={4} sm={6}>
                               <Input
                                 id={id}
                                 type="checkbox"

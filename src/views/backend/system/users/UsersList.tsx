@@ -593,6 +593,7 @@ export const UsersList = () => {
                   <Button
                     type="button"
                     color="light"
+                    disabled={loading}
                     className="me-2 "
                     onClick={toggle}
                   >
@@ -602,6 +603,7 @@ export const UsersList = () => {
                   <Button
                     type="button"
                     color="light"
+                    disabled={loading}
                     className="me-2 "
                     onClick={toggle}
                   >
@@ -612,7 +614,7 @@ export const UsersList = () => {
             </Col>
             <Col lg={6} sm={12}>
               <FormGroup row className="justify-content-lg-end">
-                <Label htmlFor="search" lg={3}>
+                <Label for="search" lg={3}>
                   {t('search')}:
                 </Label>
                 <Col lg={6}>
@@ -621,11 +623,13 @@ export const UsersList = () => {
                       id="search"
                       onChange={(e) => setFilterText(e.target.value)}
                       type="text"
+                      disabled={loading}
                       value={filterText}
                     />
                     <Button
                       type="submit"
                       color="primary"
+                      disabled={loading}
                       className="text-white"
                     >
                       <i className="fa fa-search" />
@@ -638,7 +642,7 @@ export const UsersList = () => {
         </Container>
       </form>
     )
-  }, [filterText, handleSearch, t, toggle, isTrash])
+  }, [handleSearch, isTrash, loading, toggle, t, filterText])
 
   useEffect(() => {
     if (error && displayError) {
@@ -706,7 +710,7 @@ export const UsersList = () => {
               subHeaderComponent={subHeaderComponentMemo}
               expandableRows
               expandableRowsComponent={ExpandedComponent}
-              spinner={{ type: 'grow' }}
+              spinner={{ type: 'border' }}
               noDataComponentText={t('noDataNameText', {
                 name: t('user').toLowerCase(),
                 gender: 'male',
