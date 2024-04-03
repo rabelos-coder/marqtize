@@ -10,6 +10,9 @@
   "oops": "Oops!",
   "home": "Home",
   "admin": "Admin",
+  "system": "Sistema",
+  "logging": "Log de Requisição",
+  "loggings": "Logs de Requisição",
   "administer": "Administrar",
   "panel": "Painel",
   "backend": "Back-end",
@@ -94,6 +97,8 @@
   "connectionPlural": "{count, plural, =0 {Conexão} =1 {Conexão} other {Conexões}}",
   "application": "Aplicativo",
   "applications": "Aplicativos",
+  "credential": "Credencial",
+  "credentials": "Credenciais",
   "website": "Website",
   "logout": "Sair",
   "settings": "Configurações",
@@ -877,5 +882,7 @@
     "paragraph1": "<ul><li><b>Criação Simples de Loja:</b> Com nossa interface intuitiva e ferramentas de design flexíveis, você pode criar uma loja online visualmente impressionante em questão de minutos, mesmo sem conhecimento técnico.</li><li><b>Gestão de Produtos Eficiente:</b> Gerencie seu catálogo de produtos com facilidade, incluindo adição, edição e exclusão de produtos, atributos e categorias.</li><li><b>Processamento de Pedidos Simplificado:</b> Nossa plataforma simplifica o processo de processamento de pedidos, desde a confirmação do pagamento até o envio final, para garantir uma experiência de compra perfeita para seus clientes.</li><li><b>Opções de Pagamento Seguras:</b> Integramos uma variedade de métodos de pagamento seguros para garantir transações seguras e confiáveis entre você e seus clientes.</li><li><b>Suporte Especializado:</b> Nossa equipe de suporte técnico está disponível para ajudar com quaisquer dúvidas ou problemas que você possa encontrar ao longo do caminho, garantindo que você tenha uma experiência tranquila e sem complicações.</li></ul>",
     "paragraph2": "<ul><li><b>Rápido Tempo de Lançamento:</b> Com nossa plataforma, você pode lançar sua loja online rapidamente e começar a vender para seu público-alvo em pouco tempo.</li><li><b>Escalabilidade:</b> Nossa solução é altamente escalável, permitindo que você cresça e expanda sua loja online conforme seu negócio cresce.</li><li><b>Flexibilidade:</b> Com uma ampla gama de recursos e opções de personalização, você tem total controle sobre a aparência e funcionalidade da sua loja online.</li></ul>",
     "paragraph3": "Transforme sua ideia em um negócio de sucesso online com a {company}. Junte-se a nós e descubra como você pode criar uma loja online impressionante, atrair clientes e impulsionar as vendas de forma eficaz. Estamos aqui para ajudá-lo em cada passo do caminho!"
-  }
+  },
+  "noData": "Nenhum dado informado.",
+  "download": "Baixar"
 }

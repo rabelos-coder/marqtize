@@ -7,6 +7,7 @@ export enum PublicSubjectsEnum {
 export enum ProtectedSubjectsEnum {
   Account = 'Account',
   Claim = 'Claim',
+  Logging = 'Logging',
 }
 
 export const Subjects = {

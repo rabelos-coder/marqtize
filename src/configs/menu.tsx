@@ -1,6 +1,8 @@
 import {
+  HiGlobeAlt,
   HiHome,
   HiLockClosed,
+  HiOutlineGlobeAlt,
   HiOutlineHome,
   HiOutlineLockClosed,
   HiOutlineUser,
@@ -90,6 +92,23 @@ export const MenuListData: SidebarMenuType[] = [
             claims: ['Role:Manage', 'Role:Read'],
           },
         ],
+      },
+    ],
+  },
+  {
+    title: 'system',
+    menuContent: 'Log,Logging,Claims',
+    claims: ['Logging:Manage', 'Logging:Read', 'Claim:Read'],
+    items: [
+      {
+        id: uuidv4(),
+        title: 'loggings',
+        path: 'backend/system/loggings',
+        claims: ['Logging:Manage', 'Logging:Read'],
+        iconStroke: <HiOutlineGlobeAlt className="stroke-icon" />,
+        iconFill: <HiGlobeAlt className="fill-icon" />,
+        pathSlice: 'logging',
+        type: 'link',
       },
       {
         id: uuidv4(),

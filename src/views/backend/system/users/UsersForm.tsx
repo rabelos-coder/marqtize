@@ -2,7 +2,6 @@
 
 import { useLazyQuery, useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import axios from 'axios'
 import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
 import {
@@ -27,12 +26,15 @@ import {
   Label,
   Row,
 } from 'reactstrap'
+import { v4 as uuidv4 } from 'uuid'
 import * as yup from 'yup'
 
 import { Avatar } from '@/components/common/Avatar'
 import FinishForm from '@/components/common/NumberingWizard/FinishForm'
 import StepperHorizontal from '@/components/common/NumberingWizard/StepperHorizontal'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
+import { api } from '@/configs/axios'
+import { APP_TIMEZONE } from '@/environment'
 import { CREATE_USER, FIND_USER, UPDATE_USER } from '@/graphql/users'
 import { useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
@@ -46,7 +48,7 @@ import {
 import { UserTypeEnum } from '@/types/enums'
 import { LanguageEnum } from '@/types/language'
 import { Role } from '@/types/role'
-import { Subjects } from '@/types/subject'
+import { ProtectedSubjectsEnum } from '@/types/subject'
 import { Timezone } from '@/types/timezone'
 import { CreateUserInput, UpdateUserInput, User, UserInput } from '@/types/user'
 import { setFormValues, validateFormValue } from '@/utils/helpers'
@@ -222,8 +224,8 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
 
   const getAccounts = useCallback(
     async (data?: any) =>
-      await axios
-        .post<Account[]>('/api/backend/accounts', data)
+      await api
+        .post<Account[]>(`/backend/accounts`, data)
         .then(({ data }) =>
           setAccounts(
             data?.map(
@@ -241,8 +243,8 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
 
   const getClaims = useCallback(
     async () =>
-      await axios
-        .get<Claim[]>('/api/backend/claims')
+      await api
+        .get<Claim[]>(`/backend/claims`)
         .then(({ data }) => setClaims(data))
         .catch((error) => toast.error(error?.response?.data?.message)),
     []
@@ -250,8 +252,8 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
 
   const getRoles = useCallback(
     async () =>
-      await axios
-        .get<Role[]>('/api/backend/roles')
+      await api
+        .get<Role[]>(`/backend/roles?token=${uuidv4()}`)
         .then(({ data }) => setRoles(data))
         .catch((error) => toast.error(error?.response?.data?.message)),
     []
@@ -259,9 +261,9 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
 
   const getTimezones = useCallback(
     async () =>
-      await axios
-        .get<Timezone[]>('/api/backend/timezones')
-        .then(({ data }) =>
+      await api
+        .get<Timezone[]>(`/backend/timezones`)
+        .then(({ data }) => {
           setTimezones(
             data?.map(
               ({ id, name }) =>
@@ -271,9 +273,17 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                 }) as unknown as ReactSelectType
             )
           )
-        )
+          if (mode === 'create' && data) {
+            const defaultTimezone = data.find(
+              ({ code }) => code === APP_TIMEZONE
+            )
+            if (defaultTimezone) {
+              setValue('timezoneId', defaultTimezone.id)
+            }
+          }
+        })
         .catch((error) => toast.error(error?.response?.data?.message)),
-    []
+    [mode, setValue]
   )
 
   const handleUser = useCallback(async () => {
@@ -1100,7 +1110,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                     disabled={disabled}
                     render={({ field: { onChange, value } }) => (
                       <>
-                        {roles?.map(({ id, name, slug }) => {
+                        {roles?.map(({ id, accountId, name, slug }) => {
                           if (!jwt?.sa && !jwt?.roles.includes('admin')) {
                             if (
                               !jwt?.roles?.includes(slug) &&
@@ -1112,7 +1122,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                               value.includes(id)
                             ) {
                               return (
-                                <Label key={id} htmlFor={id} lg={4} sm={6}>
+                                <Label key={id} for={id} lg={4} sm={6}>
                                   <Input
                                     id={id}
                                     type="checkbox"
@@ -1128,15 +1138,17 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                           } else if (!jwt?.sa && jwt?.roles.includes('admin')) {
                             if (
                               !jwt?.roles?.includes(slug) &&
-                              !value.includes(id)
+                              !value.includes(id) &&
+                              jwt?.accountId !== accountId
                             ) {
                               return <Fragment key={id}></Fragment>
                             } else if (
                               !jwt?.roles?.includes(slug) &&
-                              value.includes(id)
+                              value.includes(id) &&
+                              jwt?.accountId !== accountId
                             ) {
                               return (
-                                <Label key={id} htmlFor={id} lg={4} sm={6}>
+                                <Label key={id} for={id} lg={4} sm={6}>
                                   <Input
                                     id={id}
                                     type="checkbox"
@@ -1152,7 +1164,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                           }
 
                           return (
-                            <Label key={id} htmlFor={id} lg={4} sm={6}>
+                            <Label key={id} for={id} lg={4} sm={6}>
                               <Input
                                 id={id}
                                 type="checkbox"
@@ -1197,10 +1209,18 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                           if (!jwt?.sa && !jwt?.roles.includes('admin')) {
                             if (!jwt?.claims?.includes(key))
                               return <Fragment key={key}></Fragment>
-                            if (subject === Subjects.Claim)
+                            if (
+                              Object.keys(ProtectedSubjectsEnum).includes(
+                                subject
+                              )
+                            )
                               return <Fragment key={key}></Fragment>
                           } else if (!jwt?.sa && jwt?.roles.includes('admin')) {
-                            if (subject === Subjects.Claim)
+                            if (
+                              Object.keys(ProtectedSubjectsEnum).includes(
+                                subject
+                              )
+                            )
                               return <Fragment key={key}></Fragment>
                           }
 

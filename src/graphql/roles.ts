@@ -51,6 +51,26 @@ const FRAGMENT_ROLE_PROPS = gql`
     }
   }
 `
+const FRAGMENT_ROLE_PROPS2 = gql`
+  fragment RolesProps on Role {
+    id
+    accountId
+    name
+    slug
+    claims
+    isDeleteable
+    isDefault
+    createdAt
+    updatedAt
+    deletedAt
+    account {
+      corporateName
+      tradingName
+      systemName
+      slug
+    }
+  }
+`
 
 export const COUNT_ROLES: TypedDocumentNode<CountRole, WhereInput> = gql`
   query CountRole($where: SearchRoleInput) {
@@ -62,10 +82,10 @@ export const FIND_MANY_ROLES: TypedDocumentNode<
   FindManyRole,
   WhereAndOrderInput
 > = gql`
-  ${FRAGMENT_ROLE_PROPS}
+  ${FRAGMENT_ROLE_PROPS2}
   query FindManyRole($where: SearchRoleInput, $orderBy: SortRoleInput) {
     findManyRole(where: $where, orderBy: $orderBy) {
-      ...RoleProps
+      ...RolesProps
     }
   }
 `

@@ -2,7 +2,6 @@
 
 import { useLazyQuery, useMutation } from '@apollo/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import axios from 'axios'
 import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
 import { Fragment, useCallback, useEffect, useState } from 'react'
@@ -26,6 +25,7 @@ import * as yup from 'yup'
 import FinishForm from '@/components/common/NumberingWizard/FinishForm'
 import StepperHorizontal from '@/components/common/NumberingWizard/StepperHorizontal'
 import { SLUG_REGEX } from '@/configs'
+import { api } from '@/configs/axios'
 import { CREATE_ROLE, FIND_ROLE, UPDATE_ROLE } from '@/graphql/roles'
 import { useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
@@ -38,7 +38,7 @@ import {
 } from '@/types/common'
 import { UserTypeEnum } from '@/types/enums'
 import { CreateRoleInput, Role, RoleInput, UpdateRoleInput } from '@/types/role'
-import { Subjects } from '@/types/subject'
+import { ProtectedSubjectsEnum } from '@/types/subject'
 import { User } from '@/types/user'
 import { setFormValues, validateFormValue } from '@/utils/helpers'
 
@@ -121,8 +121,8 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
 
   const getAccounts = useCallback(
     async (data?: any) =>
-      await axios
-        .post<Account[]>('/api/backend/accounts', data)
+      await api
+        .post<Account[]>('/backend/accounts', data)
         .then(({ data }) =>
           setAccounts(
             data?.map(
@@ -140,8 +140,8 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
 
   const getClaims = useCallback(
     async () =>
-      await axios
-        .get<Claim[]>('/api/backend/claims')
+      await api
+        .get<Claim[]>('/backend/claims')
         .then(({ data }) => setClaims(data))
         .catch((error) => toast.error(error?.response?.data?.message)),
     []
@@ -149,8 +149,8 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
 
   const getUsers = useCallback(
     async (data?: any) =>
-      await axios
-        .post<User[]>('/api/backend/users', data)
+      await api
+        .post<User[]>('/backend/users', data)
         .then(({ data }) => setUsers(data))
         .catch((error) => toast.error(error?.response?.data?.message)),
     []
@@ -574,10 +574,18 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                           if (!jwt?.sa && !jwt?.roles.includes('admin')) {
                             if (!jwt?.claims?.includes(key))
                               return <Fragment key={key}></Fragment>
-                            if (subject === Subjects.Claim)
+                            if (
+                              Object.keys(ProtectedSubjectsEnum).includes(
+                                subject
+                              )
+                            )
                               return <Fragment key={key}></Fragment>
                           } else if (!jwt?.sa && jwt?.roles.includes('admin')) {
-                            if (subject === Subjects.Claim)
+                            if (
+                              Object.keys(ProtectedSubjectsEnum).includes(
+                                subject
+                              )
+                            )
                               return <Fragment key={key}></Fragment>
                           }
 

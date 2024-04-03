@@ -1,7 +1,6 @@
 'use client'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import axios from 'axios'
 import { useLocale, useTranslations } from 'next-intl'
 import { useReCaptcha } from 'next-recaptcha-v3'
 import { useState } from 'react'
@@ -12,6 +11,7 @@ import * as yup from 'yup'
 
 import { CommonLogo } from '@/components/common/CommonLogo'
 import { EMAIL_REGEX } from '@/configs'
+import { api } from '@/configs/axios'
 import { IS_DEVELOPMENT } from '@/environment'
 import { Link, useRouter } from '@/navigation'
 import { AuthFormProps } from '@/types/common'
@@ -72,8 +72,8 @@ export const ForgotPasswordForm = ({ alignLogo }: AuthFormProps) => {
       return
     }
 
-    await axios
-      .post(`/api/auth/forgot-password`, data, {
+    await api
+      .post(`/auth/forgot-password`, data, {
         headers: { recaptcha, locale },
       })
       .then(({ data }) => {

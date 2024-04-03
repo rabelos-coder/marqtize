@@ -1,7 +1,6 @@
 'use client'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import axios from 'axios'
 import { useLocale, useTranslations } from 'next-intl'
 import { useReCaptcha } from 'next-recaptcha-v3'
 import { useCallback, useState } from 'react'
@@ -11,6 +10,7 @@ import { Button, Col, FormFeedback, Input, Label, Row } from 'reactstrap'
 import * as yup from 'yup'
 
 import { EMAIL_REGEX } from '@/configs'
+import { api } from '@/configs/axios'
 import { IS_DEVELOPMENT, IS_PRODUCTION } from '@/environment'
 
 type FormData = {
@@ -83,8 +83,8 @@ export const ContactUs = () => {
         return
       }
 
-      await axios
-        .post('/api/contact', data, {
+      await api
+        .post('/contact', data, {
           headers: {
             locale,
             recaptcha,

@@ -1,7 +1,6 @@
 'use client'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import axios from 'axios'
 import { useLocale, useTranslations } from 'next-intl'
 import { useReCaptcha } from 'next-recaptcha-v3'
 import { useState } from 'react'
@@ -20,6 +19,7 @@ import * as yup from 'yup'
 
 import { CommonLogo } from '@/components/common/CommonLogo'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
+import { api } from '@/configs/axios'
 import { IS_DEVELOPMENT } from '@/environment'
 import { useAppSelector } from '@/hooks'
 import { Link, useRouter } from '@/navigation'
@@ -124,8 +124,8 @@ export const RegisterForm = ({ alignLogo }: AuthFormProps) => {
       return
     }
 
-    await axios
-      .post(`/api/auth/register`, data, {
+    await api
+      .post(`/auth/register`, data, {
         headers: { recaptcha, locale },
       })
       .then(({ data }) => {

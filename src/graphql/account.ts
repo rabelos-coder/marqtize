@@ -31,7 +31,6 @@ import {
 const FRAGMENT_ACCOUNT_PROPS = gql`
   fragment AccountProps on Account {
     id
-    userId
     erpId
     corporateNumber
     corporateName
