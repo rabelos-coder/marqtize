@@ -7,6 +7,10 @@ body {
     color: $dark-all-font-color;
     background-color: $dark-body-background;
 
+    .react-json-view {
+      background-color: var(--bs-gray-800) !important;
+    }
+
     .card {
       --bs-card-title-color: var(--body-font-color);
       --bs-card-subtitle-color: var(--body-font-color);

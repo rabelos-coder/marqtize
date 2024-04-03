@@ -7,8 +7,6 @@ import CommonCardHeading from '@/components/common/CommonCardHeading'
 import { concatTitle } from '@/utils/helpers'
 import { LoggingView } from '@/views/backend/system/loggings/LoggingView'
 
-import style from './page.module.scss'
-
 export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('viewName', { name: t('logging') }))
@@ -42,7 +40,7 @@ export default async function UserViewPage({ params: { locale, id } }: any) {
                     name: t('logging').toLowerCase(),
                   })}
                 />
-                <LoggingView id={id} style={style} />
+                <LoggingView id={id} />
               </Card>
             </Col>
           </Row>

@@ -18,6 +18,7 @@ const nextConfig = {
   generateEtags: false,
   reactStrictMode: true,
   swcMinify: true,
+  distDir: 'build',
   images: {
     remotePatterns: [
       {

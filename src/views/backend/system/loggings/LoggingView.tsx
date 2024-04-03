@@ -5,8 +5,7 @@ import { DateTime } from 'luxon'
 import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { LuDownload } from 'react-icons/lu'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { prism } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import ReactJson from 'react-json-view'
 import { toast } from 'react-toastify'
 import {
   Button,
@@ -27,17 +26,16 @@ import { Avatar } from '@/components/common/Avatar'
 import { SpinnerBoxed } from '@/components/common/SpinnerBoxed'
 import { APP_DATETIME_FORMAT } from '@/environment'
 import { DELETE_LOGGING, FIND_LOGGING } from '@/graphql/logging'
-import { useAuth } from '@/hooks'
+import { useAppSelector, useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
 
 type LoggingViewProps = {
   id: string
-  style: any
 }
 
 const defaultImageUrl = '/assets/images/user/user.jpg'
 
-export const LoggingView = ({ id, style }: LoggingViewProps) => {
+export const LoggingView = ({ id }: LoggingViewProps) => {
   const [activeTab, setActiveTab] = useState('tab1')
   const [imgSrc, setImgSrc] = useState(defaultImageUrl)
   const [displayError, setDisplayError] = useState(false)
@@ -52,6 +50,7 @@ export const LoggingView = ({ id, style }: LoggingViewProps) => {
   const router = useRouter()
   const locale = useLocale()
   const { timezone } = useAuth()
+  const { theme } = useAppSelector((state) => state.theme)
 
   const handleDownload = (content, fileName) => {
     const element = document.createElement('a')
@@ -265,17 +264,23 @@ export const LoggingView = ({ id, style }: LoggingViewProps) => {
                       </Button>
                     </Col>
                     <Col lg={12}>
-                      <SyntaxHighlighter
-                        language="json"
-                        wrapLines={true}
-                        className={style.syntaxHighlighter}
-                        style={prism}
-                      >
-                        {String(data?.findByIdLogging?.requestData).replaceAll(
-                          /\\n/gm,
-                          '\n'
+                      <ReactJson
+                        name={null}
+                        indentWidth={2}
+                        displayDataTypes={false}
+                        theme={
+                          theme === 'dark'
+                            ? 'summerfruit'
+                            : 'summerfruit:inverted'
+                        }
+                        style={{
+                          padding: '20px',
+                          borderRadius: '10px',
+                        }}
+                        src={JSON.parse(
+                          data?.findByIdLogging?.requestData ?? {}
                         )}
-                      </SyntaxHighlighter>
+                      />
                     </Col>
                   </>
                 ) : (
@@ -309,17 +314,23 @@ export const LoggingView = ({ id, style }: LoggingViewProps) => {
                       </Button>
                     </Col>
                     <Col lg={12}>
-                      <SyntaxHighlighter
-                        language="json"
-                        wrapLines={true}
-                        className={style.syntaxHighlighter}
-                        style={prism}
-                      >
-                        {String(data?.findByIdLogging?.responseData).replaceAll(
-                          /\\n/gm,
-                          '\n'
+                      <ReactJson
+                        name={null}
+                        indentWidth={2}
+                        displayDataTypes={false}
+                        theme={
+                          theme === 'dark'
+                            ? 'summerfruit'
+                            : 'summerfruit:inverted'
+                        }
+                        style={{
+                          padding: '20px',
+                          borderRadius: '10px',
+                        }}
+                        src={JSON.parse(
+                          data?.findByIdLogging?.responseData ?? {}
                         )}
-                      </SyntaxHighlighter>
+                      />
                     </Col>
                   </>
                 ) : (

@@ -453,7 +453,7 @@ export const LoggingList = () => {
                       [{ label: '--', value: '' }].concat(
                         users.map((user) => ({
                           label:
-                            `${user.systemName ?? user.name}` +
+                            `${user.name}` +
                             (user.account
                               ? ` (${user.account.systemName ?? user.account.tradingName})`
                               : ''),

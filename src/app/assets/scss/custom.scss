@@ -192,3 +192,9 @@ a.text-white:hover {
 .min-vh-90 {
   min-height: 90vh;
 }
+
+.light-only {
+  .react-json-view {
+    background-color: var(--bs-gray-100) !important;
+  }
+}
