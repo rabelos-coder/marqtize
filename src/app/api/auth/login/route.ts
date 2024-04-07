@@ -25,7 +25,13 @@ export async function POST(req: NextRequest) {
   // sanitize input
   const email = data?.email?.trim() ?? null
   const password = data?.password?.trim() ?? null
-  const rememberMe = Boolean(data?.rememberMe) ?? false
+  const rememberMe = data?.rememberMe ?? false
+
+  console.log({
+    email,
+    password,
+    rememberMe,
+  })
 
   if (!email || !password) {
     return NextResponse.json(
