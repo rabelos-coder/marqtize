@@ -20,7 +20,7 @@ jobs:
           check-latest: true
 
       - name: Install Npm Dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Build App
         run: npm run build
