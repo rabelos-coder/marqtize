@@ -87,23 +87,23 @@ export type ComponentWithLocaleProps = Readonly<{
   params: ParamsType
 }>
 
-export type ChildrenProps = {
+export type ChildrenProps = Readonly<{
   children: ReactNode
-}
+}>
 
-export type ReduxProviderProps = {
+export type ReduxProviderProps = Readonly<{
   host: string
   children: ReactNode
-}
+}>
 
 export type AuthFormProps = {
   alignLogo?: string
 }
 
-export type PageWithChildrenProps = {
+export type PageWithChildrenProps = Readonly<{
   page: number
   children?: ReactNode
-}
+}>
 
 export enum ModeEnum {
   SENSITIVE = 'SENSITIVE',
