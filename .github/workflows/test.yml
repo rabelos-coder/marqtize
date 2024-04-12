@@ -18,12 +18,13 @@ jobs:
         with:
           node-version: '20'
           check-latest: true
+      - uses: oven-sh/setup-bun@v1
 
-      - name: Install Npm Dependencies
-        run: npm install --force
+      - name: Install dependencies
+        run: bun install
 
-      - name: Build App
-        run: npm run build
+      - name: Build application
+        run: bun run build
 
       - name: Run tests with jest
-        run: npm run test:ci
+        run: bun run test:ci
