@@ -8,9 +8,9 @@ const createJestConfig = nextJest({
 })
 
 // Add any custom config to be passed to Jest
-const customJestConfig: Config = {
+const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
   moduleDirectories: ['node_modules', '<rootDir>'],
   testPathIgnorePatterns: [
     '<rootDir>/.next/',
@@ -24,4 +24,4 @@ const customJestConfig: Config = {
   },
 }
 
-export default createJestConfig(customJestConfig)
+export default createJestConfig(config)

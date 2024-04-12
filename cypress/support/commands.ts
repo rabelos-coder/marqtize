@@ -37,5 +37,5 @@
 // }
 
 // Prevent TypeScript from reading file as legacy script
-const asModule = {};
-export default asModule;
+const asModule = {}
+export default asModule
