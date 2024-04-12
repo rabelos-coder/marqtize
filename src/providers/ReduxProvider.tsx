@@ -27,6 +27,8 @@ export function ReduxProvider({ host, children }: ReduxProviderProps) {
 
     // Create the store instance the first time this renders
     storeRef.current = makeStore()
+
+    // @ts-ignore
     storeRef.current.dispatch(fetchAccount({ slug, host }))
   }
 

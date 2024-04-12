@@ -42,6 +42,7 @@ export const DefaultPage = ({ host, slug }: Props) => {
   const { account, loading } = useAppSelector((state) => state.account)
 
   useEffect(() => {
+    // @ts-ignore
     if (!account) dispatch(fetchAccount({ slug, host }))
     if (account) setSiteAccount(account)
   }, [account, dispatch, host, slug])

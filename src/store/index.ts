@@ -12,6 +12,8 @@ export const makeStore = () => {
     devTools: IS_DEVELOPMENT
       ? { name: `${APP_META_TITLE}-store`.toLowerCase() }
       : false,
+
+    // @ts-ignore
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
