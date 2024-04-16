@@ -4,7 +4,7 @@
     {
       "name": "Next.js: debug server-side",
       "type": "node-terminal",
-      "command": "yarn dev",
+      "command": "bun dev",
       "request": "launch"
     },
     {
@@ -16,7 +16,7 @@
     {
       "name": "Next.js: debug full stack",
       "type": "node-terminal",
-      "command": "yarn dev",
+      "command": "bun dev",
       "request": "launch",
       "serverReadyAction": {
         "pattern": "Local:.+ (https?://.+)",
