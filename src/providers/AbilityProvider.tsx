@@ -1,6 +1,6 @@
 'use client'
 
-import { AbilityContext } from '@/context/AbilityContext'
+import AbilityContext from '@/context/AbilityContext'
 import { AbilityProviderProps } from '@/types/ability'
 
 /**
@@ -10,7 +10,7 @@ import { AbilityProviderProps } from '@/types/ability'
  * @param {AnyAbility[]} abilities - The abilities to be provided
  * @return {JSX.Element} The component with provided abilities
  */
-export function AbilityProvider({
+export default function AbilityProvider({
   children,
   ability,
 }: AbilityProviderProps): JSX.Element {

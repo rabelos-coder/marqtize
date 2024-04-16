@@ -17,9 +17,9 @@ import {
 } from 'reactstrap'
 import * as yup from 'yup'
 
-import { CommonLogo } from '@/components/common/CommonLogo'
+import CommonLogo from '@/components/common/CommonLogo'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
-import { api } from '@/configs/axios'
+import api from '@/configs/axios'
 import { IS_DEVELOPMENT } from '@/environment'
 import { useAppSelector } from '@/hooks'
 import { Link, useRouter } from '@/navigation'

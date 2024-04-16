@@ -1,4 +1,4 @@
-export const Spinner = () => (
+const Spinner = () => (
   <div className="loader-wrapper">
     <div className="loader-index">
       <span></span>
@@ -22,3 +22,5 @@ export const Spinner = () => (
     </svg>
   </div>
 )
+
+export default Spinner

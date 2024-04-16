@@ -10,7 +10,7 @@ import { ReduxProviderProps } from '@/types/common'
 
 import { AppStore, makeStore } from '../store'
 
-export function ReduxProvider({ host, children }: ReduxProviderProps) {
+export default function ReduxProvider({ host, children }: ReduxProviderProps) {
   const storeRef = useRef<AppStore | null>(null)
   const pathname = usePathname()
 

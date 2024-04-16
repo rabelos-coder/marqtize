@@ -7,7 +7,7 @@ import DataTable, { createTheme, TableProps } from 'react-data-table-component'
 import { APP_PAGINATION_ROWS, APP_PAGINATION_SHOW_ALL } from '@/environment'
 import { useAppSelector } from '@/hooks'
 
-import { SpinnerLine, SpinnerLineProps } from './SpinnerLine'
+import SpinnerLine, { SpinnerLineProps } from './SpinnerLine'
 
 export interface SelectChangeState<T> {
   allSelected: boolean

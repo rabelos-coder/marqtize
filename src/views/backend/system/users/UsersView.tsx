@@ -18,9 +18,9 @@ import {
   TabPane,
 } from 'reactstrap'
 
-import { Can } from '@/components/backend/Guards/Can'
-import { Avatar } from '@/components/common/Avatar'
-import { SpinnerBoxed } from '@/components/common/SpinnerBoxed'
+import Can from '@/components/backend/Guards/Can'
+import Avatar from '@/components/common/Avatar'
+import SpinnerBoxed from '@/components/common/SpinnerBoxed'
 import { APP_DATETIME_FORMAT } from '@/environment'
 import { FIND_USER } from '@/graphql/users'
 import { useAuth } from '@/hooks'

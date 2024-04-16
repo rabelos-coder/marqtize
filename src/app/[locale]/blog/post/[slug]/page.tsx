@@ -7,17 +7,18 @@ import { getTranslations } from 'next-intl/server'
 import { Fragment } from 'react'
 import { Col, Container, Row } from 'reactstrap'
 
-import { CustomButton } from '@/components/common/CustomButton'
-import { ShareButtons } from '@/components/common/ShareButtons'
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import CustomButton from '@/components/common/CustomButton'
+import ShareButtons from '@/components/common/ShareButtons'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import {
   APP_META_DESCRIPTION,
   APP_META_TITLE,
   APP_WEBSITE,
 } from '@/environment'
 import { FIND_FIRST_POST } from '@/graphql/blogPost'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
+import { ChildrenWithParamsProps } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { DateTime } from '@/utils/date'
 import { concatTitle } from '@/utils/helpers'
@@ -26,7 +27,7 @@ const client = createApolloClient()
 
 export async function generateMetadata({
   params: { locale, slug },
-}: any): Promise<Metadata> {
+}: ChildrenWithParamsProps): Promise<Metadata> {
   const t = await getTranslations({ locale })
   let title = concatTitle(t('blog.title'))
   const headersList = headers()
@@ -100,7 +101,9 @@ export async function generateMetadata({
   }
 }
 
-export default async function BlogPostPage({ params: { locale, slug } }: any) {
+export default async function BlogPostPage({
+  params: { locale, slug },
+}: ChildrenWithParamsProps) {
   const t = await getTranslations({ locale })
 
   let title = t('blog.post.title')

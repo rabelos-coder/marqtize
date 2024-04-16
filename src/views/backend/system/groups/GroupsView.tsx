@@ -18,8 +18,8 @@ import {
   TabPane,
 } from 'reactstrap'
 
-import { Can } from '@/components/backend/Guards/Can'
-import { SpinnerBoxed } from '@/components/common/SpinnerBoxed'
+import Can from '@/components/backend/Guards/Can'
+import SpinnerBoxed from '@/components/common/SpinnerBoxed'
 import { APP_DATETIME_FORMAT } from '@/environment'
 import { FIND_ROLE } from '@/graphql/roles'
 import { useAuth } from '@/hooks'

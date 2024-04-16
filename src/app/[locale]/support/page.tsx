@@ -2,14 +2,17 @@ import { getTranslations } from 'next-intl/server'
 import { FiArrowRight, FiLifeBuoy, FiTv, FiUser } from 'react-icons/fi'
 import { Col, Container, Row } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { EMAIL } from '@/environment'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
+import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
-export async function generateMetadata({ params: { locale } }: any) {
+export async function generateMetadata({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('support'))
 
@@ -18,7 +21,9 @@ export async function generateMetadata({ params: { locale } }: any) {
   }
 }
 
-export default async function SupportPage({ params: { locale } }: any) {
+export default async function SupportPage({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
 
   return (

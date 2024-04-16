@@ -21,7 +21,7 @@ import {
 import Sawl from 'sweetalert2'
 import * as yup from 'yup'
 
-import { Avatar } from '@/components/common/Avatar'
+import Avatar from '@/components/common/Avatar'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
 import { UPDATE_PROFILE } from '@/graphql/auth'

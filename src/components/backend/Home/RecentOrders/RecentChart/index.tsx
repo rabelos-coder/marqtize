@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import React from 'react'
 import { CardBody, Col, Row } from 'reactstrap'
 
 import { RecentOrderChart } from '@/fake/chart'

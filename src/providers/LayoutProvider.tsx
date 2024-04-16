@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-import { LayoutContext } from '@/context/LayoutContext'
+import LayoutContext from '@/context/LayoutContext'
 import { useAppSelector } from '@/hooks'
 import { ChildrenProps } from '@/types/common'
 import { SearchableMenuType } from '@/types/layout'

@@ -1,12 +1,15 @@
 import { getTranslations } from 'next-intl/server'
 import { Col, Container, Row } from 'reactstrap'
 
-import { Breadcrumbs } from '@/components/backend/Breadcrumbs'
-import { AclGuard } from '@/components/backend/Guards/AclGuard'
+import Breadcrumbs from '@/components/backend/Breadcrumbs'
+import AclGuard from '@/components/backend/Guards/AclGuard'
+import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 import { GroupsList } from '@/views/backend/system/groups/GroupsList'
 
-export async function generateMetadata({ params: { locale } }: any) {
+export async function generateMetadata({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('groups'))
 
@@ -15,7 +18,9 @@ export async function generateMetadata({ params: { locale } }: any) {
   }
 }
 
-export default async function GroupsPage({ params: { locale } }: any) {
+export default async function GroupsPage({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
 
   const title = t('groups')

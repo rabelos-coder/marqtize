@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const api = axios.create({
+const api = axios.create({
   baseURL: '/api',
   headers: {
     'Cache-Control': 'no-cache',
@@ -8,3 +8,5 @@ export const api = axios.create({
     Expires: '0',
   },
 })
+
+export default api

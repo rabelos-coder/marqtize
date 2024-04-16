@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import { AuthContext } from '@/context/AuthContext'
+import AuthContext from '@/context/AuthContext'
 import { APP_LANGUAGE, APP_TIMEZONE } from '@/environment'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { useRouter } from '@/navigation'
@@ -18,7 +18,7 @@ import { User } from '@/types/user'
  * @param {ChildrenProps} children - The child components to provide authentication context to.
  * @return {JSX.Element} The authentication context provided to the children.
  */
-export function AuthProvider({ children }: ChildrenProps): JSX.Element {
+export default function AuthProvider({ children }: ChildrenProps): JSX.Element {
   const auth = useProvideAuth()
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>

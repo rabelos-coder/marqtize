@@ -10,7 +10,7 @@ import { Button, Col, FormFeedback, Input, Label, Row } from 'reactstrap'
 import * as yup from 'yup'
 
 import { EMAIL_REGEX } from '@/configs'
-import { api } from '@/configs/axios'
+import api from '@/configs/axios'
 import { IS_DEVELOPMENT, IS_PRODUCTION } from '@/environment'
 
 type FormData = {

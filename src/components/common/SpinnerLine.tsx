@@ -15,7 +15,7 @@ export type SpinnerLineProps = {
     | 'default'
 }
 
-export const SpinnerLine = ({ type, color, className }: SpinnerLineProps) => {
+const SpinnerLine = ({ type, color, className }: SpinnerLineProps) => {
   return (
     <div
       className={`d-flex justify-content-center align-items-center ${className}`}
@@ -27,3 +27,5 @@ export const SpinnerLine = ({ type, color, className }: SpinnerLineProps) => {
     </div>
   )
 }
+
+export default SpinnerLine

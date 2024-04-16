@@ -2,7 +2,7 @@ type SvgBorderProps = {
   className?: string
 }
 
-export const SvgBorder = ({ className }: SvgBorderProps) => {
+const SvgBorder = ({ className }: SvgBorderProps) => {
   return (
     <div className={`svg-border-rounded ${className}`}>
       <svg
@@ -16,3 +16,5 @@ export const SvgBorder = ({ className }: SvgBorderProps) => {
     </div>
   )
 }
+
+export default SvgBorder

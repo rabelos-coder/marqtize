@@ -4,10 +4,10 @@ import { notFound } from 'next/navigation'
 import { useState } from 'react'
 import { Button, Container } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { IS_DEVELOPMENT } from '@/environment'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 
 export default function ErrorPage() {
   const [user, setUser] = useState({ name: 'John Doe' })

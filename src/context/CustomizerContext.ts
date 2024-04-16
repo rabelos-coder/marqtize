@@ -4,7 +4,7 @@ import { createContext } from 'react'
 
 import { CustomizerContextType } from '@/types/customizer'
 
-export const CustomizerContext = createContext<CustomizerContextType>({
+const CustomizerContext = createContext<CustomizerContextType>({
   layout: '',
   sidebarIconType: '',
   layoutName: '',
@@ -27,3 +27,5 @@ export const CustomizerContext = createContext<CustomizerContextType>({
   addColor: () => {},
   addMixBackgroundLayout: () => {},
 })
+
+export default CustomizerContext

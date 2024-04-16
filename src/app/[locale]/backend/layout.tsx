@@ -3,13 +3,13 @@ import '../../assets/scss/app.scss'
 import { Metadata } from 'next/types'
 import { ToastContainer } from 'react-toastify'
 
-import { AuthGuard } from '@/components/backend/Guards/AuthGuard'
+import AuthGuard from '@/components/backend/Guards/AuthGuard'
 import {
   APP_META_DESCRIPTION,
   APP_META_KEYWORDS,
   APP_META_SLOGAN,
 } from '@/environment'
-import { AuthProvider } from '@/providers/AuthProvider'
+import AuthProvider from '@/providers/AuthProvider'
 import { CustomizerProvider } from '@/providers/CustomizerProvider'
 import { LayoutProvider } from '@/providers/LayoutProvider'
 import { ChildrenProps } from '@/types/common'

@@ -1,11 +1,10 @@
 import Image from 'next/image'
-import React from 'react'
 
 type PropsType = {
   alignLogo?: string
 }
 
-export const CommonLogo = ({ alignLogo }: PropsType) => {
+const CommonLogo = ({ alignLogo }: PropsType) => {
   return (
     <a className={`logo ${alignLogo ? alignLogo : ''} `} href="/">
       <Image
@@ -25,3 +24,5 @@ export const CommonLogo = ({ alignLogo }: PropsType) => {
     </a>
   )
 }
+
+export default CommonLogo

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiChevronsUp } from 'react-icons/fi'
 
-export const TapTop = () => {
+const TapTop = () => {
   const [tapTopStyle, setTapTopStyle] = useState('none')
 
   const executeScroll = () => {
@@ -34,3 +34,5 @@ export const TapTop = () => {
     </div>
   )
 }
+
+export default TapTop

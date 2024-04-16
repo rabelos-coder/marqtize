@@ -1,7 +1,6 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import React from 'react'
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap'
 
 import { LightCardData } from '@/fake'

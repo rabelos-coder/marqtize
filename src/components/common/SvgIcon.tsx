@@ -1,5 +1,3 @@
-import React from 'react'
-
 type SvgIconProps = {
   iconId: string
 } & React.SVGProps<SVGSVGElement>

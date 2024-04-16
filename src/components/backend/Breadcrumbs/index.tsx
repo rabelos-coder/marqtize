@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react'
 import { Col, Container, Row } from 'reactstrap'
 
 import SvgIcon from '@/components/common/SvgIcon'
@@ -13,7 +12,7 @@ type BreadcrumbProps = {
   subParent?: string
 }
 
-export const Breadcrumbs = ({
+const Breadcrumbs = ({
   title,
   pageTitle,
   parent,
@@ -49,3 +48,5 @@ export const Breadcrumbs = ({
     </div>
   )
 }
+
+export default Breadcrumbs

@@ -9,7 +9,7 @@ import {
   TwitterShareButton,
 } from 'react-share'
 
-export const ShareButtons = () => {
+const ShareButtons = () => {
   const t = useTranslations()
   const [url, setUrl] = useState('')
 
@@ -40,3 +40,5 @@ export const ShareButtons = () => {
     </div>
   )
 }
+
+export default ShareButtons

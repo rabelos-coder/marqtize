@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { classes } from '@/configs/layout'
 import Theme from '@/configs/theme'
-import { CustomizerContext } from '@/context/CustomizerContext'
+import CustomizerContext from '@/context/CustomizerContext'
 import { ChildrenProps } from '@/types/common'
 
 export const CustomizerProvider = ({ children }: ChildrenProps) => {

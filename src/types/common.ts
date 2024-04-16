@@ -78,32 +78,38 @@ export type FindByIdsInput = {
 
 type ParamsType = {
   id?: string
+  page?: string | number
   slug?: string
+  subdomain?: string
   locale: string
 }
 
-export type ComponentWithLocaleProps = Readonly<{
+export type ErrorPageProps = {
+  error: Error & { digest?: string }
+  reset: () => void
+}
+
+export type ChildrenProps = {
   children: ReactNode
+}
+export type PageParamsProps = {
   params: ParamsType
-}>
+}
 
-export type ChildrenProps = Readonly<{
-  children: ReactNode
-}>
+export type ChildrenWithParamsProps = {} & PageParamsProps & ChildrenProps
 
-export type ReduxProviderProps = Readonly<{
+export type ReduxProviderProps = {
   host: string
-  children: ReactNode
-}>
+} & ChildrenProps
 
 export type AuthFormProps = {
   alignLogo?: string
 }
 
-export type PageWithChildrenProps = Readonly<{
+export type PageWithChildrenProps = {
   page: number
   children?: ReactNode
-}>
+}
 
 export enum ModeEnum {
   SENSITIVE = 'SENSITIVE',

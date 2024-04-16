@@ -14,7 +14,7 @@ type WidgetProps = {
   }
 }
 
-export const WidgetOne = ({ data }: WidgetProps) => {
+const WidgetOne = ({ data }: WidgetProps) => {
   return (
     <Card className="widget-1">
       <CardBody>
@@ -40,3 +40,5 @@ export const WidgetOne = ({ data }: WidgetProps) => {
     </Card>
   )
 }
+
+export default WidgetOne

@@ -11,7 +11,7 @@ type WidgetProps = {
   mainClass?: string
 }
 
-export const WidgetTwo = ({ data, chartClass, mainClass }: WidgetProps) => {
+const WidgetTwo = ({ data, chartClass, mainClass }: WidgetProps) => {
   return (
     <Card
       className={`widget-1 widget-with-chart ${mainClass ? mainClass : ''}`}
@@ -35,3 +35,5 @@ export const WidgetTwo = ({ data, chartClass, mainClass }: WidgetProps) => {
     </Card>
   )
 }
+
+export default WidgetTwo

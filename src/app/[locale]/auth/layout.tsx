@@ -10,8 +10,9 @@ import {
   APP_META_SLOGAN,
   RECAPTCHA_SITE_KEY,
 } from '@/environment'
-import { GuestLayout } from '@/layout/common/GuestLayout'
-import { AuthProvider } from '@/providers/AuthProvider'
+import GuestLayout from '@/layouts/common/GuestLayout'
+import AuthProvider from '@/providers/AuthProvider'
+import { ChildrenWithParamsProps } from '@/types/common'
 import { concatTitle, icons } from '@/utils/helpers'
 
 export function generateMetadata(): Metadata {
@@ -25,7 +26,10 @@ export function generateMetadata(): Metadata {
   }
 }
 
-export default function AuthLayout({ children, params: { locale } }: any) {
+export default function AuthLayout({
+  children,
+  params: { locale },
+}: ChildrenWithParamsProps) {
   return (
     <ReCaptchaProvider
       reCaptchaKey={RECAPTCHA_SITE_KEY}

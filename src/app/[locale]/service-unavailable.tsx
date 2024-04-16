@@ -2,10 +2,10 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Col, Container, Row } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { APP_META_TITLE } from '@/environment'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 
 export default function ServiceUnavailable() {
   const t = useTranslations()

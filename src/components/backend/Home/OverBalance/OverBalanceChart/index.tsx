@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic'
 import { useTranslations } from 'next-intl'
-import React from 'react'
 import { CardBody, Col, Row } from 'reactstrap'
 
 import { CurrencyChartData } from '@/fake/chart'

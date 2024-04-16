@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { SidebarMenuType } from '@/types/layout'
 
-export const MenuListData: SidebarMenuType[] = [
+const MenuListData: SidebarMenuType[] = [
   {
     title: 'general',
     menuContent: 'Dashboards,Dashboard',
@@ -123,3 +123,5 @@ export const MenuListData: SidebarMenuType[] = [
     ],
   },
 ]
+
+export default MenuListData

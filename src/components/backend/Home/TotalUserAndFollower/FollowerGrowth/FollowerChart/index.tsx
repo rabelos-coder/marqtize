@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import React from 'react'
 import { CardBody } from 'reactstrap'
 
 import { GrowthChartData } from '@/fake/chart'

@@ -21,9 +21,9 @@ import {
 } from 'reactstrap'
 import Swal from 'sweetalert2'
 
-import { Can } from '@/components/backend/Guards/Can'
-import { Avatar } from '@/components/common/Avatar'
-import { SpinnerBoxed } from '@/components/common/SpinnerBoxed'
+import Can from '@/components/backend/Guards/Can'
+import Avatar from '@/components/common/Avatar'
+import SpinnerBoxed from '@/components/common/SpinnerBoxed'
 import { APP_DATETIME_FORMAT } from '@/environment'
 import { DELETE_LOGGING, FIND_LOGGING } from '@/graphql/logging'
 import { useAppSelector, useAuth } from '@/hooks'

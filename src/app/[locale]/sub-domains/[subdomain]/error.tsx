@@ -8,6 +8,7 @@ import { FaArrowsRotate } from 'react-icons/fa6'
 import { Button } from 'reactstrap'
 
 import { IS_DEVELOPMENT } from '@/environment'
+import { ErrorPageProps } from '@/types/common'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -23,13 +24,7 @@ const inter = Inter({
   preload: true,
 })
 
-export default function ErrorPage({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
+export default function ErrorPage({ error, reset }: ErrorPageProps) {
   const t = useTranslations()
 
   useEffect(() => {

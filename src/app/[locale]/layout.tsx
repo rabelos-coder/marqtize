@@ -7,17 +7,17 @@ import { NextIntlClientProvider } from 'next-intl'
 import { unstable_setRequestLocale } from 'next-intl/server'
 import { Suspense } from 'react'
 
-import { CookieConsent } from '@/components/common/CookieConsent'
-import { Spinner } from '@/components/common/Spinner'
+import CookieConsent from '@/components/common/CookieConsent'
+import Spinner from '@/components/common/Spinner'
 import { locales } from '@/configs/i18n'
 import { APP_LANGUAGE, APP_WEBSITE, IS_DEVELOPMENT } from '@/environment'
-import { ApolloProvider } from '@/providers/ApolloProvider'
-import { ReduxProvider } from '@/providers/ReduxProvider'
-import { ComponentWithLocaleProps } from '@/types/common'
+import ApolloProvider from '@/providers/ApolloProvider'
+import ReduxProvider from '@/providers/ReduxProvider'
+import { ChildrenWithParamsProps, PageParamsProps } from '@/types/common'
 
 export async function generateMetadata({
   params: { locale },
-}: any): Promise<Metadata> {
+}: PageParamsProps): Promise<Metadata> {
   const headersList = headers()
 
   const referer = headersList?.get('referer') ?? APP_WEBSITE
@@ -38,7 +38,7 @@ export async function generateMetadata({
 export default async function LocaleLayout({
   children,
   params,
-}: ComponentWithLocaleProps) {
+}: ChildrenWithParamsProps) {
   const header = headers()
   const host = header.get('host') ?? ''
 

@@ -27,12 +27,6 @@ export async function POST(req: NextRequest) {
   const password = data?.password?.trim() ?? null
   const rememberMe = data?.rememberMe ?? false
 
-  console.log({
-    email,
-    password,
-    rememberMe,
-  })
-
   if (!email || !password) {
     return NextResponse.json(
       { message: t('typeFieldsRequired') },

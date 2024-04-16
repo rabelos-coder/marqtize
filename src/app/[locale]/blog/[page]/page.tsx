@@ -1,18 +1,24 @@
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { PAGINATED_POSTS } from '@/graphql/blogPost'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
-import { OrderByEnum } from '@/types/common'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
+import {
+  ChildrenWithParamsProps,
+  OrderByEnum,
+  PageParamsProps,
+} from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import { Posts } from '@/views/frontend/landing/Posts'
 
 const client = createApolloClient()
 
-export async function generateMetadata({ params: { locale } }: any) {
+export async function generateMetadata({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('blog.title'))
 
@@ -21,7 +27,9 @@ export async function generateMetadata({ params: { locale } }: any) {
   }
 }
 
-export default async function PostsPage({ params: { locale, page } }: any) {
+export default async function PostsPage({
+  params: { locale, page },
+}: ChildrenWithParamsProps) {
   const t = await getTranslations({ locale })
 
   page = parseInt(`${page}`)

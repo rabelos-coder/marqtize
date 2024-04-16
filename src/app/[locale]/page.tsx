@@ -4,12 +4,15 @@ import { FaCheckCircle, FaCircle, FaQuestionCircle } from 'react-icons/fa'
 import { FiUser } from 'react-icons/fi'
 import { Badge, Card, CardBody, Col, Container, List, Row } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
+import { PageParamsProps } from '@/types/common'
 
-export default async function HomePage({ params: { locale } }: any) {
+export default async function HomePage({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
 
   return (

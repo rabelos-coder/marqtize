@@ -8,7 +8,7 @@ type CustomButtonProps = {
   back?: boolean | undefined
 } & ButtonProps
 
-export const CustomButton = ({
+const CustomButton = ({
   children,
   back,
   onClick,
@@ -32,3 +32,5 @@ export const CustomButton = ({
     </Button>
   )
 }
+
+export default CustomButton

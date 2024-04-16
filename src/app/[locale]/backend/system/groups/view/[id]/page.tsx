@@ -1,13 +1,16 @@
 import { getTranslations } from 'next-intl/server'
 import { Card, Col, Container, Row } from 'reactstrap'
 
-import { Breadcrumbs } from '@/components/backend/Breadcrumbs'
-import { AclGuard } from '@/components/backend/Guards/AclGuard'
+import Breadcrumbs from '@/components/backend/Breadcrumbs'
+import AclGuard from '@/components/backend/Guards/AclGuard'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
+import { ChildrenWithParamsProps, PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 import { GroupsView } from '@/views/backend/system/groups/GroupsView'
 
-export async function generateMetadata({ params: { locale } }: any) {
+export async function generateMetadata({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('viewName', { name: t('role') }))
 
@@ -16,7 +19,9 @@ export async function generateMetadata({ params: { locale } }: any) {
   }
 }
 
-export default async function RoleViewPage({ params: { locale, id } }: any) {
+export default async function RoleViewPage({
+  params: { locale, id },
+}: ChildrenWithParamsProps) {
   const t = await getTranslations({ locale })
   const title = t('viewName', { name: t('role') })
   const pageTitle = t('role')
@@ -40,7 +45,7 @@ export default async function RoleViewPage({ params: { locale, id } }: any) {
                     name: t('role').toLowerCase(),
                   })}
                 />
-                <GroupsView id={id} />
+                <GroupsView id={`${id}`} />
               </Card>
             </Col>
           </Row>

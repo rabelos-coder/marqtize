@@ -38,3 +38,5 @@ export function LetteredAvatar({ name, size, rounded }: LetteredAvatarProps) {
     </div>
   )
 }
+
+export default LetteredAvatar

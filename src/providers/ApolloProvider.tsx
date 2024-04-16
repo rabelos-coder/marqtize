@@ -11,7 +11,9 @@ import { createApolloClient } from '@/utils/apollo'
  * @param {ChildrenProps} children - The child components to provide Apollo client to.
  * @return {JSX.Element} The Apollo client provider with the children.
  */
-export function ApolloProvider({ children }: ChildrenProps): JSX.Element {
+export default function ApolloProvider({
+  children,
+}: ChildrenProps): JSX.Element {
   return (
     <ApolloClientProvider client={createApolloClient()}>
       {children}

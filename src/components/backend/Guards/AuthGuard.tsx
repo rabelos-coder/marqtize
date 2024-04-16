@@ -9,7 +9,7 @@ import { ChildrenProps } from '@/types/common'
  * @param {ChildrenProps} children - The child components to be rendered within the guarded route.
  * @return {JSX.Element} The original child components to be rendered if the user is authenticated.
  */
-export const AuthGuard = ({ children }: ChildrenProps): JSX.Element => {
+const AuthGuard = ({ children }: ChildrenProps): JSX.Element => {
   const { isLoggedIn } = useAuth()
 
   if (isLoggedIn) {
@@ -18,3 +18,5 @@ export const AuthGuard = ({ children }: ChildrenProps): JSX.Element => {
 
   return <></>
 }
+
+export default AuthGuard

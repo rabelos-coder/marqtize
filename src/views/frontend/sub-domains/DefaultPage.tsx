@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import { FiRefreshCcw } from 'react-icons/fi'
 import { Button } from 'reactstrap'
 
-import { SpinnerBoxed } from '@/components/common/SpinnerBoxed'
+import SpinnerBoxed from '@/components/common/SpinnerBoxed'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { useRouter } from '@/navigation'
 import { fetchAccount } from '@/store/slices/accountSlice'

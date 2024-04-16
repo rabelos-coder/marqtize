@@ -1,13 +1,16 @@
 import { getTranslations } from 'next-intl/server'
 import { Card, Col, Container, Row } from 'reactstrap'
 
-import { Breadcrumbs } from '@/components/backend/Breadcrumbs'
-import { AclGuard } from '@/components/backend/Guards/AclGuard'
+import Breadcrumbs from '@/components/backend/Breadcrumbs'
+import AclGuard from '@/components/backend/Guards/AclGuard'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
+import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 import { UsersForm } from '@/views/backend/system/users/UsersForm'
 
-export async function generateMetadata({ params: { locale } }: any) {
+export async function generateMetadata({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('createName', { name: t('user') }))
 
@@ -16,7 +19,9 @@ export async function generateMetadata({ params: { locale } }: any) {
   }
 }
 
-export default async function RoleCreatePage({ params: { locale } }: any) {
+export default async function RoleCreatePage({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = t('createName', { name: t('user') })
   const pageTitle = t('user')

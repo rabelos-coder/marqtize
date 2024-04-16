@@ -1,12 +1,15 @@
 import { getTranslations } from 'next-intl/server'
 import { Container } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
+import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
-export async function generateMetadata({ params: { locale } }: any) {
+export async function generateMetadata({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('documentation.title'))
 
@@ -15,7 +18,9 @@ export async function generateMetadata({ params: { locale } }: any) {
   }
 }
 
-export default async function DocumentationPage({ params: { locale } }: any) {
+export default async function DocumentationPage({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
 
   return (

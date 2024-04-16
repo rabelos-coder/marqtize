@@ -18,7 +18,7 @@ export type AvatarProps = {
  * @param {AvatarProps} props - The props to be used in the avatar.
  * @return {JSX.Element} The avatar component to be rendered.
  */
-export function Avatar({
+export default function Avatar({
   id,
   name,
   size,

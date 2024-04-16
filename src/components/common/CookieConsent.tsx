@@ -11,7 +11,7 @@ import { Link } from '@/navigation'
 const localConsent: string | null =
   (Cookies.get(STORAGE_COOKIE_CONSENT) as string) ?? null
 
-export const CookieConsent = () => {
+const CookieConsent = () => {
   const [showConsent, setShowConsent] = useState(true)
 
   const t = useTranslations()
@@ -58,3 +58,5 @@ export const CookieConsent = () => {
     </div>
   )
 }
+
+export default CookieConsent

@@ -7,19 +7,14 @@ import { useEffect } from 'react'
 import { FiRefreshCw } from 'react-icons/fi'
 import { Col, Container, Row } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { APP_META_TITLE, IS_DEVELOPMENT } from '@/environment'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link, usePathname } from '@/navigation'
+import { ErrorPageProps } from '@/types/common'
 
-export default function ErrorPage({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
+export default function ErrorPage({ error, reset }: ErrorPageProps) {
   const t = useTranslations()
   const pathname = usePathname()
 

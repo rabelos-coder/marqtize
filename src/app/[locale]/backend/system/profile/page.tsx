@@ -2,17 +2,20 @@ import { cookies } from 'next/headers'
 import { getTranslations } from 'next-intl/server'
 import { Container, Row } from 'reactstrap'
 
-import { Breadcrumbs } from '@/components/backend/Breadcrumbs'
-import { AclGuard } from '@/components/backend/Guards/AclGuard'
+import Breadcrumbs from '@/components/backend/Breadcrumbs'
+import AclGuard from '@/components/backend/Guards/AclGuard'
 import { STORAGE_AUTH_TOKEN } from '@/configs'
 import { WHO_AM_I } from '@/graphql/auth'
 import { FIND_MANY_TIMEZONES } from '@/graphql/localization'
+import { PageParamsProps } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import EditMyProfile from '@/views/backend/system/profile/EditMyProfile'
 import EditProfileForm from '@/views/backend/system/profile/EditProfileForm'
 
-export async function generateMetadata({ params: { locale } }: any) {
+export async function generateMetadata({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('myProfile'))
 
@@ -23,7 +26,9 @@ export async function generateMetadata({ params: { locale } }: any) {
 
 export const dynamic = 'force-dynamic'
 
-export default async function ProfilePage({ params: { locale } }: any) {
+export default async function ProfilePage({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
 
   const cookieStore = cookies()

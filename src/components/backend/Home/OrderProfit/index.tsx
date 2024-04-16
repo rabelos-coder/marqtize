@@ -1,6 +1,6 @@
 import { Col, Row } from 'reactstrap'
 
-import { WidgetTwo } from '@/components/common/WidgetTwo'
+import WidgetTwo from '@/components/common/WidgetTwo'
 import { Widgets2ChartData, Widgets2ChartData2 } from '@/fake/chart'
 
 const OrderProfit = () => {

@@ -23,7 +23,7 @@ type CanAnyProps = {
  * @param {ReactNode} children - The child components to provide ability context to.
  * @return {JSX.Element} The ability context provided to the children.
  */
-export const CanAny = ({ acls, children }: CanAnyProps): JSX.Element => {
+const CanAny = ({ acls, children }: CanAnyProps): JSX.Element => {
   const [can, setCan] = useState(false)
   const ability = useAbility()
 
@@ -37,3 +37,5 @@ export const CanAny = ({ acls, children }: CanAnyProps): JSX.Element => {
 
   return <>{children}</>
 }
+
+export default CanAny

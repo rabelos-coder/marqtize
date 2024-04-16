@@ -2,7 +2,7 @@
 
 import { ReactNode, useCallback, useEffect, useState } from 'react'
 
-import { Spinner } from '@/components/common/Spinner'
+import Spinner from '@/components/common/Spinner'
 import {
   AclAbility,
   AppAbility,
@@ -10,12 +10,12 @@ import {
   defaultAcl,
 } from '@/configs/ability'
 import { useAuth } from '@/hooks'
-import { AuthLayout } from '@/layout/backend/AuthLayout'
-import { AbilityProvider } from '@/providers/AbilityProvider'
+import AuthLayout from '@/layouts/backend/AuthLayout'
+import AbilityProvider from '@/providers/AbilityProvider'
 import { ActionEnum } from '@/types/action'
 import { JWT } from '@/types/jwt'
 
-import { NotAuthorized } from '../NotAuthorized'
+import NotAuthorized from '../NotAuthorized'
 
 type AclGuardProps = {
   children: ReactNode
@@ -28,7 +28,7 @@ type AclGuardProps = {
  * @param {AclGuardProps} props - the properties for the AclGuard component
  * @return {JSX.Element} the rendered JSX based on the user's access and abilities
  */
-export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
+const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
   const [loggedIn, setLoggedIn] = useState(false)
   const [ability, setAbility] = useState<AppAbility | null>(null)
 
@@ -72,3 +72,5 @@ export const AclGuard = ({ acl, children }: AclGuardProps): JSX.Element => {
   // Render Not Authorized component if the current user has limited access
   return <NotAuthorized />
 }
+
+export default AclGuard

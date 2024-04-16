@@ -2,20 +2,22 @@ import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { Container } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { FIND_FIRST_CATEGORY } from '@/graphql/blogCategory'
 import { PAGINATED_POSTS } from '@/graphql/blogPost'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
-import { OrderByEnum } from '@/types/common'
+import { ChildrenWithParamsProps, OrderByEnum } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import { Posts } from '@/views/frontend/landing/Posts'
 
 const client = createApolloClient()
 
-export async function generateMetadata({ params: { locale, slug } }: any) {
+export async function generateMetadata({
+  params: { locale, slug },
+}: ChildrenWithParamsProps) {
   const t = await getTranslations({ locale })
   let title = concatTitle(t('blog.categories.title'))
 
@@ -43,7 +45,7 @@ export async function generateMetadata({ params: { locale, slug } }: any) {
 
 export default async function PostsByCategoryPage({
   params: { locale, slug, page },
-}: any) {
+}: ChildrenWithParamsProps) {
   const t = await getTranslations({ locale })
 
   page = parseInt(`${page}`)

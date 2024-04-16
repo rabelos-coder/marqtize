@@ -14,7 +14,7 @@ type SpinnerBoxedProps = {
     | 'default'
 }
 
-export const SpinnerBoxed = ({ type, color }: SpinnerBoxedProps) => {
+const SpinnerBoxed = ({ type, color }: SpinnerBoxedProps) => {
   return (
     <div
       className="d-flex justify-content-center align-items-center"
@@ -27,3 +27,5 @@ export const SpinnerBoxed = ({ type, color }: SpinnerBoxedProps) => {
     </div>
   )
 }
+
+export default SpinnerBoxed

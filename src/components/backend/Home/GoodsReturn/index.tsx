@@ -1,6 +1,6 @@
 import { Col, Row } from 'reactstrap'
 
-import { WidgetOne } from '@/components/common/WidgetOne'
+import WidgetOne from '@/components/common/WidgetOne'
 
 const GoodsReturn = () => {
   return (

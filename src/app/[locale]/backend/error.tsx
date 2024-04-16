@@ -7,14 +7,9 @@ import { useEffect } from 'react'
 import { Button, Col, Container } from 'reactstrap'
 
 import { IS_DEVELOPMENT } from '@/environment'
+import { ErrorPageProps } from '@/types/common'
 
-export default function ErrorPage({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string }
-  reset: () => void
-}) {
+export default function ErrorPage({ error, reset }: ErrorPageProps) {
   const t = useTranslations()
 
   useEffect(() => {

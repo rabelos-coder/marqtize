@@ -5,10 +5,10 @@ import { useTranslations } from 'next-intl'
 import { FiArrowLeft } from 'react-icons/fi'
 import { Col, Container, Row } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { APP_META_TITLE } from '@/environment'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link, useRouter } from '@/navigation'
 
 export default function NotFound() {

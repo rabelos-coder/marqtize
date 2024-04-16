@@ -7,7 +7,7 @@ import { Button, Col, Container } from 'reactstrap'
 import { useRouter } from '@/navigation'
 import { CommonErrorPageProps } from '@/types/common'
 
-export const ErrorPage = ({
+const ErrorPage = ({
   title,
   description,
   titleClassName,
@@ -48,3 +48,5 @@ export const ErrorPage = ({
     </div>
   )
 }
+
+export default ErrorPage

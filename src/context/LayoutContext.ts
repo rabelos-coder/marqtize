@@ -4,7 +4,7 @@ import { createContext } from 'react'
 
 import { LayoutContextType } from '@/types/layout'
 
-export const LayoutContext = createContext<LayoutContextType>({
+const LayoutContext = createContext<LayoutContextType>({
   searchableMenu: [],
   setSearchableMenu: () => {},
   bookmarkList: [],
@@ -17,3 +17,5 @@ export const LayoutContext = createContext<LayoutContextType>({
   bookMarkClass: false,
   setBookMarkClass: () => {},
 })
+
+export default LayoutContext

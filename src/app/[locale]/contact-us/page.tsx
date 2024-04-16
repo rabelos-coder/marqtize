@@ -1,15 +1,18 @@
 import { getTranslations } from 'next-intl/server'
 import { Col, Container, Row } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { EMAIL, MOBILE, PHONE } from '@/environment'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
+import { PageParamsProps } from '@/types/common'
 import { concatTitle, generateWhatsAppLink } from '@/utils/helpers'
 import { ContactUs } from '@/views/frontend/landing/ContactUs'
 
-export async function generateMetadata({ params: { locale } }: any) {
+export async function generateMetadata({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('contact'))
 
@@ -18,7 +21,9 @@ export async function generateMetadata({ params: { locale } }: any) {
   }
 }
 
-export default async function ContactPage({ params: { locale } }: any) {
+export default async function ContactPage({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
 
   return (

@@ -29,11 +29,11 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 import * as yup from 'yup'
 
-import { Avatar } from '@/components/common/Avatar'
+import Avatar from '@/components/common/Avatar'
 import FinishForm from '@/components/common/NumberingWizard/FinishForm'
 import StepperHorizontal from '@/components/common/NumberingWizard/StepperHorizontal'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
-import { api } from '@/configs/axios'
+import api from '@/configs/axios'
 import { APP_TIMEZONE } from '@/environment'
 import { CREATE_USER, FIND_USER, UPDATE_USER } from '@/graphql/users'
 import { useAuth } from '@/hooks'

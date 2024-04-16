@@ -28,11 +28,11 @@ import {
 } from 'reactstrap'
 import Swal from 'sweetalert2'
 
-import { Can } from '@/components/backend/Guards/Can'
-import { CanAny } from '@/components/backend/Guards/CanAny'
+import Can from '@/components/backend/Guards/Can'
+import CanAny from '@/components/backend/Guards/CanAny'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
 import Table, { SelectChangeState } from '@/components/common/Table'
-import { api } from '@/configs/axios'
+import api from '@/configs/axios'
 import { APP_PAGINATION } from '@/environment'
 import {
   DELETE_LOGGING,

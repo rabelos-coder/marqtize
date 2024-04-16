@@ -1,6 +1,6 @@
 import { CheckLayoutDataType } from '@/types/layout'
 
-export const CheckLayoutData: CheckLayoutDataType[] = [
+const CheckLayoutData: CheckLayoutDataType[] = [
   {
     image: '/landing/layout-images/dubai.jpg',
     title: 'dubai',
@@ -76,3 +76,5 @@ export const CheckLayoutData: CheckLayoutDataType[] = [
     attr: 'default-body',
   },
 ]
+
+export default CheckLayoutData

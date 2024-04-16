@@ -1,13 +1,16 @@
 import { getTranslations } from 'next-intl/server'
 import { Col, Container, List, Row } from 'reactstrap'
 
-import { SvgBorder } from '@/components/frontend/common/SvgBorder'
+import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { APP_META_TITLE, EMAIL } from '@/environment'
-import { Header } from '@/layout/frontend/landing/Header'
-import { LandingLayout } from '@/layout/frontend/landing/LandingLayout'
+import Header from '@/layouts/frontend/landing/Header'
+import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
+import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
-export async function generateMetadata({ params: { locale } }: any) {
+export async function generateMetadata({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('privacyPolicy'))
 
@@ -16,7 +19,9 @@ export async function generateMetadata({ params: { locale } }: any) {
   }
 }
 
-export default async function PrivacyPolicyPage({ params: { locale } }: any) {
+export default async function PrivacyPolicyPage({
+  params: { locale },
+}: PageParamsProps) {
   const t = await getTranslations({ locale, namespace: 'privacyPolicy' })
 
   return (

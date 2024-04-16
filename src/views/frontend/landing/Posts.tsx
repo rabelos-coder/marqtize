@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { Fragment } from 'react'
 import { Card, CardBody, CardFooter, Col, Container, Row } from 'reactstrap'
 
-import { Pagination } from '@/layout/frontend/landing/Pagination'
+import Pagination from '@/layouts/frontend/landing/Pagination'
 import { Link } from '@/navigation'
 import { BlogPost } from '@/types/blog'
 import { PaginationMeta } from '@/types/common'

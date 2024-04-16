@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl'
 
-import { ErrorPage } from '@/components/common/ErrorPage'
+import ErrorPage from '@/components/common/ErrorPage'
 
-export const NotAuthorized = () => {
+const NotAuthorized = () => {
   const t = useTranslations()
 
   return (
@@ -14,3 +14,5 @@ export const NotAuthorized = () => {
     />
   )
 }
+
+export default NotAuthorized

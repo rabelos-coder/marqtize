@@ -20,7 +20,7 @@ type CanProps = {
  * @param {ReactNode} children - The child components to provide ability context to.
  * @return {JSX.Element} The ability context provided to the children.
  */
-export const Can = ({ action, subject, children }: CanProps): JSX.Element => {
+const Can = ({ action, subject, children }: CanProps): JSX.Element => {
   const ability = useAbility()
 
   if (!ability.can(action, subject)) {
@@ -29,3 +29,5 @@ export const Can = ({ action, subject, children }: CanProps): JSX.Element => {
 
   return <>{children}</>
 }
+
+export default Can
