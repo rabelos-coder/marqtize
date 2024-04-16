@@ -1,9 +1,14 @@
+import bundleAnalyzer from '@next/bundle-analyzer'
 import { withSentryConfig } from '@sentry/nextjs'
 import createNextIntlPlugin from 'next-intl/plugin'
 import nextPWA from 'next-pwa'
 import { join } from 'path'
 
 const withNextIntl = createNextIntlPlugin()
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+  openAnalyzer: true,
+})
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 
@@ -17,7 +22,6 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: false,
   reactStrictMode: true,
-  swcMinify: true,
   distDir: 'build',
   images: {
     remotePatterns: [
@@ -53,6 +57,8 @@ const nextConfig = {
 }
 
 if (IS_DEVELOPMENT) {
+  nextConfig['poweredByHeader'] = true
+  nextConfig['generateEtags'] = true
   nextConfig['sassOptions'] = {
     includePaths: [join(process.cwd(), 'src/app/scss')],
     sourceMap: true,
@@ -74,42 +80,44 @@ if (IS_DEVELOPMENT) {
 
 export default IS_DEVELOPMENT
   ? withNextIntl(withPWA(nextConfig))
-  : withSentryConfig(
-      withNextIntl(withPWA(nextConfig)),
-      {
-        // For all available options, see:
-        // https://github.com/getsentry/sentry-webpack-plugin#options
+  : withBundleAnalyzer(
+      withSentryConfig(
+        withNextIntl(withPWA(nextConfig)),
+        {
+          // For all available options, see:
+          // https://github.com/getsentry/sentry-webpack-plugin#options
 
-        // Suppresses source map uploading logs during build
-        silent: true,
-        org: 'rabelos-coder',
-        project: 'marqtize-web',
-      },
-      {
-        // For all available options, see:
-        // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+          // Suppresses source map uploading logs during build
+          silent: true,
+          org: 'rabelos-coder',
+          project: 'marqtize-web',
+        },
+        {
+          // For all available options, see:
+          // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
 
-        // Upload a larger set of source maps for prettier stack traces (increases build time)
-        widenClientFileUpload: true,
+          // Upload a larger set of source maps for prettier stack traces (increases build time)
+          widenClientFileUpload: true,
 
-        // Transpiles SDK to be compatible with IE11 (increases bundle size)
-        transpileClientSDK: true,
+          // Transpiles SDK to be compatible with IE11 (increases bundle size)
+          transpileClientSDK: true,
 
-        // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers. (increases server load)
-        // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
-        // side errors will fail.
-        tunnelRoute: '/monitoring',
+          // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers. (increases server load)
+          // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
+          // side errors will fail.
+          tunnelRoute: '/monitoring',
 
-        // Hides source maps from generated client bundles
-        hideSourceMaps: true,
+          // Hides source maps from generated client bundles
+          hideSourceMaps: true,
 
-        // Automatically tree-shake Sentry logger statements to reduce bundle size
-        disableLogger: true,
+          // Automatically tree-shake Sentry logger statements to reduce bundle size
+          disableLogger: true,
 
-        // Enables automatic instrumentation of Vercel Cron Monitors.
-        // See the following for more information:
-        // https://docs.sentry.io/product/crons/
-        // https://vercel.com/docs/cron-jobs
-        automaticVercelMonitors: true,
-      }
+          // Enables automatic instrumentation of Vercel Cron Monitors.
+          // See the following for more information:
+          // https://docs.sentry.io/product/crons/
+          // https://vercel.com/docs/cron-jobs
+          automaticVercelMonitors: true,
+        }
+      )
     )
