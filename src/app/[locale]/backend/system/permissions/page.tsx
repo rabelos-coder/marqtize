@@ -3,13 +3,10 @@ import { Col, Container, Row } from 'reactstrap'
 
 import Breadcrumbs from '@/components/backend/Breadcrumbs'
 import AclGuard from '@/components/backend/Guards/AclGuard'
-import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 import { PermissionsList } from '@/views/backend/system/permissions/PermissionsList'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('permissions'))
 
@@ -18,9 +15,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function PermissionsPage({
-  params: { locale },
-}: PageParamsProps) {
+export default async function PermissionsPage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
 
   const title = t('permissions')

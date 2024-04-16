@@ -5,12 +5,9 @@ import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { APP_META_TITLE, EMAIL, WEBSITE } from '@/environment'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
-import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale, namespace: 'termsAndConditions' })
   const title = concatTitle(t('title'))
 
@@ -21,7 +18,7 @@ export async function generateMetadata({
 
 export default async function TermsAndConditionsPage({
   params: { locale },
-}: PageParamsProps) {
+}: any) {
   const t = await getTranslations({ locale, namespace: 'termsAndConditions' })
 
   return (

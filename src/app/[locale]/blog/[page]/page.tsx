@@ -5,20 +5,14 @@ import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { PAGINATED_POSTS } from '@/graphql/blogPost'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
-import {
-  ChildrenWithParamsProps,
-  OrderByEnum,
-  PageParamsProps,
-} from '@/types/common'
+import { OrderByEnum } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import { Posts } from '@/views/frontend/landing/Posts'
 
 const client = createApolloClient()
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('blog.title'))
 
@@ -27,9 +21,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function PostsPage({
-  params: { locale, page },
-}: ChildrenWithParamsProps) {
+export default async function PostsPage({ params: { locale, page } }: any) {
   const t = await getTranslations({ locale })
 
   page = parseInt(`${page}`)

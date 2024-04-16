@@ -7,15 +7,12 @@ import AclGuard from '@/components/backend/Guards/AclGuard'
 import { STORAGE_AUTH_TOKEN } from '@/configs'
 import { WHO_AM_I } from '@/graphql/auth'
 import { FIND_MANY_TIMEZONES } from '@/graphql/localization'
-import { PageParamsProps } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import EditMyProfile from '@/views/backend/system/profile/EditMyProfile'
 import EditProfileForm from '@/views/backend/system/profile/EditProfileForm'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('myProfile'))
 
@@ -26,9 +23,7 @@ export async function generateMetadata({
 
 export const dynamic = 'force-dynamic'
 
-export default async function ProfilePage({
-  params: { locale },
-}: PageParamsProps) {
+export default async function ProfilePage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
 
   const cookieStore = cookies()

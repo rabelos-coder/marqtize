@@ -1,12 +1,9 @@
 import { getTranslations } from 'next-intl/server'
 
 import { redirect } from '@/navigation'
-import { ChildrenWithParamsProps, PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
 
   const title = concatTitle(t('blog.tags.title'))
@@ -16,8 +13,6 @@ export async function generateMetadata({
   }
 }
 
-export default function BlogTagPage({
-  params: { slug },
-}: ChildrenWithParamsProps) {
+export default function BlogTagPage({ params: { slug } }: any) {
   redirect(`/blog/tag/${slug}/1`)
 }

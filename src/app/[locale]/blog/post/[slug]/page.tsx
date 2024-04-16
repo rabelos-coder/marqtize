@@ -21,7 +21,6 @@ import {
 import { FIND_FIRST_POST } from '@/graphql/blogPost'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
-import { ChildrenWithParamsProps } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 
@@ -29,7 +28,7 @@ const client = createApolloClient()
 
 export async function generateMetadata({
   params: { locale, slug },
-}: ChildrenWithParamsProps): Promise<Metadata> {
+}: any): Promise<Metadata> {
   const t = await getTranslations({ locale })
   let title = concatTitle(t('blog.title'))
   const headersList = headers()
@@ -103,9 +102,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function BlogPostPage({
-  params: { locale, slug },
-}: ChildrenWithParamsProps) {
+export default async function BlogPostPage({ params: { locale, slug } }: any) {
   const t = await getTranslations({ locale })
 
   let title = t('blog.post.title')

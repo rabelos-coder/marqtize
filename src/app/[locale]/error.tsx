@@ -12,9 +12,14 @@ import { APP_META_TITLE, IS_DEVELOPMENT } from '@/environment'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link, usePathname } from '@/navigation'
-import { ErrorPageProps } from '@/types/common'
 
-export default function ErrorPage({ error, reset }: ErrorPageProps) {
+export default function ErrorPage({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
   const t = useTranslations()
   const pathname = usePathname()
 

@@ -14,12 +14,9 @@ import {
 } from '@/environment'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
-import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('license'))
 
@@ -28,9 +25,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function LicensePage({
-  params: { locale },
-}: PageParamsProps) {
+export default async function LicensePage({ params: { locale } }: any) {
   const t = await getTranslations({ locale, namespace: 'license' })
 
   return (

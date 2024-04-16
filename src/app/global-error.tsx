@@ -7,7 +7,6 @@ import { FaArrowsRotate } from 'react-icons/fa6'
 import { Button } from 'reactstrap'
 
 import { IS_DEVELOPMENT } from '@/environment'
-import { ErrorPageProps } from '@/types/common'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -23,7 +22,13 @@ const inter = Inter({
   preload: true,
 })
 
-export default function GlobalError({ error, reset }: ErrorPageProps) {
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
   useEffect(() => {
     !IS_DEVELOPMENT ? Sentry.captureException(error) : console.error(error)
   }, [error])

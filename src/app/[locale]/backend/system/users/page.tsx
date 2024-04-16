@@ -3,13 +3,10 @@ import { Col, Container, Row } from 'reactstrap'
 
 import Breadcrumbs from '@/components/backend/Breadcrumbs'
 import AclGuard from '@/components/backend/Guards/AclGuard'
-import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 import { UsersList } from '@/views/backend/system/users/UsersList'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('users'))
 
@@ -18,9 +15,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function UsersPage({
-  params: { locale },
-}: PageParamsProps) {
+export default async function UsersPage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
 
   const title = t('users')

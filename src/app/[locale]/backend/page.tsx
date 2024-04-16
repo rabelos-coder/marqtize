@@ -8,7 +8,6 @@ import GreetingCard from '@/components/backend/Home/GreetingCard'
 import OrderProfit from '@/components/backend/Home/OrderProfit'
 import SalePurchase from '@/components/backend/Home/SalePurchase'
 import { APP_META_SLOGAN } from '@/environment'
-import { ChildrenWithParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
 export async function generateMetadata() {
@@ -19,9 +18,7 @@ export async function generateMetadata() {
   }
 }
 
-export default async function BackendPage({
-  params: { locale },
-}: ChildrenWithParamsProps) {
+export default async function BackendPage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = t('home')
 

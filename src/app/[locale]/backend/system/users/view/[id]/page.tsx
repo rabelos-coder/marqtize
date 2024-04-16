@@ -4,13 +4,10 @@ import { Card, Col, Container, Row } from 'reactstrap'
 import Breadcrumbs from '@/components/backend/Breadcrumbs'
 import AclGuard from '@/components/backend/Guards/AclGuard'
 import CommonCardHeading from '@/components/common/CommonCardHeading'
-import { ChildrenWithParamsProps, PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 import { UsersView } from '@/views/backend/system/users/UsersView'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('viewName', { name: t('user') }))
 
@@ -19,9 +16,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function UserViewPage({
-  params: { locale, id },
-}: ChildrenWithParamsProps) {
+export default async function UserViewPage({ params: { locale, id } }: any) {
   const t = await getTranslations({ locale })
   const title = t('viewName', { name: t('user') })
   const pageTitle = t('user')

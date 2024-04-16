@@ -4,12 +4,9 @@ import { Col, Container, List, Row } from 'reactstrap'
 import SvgBorder from '@/components/frontend/common/SvgBorder'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
-import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('paymentMethods'))
 
@@ -18,9 +15,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function PaymentsPage({
-  params: { locale },
-}: PageParamsProps) {
+export default async function PaymentsPage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
 
   return (

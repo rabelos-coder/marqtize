@@ -12,7 +12,6 @@ import {
 } from '@/environment'
 import GuestLayout from '@/layouts/common/GuestLayout'
 import AuthProvider from '@/providers/AuthProvider'
-import { ChildrenWithParamsProps } from '@/types/common'
 import { concatTitle, icons } from '@/utils/helpers'
 
 export function generateMetadata(): Metadata {
@@ -26,10 +25,7 @@ export function generateMetadata(): Metadata {
   }
 }
 
-export default function AuthLayout({
-  children,
-  params: { locale },
-}: ChildrenWithParamsProps) {
+export default function AuthLayout({ children, params: { locale } }: any) {
   return (
     <ReCaptchaProvider
       reCaptchaKey={RECAPTCHA_SITE_KEY}

@@ -6,12 +6,9 @@ import SvgBorder from '@/components/frontend/common/SvgBorder'
 import { IS_DEVELOPMENT } from '@/environment'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
-import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('home'))
 
@@ -20,9 +17,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function BasicPage({
-  params: { locale },
-}: PageParamsProps) {
+export default async function BasicPage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
 
   if (!IS_DEVELOPMENT) notFound()

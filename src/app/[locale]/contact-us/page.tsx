@@ -6,13 +6,10 @@ import { EMAIL, MOBILE, PHONE } from '@/environment'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
-import { PageParamsProps } from '@/types/common'
 import { concatTitle, generateWhatsAppLink } from '@/utils/helpers'
 import { ContactUs } from '@/views/frontend/landing/ContactUs'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('contact'))
 
@@ -21,9 +18,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function ContactPage({
-  params: { locale },
-}: PageParamsProps) {
+export default async function ContactPage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
 
   return (

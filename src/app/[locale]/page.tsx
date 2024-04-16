@@ -8,11 +8,8 @@ import SvgBorder from '@/components/frontend/common/SvgBorder'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
-import { PageParamsProps } from '@/types/common'
 
-export default async function HomePage({
-  params: { locale },
-}: PageParamsProps) {
+export default async function HomePage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
 
   return (

@@ -2,13 +2,10 @@ import { getTranslations } from 'next-intl/server'
 import { Col, Container, Row } from 'reactstrap'
 
 import RatioImage from '@/components/backend/RatioImage'
-import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 import { RegisterForm } from '@/views/auth/RegisterForm'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('createAccount'))
 

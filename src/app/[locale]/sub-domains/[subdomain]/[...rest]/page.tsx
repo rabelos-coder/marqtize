@@ -1,11 +1,7 @@
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
-import { PageParamsProps } from '@/types/common'
-
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = t('notFound')
 

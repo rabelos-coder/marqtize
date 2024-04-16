@@ -7,12 +7,9 @@ import { EMAIL } from '@/environment'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
-import { PageParamsProps } from '@/types/common'
 import { concatTitle } from '@/utils/helpers'
 
-export async function generateMetadata({
-  params: { locale },
-}: PageParamsProps) {
+export async function generateMetadata({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
   const title = concatTitle(t('support'))
 
@@ -21,9 +18,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function SupportPage({
-  params: { locale },
-}: PageParamsProps) {
+export default async function SupportPage({ params: { locale } }: any) {
   const t = await getTranslations({ locale })
 
   return (

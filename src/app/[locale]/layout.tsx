@@ -13,11 +13,10 @@ import { locales } from '@/configs/i18n'
 import { APP_LANGUAGE, APP_WEBSITE, IS_DEVELOPMENT } from '@/environment'
 import ApolloProvider from '@/providers/ApolloProvider'
 import ReduxProvider from '@/providers/ReduxProvider'
-import { ChildrenWithParamsProps, PageParamsProps } from '@/types/common'
 
 export async function generateMetadata({
   params: { locale },
-}: PageParamsProps): Promise<Metadata> {
+}: any): Promise<Metadata> {
   const headersList = headers()
 
   const referer = headersList?.get('referer') ?? APP_WEBSITE
@@ -35,10 +34,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: ChildrenWithParamsProps) {
+export default async function LocaleLayout({ children, params }: any) {
   const header = headers()
   const host = header.get('host') ?? ''
 

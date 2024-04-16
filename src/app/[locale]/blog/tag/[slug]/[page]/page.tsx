@@ -8,16 +8,14 @@ import { FIND_FIRST_TAG } from '@/graphql/blogTags'
 import Header from '@/layouts/frontend/landing/Header'
 import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
-import { ChildrenWithParamsProps, OrderByEnum } from '@/types/common'
+import { OrderByEnum } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
 import { concatTitle } from '@/utils/helpers'
 import { Posts } from '@/views/frontend/landing/Posts'
 
 const client = createApolloClient()
 
-export async function generateMetadata({
-  params: { locale, slug },
-}: ChildrenWithParamsProps) {
+export async function generateMetadata({ params: { locale, slug } }: any) {
   const t = await getTranslations({ locale })
   let title = concatTitle(t('blog.tags.title'))
 
@@ -45,7 +43,7 @@ export async function generateMetadata({
 
 export default async function PostsByTagPage({
   params: { locale, slug, page },
-}: ChildrenWithParamsProps) {
+}: any) {
   const t = await getTranslations({ locale })
 
   page = parseInt(`${page}`)
