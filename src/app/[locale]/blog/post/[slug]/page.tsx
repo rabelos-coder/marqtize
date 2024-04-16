@@ -1,4 +1,5 @@
 import { capitalize } from 'lodash'
+import { DateTime } from 'luxon'
 import { Metadata } from 'next'
 import { headers } from 'next/headers'
 import Image from 'next/image'
@@ -11,8 +12,10 @@ import CustomButton from '@/components/common/CustomButton'
 import ShareButtons from '@/components/common/ShareButtons'
 import SvgBorder from '@/components/frontend/common/SvgBorder'
 import {
+  APP_DATETIME_FORMAT,
   APP_META_DESCRIPTION,
   APP_META_TITLE,
+  APP_TIMEZONE,
   APP_WEBSITE,
 } from '@/environment'
 import { FIND_FIRST_POST } from '@/graphql/blogPost'
@@ -20,7 +23,6 @@ import LandingLayout from '@/layouts/frontend/landing/LandingLayout'
 import { Link } from '@/navigation'
 import { ChildrenWithParamsProps } from '@/types/common'
 import { createApolloClient } from '@/utils/apollo'
-import { DateTime } from '@/utils/date'
 import { concatTitle } from '@/utils/helpers'
 
 const client = createApolloClient()
@@ -165,9 +167,10 @@ export default async function BlogPostPage({
                         </div>
                       )}
                       <div className="single-post-meta-details-date">
-                        {new DateTime(findFirstBlogPost.publishedAt)
-                          .locale(locale)
-                          .format()}
+                        {DateTime.fromISO(`${findFirstBlogPost.publishedAt}`)
+                          .setZone(APP_TIMEZONE)
+                          .setLocale(locale)
+                          .toFormat(APP_DATETIME_FORMAT)}
                       </div>
                     </div>
                   </div>

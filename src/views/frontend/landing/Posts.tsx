@@ -1,16 +1,17 @@
 'use client'
 
 import { capitalize } from 'lodash'
+import { DateTime } from 'luxon'
 import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl'
 import { Fragment } from 'react'
 import { Card, CardBody, CardFooter, Col, Container, Row } from 'reactstrap'
 
+import { APP_DATETIME_FORMAT, APP_TIMEZONE } from '@/environment'
 import Pagination from '@/layouts/frontend/landing/Pagination'
 import { Link } from '@/navigation'
 import { BlogPost } from '@/types/blog'
 import { PaginationMeta } from '@/types/common'
-import { DateTime } from '@/utils/date'
 import { createResume } from '@/utils/helpers'
 
 type PostsProps = {
@@ -71,9 +72,10 @@ export const Posts = ({ posts, meta }: PostsProps) => {
                           </div>
                         )}
                         <div className="post-preview-meta-details-date">
-                          {new DateTime(post.publishedAt)
-                            .locale(locale)
-                            .format()}
+                          {DateTime.fromISO(`${post.publishedAt}`)
+                            .setZone(APP_TIMEZONE)
+                            .setLocale(locale)
+                            .toFormat(APP_DATETIME_FORMAT)}
                         </div>
                       </div>
                     </div>

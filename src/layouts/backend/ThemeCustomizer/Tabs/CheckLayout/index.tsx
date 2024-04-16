@@ -1,4 +1,4 @@
-import { useTranslations } from 'use-intl'
+import { useTranslations } from 'next-intl'
 
 import CheckLayoutData from '@/configs/customizer'
 import { useCustomizer } from '@/hooks'
