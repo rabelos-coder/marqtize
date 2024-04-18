@@ -1,73 +1,41 @@
 {
   "version": "0.2.0",
-  "trace": true,
   "configurations": [
     {
       "name": "Next.js: debug server-side",
       "type": "node",
       "request": "launch",
-      "trace": true,
       "program": "${workspaceFolder}/node_modules/.bin/next",
-      "args": ["dev"],
       "runtimeArgs": ["--inspect"],
-      "skipFiles": ["<node_internals>/**"],
-      "sourceMaps": true,
-      "sourceMapPathOverrides": {
-        "webpack://_N_E/*": "${webRoot}/*"
-      },
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ]
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "name": "Next.js: turbo debug server-side",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/.bin/next",
-      "args": ["dev", "--turbo"],
+      "args": ["--turbo"],
       "runtimeArgs": ["--inspect"],
+      "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
       "sourceMapPathOverrides": {
         "/turbopack/[project]/*": "${webRoot}/*"
-      },
-      "skipFiles": ["<node_internals>/**"]
+      }
     },
     {
       "name": "Next.js: debug client-side",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}",
-      "sourceMaps": true,
-      "sourceMapPathOverrides": {
-        "webpack://_N_E/./*": "${webRoot}/*"
-      }
-    },
-    {
-      "name": "Next.js: turbo debug client-side",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}",
-      "sourceMaps": true,
-      "sourceMapPathOverrides": {
-        "/turbopack/[project]/*": "${webRoot}/*"
-      }
+      "webRoot": "${workspaceFolder}"
     },
     {
       "name": "Next.js: debug full stack",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/.bin/next",
-      "args": ["dev"],
       "runtimeArgs": ["--inspect"],
       "skipFiles": ["<node_internals>/**"],
-      "sourceMaps": true,
-      "sourceMapPathOverrides": {
-        "webpack://_N_E/./*": "${webRoot}/*"
-      },
-      "cwd": "${workspaceFolder}",
       "serverReadyAction": {
         "action": "debugWithChrome",
         "killOnServerStop": true,
@@ -81,14 +49,13 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/.bin/next",
-      "args": ["dev", "--turbo"],
+      "args": ["--turbo"],
       "runtimeArgs": ["--inspect"],
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
       "sourceMapPathOverrides": {
         "/turbopack/[project]/*": "${webRoot}/*"
       },
-      "cwd": "${workspaceFolder}",
       "serverReadyAction": {
         "action": "debugWithChrome",
         "killOnServerStop": true,

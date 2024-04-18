@@ -8,6 +8,7 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "sourceMap": true,
     "esModuleInterop": true,
     "module": "ESNext",
     "moduleDetection": "force",
@@ -39,8 +40,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "jest.config.ts"
+    ".next/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "cypress/**/*.{ts,tsx}", "gulpfile.js"]
+  "exclude": ["node_modules", "cypress"]
 }
