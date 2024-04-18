@@ -6,15 +6,15 @@ import { ExpanderComponentProps } from 'react-data-table-component'
 
 import { APP_DATETIME_FORMAT } from '@/environment'
 import { useAuth } from '@/hooks'
-import { Role } from '@/types/role'
+import { Account } from '@/types/account'
 
-export const ExpandedComponent: React.FC<ExpanderComponentProps<Role>> = ({
+export const ExpandedComponent: React.FC<ExpanderComponentProps<Account>> = ({
   data,
 }) => {
   const t = useTranslations()
 
   const locale = useLocale()
-  const { timezone, user } = useAuth()
+  const { timezone } = useAuth()
 
   return (
     <div className="p-3">
@@ -24,52 +24,17 @@ export const ExpandedComponent: React.FC<ExpanderComponentProps<Role>> = ({
             <th className="font-weight-bold">{t('id')}:</th>
             <td>{data.id}</td>
           </tr>
-
           <tr>
-            <th className="font-weight-bold">{t('users')}:</th>
-            <td>
-              {data.users?.length ?? 0 > 0
-                ? data.users?.length
-                : t('none', { gender: 'male' })}
-            </td>
+            <th className="font-weight-bold">{t('erpId')}:</th>
+            <td>{data.erpId}</td>
           </tr>
-
-          <tr>
-            <th className="font-weight-bold">{t('permissions')}:</th>
-            <td>
-              {data.claims.length > 0
-                ? data.claims.length
-                : t('none', { gender: 'female' })}
-            </td>
-          </tr>
-          <tr>
-            <th className="font-weight-bold">{t('account')}:</th>
-            <td>
-              {data.account?.systemName ??
-                data.account?.tradingName ??
-                data.account?.corporateName ??
-                t('none', { gender: 'male' })}
-            </td>
-          </tr>
-          {user?.isSuperAdmin && (
-            <tr>
-              <th className="font-weight-bold">{t('isDeleteable')}:</th>
-              <td>
-                <span
-                  className={`badge badge-light-${data.isDeleteable ? 'success' : 'danger'}`}
-                >
-                  {data.isDeleteable ? t('yes') : t('no')}
-                </span>
-              </td>
-            </tr>
-          )}
           <tr>
             <th className="font-weight-bold">{t('isDefault')}:</th>
             <td>
               <span
-                className={`badge badge-light-${data.isDefault ? 'success' : 'danger'}`}
+                className={`badge badge-light-${data.isActive ? 'success' : 'danger'}`}
               >
-                {data.isDefault ? t('yes') : t('no')}
+                {data.isActive ? t('yes') : t('no')}
               </span>
             </td>
           </tr>

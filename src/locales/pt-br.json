@@ -1,4 +1,5 @@
 {
+  "management": "Gerenciamento",
   "User": "Usuário",
   "Role": "Grupo",
   "Claim": "Permissão",
@@ -884,5 +885,6 @@
     "paragraph3": "Transforme sua ideia em um negócio de sucesso online com a {company}. Junte-se a nós e descubra como você pode criar uma loja online impressionante, atrair clientes e impulsionar as vendas de forma eficaz. Estamos aqui para ajudá-lo em cada passo do caminho!"
   },
   "noData": "Nenhum dado informado.",
-  "download": "Baixar"
+  "download": "Baixar",
+  "erpId": "ID ERP"
 }

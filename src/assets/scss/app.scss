@@ -1,0 +1,55 @@
+// fonts
+@import "./fonts.scss";
+@import "node_modules/bootstrap-scss/bootstrap.scss";
+
+// react toastify css
+@import "node_modules/react-toastify/dist/ReactToastify.css";
+
+// react filepond css
+@import "node_modules/filepond/dist/filepond.min.css";
+@import "node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+// react-dropzone
+@import "node_modules/react-dropzone-uploader/dist/styles.css";
+
+// sweetalert-2
+@import "node_modules/sweetalert2/src/sweetalert2.scss";
+
+// // react-slick css
+// @import "node_modules/slick-carousel/slick/slick.css";
+// @import "node_modules/slick-carousel/slick/slick-theme.css";
+
+// image cropper css
+@import "node_modules/react-image-crop/src/ReactCrop.scss";
+
+// timeline scss
+@import "node_modules/react-vertical-timeline-component/style.min.css";
+
+// react date-piker
+@import "node_modules/react-datepicker/dist/react-datepicker.css";
+//photoswipe
+@import "node_modules/photoswipe/dist/photoswipe.css";
+// Typeahead
+@import "node_modules/react-bootstrap-typeahead/css/Typeahead.css";
+// Mde EDitor
+@import "node_modules/easymde/dist/easymde.min.css";
+//swiper
+@import "node_modules/swiper/swiper.css";
+
+@import "node_modules/react-calendar/dist/Calendar.css";
+
+//LeafLet
+@import "node_modules/leaflet/dist/leaflet.css";
+
+@import "vendors/chartist.scss";
+@import "vendors/themify.scss";
+@import "vendors/whether-icon.scss";
+@import "vendors/icofont.scss";
+@import "vendors/flag-icon.scss";
+@import "vendors/icoicon/_icons.scss";
+@import "vendors/fontawesome.scss";
+@import "vendors/animate.scss";
+@import "vendors/todo.scss";
+@import "./style.scss";
+@import "./responsive.scss";
+@import "./custom.scss";

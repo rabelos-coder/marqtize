@@ -1,7 +1,5 @@
 'use client'
 
-import '../../../app/assets/scss/landing.scss'
-
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
 

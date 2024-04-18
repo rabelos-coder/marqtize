@@ -1,27 +1,100 @@
 {
   "version": "0.2.0",
+  "trace": true,
   "configurations": [
     {
       "name": "Next.js: debug server-side",
-      "type": "node-terminal",
-      "command": "bun dev",
-      "request": "launch"
+      "type": "node",
+      "request": "launch",
+      "trace": true,
+      "program": "${workspaceFolder}/node_modules/.bin/next",
+      "args": ["dev"],
+      "runtimeArgs": ["--inspect"],
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack://_N_E/*": "${webRoot}/*"
+      },
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ]
+    },
+    {
+      "name": "Next.js: turbo debug server-side",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/next",
+      "args": ["dev", "--turbo"],
+      "runtimeArgs": ["--inspect"],
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "/turbopack/[project]/*": "${webRoot}/*"
+      },
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "name": "Next.js: debug client-side",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack://_N_E/./*": "${webRoot}/*"
+      }
+    },
+    {
+      "name": "Next.js: turbo debug client-side",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "/turbopack/[project]/*": "${webRoot}/*"
+      }
     },
     {
       "name": "Next.js: debug full stack",
-      "type": "node-terminal",
-      "command": "bun dev",
+      "type": "node",
       "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/next",
+      "args": ["dev"],
+      "runtimeArgs": ["--inspect"],
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack://_N_E/./*": "${webRoot}/*"
+      },
+      "cwd": "${workspaceFolder}",
       "serverReadyAction": {
-        "pattern": "Local:.+ (https?://.+)",
+        "action": "debugWithChrome",
+        "killOnServerStop": true,
+        "pattern": "- Local:.+(https?://.+)",
         "uriFormat": "%s",
-        "action": "debugWithChrome"
+        "webRoot": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Next.js: turbo debug full stack",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/next",
+      "args": ["dev", "--turbo"],
+      "runtimeArgs": ["--inspect"],
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "/turbopack/[project]/*": "${webRoot}/*"
+      },
+      "cwd": "${workspaceFolder}",
+      "serverReadyAction": {
+        "action": "debugWithChrome",
+        "killOnServerStop": true,
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "webRoot": "${workspaceFolder}"
       }
     }
   ]

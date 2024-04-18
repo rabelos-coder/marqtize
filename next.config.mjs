@@ -22,7 +22,6 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: false,
   reactStrictMode: true,
-  distDir: 'build',
   images: {
     remotePatterns: [
       {
@@ -57,12 +56,14 @@ const nextConfig = {
 }
 
 if (IS_DEVELOPMENT) {
+  nextConfig['productionBrowserSourceMaps'] = true
   nextConfig['poweredByHeader'] = true
   nextConfig['generateEtags'] = true
   nextConfig['sassOptions'] = {
-    includePaths: [join(process.cwd(), 'src/app/scss')],
     sourceMap: true,
+    includePaths: [join(process.cwd(), 'src/assets/scss')],
   }
+
   nextConfig['webpack'] = (config) => {
     /**
      * Force scss source maps for debugging. If there are performance issues or you don't need debug css, use the value "eval-source-map" instead.

@@ -1,6 +1,6 @@
 'use client'
 
-import '../../../app/assets/scss/landing.scss'
+import '../../../assets/css/landing.css'
 
 import dynamic from 'next/dynamic'
 import { useLocale } from 'next-intl'

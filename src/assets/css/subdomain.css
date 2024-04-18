@@ -1,0 +1,6 @@
+.alert-default {
+  background-color: rgba(var(--bs-success-rgb));
+  border-color: rgba(var(--bs-success-rgb));
+  color: rgba(var(--bs-white));
+}
+/*# sourceMappingURL=subdomain.css.map */

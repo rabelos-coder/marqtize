@@ -1,7 +1,6 @@
 import { gql, TypedDocumentNode } from '@apollo/client'
 
 import {
-  Account,
   CountAccount,
   CreateAccount,
   CreateAccountInput,
@@ -12,6 +11,7 @@ import {
   FindBySlugOrHostInput,
   FindFirstAccount,
   FindManyAccount,
+  PaginatedAccount,
   RemoveAccount,
   RemoveManyAccount,
   RestoreAccount,
@@ -23,7 +23,6 @@ import {
   FindByIdInput,
   FindByIdsInput,
   PaginatedInput,
-  PaginatedObject,
   WhereAndOrderInput,
   WhereInput,
 } from '@/types/common'
@@ -87,7 +86,7 @@ export const FIND_MANY_ACCOUNTS: TypedDocumentNode<
 `
 
 export const PAGINATED_ACCOUNTS: TypedDocumentNode<
-  PaginatedObject<Account>,
+  PaginatedAccount,
   PaginatedInput
 > = gql`
   ${FRAGMENT_ACCOUNT_PROPS}

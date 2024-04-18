@@ -1,4 +1,4 @@
-import '../../assets/scss/app.scss'
+import '../../../assets/css/app.css'
 
 import { Metadata } from 'next/types'
 import { ToastContainer } from 'react-toastify'

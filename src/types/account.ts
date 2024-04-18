@@ -1,3 +1,5 @@
+import { PaginatedObject } from './common'
+
 export type AccountState = {
   account: Account | null
   loading: boolean
@@ -5,29 +7,29 @@ export type AccountState = {
 }
 
 export type Account = {
-  id?: string
-  erpId?: string | null
-  corporateNumber?: string | null
+  id: string
+  erpId: string | null
+  corporateNumber: string
   corporateName: string
-  tradingName?: string | null
+  tradingName: string
   systemName: string
   email: string
   slug: string
-  phone?: string | null
-  mobile?: string | null
-  postcode?: string | null
-  address?: string | null
-  number?: string | null
-  complement?: string | null
-  neighborhood?: string | null
-  countryId?: string | null
-  cityId?: string | null
-  stateId?: string | null
-  isActive?: boolean
-  tradingLogo?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
+  phone: string | null
+  mobile: string | null
+  postcode: string | null
+  address: string | null
+  number: string | null
+  complement: string | null
+  neighborhood: string | null
+  countryId: string | null
+  cityId: string | null
+  stateId: string | null
+  isActive: boolean
+  tradingLogo: string | null
+  createdAt: string
+  updatedAt: string
+  deletedAt: string | null
 }
 
 export type CountAccount = {
@@ -119,4 +121,8 @@ type AccountUpdateInput = {
 
 export type UpdateAccountInput = {
   data: AccountUpdateInput
+}
+
+export type PaginatedAccount = {
+  paginatedAccount: PaginatedObject<Account>
 }

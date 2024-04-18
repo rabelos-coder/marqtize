@@ -1,4 +1,4 @@
-import './assets/scss/globals.scss'
+import '../assets/css/globals.css'
 
 import { Metadata } from 'next'
 import { headers } from 'next/headers'

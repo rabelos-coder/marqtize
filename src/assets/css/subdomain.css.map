@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"src/assets/scss","sources":["subdomain.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA","file":"subdomain.css","sourcesContent":[".alert-default {\n  background-color: rgba(var(--bs-success-rgb));\n  border-color: rgba(var(--bs-success-rgb));\n  color: rgba(var(--bs-white));\n}\n"]}

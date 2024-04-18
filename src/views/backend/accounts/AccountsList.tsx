@@ -33,16 +33,17 @@ import CommonCardHeading from '@/components/common/CommonCardHeading'
 import Table, { SelectChangeState } from '@/components/common/Table'
 import { APP_PAGINATION } from '@/environment'
 import {
-  DELETE_ROLE,
-  DELETE_ROLES,
-  PAGINATED_ROLES,
-  REMOVE_ROLE,
-  REMOVE_ROLES,
-  RESTORE_ROLE,
-  RESTORE_ROLES,
-} from '@/graphql/roles'
-import { useAbility, useAuth } from '@/hooks'
+  DELETE_ACCOUNT,
+  DELETE_ACCOUNTS,
+  PAGINATED_ACCOUNTS,
+  REMOVE_ACCOUNT,
+  REMOVE_ACCOUNTS,
+  RESTORE_ACCOUNT,
+  RESTORE_ACCOUNTS,
+} from '@/graphql/account'
+import { useAbility } from '@/hooks'
 import { Link } from '@/navigation'
+import { Account } from '@/types/account'
 import { ActionEnum } from '@/types/action'
 import {
   FindManyInput,
@@ -50,7 +51,6 @@ import {
   OrderByEnum,
   PaginatedInput,
 } from '@/types/common'
-import { Role } from '@/types/role'
 import { Subjects } from '@/types/subject'
 
 import { ExpandedComponent } from './ExpandedComponent'
@@ -58,41 +58,36 @@ import { ExpandedComponent } from './ExpandedComponent'
 export const AccountsList = () => {
   const t = useTranslations()
   const ability = useAbility()
-  const pageTitle = t('listName', { name: t('groups') })
+  const pageTitle = t('listName', { name: t('accounts') })
   const pageDescription = t('seeInformationAboutName', {
     gender: 'male',
-    name: t('groups').toLowerCase(),
+    name: t('accounts').toLowerCase(),
   })
-  const pageTrashTitle = t('nameTrash', { name: t('groups') })
+  const pageTrashTitle = t('nameTrash', { name: t('accounts') })
   const pageTrashDescription = t('seeInformationAboutDeletedName', {
     gender: 'male',
-    name: t('groups').toLowerCase(),
+    name: t('accounts').toLowerCase(),
   })
-
-  const { jwt } = useAuth()
 
   const defaultVariables: PaginatedInput = useMemo(() => {
     const variables: PaginatedInput = {
       page: 1,
       perPage: APP_PAGINATION,
-      orderBy: { name: OrderByEnum.ASC },
+      orderBy: { systemName: OrderByEnum.ASC },
       where: { deletedAt: null, AND: [], OR: [] },
     }
-
-    // @ts-ignore
-    if (!jwt?.sa && jwt?.accountId) variables.where['accountId'] = jwt.accountId
 
     if (variables.where?.AND?.length === 0) delete variables.where.AND
     if (variables.where?.OR?.length === 0) delete variables.where.OR
 
     return variables
-  }, [jwt])
+  }, [])
 
   const [cardTitle, setCardTitle] = useState(pageTitle)
   const [cardDescription, setCardDescription] = useState(pageDescription)
   const [filterText, setFilterText] = useState('')
-  const [rows, setRows] = useState<Role[]>([])
-  const [selectedRows, setSelectedRows] = useState<Role[]>([])
+  const [rows, setRows] = useState<Account[]>([])
+  const [selectedRows, setSelectedRows] = useState<Account[]>([])
   const [totalRows, setTotalRows] = useState(0)
   const [toggleCleared, setToggleCleared] = useState(false)
   const [displayError, setDisplayError] = useState(true)
@@ -100,17 +95,17 @@ export const AccountsList = () => {
   const [dropdownOpen, setDropdownOpen] = useState<any>({})
   const [variables, setVariables] = useState<PaginatedInput>(defaultVariables)
 
-  const [removeRole] = useMutation(REMOVE_ROLE)
-  const [removeRoles] = useMutation(REMOVE_ROLES)
-  const [deleteRole] = useMutation(DELETE_ROLE)
-  const [deleteRoles] = useMutation(DELETE_ROLES)
-  const [restoreRole] = useMutation(RESTORE_ROLE)
-  const [restoreRoles] = useMutation(RESTORE_ROLES)
-  const { data, loading, error } = useQuery(PAGINATED_ROLES, {
+  const [removeAccount] = useMutation(REMOVE_ACCOUNT)
+  const [removeAccounts] = useMutation(REMOVE_ACCOUNTS)
+  const [deleteAccount] = useMutation(DELETE_ACCOUNT)
+  const [deleteAccounts] = useMutation(DELETE_ACCOUNTS)
+  const [restoreAccount] = useMutation(RESTORE_ACCOUNT)
+  const [restoreAccounts] = useMutation(RESTORE_ACCOUNTS)
+  const { data, loading, error } = useQuery(PAGINATED_ACCOUNTS, {
     fetchPolicy: 'no-cache',
     variables,
   })
-  const [handleRoles] = useLazyQuery(PAGINATED_ROLES, {
+  const [handleAccounts] = useLazyQuery(PAGINATED_ACCOUNTS, {
     fetchPolicy: 'no-cache',
     variables,
   })
@@ -128,9 +123,12 @@ export const AccountsList = () => {
     [dropdownOpen]
   )
 
-  const handleSelectedRows = useCallback((state: SelectChangeState<Role>) => {
-    setSelectedRows(state.selectedRows)
-  }, [])
+  const handleSelectedRows = useCallback(
+    (state: SelectChangeState<Account>) => {
+      setSelectedRows(state.selectedRows)
+    },
+    []
+  )
 
   const handleSearch = useCallback(
     async (e?: React.FormEvent<HTMLFormElement> | null, trash?: boolean) => {
@@ -194,17 +192,17 @@ export const AccountsList = () => {
     setVariables(defaultVariables)
     setCardTitle(pageTitle)
     setCardDescription(pageDescription)
-    await handleRoles().then(({ data }) => {
-      setRows(data?.paginatedRole.data || [])
+    await handleAccounts().then(({ data }) => {
+      setRows(data?.paginatedAccount.data || [])
       setDropdownOpen(
-        data?.paginatedRole.data.reduce(
+        data?.paginatedAccount.data.reduce(
           (acc, cur) => ({ ...acc, [cur.id]: false }),
           {}
         )
       )
-      setTotalRows(data?.paginatedRole.meta.total || 0)
+      setTotalRows(data?.paginatedAccount.meta.total || 0)
     })
-  }, [defaultVariables, handleRoles, pageDescription, pageTitle])
+  }, [defaultVariables, handleAccounts, pageDescription, pageTitle])
 
   const toggle = useCallback(async () => {
     const trash = !isTrash
@@ -225,11 +223,11 @@ export const AccountsList = () => {
         cancelButtonText: t('no'),
       }).then(async ({ isConfirmed }) => {
         if (isConfirmed) {
-          await restoreRoles({
+          await restoreAccounts({
             variables: { ids: selectedRows.map((row) => row.id) },
           })
             .then(async ({ data }) => {
-              const res = data?.restoreManyRole ?? false
+              const res = data?.restoreManyAccount ?? false
               if (res) {
                 await handleReset()
                 toast.success(t('itemsRestoreSuccess'))
@@ -256,11 +254,11 @@ export const AccountsList = () => {
       }).then(async ({ isConfirmed }) => {
         if (isConfirmed) {
           if (isTrash) {
-            await deleteRoles({
+            await deleteAccounts({
               variables: { ids: selectedRows.map((row) => row.id) },
             })
               .then(async ({ data }) => {
-                const res = data?.deleteManyRole ?? false
+                const res = data?.deleteManyAccount ?? false
                 if (res) {
                   await handleReset()
                   toast.success(t('itemsDeleteSuccess'))
@@ -273,11 +271,11 @@ export const AccountsList = () => {
                 toast.error(err?.message ?? t('itemsDeleteError'))
               )
           } else {
-            await removeRoles({
+            await removeAccounts({
               variables: { ids: selectedRows.map((row) => row.id) },
             })
               .then(async ({ data }) => {
-                const res = data?.removeManyRole ?? false
+                const res = data?.removeManyAccount ?? false
                 if (res) {
                   await handleReset()
                   toast.success(t('itemsRemoveSuccess'))
@@ -325,13 +323,13 @@ export const AccountsList = () => {
   }, [
     loading,
     t,
-    restoreRoles,
+    restoreAccounts,
     selectedRows,
     handleReset,
     toggleCleared,
     isTrash,
-    deleteRoles,
-    removeRoles,
+    deleteAccounts,
+    removeAccounts,
   ])
 
   const handleDelete = useCallback(
@@ -351,9 +349,9 @@ export const AccountsList = () => {
       }).then(async ({ isConfirmed }) => {
         if (isConfirmed) {
           if (isTrash) {
-            await deleteRole({ variables: { id } })
+            await deleteAccount({ variables: { id } })
               .then(async ({ data }) => {
-                const res = data?.deleteRole ?? false
+                const res = data?.deleteAccount ?? false
                 if (res) {
                   await handleReset()
                   toast.success(t('itemDeleteSuccess'))
@@ -363,9 +361,9 @@ export const AccountsList = () => {
               })
               .catch((err) => toast.error(err?.message ?? t('itemDeleteError')))
           } else {
-            await removeRole({ variables: { id } })
+            await removeAccount({ variables: { id } })
               .then(async ({ data }) => {
-                const res = data?.removeRole ?? false
+                const res = data?.removeAccount ?? false
                 if (res) {
                   await handleReset()
                   toast.success(t('itemRemoveSuccess'))
@@ -378,7 +376,7 @@ export const AccountsList = () => {
         }
       })
     },
-    [t, isTrash, deleteRole, handleReset, removeRole]
+    [t, isTrash, deleteAccount, handleReset, removeAccount]
   )
 
   const handleRestore = useCallback(
@@ -397,9 +395,9 @@ export const AccountsList = () => {
         cancelButtonText: t('no'),
       }).then(async ({ isConfirmed }) => {
         if (isConfirmed) {
-          await restoreRole({ variables: { id } })
+          await restoreAccount({ variables: { id } })
             .then(async ({ data }) => {
-              const res = data?.restoreRole ?? false
+              const res = data?.restoreAccount ?? false
               if (res) {
                 await handleReset()
                 toast.success(t('itemRestoreSuccess'))
@@ -411,23 +409,29 @@ export const AccountsList = () => {
         }
       })
     },
-    [handleReset, restoreRole, t]
+    [handleReset, restoreAccount, t]
   )
 
-  const columns: TableColumn<Role>[] = useMemo(
+  const columns: TableColumn<Account>[] = useMemo(
     () => [
       {
-        name: t('name'),
+        name: t('tradingName'),
         sortable: true,
-        sortField: 'name',
-        selector: (row) => row.name,
+        sortField: 'tradingName',
+        selector: (row) => row.tradingName,
       },
       {
-        name: t('slug'),
+        name: t('systemName'),
         sortable: true,
-        sortField: 'slug',
+        sortField: 'systemName',
+        selector: (row) => row.systemName,
+      },
+      {
+        name: t('corporateNumber'),
+        sortable: true,
+        sortField: 'corporateNumber',
         width: '200px',
-        selector: (row) => row.slug,
+        selector: (row) => row.corporateNumber,
       },
       {
         name: <HiBolt className="h-4 w-4" />,
@@ -436,10 +440,10 @@ export const AccountsList = () => {
         cell: (row) => (
           <CanAny
             acls={[
-              { action: ActionEnum.Read, subject: Subjects.Role },
-              { action: ActionEnum.Update, subject: Subjects.Role },
-              { action: ActionEnum.Delete, subject: Subjects.Role },
-              { action: ActionEnum.Manage, subject: Subjects.Role },
+              { action: ActionEnum.Read, subject: Subjects.Account },
+              { action: ActionEnum.Update, subject: Subjects.Account },
+              { action: ActionEnum.Delete, subject: Subjects.Account },
+              { action: ActionEnum.Manage, subject: Subjects.Account },
             ]}
           >
             <Dropdown
@@ -460,10 +464,10 @@ export const AccountsList = () => {
                 >
                   {t('actions')}
                 </DropdownItem>
-                <Can action={ActionEnum.Read} subject={Subjects.Role}>
+                <Can action={ActionEnum.Read} subject={Subjects.Account}>
                   <DropdownItem
                     className="d-flex justify-content-start align-items-center"
-                    href={`/backend/system/groups/view/${row.id}`}
+                    href={`/backend/accounts/view/${row.id}`}
                     tag={Link}
                   >
                     <HiEye className="me-2" />
@@ -473,13 +477,13 @@ export const AccountsList = () => {
                 {!isTrash && (
                   <CanAny
                     acls={[
-                      { action: ActionEnum.Update, subject: Subjects.Role },
-                      { action: ActionEnum.Manage, subject: Subjects.Role },
+                      { action: ActionEnum.Update, subject: Subjects.Account },
+                      { action: ActionEnum.Manage, subject: Subjects.Account },
                     ]}
                   >
                     <DropdownItem
                       className="d-flex justify-content-start align-items-center"
-                      href={`/backend/system/groups/edit/${row.id}`}
+                      href={`/backend/accounts/edit/${row.id}`}
                       tag={Link}
                     >
                       <HiPencilSquare className="me-2" />
@@ -490,8 +494,8 @@ export const AccountsList = () => {
                 {isTrash && (
                   <CanAny
                     acls={[
-                      { action: ActionEnum.Delete, subject: Subjects.Role },
-                      { action: ActionEnum.Manage, subject: Subjects.Role },
+                      { action: ActionEnum.Delete, subject: Subjects.Account },
+                      { action: ActionEnum.Manage, subject: Subjects.Account },
                     ]}
                   >
                     <DropdownItem
@@ -505,24 +509,22 @@ export const AccountsList = () => {
                     </DropdownItem>
                   </CanAny>
                 )}
-                {row.isDeleteable && (
-                  <CanAny
-                    acls={[
-                      { action: ActionEnum.Delete, subject: Subjects.Role },
-                      { action: ActionEnum.Manage, subject: Subjects.Role },
-                    ]}
+                <CanAny
+                  acls={[
+                    { action: ActionEnum.Delete, subject: Subjects.Account },
+                    { action: ActionEnum.Manage, subject: Subjects.Account },
+                  ]}
+                >
+                  <DropdownItem
+                    className="d-flex justify-content-start align-items-center"
+                    href="#!"
+                    onClick={(e) => handleDelete(e, row.id)}
+                    tag={Link}
                   >
-                    <DropdownItem
-                      className="d-flex justify-content-start align-items-center"
-                      href="#!"
-                      onClick={(e) => handleDelete(e, row.id)}
-                      tag={Link}
-                    >
-                      <HiTrash className="me-2" />
-                      {t('deleteName', { name: t('role') })}
-                    </DropdownItem>
-                  </CanAny>
-                )}
+                    <HiTrash className="me-2" />
+                    {t('deleteName', { name: t('role') })}
+                  </DropdownItem>
+                </CanAny>
               </DropdownMenu>
             </Dropdown>
           </CanAny>
@@ -540,8 +542,8 @@ export const AccountsList = () => {
             <Col lg={6} sm={12} className="text-lg-start">
               <CanAny
                 acls={[
-                  { action: ActionEnum.Manage, subject: Subjects.Role },
-                  { action: ActionEnum.Delete, subject: Subjects.Role },
+                  { action: ActionEnum.Manage, subject: Subjects.Account },
+                  { action: ActionEnum.Delete, subject: Subjects.Account },
                 ]}
               >
                 {isTrash ? (
@@ -605,14 +607,14 @@ export const AccountsList = () => {
       setDisplayError(false)
     }
     if (data) {
-      setRows(data.paginatedRole.data)
+      setRows(data.paginatedAccount.data)
       setDropdownOpen(
-        data.paginatedRole.data.reduce(
+        data.paginatedAccount.data.reduce(
           (acc, cur) => ({ ...acc, [cur.id]: false }),
           {}
         )
       )
-      setTotalRows(data.paginatedRole.meta.total)
+      setTotalRows(data.paginatedAccount.meta.total)
     }
   }, [error, data, pageTitle, pageDescription, displayError])
 
@@ -635,9 +637,8 @@ export const AccountsList = () => {
               clearSelectedRows={toggleCleared}
               paginationPerPage={variables.perPage}
               highlightOnHover
-              selectableRowDisabled={(row) =>
-                !ability.can(ActionEnum.Delete, Subjects.Role) ||
-                !row.isDeleteable
+              selectableRowDisabled={() =>
+                !ability.can(ActionEnum.Delete, Subjects.Account)
               }
               pagination
               paginationServer
@@ -668,7 +669,7 @@ export const AccountsList = () => {
               expandableRowsComponent={ExpandedComponent}
               spinner={{ type: 'border' }}
               noDataComponentText={t('noDataNameText', {
-                name: t('group').toLowerCase(),
+                name: t('account').toLowerCase(),
                 gender: 'male',
               })}
             />
