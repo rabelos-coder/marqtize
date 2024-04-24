@@ -5,6 +5,8 @@ import { APP_LANGUAGE } from '@/environment'
 import { RESET_PASSWORD } from '@/graphql/auth'
 import { apiClient } from '@/utils/apollo'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: NextRequest) {
   const recaptcha = req.headers.get('recaptcha') ?? ''
   const skipRecaptcha = req.headers.get('x-recaptcha-skip') ?? 'false'

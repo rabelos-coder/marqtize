@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server'
 import { FIND_MANY_CLAIMS } from '@/graphql/claims'
 import { apiClient } from '@/utils/apollo'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   return await apiClient
     .query({

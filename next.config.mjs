@@ -15,6 +15,7 @@ const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
 const withPWA = nextPWA({
   dest: 'public',
   disable: IS_DEVELOPMENT,
+  maximumFileSizeToCacheInBytes: 5000000,
 })
 
 /** @type {import('next').NextConfig} */

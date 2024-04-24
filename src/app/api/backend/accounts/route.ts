@@ -4,6 +4,8 @@ import { FIND_MANY_ACCOUNTS } from '@/graphql/account'
 import { OrderByEnum } from '@/types/common'
 import { apiClient } from '@/utils/apollo'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: NextRequest) {
   const data = await req.json()
 

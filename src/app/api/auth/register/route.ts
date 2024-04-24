@@ -6,6 +6,8 @@ import { REGISTER } from '@/graphql/auth'
 import { UserTypeEnum } from '@/types/enums'
 import { apiClient } from '@/utils/apollo'
 
+export const dynamic = 'force-dynamic'
+
 export async function POST(req: NextRequest) {
   const locale = req.headers.get('locale') ?? APP_LANGUAGE
   const recaptcha = req.headers.get('recaptcha') ?? ''

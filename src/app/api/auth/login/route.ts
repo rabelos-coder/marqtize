@@ -1,5 +1,3 @@
-'use server'
-
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { getTranslations } from 'next-intl/server'
@@ -13,6 +11,8 @@ import {
 import { APP_LANGUAGE, APP_TIMEZONE } from '@/environment'
 import { LOGIN } from '@/graphql/auth'
 import { apiClient } from '@/utils/apollo'
+
+export const dynamic = 'force-dynamic'
 
 export async function POST(req: NextRequest) {
   const t = await getTranslations({

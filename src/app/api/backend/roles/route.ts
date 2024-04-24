@@ -4,6 +4,8 @@ import { FIND_MANY_ROLES } from '@/graphql/roles'
 import { OrderByEnum } from '@/types/common'
 import { apiClient } from '@/utils/apollo'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   return await apiClient
     .query({
