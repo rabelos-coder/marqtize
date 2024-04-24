@@ -26,10 +26,10 @@ export const ExpandedComponent: React.FC<ExpanderComponentProps<Account>> = ({
           </tr>
           <tr>
             <th className="font-weight-bold">{t('erpId')}:</th>
-            <td>{data.erpId}</td>
+            <td>{data.erpId ?? t('none', { gender: 'male' })}</td>
           </tr>
           <tr>
-            <th className="font-weight-bold">{t('isDefault')}:</th>
+            <th className="font-weight-bold">{t('activated')}:</th>
             <td>
               <span
                 className={`badge badge-light-${data.isActive ? 'success' : 'danger'}`}

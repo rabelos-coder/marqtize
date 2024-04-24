@@ -13,5 +13,5 @@ module.exports = {
 
   // Format MarkDown and JSON
   '**/*.(md|json)': (filenames) =>
-    `bun run prettier --write ${filenames.join(' ')}`,
+    `bunx prettier --write ${filenames.join(' ')}`,
 }

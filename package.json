@@ -1,19 +1,19 @@
 {
-  "name": "marqtize",
+  "name": "marqtize-site",
   "version": "1.0.0",
-  "description": "This is the Marqtize Core Application.",
-  "author": "Fabricio Pereira Rabelo",
-  "homepage": "https://github.com/rabelos-coder/marqtize",
+  "description": "This is the Marqtize Website.",
+  "author": "Marqtize <dev@marqtize.com.br>",
+  "homepage": "https://github.com/marqtize/marqtize-site",
   "contributors": [
     {
-      "name": "Fabricio Pereira Rabelo",
-      "email": "fabricio@rabeloscoder.com.br",
-      "url": "https://rabeloscoder.com.br"
+      "name": "Marqtize",
+      "email": "dev@marqtize.com.br",
+      "url": "https://marqtize.com.br"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/rabelos-coder/marqtize.git"
+    "url": "https://github.com/marqtize/marqtize-site.git"
   },
   "private": true,
   "license": "MIT",
@@ -24,8 +24,8 @@
     "start": "NODE_ENV=production next start -p 3001",
     "lint": "next lint",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
-    "format": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
-    "format:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "format": "bunx prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "format:fix": "bunx prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "e2e": "start-server-and-test dev http://localhost:3000 \"cypress open --e2e\"",
     "e2e:headless": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\"",
     "component": "cypress open --component",
@@ -196,7 +196,11 @@
     }
   },
   "trustedDependencies": [
-    "@sentry/cli"
-  ],
-  "packageManager": "yarn@4.1.1"
+    "@sentry/cli",
+    "cypress",
+    "electron",
+    "es5-ext",
+    "react-vertical-timeline-component",
+    "sharp"
+  ]
 }
