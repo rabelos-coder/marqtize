@@ -1,4 +1,4 @@
-import '../../assets/scss/app.scss'
+import '../../../assets/scss/app.scss'
 
 import { Metadata } from 'next/types'
 import { ReCaptchaProvider } from 'next-recaptcha-v3'

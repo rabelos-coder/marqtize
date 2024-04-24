@@ -1,4 +1,4 @@
-import '../../assets/scss/subdomain.scss'
+import '../../../assets/scss/subdomain.scss'
 
 import { ChildrenProps } from '@/types/common'
 

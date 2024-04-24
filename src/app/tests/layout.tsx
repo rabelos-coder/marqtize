@@ -1,4 +1,4 @@
-import '../assets/scss/globals.scss'
+import '../../assets/scss/globals.scss'
 
 import { ChildrenProps } from '@/types/common'
 
