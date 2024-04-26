@@ -30,8 +30,8 @@ type FormData = {
 
 const defaultValues = IS_DEVELOPMENT
   ? {
-      email: 'amandasmith@me.com',
-      password: 'abClK1@X',
+      email: 'admin@example.com',
+      password: '23277wyZ*',
     }
   : {
       email: '',

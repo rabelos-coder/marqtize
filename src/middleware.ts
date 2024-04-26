@@ -15,6 +15,14 @@ import { getValidSubdomain } from './utils/helpers'
 
 const PUBLIC_FILE = /\.(.*)$/
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore: Unreachable code error
+BigInt.prototype.toJSON = function () {
+  const int = Number.parseInt(this.toString())
+
+  return int ?? this.toString()
+}
+
 const intlMiddleware = createMiddleware({
   locales,
   localePrefix,
