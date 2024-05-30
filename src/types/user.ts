@@ -7,8 +7,8 @@ import { Role } from './role'
 import { Timezone } from './timezone'
 
 export type User = {
-  id: string
-  accountId: string
+  id: number
+  accountId: number
   name: string
   systemName: string
   email: string
@@ -38,9 +38,9 @@ export type User = {
 }
 
 export type UserToken = {
-  id: string
+  id: number
   token: string
-  userId: string
+  userId: number
   expiresAt: string
   createdAt: string
   updatedAt: string
@@ -95,7 +95,7 @@ export type RestoreManyUser = {
 }
 
 export type UserInput = {
-  accountId?: string | null
+  accountId?: number | null
   name: string
   systemName: string
   email: string
@@ -107,9 +107,9 @@ export type UserInput = {
   isSuperAdmin: boolean
   language: string
   type: UserTypeEnum
-  timezoneId?: string | null
+  timezoneId?: number | null
   claims?: string[]
-  roles?: string[]
+  roles?: number[]
 }
 
 export type CreateUserInput = {
@@ -117,7 +117,7 @@ export type CreateUserInput = {
 }
 
 type UserUpdateInput = {
-  id: string
+  id: number
 } & UserInput
 
 export type UpdateUserInput = {

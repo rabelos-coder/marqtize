@@ -122,7 +122,7 @@ export const PAGINATED_ROLES: TypedDocumentNode<PaginatedRole, PaginatedInput> =
 
 export const FIND_ROLE: TypedDocumentNode<FindByIdRole, FindByIdInput> = gql`
   ${FRAGMENT_ROLE_PROPS}
-  query FindByIdRole($id: String!) {
+  query FindByIdRole($id: Int!) {
     findByIdRole(id: $id) {
       ...RoleProps
     }
@@ -160,7 +160,7 @@ export const UPDATE_ROLE: TypedDocumentNode<UpdateRole, UpdateRoleInput> = gql`
 `
 
 export const DELETE_ROLE: TypedDocumentNode<DeleteRole, FindByIdInput> = gql`
-  mutation DeleteRole($id: String!) {
+  mutation DeleteRole($id: Int!) {
     deleteRole(id: $id)
   }
 `
@@ -173,7 +173,7 @@ export const DELETE_ROLES: TypedDocumentNode<DeleteManyRole, FindByIdsInput> =
   `
 
 export const REMOVE_ROLE: TypedDocumentNode<RemoveRole, FindByIdInput> = gql`
-  mutation RemoveRole($id: String!) {
+  mutation RemoveRole($id: Int!) {
     removeRole(id: $id)
   }
 `
@@ -186,7 +186,7 @@ export const REMOVE_ROLES: TypedDocumentNode<RemoveManyRole, FindByIdsInput> =
   `
 
 export const RESTORE_ROLE: TypedDocumentNode<RestoreRole, FindByIdInput> = gql`
-  mutation RestoreRole($id: String!) {
+  mutation RestoreRole($id: Int!) {
     restoreRole(id: $id)
   }
 `

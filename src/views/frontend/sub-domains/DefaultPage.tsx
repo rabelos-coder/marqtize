@@ -5,7 +5,8 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { FiRefreshCcw } from 'react-icons/fi'
+import { HiRefresh } from '@react-icons/all-files/hi/HiRefresh'
+
 import { Button } from 'reactstrap'
 
 import SpinnerBoxed from '@/components/common/SpinnerBoxed'
@@ -80,7 +81,7 @@ export const DefaultPage = ({ host, slug }: Props) => {
           className={`${inter.className}`}
           onClick={() => router.refresh()}
         >
-          <FiRefreshCcw className="me-2" />
+          <HiRefresh className="me-2" />
           {t('reload')}
         </Button>
       </div>

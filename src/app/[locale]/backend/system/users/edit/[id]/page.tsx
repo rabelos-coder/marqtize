@@ -40,7 +40,7 @@ export default async function UserEditPage({ params: { locale, id } }: any) {
                     name: t('user').toLowerCase(),
                   })}
                 />
-                <UsersForm mode="update" id={id} />
+                <UsersForm mode="update" id={parseInt(id)} />
               </Card>
             </Col>
           </Row>

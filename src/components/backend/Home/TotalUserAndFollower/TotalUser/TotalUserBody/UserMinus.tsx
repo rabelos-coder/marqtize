@@ -1,11 +1,11 @@
-import { FiUserMinus } from 'react-icons/fi'
+import { HiUserRemove } from '@react-icons/all-files/hi/HiUserRemove'
 
 const UserMinus = () => {
   return (
     <li>
       <div className="user-icon success">
         <div className="user-box">
-          <FiUserMinus className="font-success" size={24} />
+          <HiUserRemove className="font-success" size={24} />
         </div>
       </div>
       <div>

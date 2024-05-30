@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const CommonUL = dynamic(() => import('../CommonUL'))
+const CommonUL = dynamic(() => import('../CommonUL'), { ssr: false })
 
 type propsType = {
   handleCustomizerMix_Background: (item: string) => void

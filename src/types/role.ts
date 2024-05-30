@@ -3,8 +3,8 @@ import { PaginatedObject } from './common'
 import { User } from './user'
 
 export type Role = {
-  id: string
-  accountId: string
+  id: number
+  accountId: number
   name: string
   slug: string
   isDeleteable?: boolean
@@ -67,12 +67,12 @@ export type RestoreManyRole = {
 }
 
 export type RoleInput = {
-  accountId?: string | null
+  accountId?: number | null
   name: string
   slug: string
   isDefault?: boolean
   claims?: string[]
-  users?: string[]
+  users?: number[]
 }
 
 export type CreateRoleInput = {
@@ -80,7 +80,7 @@ export type CreateRoleInput = {
 }
 
 type RoleUpdateInput = {
-  id: string
+  id: number
 } & RoleInput
 
 export type UpdateRoleInput = {

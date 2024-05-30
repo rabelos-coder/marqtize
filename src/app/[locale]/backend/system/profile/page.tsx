@@ -51,7 +51,7 @@ export default async function ProfilePage({ params: { locale } }: any) {
     },
   ]
 
-  const timezones: Array<{ label: string; value: string }> =
+  const timezones: any =
     (timezonesData?.findManyTimezone?.map((timezone) => ({
       label: timezone.name,
       value: timezone.id,

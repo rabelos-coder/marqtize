@@ -7,7 +7,7 @@ import { Col, Container, Row } from 'reactstrap'
 import { APP_META_TITLE } from '@/environment'
 import { Link } from '@/navigation'
 
-const FooterMenu = dynamic(() => import('./FooterMenu'))
+const FooterMenu = dynamic(() => import('./FooterMenu'), { ssr: false })
 
 export default function () {
   const t = useTranslations()

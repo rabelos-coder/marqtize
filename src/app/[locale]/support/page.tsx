@@ -1,5 +1,9 @@
 import { getTranslations } from 'next-intl/server'
-import { FiArrowRight, FiLifeBuoy, FiTv, FiUser } from 'react-icons/fi'
+import { FiArrowRight } from '@react-icons/all-files/fi/FiArrowRight'
+import { FiLifeBuoy } from '@react-icons/all-files/fi/FiLifeBuoy'
+import { FiTv } from '@react-icons/all-files/fi/FiTv'
+import { FiUser } from '@react-icons/all-files/fi/FiUser'
+
 import { Col, Container, Row } from 'reactstrap'
 
 import SvgBorder from '@/components/frontend/common/SvgBorder'

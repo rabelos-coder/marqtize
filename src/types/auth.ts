@@ -37,7 +37,7 @@ export type UpdateProfileInput = {
     email?: string | null
     password?: string | null
     language?: string | null
-    timezoneId?: string | null
+    timezoneId?: number | null
     removeImage?: boolean | null
     imageFile?: File | null
   }
@@ -74,7 +74,7 @@ export type LoginInput = {
 
 export type RegisterInput = {
   data: {
-    accountId?: string | null
+    accountId?: number | null
     name: string
     systemName: string
     email: string
@@ -82,7 +82,7 @@ export type RegisterInput = {
     imageFile?: Upload
     language?: string
     type?: UserTypeEnum
-    timezoneId?: string
+    timezoneId?: number
   }
 }
 
@@ -106,12 +106,12 @@ export type ProfileProps = {
 }
 
 export type EditProfileProps = {
-  timezones: Array<{ label: string; value: string }>
+  timezones: Array<{ label: string; value: number }>
   languages: Array<{ label: string; value: string }>
 } & ProfileProps
 
 export type UserAccount = {
-  userId: string
+  userId: number
   provider: string
   providerAccountId: string
   refreshToken: string
@@ -124,7 +124,7 @@ export type UserAccount = {
 
 export type UserSession = {
   sessionToken: string
-  userId: string
+  userId: number
   expiresAt: string
   createdAt: string
   updatedAt: string

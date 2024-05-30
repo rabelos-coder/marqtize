@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { DateTime } from 'luxon'
 import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
-import { LuDownload } from 'react-icons/lu'
+import { FaDownload } from '@react-icons/all-files/fa/FaDownload'
 import ReactJson from 'react-json-view'
 import { toast } from 'react-toastify'
 import {
@@ -30,7 +30,7 @@ import { useAppSelector, useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
 
 type LoggingViewProps = {
-  id: string
+  id: number
 }
 
 const defaultImageUrl = '/assets/images/user/user.jpg'
@@ -259,7 +259,7 @@ export const LoggingView = ({ id }: LoggingViewProps) => {
                           )
                         }
                       >
-                        <LuDownload className="me-2" />
+                        <FaDownload className="me-2" />
                         {t('download')}
                       </Button>
                     </Col>
@@ -309,7 +309,7 @@ export const LoggingView = ({ id }: LoggingViewProps) => {
                           )
                         }
                       >
-                        <LuDownload className="me-2" />
+                        <FaDownload className="me-2" />
                         {t('download')}
                       </Button>
                     </Col>

@@ -119,7 +119,7 @@ export const PAGINATED_USERS: TypedDocumentNode<PaginatedUser, PaginatedInput> =
 
 export const FIND_USER: TypedDocumentNode<FindByIdUser, FindByIdInput> = gql`
   ${FRAGMENT_USER_PROPS}
-  query FindByIdUser($id: String!) {
+  query FindByIdUser($id: Int!) {
     findByIdUser(id: $id) {
       ...UserProps
     }
@@ -155,7 +155,7 @@ export const UPDATE_USER: TypedDocumentNode<UpdateUser, UpdateUserInput> = gql`
 `
 
 export const DELETE_USER: TypedDocumentNode<DeleteUser, FindByIdInput> = gql`
-  mutation DeleteUser($id: String!) {
+  mutation DeleteUser($id: Int!) {
     deleteUser(id: $id)
   }
 `
@@ -168,7 +168,7 @@ export const DELETE_USERS: TypedDocumentNode<DeleteManyUser, FindByIdsInput> =
   `
 
 export const REMOVE_USER: TypedDocumentNode<RemoveUser, FindByIdInput> = gql`
-  mutation RemoveUser($id: String!) {
+  mutation RemoveUser($id: Int!) {
     removeUser(id: $id)
   }
 `
@@ -181,7 +181,7 @@ export const REMOVE_USERS: TypedDocumentNode<RemoveManyUser, FindByIdsInput> =
   `
 
 export const RESTORE_USER: TypedDocumentNode<RestoreUser, FindByIdInput> = gql`
-  mutation RestoreUser($id: String!) {
+  mutation RestoreUser($id: Int!) {
     restoreUser(id: $id)
   }
 `

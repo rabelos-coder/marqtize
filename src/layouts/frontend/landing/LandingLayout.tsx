@@ -3,10 +3,14 @@
 import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
 
-const TapTop = dynamic(() => import('@/components/common/TapTop'))
-const Navbar = dynamic(() => import('./Navbar/index'))
-const Footer = dynamic(() => import('./Footer/index'))
-const DefaultLayout = dynamic(() => import('../default/DefaultLayout'))
+const TapTop = dynamic(() => import('@/components/common/TapTop'), {
+  ssr: false,
+})
+const Navbar = dynamic(() => import('./Navbar/index'), { ssr: false })
+const Footer = dynamic(() => import('./Footer/index'), { ssr: false })
+const DefaultLayout = dynamic(() => import('../default/DefaultLayout'), {
+  ssr: false,
+})
 
 type LandingProps = {
   children: React.ReactNode

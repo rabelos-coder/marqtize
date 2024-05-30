@@ -4,84 +4,107 @@ import createNextIntlPlugin from 'next-intl/plugin'
 import nextPWA from 'next-pwa'
 import { join } from 'path'
 
+/**
+ * Environment constants
+ */
+const ENVIRONMENT = process.env.NODE_ENV ?? 'development'
+const IS_PRODUCTION = ENVIRONMENT === 'production'
+const IS_DEVELOPMENT = ENVIRONMENT === 'development'
+
+/**
+ * Next Intl Config
+ */
 const withNextIntl = createNextIntlPlugin()
+
+/**
+ * Bundle Analyzer Config
+ */
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
   openAnalyzer: true,
 })
 
-const IS_DEVELOPMENT = process.env.NODE_ENV === 'development'
-
+/**
+ * Progressive Web APP Config
+ */
 const withPWA = nextPWA({
   dest: 'public',
-  disable: IS_DEVELOPMENT,
   maximumFileSizeToCacheInBytes: 5000000,
 })
 
+/**
+ * Remove Images Patterns
+ */
+/** @type {import('next/dist/shared/lib/image-config').RemotePattern[]} */
+const remotePatterns = [
+  {
+    protocol: 'http',
+    hostname: 'localhost',
+    port: '9001',
+  },
+  {
+    protocol: 'http',
+    hostname: 'localhost',
+    port: '3000',
+  },
+  {
+    protocol: 'http',
+    hostname: 'localhost',
+    port: '4000',
+  },
+  {
+    protocol: 'https',
+    hostname: 'lh3.googleusercontent.com',
+  },
+  {
+    protocol: 'https',
+    hostname: 'scontent.faqa2-1.fna.fbcdn.net',
+  },
+  {
+    protocol: 'https',
+    hostname: 'ui-avatars.com',
+  },
+]
+
+/**
+ * Next.js Config
+ */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  poweredByHeader: false,
-  generateEtags: false,
+  poweredByHeader: IS_PRODUCTION,
+  productionBrowserSourceMaps: false,
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '9001',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3000',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '4000',
-      },
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'scontent.faqa2-1.fna.fbcdn.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'ui-avatars.com',
-      },
-    ],
+    remotePatterns,
+  },
+  sassOptions: {
+    sourceMap: IS_DEVELOPMENT,
+    includePaths: [join(process.cwd(), 'src/assets/scss')],
+  },
+  webpack: (config, { dev }) => {
+    if (config.cache && !dev) {
+      config.cache = Object.freeze({
+        type: 'memory',
+      })
+      config.cache.maxMemoryGenerations = 0
+      config.experimental.serverSourceMaps = false
+    }
+
+    if (IS_DEVELOPMENT) {
+      Object.defineProperty(config, 'devtool', {
+        get() {
+          return 'source-map'
+        },
+        set() {},
+      })
+    }
+
+    return config
   },
 }
 
-if (IS_DEVELOPMENT) {
-  nextConfig['productionBrowserSourceMaps'] = true
-  nextConfig['poweredByHeader'] = true
-  nextConfig['generateEtags'] = true
-  nextConfig['sassOptions'] = {
-    sourceMap: true,
-    includePaths: [join(process.cwd(), 'src/assets/scss')],
-  }
-
-  nextConfig['webpack'] = (config) => {
-    /**
-     * Force scss source maps for debugging. If there are performance issues or you don't need debug css, use the value "eval-source-map" instead.
-     */
-    Object.defineProperty(config, 'devtool', {
-      get() {
-        return 'source-map'
-      },
-      set() {},
-    })
-
-    return config
-  }
-}
-
 export default IS_DEVELOPMENT
-  ? withNextIntl(withPWA(nextConfig))
+  ? withNextIntl(nextConfig)
   : withBundleAnalyzer(
       withSentryConfig(
         withNextIntl(withPWA(nextConfig)),

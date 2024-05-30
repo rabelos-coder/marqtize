@@ -2,12 +2,12 @@ import { PaginatedObject } from './common'
 import { User } from './user'
 
 export type BlogPost = {
-  id: string
+  id: number
   title: string
   slug: string
   resume: string
   content: string
-  authorId: string
+  authorId: number
   coverImage?: string
   isPublished: boolean
   publishedAt?: string
@@ -20,7 +20,7 @@ export type BlogPost = {
 }
 
 export type BlogCategory = {
-  id: string
+  id: number
   name: string
   slug: string
   createdAt: string
@@ -30,7 +30,7 @@ export type BlogCategory = {
 }
 
 export type BlogTag = {
-  id: string
+  id: number
   name: string
   slug: string
   createdAt: string

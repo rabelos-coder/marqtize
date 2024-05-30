@@ -1,13 +1,13 @@
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { FiAlignCenter } from 'react-icons/fi'
+import { FiAlignCenter } from '@react-icons/all-files/fi/FiAlignCenter'
 import { Col } from 'reactstrap'
 
 import { APP_META_TITLE } from '@/environment'
 import { useLayout } from '@/hooks'
 import { Link } from '@/navigation'
 
-const Trading = dynamic(() => import('./Trading'))
+const Trading = dynamic(() => import('./Trading'), { ssr: false })
 
 const Leftbar = () => {
   const { sideBarToggle, setSideBarToggle } = useLayout()

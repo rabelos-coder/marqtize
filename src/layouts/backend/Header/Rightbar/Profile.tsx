@@ -2,10 +2,8 @@
 
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import {
-  HiOutlineArrowRightOnRectangle,
-  HiOutlineGlobeAlt,
-} from 'react-icons/hi2'
+import { HiOutlineLogout } from '@react-icons/all-files/hi/HiOutlineLogout'
+import { HiOutlineGlobeAlt } from '@react-icons/all-files/hi/HiOutlineGlobeAlt'
 import { toast } from 'react-toastify'
 import Sawl from 'sweetalert2'
 
@@ -74,7 +72,7 @@ const Profile = () => {
           ))}
         <li onClick={logoutConfirm}>
           <a href="#123">
-            <HiOutlineArrowRightOnRectangle />
+            <HiOutlineLogout />
             <span>{t('logout')}</span>
           </a>
         </li>

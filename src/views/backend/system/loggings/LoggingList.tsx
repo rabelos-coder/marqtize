@@ -5,8 +5,10 @@ import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 import { TableColumn } from 'react-data-table-component'
-import { HiDotsVertical } from 'react-icons/hi'
-import { HiBolt, HiEye, HiTrash } from 'react-icons/hi2'
+import { HiDotsVertical } from '@react-icons/all-files/hi/HiDotsVertical'
+import { HiLightningBolt } from '@react-icons/all-files/hi/HiLightningBolt'
+import { HiOutlineEye } from '@react-icons/all-files/hi/HiOutlineEye'
+import { HiOutlineTrash } from '@react-icons/all-files/hi/HiOutlineTrash'
 import Select from 'react-select'
 import { toast } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
@@ -127,7 +129,7 @@ export const LoggingList = () => {
   )
 
   const toggleDropdown = useCallback(
-    (id: string) => {
+    (id: number) => {
       setDropdownOpen({
         ...Object.keys(dropdownOpen).reduce(
           (acc, cur) => ({ ...acc, [cur]: false }),
@@ -147,7 +149,7 @@ export const LoggingList = () => {
   )
 
   const handleSearch = useCallback(
-    async (e?: React.FormEvent<HTMLFormElement> | null, _userId?: string) => {
+    async (e?: React.FormEvent<HTMLFormElement> | null, _userId?: number) => {
       if (typeof e !== 'undefined') {
         e?.preventDefault()
       }
@@ -306,7 +308,7 @@ export const LoggingList = () => {
   const handleDelete = useCallback(
     async (
       e: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLElement>,
-      id: string
+      id: number
     ) => {
       e?.preventDefault()
 
@@ -365,7 +367,7 @@ export const LoggingList = () => {
           ),
         },
         {
-          name: <HiBolt className="h-4 w-4" />,
+          name: <HiLightningBolt className="h-4 w-4" />,
           center: true,
           width: '70px',
           cell: (row) => (
@@ -400,7 +402,7 @@ export const LoggingList = () => {
                       href={`/backend/system/loggings/view/${row.id}`}
                       tag={Link}
                     >
-                      <HiEye className="me-2" />
+                      <HiOutlineEye className="me-2" />
                       {t('viewName', { name: t('logging') })}
                     </DropdownItem>
                   </Can>
@@ -416,7 +418,7 @@ export const LoggingList = () => {
                       onClick={(e) => handleDelete(e, row.id)}
                       tag={Link}
                     >
-                      <HiTrash className="me-2" />
+                      <HiOutlineTrash className="me-2" />
                       {t('deleteName', { name: t('logging') })}
                     </DropdownItem>
                   </CanAny>

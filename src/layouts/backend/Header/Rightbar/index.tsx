@@ -3,9 +3,9 @@ import { Col } from 'reactstrap'
 
 import { THEME_LOCALE_SWITCHER_ENABLED } from '@/environment'
 
-const Language = dynamic(() => import('./Languages'))
-const MoonLight = dynamic(() => import('./MoonLight'))
-const Profile = dynamic(() => import('./Profile'))
+const Language = dynamic(() => import('./Languages'), { ssr: false })
+const MoonLight = dynamic(() => import('./MoonLight'), { ssr: false })
+const Profile = dynamic(() => import('./Profile'), { ssr: false })
 
 const Rightbar = () => {
   return (

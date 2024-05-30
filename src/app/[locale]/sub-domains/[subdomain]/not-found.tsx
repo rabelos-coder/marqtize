@@ -2,7 +2,7 @@
 
 import { Inter, Roboto } from 'next/font/google'
 import { useTranslations } from 'next-intl'
-import { FaArrowLeft } from 'react-icons/fa6'
+import { HiArrowLeft } from '@react-icons/all-files/hi/HiArrowLeft'
 import { Button } from 'reactstrap'
 
 import { useRouter } from '@/navigation'
@@ -39,7 +39,7 @@ export default function NotFoundPage() {
           className={`${inter.className}`}
           onClick={() => router.back()}
         >
-          <FaArrowLeft className="me-2" />
+          <HiArrowLeft className="me-2" />
           {t('back')}
         </Button>
       </div>

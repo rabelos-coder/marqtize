@@ -10,12 +10,18 @@ import { useAppSelector, useAuth, useCustomizer, useLayout } from '@/hooks'
 import { ChildrenProps } from '@/types/common'
 import { SearchableMenuType, SidebarItemType } from '@/types/layout'
 
-const TapTop = dynamic(() => import('@/components/common/TapTop'))
-const Spinner = dynamic(() => import('@/components/common/Spinner'))
-const Header = dynamic(() => import('./Header'))
-const Footer = dynamic(() => import('./Footer'))
-const SideBar = dynamic(() => import('./Sidebar'))
-const ThemeCustomizer = dynamic(() => import('./ThemeCustomizer'))
+const TapTop = dynamic(() => import('@/components/common/TapTop'), {
+  ssr: false,
+})
+const Spinner = dynamic(() => import('@/components/common/Spinner'), {
+  ssr: false,
+})
+const Header = dynamic(() => import('./Header'), { ssr: false })
+const Footer = dynamic(() => import('./Footer'), { ssr: false })
+const SideBar = dynamic(() => import('./Sidebar'), { ssr: false })
+const ThemeCustomizer = dynamic(() => import('./ThemeCustomizer'), {
+  ssr: false,
+})
 
 /**
  * Renders the authentication layout for the back-end application.

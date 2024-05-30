@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { FiChevronsUp } from 'react-icons/fi'
+import { HiChevronUp } from '@react-icons/all-files/hi/HiChevronUp'
 
 const TapTop = () => {
   const [tapTopStyle, setTapTopStyle] = useState('none')
@@ -30,7 +30,7 @@ const TapTop = () => {
 
   return (
     <div className="tap-top" style={{ display: tapTopStyle }}>
-      <FiChevronsUp size={24} onClick={() => executeScroll()} />
+      <HiChevronUp size={24} onClick={() => executeScroll()} />
     </div>
   )
 }

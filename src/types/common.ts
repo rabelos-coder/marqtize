@@ -69,15 +69,15 @@ export type FindBySlugInput = {
 }
 
 export type FindByIdInput = {
-  id: string
+  id: number
 }
 
 export type FindByIdsInput = {
-  ids: string[]
+  ids: number[]
 }
 
 type ParamsType = {
-  id?: string
+  id?: number
   page?: string | number
   slug?: string
   subdomain?: string
@@ -130,5 +130,5 @@ export type CardContextType = {
 
 export type ReactSelectType = {
   label: string
-  value: string
+  value: string | number
 }

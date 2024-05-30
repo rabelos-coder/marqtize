@@ -13,9 +13,15 @@ import { useAppDispatch, useAppSelector } from '@/hooks'
 import { setLoading } from '@/store/slices/themeSlice'
 import { ChildrenProps } from '@/types/common'
 
-const GuestLayout = dynamic(() => import('@/layouts/common/GuestLayout'))
-const AuthProvider = dynamic(() => import('@/providers/AuthProvider'))
-const SpinnerBoxed = dynamic(() => import('@/components/common/SpinnerBoxed'))
+const GuestLayout = dynamic(() => import('@/layouts/common/GuestLayout'), {
+  ssr: false,
+})
+const AuthProvider = dynamic(() => import('@/providers/AuthProvider'), {
+  ssr: false,
+})
+const SpinnerBoxed = dynamic(() => import('@/components/common/SpinnerBoxed'), {
+  ssr: false,
+})
 
 /**
  * Renders the default layout for the application.

@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { FiArrowLeft } from 'react-icons/fi'
+import { HiArrowLeft } from '@react-icons/all-files/hi/HiArrowLeft'
 import { Col, Container, Row } from 'reactstrap'
 
 import SvgBorder from '@/components/frontend/common/SvgBorder'
@@ -47,7 +47,7 @@ export default function NotFound() {
                   href="#!"
                   onClick={handleBack}
                 >
-                  <FiArrowLeft width={24} height={24} className="ms-0 me-1" />
+                  <HiArrowLeft width={24} height={24} className="ms-0 me-1" />
                   {t('back')}
                 </Link>
               </div>

@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const CommonUL = dynamic(() => import('../CommonUL'))
+const CommonUL = dynamic(() => import('../CommonUL'), { ssr: false })
 
 type PropsType = {
   handleSidebarType: (data: string) => void

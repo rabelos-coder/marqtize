@@ -5,7 +5,8 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useReCaptcha } from 'next-recaptcha-v3'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { FaFacebook, FaGoogle } from 'react-icons/fa'
+import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook'
+import { FaGoogle } from '@react-icons/all-files/fa/FaGoogle'
 import { toast } from 'react-toastify'
 import { Button, FormFeedback, FormGroup, Input, Label } from 'reactstrap'
 import * as yup from 'yup'
@@ -13,7 +14,7 @@ import * as yup from 'yup'
 import CommonLogo from '@/components/common/CommonLogo'
 import { EMAIL_REGEX, PASSWORD_STRENGTH_REGEX } from '@/configs'
 import api from '@/configs/axios'
-import { IS_DEVELOPMENT, SERVER_URL } from '@/environment'
+import { IS_DEVELOPMENT, IS_PRODUCTION, SERVER_URL } from '@/environment'
 import { useAppDispatch } from '@/hooks'
 import { Link } from '@/navigation'
 import { setAuth } from '@/store/slices/authSlice'
@@ -86,12 +87,16 @@ export const LoginForm = ({ alignLogo }: AuthProps) => {
       rememberMe,
     }
 
-    const recaptcha = await executeRecaptcha('form_submit')
+    let recaptcha: string = ''
 
-    if (!recaptcha) {
-      toast.error(t('reCaptchaError'))
+    if (IS_PRODUCTION) {
+      recaptcha = await executeRecaptcha('form_submit')
 
-      return
+      if (!recaptcha) {
+        toast.error(t('reCaptchaError'))
+
+        return
+      }
     }
 
     await api

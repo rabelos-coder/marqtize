@@ -27,7 +27,7 @@ import { useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
 
 type UsersViewProps = {
-  id: string
+  id: number
 }
 
 const defaultImageUrl = '/assets/images/user/user.jpg'

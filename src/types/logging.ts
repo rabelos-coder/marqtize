@@ -2,9 +2,9 @@ import { PaginatedObject } from './common'
 import { User } from './user'
 
 export type Logging = {
-  id: string
-  userId?: string
-  tokenId?: string
+  id: number
+  userId?: number
+  tokenId?: number
   method: string
   operation?: string
   endpoint: string

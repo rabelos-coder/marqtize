@@ -1,4 +1,4 @@
-import { HiOutlineUser } from 'react-icons/hi2'
+import { HiOutlineUser } from '@react-icons/all-files/hi/HiOutlineUser'
 
 import { ProfileType } from '../types/layout'
 

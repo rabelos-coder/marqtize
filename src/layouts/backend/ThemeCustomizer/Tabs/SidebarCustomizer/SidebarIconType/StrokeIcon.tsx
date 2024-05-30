@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useTranslations } from 'next-intl'
 
-const CommonUL = dynamic(() => import('../CommonUL'))
+const CommonUL = dynamic(() => import('../CommonUL'), { ssr: false })
 
 type varType = {
   handleSideBarIconType: (data: string) => void

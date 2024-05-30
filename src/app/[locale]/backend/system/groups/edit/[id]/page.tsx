@@ -40,7 +40,7 @@ export default async function RoleEditPage({ params: { locale, id } }: any) {
                     name: t('role').toLowerCase(),
                   })}
                 />
-                <GroupsForm mode="update" id={id} />
+                <GroupsForm mode="update" id={parseInt(id)} />
               </Card>
             </Col>
           </Row>

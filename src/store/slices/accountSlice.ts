@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import { STORAGE_ACCOUNT } from '@/configs'
 import { APP_MAIN_DOMAIN } from '@/environment'
 import { Account, AccountState, FindBySlugOrHostInput } from '@/types/account'
+import api from '@/configs/axios'
 
 let account: any = Cookies.get(STORAGE_ACCOUNT) ?? null
 
@@ -31,8 +32,8 @@ export const fetchAccount = createAsyncThunk(
 
     if (!slug && !host) return null
 
-    return await axios
-      .post<Account>('/api/account', { slug, host })
+    return await api
+      .post<Account>('/account', { slug, host })
       .then(({ data }) => data ?? null)
       .catch((error) => {
         console.log(error?.response?.data?.message ?? 'No account found')

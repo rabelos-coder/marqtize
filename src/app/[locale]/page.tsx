@@ -1,7 +1,11 @@
 import { getTranslations } from 'next-intl/server'
-import { BsArrowRight, BsCart, BsCreditCard } from 'react-icons/bs'
-import { FaCheckCircle, FaCircle, FaQuestionCircle } from 'react-icons/fa'
-import { FiUser } from 'react-icons/fi'
+import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight'
+import { FaCartPlus } from '@react-icons/all-files/fa/FaCartPlus'
+import { BsCreditCard } from '@react-icons/all-files/bs/BsCreditCard'
+import { FaCheckCircle } from '@react-icons/all-files/fa/FaCheckCircle'
+import { FaCircle } from '@react-icons/all-files/fa/FaCircle'
+import { FaQuestionCircle } from '@react-icons/all-files/fa/FaQuestionCircle'
+import { FiUser } from '@react-icons/all-files/fi/FiUser'
 import { Badge, Card, CardBody, Col, Container, List, Row } from 'reactstrap'
 
 import SvgBorder from '@/components/frontend/common/SvgBorder'
@@ -49,7 +53,7 @@ export default async function HomePage({ params: { locale } }: any) {
           <Row className="gx-5 text-center">
             <Col lg={4} className="mb-5 mb-lg-0">
               <div className="icon-stack icon-stack-xl bg-gradient-primary-to-secondary text-white mb-4">
-                <BsCart />
+                <FaCartPlus />
               </div>
               <h3 id="builtFor">{t('increaseYourSales')}</h3>
               <p className="mb-0">{t('increaseYourSalesDescription')}</p>

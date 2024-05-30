@@ -4,7 +4,7 @@ import * as Sentry from '@sentry/nextjs'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
-import { FiRefreshCw } from 'react-icons/fi'
+import { HiRefresh } from '@react-icons/all-files/hi/HiRefresh'
 import { Col, Container, Row } from 'reactstrap'
 
 import SvgBorder from '@/components/frontend/common/SvgBorder'
@@ -52,7 +52,7 @@ export default function ErrorPage({
                 />
                 <p className="lead">{t('internalServerErrorInfo')}</p>
                 <Link className="text-arrow-icon" href="#!" onClick={reload}>
-                  <FiRefreshCw width={24} height={24} className="ms-0 me-1" />
+                  <HiRefresh width={24} height={24} className="ms-0 me-1" />
                   {t('reload')}
                 </Link>
               </div>

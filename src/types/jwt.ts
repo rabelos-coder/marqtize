@@ -3,9 +3,9 @@ import { UserType } from './enums'
 import { Language } from './language'
 
 export type JWT = {
-  id: string
-  tokenId: string | null
-  accountId: string | null
+  id: number
+  tokenId: number | null
+  accountId: number | null
   sa: boolean
   systemName: string
   account: Account | null

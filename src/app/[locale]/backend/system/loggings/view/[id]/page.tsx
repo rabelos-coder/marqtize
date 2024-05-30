@@ -40,7 +40,7 @@ export default async function LoggingViewPage({ params: { locale, id } }: any) {
                     name: t('logging').toLowerCase(),
                   })}
                 />
-                <LoggingView id={`${id}`} />
+                <LoggingView id={parseInt(id)} />
               </Card>
             </Col>
           </Row>

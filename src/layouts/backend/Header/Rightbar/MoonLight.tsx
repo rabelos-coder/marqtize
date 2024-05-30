@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi2'
+import { HiOutlineMoon } from '@react-icons/all-files/hi/HiOutlineMoon'
+import { HiOutlineSun } from '@react-icons/all-files/hi/HiOutlineSun'
 
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { setTheme } from '@/store/slices/themeSlice'

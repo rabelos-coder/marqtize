@@ -40,7 +40,7 @@ export default async function RoleViewPage({ params: { locale, id } }: any) {
                     name: t('role').toLowerCase(),
                   })}
                 />
-                <GroupsView id={`${id}`} />
+                <GroupsView id={parseInt(id)} />
               </Card>
             </Col>
           </Row>

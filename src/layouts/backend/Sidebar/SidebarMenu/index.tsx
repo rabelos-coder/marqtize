@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
 import { useTranslations } from 'next-intl'
 import { Fragment, useState } from 'react'
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
+import { HiArrowLeft } from '@react-icons/all-files/hi/HiArrowLeft'
+import { HiArrowRight } from '@react-icons/all-files/hi/HiArrowRight'
 
 import MenuListData from '@/configs/menu'
 import Theme from '@/configs/theme'
@@ -9,7 +10,7 @@ import { useAbility, useCustomizer, useLayout } from '@/hooks'
 import { usePathname } from '@/navigation'
 import { SidebarMenuType } from '@/types/layout'
 
-const MenuList = dynamic(() => import('./MenuList'))
+const MenuList = dynamic(() => import('./MenuList'), { ssr: false })
 
 const SidebarMenu = () => {
   const { pinnedMenu } = useLayout()
@@ -93,7 +94,7 @@ const SidebarMenu = () => {
           id="left-arrow"
           onClick={scrollToLeft}
         >
-          <FiArrowLeft />
+          <HiArrowLeft />
         </div>
       ) : (
         ''
@@ -181,7 +182,7 @@ const SidebarMenu = () => {
           className={`right-arrow ${rightArrow ? 'disabled' : ''}`}
           onClick={scrollToRight}
         >
-          <FiArrowRight />
+          <HiArrowRight />
         </div>
       ) : (
         ''

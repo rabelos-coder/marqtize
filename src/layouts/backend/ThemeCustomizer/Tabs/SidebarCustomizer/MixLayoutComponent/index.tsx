@@ -5,9 +5,9 @@ import { useEffect } from 'react'
 import Theme from '@/configs/theme'
 import { useCustomizer } from '@/hooks'
 
-const BgDark = dynamic(() => import('./BgDark'))
-const BgLight = dynamic(() => import('./BgLight'))
-const DarkSidebar = dynamic(() => import('./DarkSidebar'))
+const BgDark = dynamic(() => import('./BgDark'), { ssr: false })
+const BgLight = dynamic(() => import('./BgLight'), { ssr: false })
+const DarkSidebar = dynamic(() => import('./DarkSidebar'), { ssr: false })
 
 const MixLayoutComponent = () => {
   const { addMixBackgroundLayout, setMixLayout } = useCustomizer()

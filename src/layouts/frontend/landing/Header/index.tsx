@@ -4,7 +4,8 @@ import dynamic from 'next/dynamic'
 import { Col, Container, Row } from 'reactstrap'
 
 const SvgBorder = dynamic(
-  () => import('@/components/frontend/common/SvgBorder')
+  () => import('@/components/frontend/common/SvgBorder'),
+  { ssr: false }
 )
 
 type HeaderProps = {

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 export type AvatarProps = {
   name: string
-  id?: string
+  id?: number
   size?: number
   image?: string | null
   rounded?: boolean

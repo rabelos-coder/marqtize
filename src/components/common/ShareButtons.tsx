@@ -2,7 +2,10 @@
 
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa'
+import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF'
+import { FaLinkedinIn } from '@react-icons/all-files/fa/FaLinkedinIn'
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
+
 import {
   FacebookShareButton,
   LinkedinShareButton,

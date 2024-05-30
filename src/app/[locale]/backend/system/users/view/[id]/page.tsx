@@ -40,7 +40,7 @@ export default async function UserViewPage({ params: { locale, id } }: any) {
                     name: t('user').toLowerCase(),
                   })}
                 />
-                <UsersView id={`${id}`} />
+                <UsersView id={parseInt(id)} />
               </Card>
             </Col>
           </Row>

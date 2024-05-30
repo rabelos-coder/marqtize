@@ -4,8 +4,8 @@ import { useTranslations } from 'next-intl'
 import Theme from '@/configs/theme'
 import { useCustomizer } from '@/hooks'
 
-const FillIcon = dynamic(() => import('./FillIcon'))
-const StrokeIcon = dynamic(() => import('./StrokeIcon'))
+const FillIcon = dynamic(() => import('./FillIcon'), { ssr: false })
+const StrokeIcon = dynamic(() => import('./StrokeIcon'), { ssr: false })
 
 const SidebarIconType = () => {
   const { addSidebarIconType } = useCustomizer()

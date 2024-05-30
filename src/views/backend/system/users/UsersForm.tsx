@@ -54,12 +54,12 @@ import { CreateUserInput, UpdateUserInput, User, UserInput } from '@/types/user'
 import { setFormValues, validateFormValue } from '@/utils/helpers'
 
 type UsersFormProps = {
-  id?: string
+  id?: number
   mode: 'create' | 'update'
 }
 
 type FormData = {
-  accountId: string
+  accountId: number | null
   name: string
   systemName: string
   email: string
@@ -68,15 +68,15 @@ type FormData = {
   imageFile: File | null
   removeImage: boolean
   language: string
-  timezoneId: string
+  timezoneId: number | null
   isActive: boolean
   isSuperAdmin: boolean
   claims: string[]
-  roles: string[]
+  roles: number[]
 }
 
 const defaultValues: FormData = {
-  accountId: '',
+  accountId: null,
   name: '',
   systemName: '',
   email: '',
@@ -87,7 +87,7 @@ const defaultValues: FormData = {
   imageFile: null,
   isSuperAdmin: false,
   language: LanguageEnum.pt_BR,
-  timezoneId: '',
+  timezoneId: null,
   claims: [],
   roles: [],
 }
@@ -128,10 +128,11 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
         .required(t('propertyRequired', { property: t('language') }))
         .default(null),
       timezoneId: yup
-        .string()
+        .number()
         .nullable()
         .required(t('propertyRequired', { property: t('timezone') }))
         .default(null),
+      accountId: yup.number().optional().default(null),
       removeImage: yup.boolean().optional().default(false),
       isActive: yup.boolean().optional().default(false),
       isSuperAdmin: yup.boolean().optional().default(false),
@@ -202,7 +203,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
   const [roles, setRoles] = useState<Role[]>([])
 
   const [getUser] = useLazyQuery(FIND_USER, {
-    variables: { id: `${id}` },
+    variables: { id: id ?? 0 },
     fetchPolicy: 'no-cache',
   })
   const [createUser] = useMutation(CREATE_USER)
@@ -353,7 +354,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
 
   const onSubmit = async (form: FormData) => {
     const data: UserInput = {
-      accountId: jwt?.accountId ?? null,
+      accountId: jwt?.accountId ?? form.accountId ?? null,
       name: form.name,
       systemName: form.systemName,
       email: form.email,
@@ -396,7 +397,7 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
     } else if (mode === 'update') {
       const variables: UpdateUserInput = {
         data: {
-          id: `${id}`,
+          id: id ?? 0,
           ...data,
         },
       }
@@ -1122,9 +1123,14 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                               value.includes(id)
                             ) {
                               return (
-                                <Label key={id} for={id} lg={4} sm={6}>
+                                <Label
+                                  key={id}
+                                  for={`role-${id}`}
+                                  lg={4}
+                                  sm={6}
+                                >
                                   <Input
-                                    id={id}
+                                    id={`role-${id}`}
                                     type="checkbox"
                                     className="me-2"
                                     value={id}
@@ -1148,9 +1154,14 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                               jwt?.accountId !== accountId
                             ) {
                               return (
-                                <Label key={id} for={id} lg={4} sm={6}>
+                                <Label
+                                  key={id}
+                                  for={`role-${id}`}
+                                  lg={4}
+                                  sm={6}
+                                >
                                   <Input
-                                    id={id}
+                                    id={`role-${id}`}
                                     type="checkbox"
                                     className="me-2"
                                     value={id}
@@ -1164,9 +1175,9 @@ export const UsersForm = ({ id, mode }: UsersFormProps) => {
                           }
 
                           return (
-                            <Label key={id} for={id} lg={4} sm={6}>
+                            <Label key={id} for={`role-${id}`} lg={4} sm={6}>
                               <Input
-                                id={id}
+                                id={`role-${id}`}
                                 type="checkbox"
                                 className="me-2"
                                 value={id}

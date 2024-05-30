@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { FiX } from 'react-icons/fi'
+import { HiX } from '@react-icons/all-files/hi/HiX'
 import { Form, Input } from 'reactstrap'
 
 import SvgIcon from '@/components/common/SvgIcon'
@@ -39,7 +39,7 @@ const SearchBarContain = ({
             <div className="spinner-border Typeahead-spinner">
               <span className="sr-only">{t('loading')}...</span>
             </div>
-            <FiX
+            <HiX
               onClick={() => setSearchIcon(!searchIcon)}
               className="close-search"
             />

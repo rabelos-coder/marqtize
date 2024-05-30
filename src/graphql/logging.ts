@@ -104,7 +104,7 @@ export const PAGINATED_LOGGINGS: TypedDocumentNode<
 export const FIND_LOGGING: TypedDocumentNode<FindByIdLogging, FindByIdInput> =
   gql`
     ${FRAGMENT_LOGGING_PROPS}
-    query FindByIdLogging($id: String!) {
+    query FindByIdLogging($id: Int!) {
       findByIdLogging(id: $id) {
         ...LoggingProps
       }
@@ -128,7 +128,7 @@ export const FIND_FIRST_LOGGING: TypedDocumentNode<
 
 export const DELETE_LOGGING: TypedDocumentNode<DeleteLogging, FindByIdInput> =
   gql`
-    mutation DeleteLogging($id: String!) {
+    mutation DeleteLogging($id: Int!) {
       deleteLogging(id: $id)
     }
   `

@@ -8,7 +8,7 @@ import {
   STORAGE_TIMEZONE,
   STORAGE_USER,
 } from '@/configs'
-import { APP_LANGUAGE, APP_TIMEZONE } from '@/environment'
+import { APP_LANGUAGE, APP_TIMEZONE, IS_DEVELOPMENT } from '@/environment'
 import { LOGIN } from '@/graphql/auth'
 import { apiClient } from '@/utils/apollo'
 
@@ -20,7 +20,11 @@ export async function POST(req: NextRequest) {
   })
   const data = await req.json()
   const recaptcha = req.headers.get('recaptcha') ?? ''
-  const skipRecaptcha = req.headers.get('x-recaptcha-skip') ?? 'false'
+  const skipRecaptcha = req.headers.get('x-recaptcha-skip')
+    ? req.headers.get('x-recaptcha-skip')
+    : IS_DEVELOPMENT
+      ? process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SKIP_KEY
+      : 'false'
 
   // sanitize input
   const email = data?.email?.trim() ?? null

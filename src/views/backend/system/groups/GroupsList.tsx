@@ -5,8 +5,12 @@ import { trim } from 'lodash'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { TableColumn } from 'react-data-table-component'
-import { HiDotsVertical, HiRefresh } from 'react-icons/hi'
-import { HiBolt, HiEye, HiPencilSquare, HiTrash } from 'react-icons/hi2'
+import { HiDotsVertical } from '@react-icons/all-files/hi/HiDotsVertical'
+import { HiRefresh } from '@react-icons/all-files/hi/HiRefresh'
+import { HiLightningBolt } from '@react-icons/all-files/hi/HiLightningBolt'
+import { HiOutlineEye } from '@react-icons/all-files/hi/HiOutlineEye'
+import { HiOutlineTrash } from '@react-icons/all-files/hi/HiOutlineTrash'
+import { HiOutlinePencilAlt } from '@react-icons/all-files/hi/HiOutlinePencilAlt'
 import { toast } from 'react-toastify'
 import { Tooltip } from 'react-tooltip'
 import {
@@ -116,7 +120,7 @@ export const GroupsList = () => {
   })
 
   const toggleDropdown = useCallback(
-    (id: string) => {
+    (id: number) => {
       setDropdownOpen({
         ...Object.keys(dropdownOpen).reduce(
           (acc, cur) => ({ ...acc, [cur]: false }),
@@ -337,7 +341,7 @@ export const GroupsList = () => {
   const handleDelete = useCallback(
     async (
       e: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLElement>,
-      id: string
+      id: number
     ) => {
       e?.preventDefault()
 
@@ -384,7 +388,7 @@ export const GroupsList = () => {
   const handleRestore = useCallback(
     async (
       e: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLElement>,
-      id: string
+      id: number
     ) => {
       e?.preventDefault()
 
@@ -430,7 +434,7 @@ export const GroupsList = () => {
         selector: (row) => row.slug,
       },
       {
-        name: <HiBolt className="h-4 w-4" />,
+        name: <HiLightningBolt className="h-4 w-4" />,
         center: true,
         width: '70px',
         cell: (row) => (
@@ -466,7 +470,7 @@ export const GroupsList = () => {
                     href={`/backend/system/groups/view/${row.id}`}
                     tag={Link}
                   >
-                    <HiEye className="me-2" />
+                    <HiOutlineEye className="me-2" />
                     {t('viewName', { name: t('role') })}
                   </DropdownItem>
                 </Can>
@@ -482,7 +486,7 @@ export const GroupsList = () => {
                       href={`/backend/system/groups/edit/${row.id}`}
                       tag={Link}
                     >
-                      <HiPencilSquare className="me-2" />
+                      <HiOutlinePencilAlt className="me-2" />
                       {t('editName', { name: t('role') })}
                     </DropdownItem>
                   </CanAny>
@@ -518,7 +522,7 @@ export const GroupsList = () => {
                       onClick={(e) => handleDelete(e, row.id)}
                       tag={Link}
                     >
-                      <HiTrash className="me-2" />
+                      <HiOutlineTrash className="me-2" />
                       {t('deleteName', { name: t('role') })}
                     </DropdownItem>
                   </CanAny>

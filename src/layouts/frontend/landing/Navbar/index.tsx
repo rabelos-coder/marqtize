@@ -3,8 +3,12 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { FaChevronCircleRight, FaChevronDown } from 'react-icons/fa'
-import { FiBookOpen, FiCode, FiFileText, FiMenu } from 'react-icons/fi'
+import { FaChevronCircleRight } from '@react-icons/all-files/fa/FaChevronCircleRight'
+import { FaChevronDown } from '@react-icons/all-files/fa/FaChevronDown'
+import { FiBookOpen } from '@react-icons/all-files/fi/FiBookOpen'
+import { FiCode } from '@react-icons/all-files/fi/FiCode'
+import { FiFileText } from '@react-icons/all-files/fi/FiFileText'
+import { FiMenu } from '@react-icons/all-files/fi/FiMenu'
 import { toast } from 'react-toastify'
 import {
   Button,

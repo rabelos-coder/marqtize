@@ -43,7 +43,7 @@ import { User } from '@/types/user'
 import { setFormValues, validateFormValue } from '@/utils/helpers'
 
 type GroupsFormProps = {
-  id?: string
+  id?: number
   mode: 'create' | 'update'
 }
 
@@ -78,7 +78,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
   const { jwt } = useAuth()
 
   const [getRole] = useLazyQuery(FIND_ROLE, {
-    variables: { id: `${id}` },
+    variables: { id: id ?? 0 },
     fetchPolicy: 'no-cache',
   })
   const [createRole] = useMutation(CREATE_ROLE)
@@ -268,7 +268,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
     } else if (mode === 'update') {
       const variables: UpdateRoleInput = {
         data: {
-          id: `${id}`,
+          id,
           ...data,
         },
       }

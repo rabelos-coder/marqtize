@@ -120,7 +120,7 @@ export const PAGINATED_ACCOUNTS: TypedDocumentNode<
 export const FIND_ACCOUNT: TypedDocumentNode<FindByIdAccount, FindByIdInput> =
   gql`
     ${FRAGMENT_ACCOUNT_PROPS}
-    query FindByIdAccount($id: String!) {
+    query FindByIdAccount($id: Int!) {
       findByIdAccount(id: $id) {
         ...AccountProps
       }
@@ -180,7 +180,7 @@ export const UPDATE_ACCOUNT: TypedDocumentNode<
 
 export const DELETE_ACCOUNT: TypedDocumentNode<DeleteAccount, FindByIdInput> =
   gql`
-    mutation DeleteAccount($id: String!) {
+    mutation DeleteAccount($id: Int!) {
       deleteAccount(id: $id)
     }
   `
@@ -196,7 +196,7 @@ export const DELETE_ACCOUNTS: TypedDocumentNode<
 
 export const REMOVE_ACCOUNT: TypedDocumentNode<RemoveAccount, FindByIdInput> =
   gql`
-    mutation RemoveAccount($id: String!) {
+    mutation RemoveAccount($id: Int!) {
       removeAccount(id: $id)
     }
   `
@@ -212,7 +212,7 @@ export const REMOVE_ACCOUNTS: TypedDocumentNode<
 
 export const RESTORE_ACCOUNT: TypedDocumentNode<RestoreAccount, FindByIdInput> =
   gql`
-    mutation RestoreAccount($id: String!) {
+    mutation RestoreAccount($id: Int!) {
       restoreAccount(id: $id)
     }
   `

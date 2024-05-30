@@ -1,9 +1,11 @@
 import dynamic from 'next/dynamic'
 import { TabContent, TabPane } from 'reactstrap'
 
-const CheckLayout = dynamic(() => import('../Tabs/CheckLayout'))
-const SidebarCustomizer = dynamic(() => import('../Tabs/SidebarCustomizer'))
-const TabHeader = dynamic(() => import('./TabHeader'))
+const CheckLayout = dynamic(() => import('../Tabs/CheckLayout'), { ssr: false })
+const SidebarCustomizer = dynamic(() => import('../Tabs/SidebarCustomizer'), {
+  ssr: false,
+})
+const TabHeader = dynamic(() => import('./TabHeader'), { ssr: false })
 
 type TabCustomizerType = {
   callbackNav: (test: string, open: boolean) => void

@@ -4,7 +4,7 @@ import * as Sentry from '@sentry/nextjs'
 import { Inter, Roboto } from 'next/font/google'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
-import { FaArrowsRotate } from 'react-icons/fa6'
+import { HiRefresh } from '@react-icons/all-files/hi/HiRefresh'
 import { Button } from 'reactstrap'
 
 import { IS_DEVELOPMENT } from '@/environment'
@@ -53,7 +53,7 @@ export default function ErrorPage({
           className={`${inter.className}`}
           onClick={() => reset()}
         >
-          <FaArrowsRotate className="me-2" />
+          <HiRefresh className="me-2" />
           {t('reload')}
         </Button>
       </div>

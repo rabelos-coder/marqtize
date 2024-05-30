@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server'
-import { FiArrowRight } from 'react-icons/fi'
+import { FiArrowRight } from '@react-icons/all-files/fi/FiArrowRight'
 import { Container } from 'reactstrap'
 
 import SvgBorder from '@/components/frontend/common/SvgBorder'

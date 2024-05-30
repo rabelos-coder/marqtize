@@ -26,7 +26,7 @@ import { useAuth } from '@/hooks'
 import { useRouter } from '@/navigation'
 
 type GroupsViewProps = {
-  id: string
+  id: number
 }
 
 export const GroupsView = ({ id }: GroupsViewProps) => {

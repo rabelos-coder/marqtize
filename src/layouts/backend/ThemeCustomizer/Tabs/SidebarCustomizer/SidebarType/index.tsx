@@ -3,8 +3,8 @@ import { useTranslations } from 'next-intl'
 
 import { useCustomizer } from '@/hooks'
 
-const Horizontal = dynamic(() => import('./Horizontal'))
-const Vertical = dynamic(() => import('./Vertical'))
+const Horizontal = dynamic(() => import('./Horizontal'), { ssr: false })
+const Vertical = dynamic(() => import('./Vertical'), { ssr: false })
 
 const SidebarType = () => {
   const { addSidebarLayouts, layout } = useCustomizer()

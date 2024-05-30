@@ -32,7 +32,7 @@ type FormData = {
   name: string
   systemName: string
   language: string
-  timezoneId: string
+  timezoneId: number
   removeImage?: boolean
   imageFile?: Upload
 }
@@ -56,7 +56,7 @@ const EditProfileForm = ({ user, timezones, languages }: EditProfileProps) => {
       .string()
       .required(t('propertyRequired', { property: t('language') })),
     timezoneId: yup
-      .string()
+      .number()
       .required(t('propertyRequired', { property: t('timezone') })),
   })
 
@@ -94,7 +94,7 @@ const EditProfileForm = ({ user, timezones, languages }: EditProfileProps) => {
   } = useForm({
     defaultValues,
     mode: 'onBlur',
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema) as any,
   })
 
   return (

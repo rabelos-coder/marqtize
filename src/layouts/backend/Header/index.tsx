@@ -3,8 +3,8 @@ import { Row } from 'reactstrap'
 
 import { useLayout } from '@/hooks'
 
-const LeftBar = dynamic(() => import('./Leftbar'))
-const RightBar = dynamic(() => import('./Rightbar'))
+const LeftBar = dynamic(() => import('./Leftbar'), { ssr: false })
+const RightBar = dynamic(() => import('./Rightbar'), { ssr: false })
 
 const Header = () => {
   const { sideBarToggle } = useLayout()

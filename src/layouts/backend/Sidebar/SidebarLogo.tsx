@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { FiGrid } from 'react-icons/fi'
+import { HiViewGrid } from '@react-icons/all-files/hi/HiViewGrid'
 
 import { useLayout } from '@/hooks'
 import { Link } from '@/navigation'
@@ -35,7 +35,7 @@ const SidebarLogo = () => {
         className="toggle-sidebar"
         onClick={() => setSideBarToggle(!sideBarToggle)}
       >
-        <FiGrid className="status_toggle middle sidebar-toggle" />
+        <HiViewGrid className="status_toggle middle sidebar-toggle" />
       </div>
     </div>
   )

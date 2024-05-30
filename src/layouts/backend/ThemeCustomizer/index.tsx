@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-const NavCustomizer = dynamic(() => import('./NavCustomizer'))
-const TabCustomizer = dynamic(() => import('./TabCustomizer'))
+const NavCustomizer = dynamic(() => import('./NavCustomizer'), { ssr: false })
+const TabCustomizer = dynamic(() => import('./TabCustomizer'), { ssr: false })
 
 const ThemeCustomizer = () => {
   const [selected, setSelected] = useState('check-layout')

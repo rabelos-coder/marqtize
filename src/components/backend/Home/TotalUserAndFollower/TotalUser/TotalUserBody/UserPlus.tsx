@@ -1,11 +1,11 @@
-import { FiUserPlus } from 'react-icons/fi'
+import { HiUserAdd } from '@react-icons/all-files/hi/HiUserAdd'
 
 const UserPlus = () => {
   return (
     <li>
       <div className="user-icon primary">
         <div className="user-box">
-          <FiUserPlus className="font-primary" size={24} />
+          <HiUserAdd className="font-primary" size={24} />
         </div>
       </div>
       <div>

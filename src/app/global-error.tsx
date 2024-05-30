@@ -3,10 +3,10 @@
 import * as Sentry from '@sentry/nextjs'
 import { Inter, Roboto } from 'next/font/google'
 import { useEffect } from 'react'
-import { FaArrowsRotate } from 'react-icons/fa6'
 import { Button } from 'reactstrap'
 
 import { IS_DEVELOPMENT } from '@/environment'
+import { HiRefresh } from '@react-icons/all-files/hi/HiRefresh'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -53,7 +53,7 @@ export default function GlobalError({
               className={`${inter.className}`}
               onClick={() => reset()}
             >
-              <FaArrowsRotate className="me-2" />
+              <HiRefresh className="me-2" />
               Recarregar
             </Button>
           </div>

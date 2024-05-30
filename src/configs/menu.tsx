@@ -1,17 +1,16 @@
-import {
-  HiBuildingOffice,
-  HiGlobeAlt,
-  HiHome,
-  HiLockClosed,
-  HiOutlineBuildingOffice,
-  HiOutlineGlobeAlt,
-  HiOutlineHome,
-  HiOutlineLockClosed,
-  HiOutlineUser,
-  HiOutlineUsers,
-  HiUser,
-  HiUsers,
-} from 'react-icons/hi2'
+import { HiOutlineGlobeAlt } from '@react-icons/all-files/hi/HiOutlineGlobeAlt'
+import { HiOutlineHome } from '@react-icons/all-files/hi/HiOutlineHome'
+import { HiOutlineLockClosed } from '@react-icons/all-files/hi/HiOutlineLockClosed'
+import { HiOutlineUser } from '@react-icons/all-files/hi/HiOutlineUser'
+import { HiOutlineUsers } from '@react-icons/all-files/hi/HiOutlineUsers'
+import { HiUser } from '@react-icons/all-files/hi/HiUser'
+import { HiUsers } from '@react-icons/all-files/hi/HiUsers'
+import { HiOutlineOfficeBuilding } from '@react-icons/all-files/hi/HiOutlineOfficeBuilding'
+import { HiOfficeBuilding } from '@react-icons/all-files/hi/HiOfficeBuilding'
+import { HiGlobeAlt } from '@react-icons/all-files/hi/HiGlobeAlt'
+import { HiHome } from '@react-icons/all-files/hi/HiHome'
+import { HiLockClosed } from '@react-icons/all-files/hi/HiLockClosed'
+
 import { v4 as uuidv4 } from 'uuid'
 
 import { SidebarMenuType } from '@/types/layout'
@@ -40,8 +39,8 @@ const MenuListData: SidebarMenuType[] = [
       {
         id: uuidv4(),
         title: 'accounts',
-        iconStroke: <HiOutlineBuildingOffice className="stroke-icon" />,
-        iconFill: <HiBuildingOffice className="fill-icon" />,
+        iconStroke: <HiOutlineOfficeBuilding className="stroke-icon" />,
+        iconFill: <HiOfficeBuilding className="fill-icon" />,
         pathSlice: 'accounts',
         type: 'sub',
         active: false,

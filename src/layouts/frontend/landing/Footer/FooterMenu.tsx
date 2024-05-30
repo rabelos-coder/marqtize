@@ -3,7 +3,8 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { FaFacebook, FaInstagram } from 'react-icons/fa'
+import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook'
+import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
 import { Col, List, Row } from 'reactstrap'
 
 import { APP_META_TITLE, FACEBOOK_URL, INSTAGRAM_URL } from '@/environment'

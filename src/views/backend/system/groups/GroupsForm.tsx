@@ -43,18 +43,18 @@ import { User } from '@/types/user'
 import { setFormValues, validateFormValue } from '@/utils/helpers'
 
 type GroupsFormProps = {
-  id?: string
+  id?: number
   mode: 'create' | 'update'
 }
 
 type FormData = {
-  accountId?: string | null
+  accountId?: number | null
   name: string
   slug: string
   isDefault?: boolean
   isDeleteable?: boolean
   claims?: string[]
-  users?: string[]
+  users?: number[]
 }
 
 const defaultValues: FormData = {
@@ -78,7 +78,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
   const { jwt } = useAuth()
 
   const [getRole] = useLazyQuery(FIND_ROLE, {
-    variables: { id: `${id}` },
+    variables: { id: id ?? 0 },
     fetchPolicy: 'no-cache',
   })
   const [createRole] = useMutation(CREATE_ROLE)
@@ -268,7 +268,7 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
     } else if (mode === 'update') {
       const variables: UpdateRoleInput = {
         data: {
-          id: `${id}`,
+          id: id ?? 0,
           ...data,
         },
       }
@@ -630,9 +630,9 @@ export const GroupsForm = ({ id, mode }: GroupsFormProps) => {
                       <>
                         {users?.map(({ id, systemName, name }) => {
                           return (
-                            <Label key={id} for={id} lg={4} sm={6}>
+                            <Label key={id} for={`user-${id}`} lg={4} sm={6}>
                               <Input
-                                id={id}
+                                id={`user-${id}`}
                                 type="checkbox"
                                 className="me-2"
                                 value={id}

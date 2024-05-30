@@ -4,9 +4,9 @@ import { useState } from 'react'
 
 import Theme from '@/configs/theme'
 
-const BoxLayout = dynamic(() => import('./BoxLayout'))
-const LTR = dynamic(() => import('./LTR'))
-const RTL = dynamic(() => import('./RTL'))
+const BoxLayout = dynamic(() => import('./BoxLayout'), { ssr: false })
+const LTR = dynamic(() => import('./LTR'), { ssr: false })
+const RTL = dynamic(() => import('./RTL'), { ssr: false })
 
 const LayoutType = () => {
   const localStorageLayout = Theme.data.settings.layout_type

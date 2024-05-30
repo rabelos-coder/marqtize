@@ -4,8 +4,8 @@ import Image from 'next/image'
 import { useCustomizer, useLayout } from '@/hooks'
 import { Link } from '@/navigation'
 
-const SidebarLogo = dynamic(() => import('./SidebarLogo'))
-const SidebarMenu = dynamic(() => import('./SidebarMenu'))
+const SidebarLogo = dynamic(() => import('./SidebarLogo'), { ssr: false })
+const SidebarMenu = dynamic(() => import('./SidebarMenu'), { ssr: false })
 
 const SideBar = () => {
   const { sidebarIconType } = useCustomizer()

@@ -7,7 +7,7 @@ export type AccountState = {
 }
 
 export type Account = {
-  id: string
+  id: number
   erpId: string | null
   corporateNumber: string
   corporateName: string
@@ -116,7 +116,7 @@ export type CreateAccountInput = {
 }
 
 type AccountUpdateInput = {
-  id: string
+  id: number
 } & AccountInput
 
 export type UpdateAccountInput = {
